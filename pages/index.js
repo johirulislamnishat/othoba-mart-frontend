@@ -1,4 +1,5 @@
-import Head from 'next/head'
+import { Button } from 'antd';
+import Head from 'next/head';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
        <section>
          <div>
            <p className='text-center text-3xl bg-red-100'>This is Head of Home Page</p>
+           <Button type="primary" loading={false}>Primary Button</Button>
          </div>
        </section>
      </article>
