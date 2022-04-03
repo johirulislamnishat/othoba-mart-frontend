@@ -45,7 +45,7 @@ const HomeLayout = ({ children, title }) => {
 									enterButton
 								/>
 							</div>
-							<div className="block sm:hidden bg-red-300">
+							<div className="block sm:hidden">
 								<SearchOutlined />
 							</div>
 						</Col>
