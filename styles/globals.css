@@ -3,6 +3,10 @@
 @tailwind utilities;
 @import '~antd/dist/antd.css';
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
@@ -16,6 +20,3 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
-}
