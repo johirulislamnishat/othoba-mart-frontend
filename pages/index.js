@@ -14,6 +14,9 @@ export default function Home() {
 				</p>
 				<p>First Name: {firstName}</p>
 				<p>Last Name: {lastName}</p>
+				<p className="font-black">
+					Full Name: {firstName.concat(" ").concat(lastName)}
+				</p>
 				<p>Role: {role}</p>
 			</div>
 		</HomeLayout>

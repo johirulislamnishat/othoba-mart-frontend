@@ -3,7 +3,7 @@ import React, { createContext } from "react";
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-	const obj = { firstName: "Lutfor", lastName: "Rahman", role: "Developwer" };
+	const obj = { firstName: "Lutfor", lastName: "Rahman", role: "Developer" };
 	return <AuthContext.Provider value={obj}>{children}</AuthContext.Provider>;
 };
 
