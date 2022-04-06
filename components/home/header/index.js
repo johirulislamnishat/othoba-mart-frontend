@@ -1,14 +1,30 @@
-import { CarOutlined } from "@ant-design/icons";
-import { Carousel, Col, Image, Rate, Row } from "antd";
+import {
+	CarOutlined,
+	CheckCircleOutlined,
+	CreditCardOutlined,
+	DollarCircleOutlined,
+} from "@ant-design/icons";
+import { Carousel, Col, Image, Menu, Rate, Row } from "antd";
 import Text from "antd/lib/typography/Text";
 import React from "react";
 
 const HomeHeader = () => {
 	return (
-		<div>
-			<Row>
-				<Col xs={0} md={0} lg={4}>
-					<h1>First</h1>
+		<div className="mt-3">
+			<Row gutter={[16, 16]}>
+				<Col xs={0} md={0} lg={4} className="mt-5">
+					<Menu defaultSelectedKeys={["1"]} mode="inline">
+						<Menu.Item key="1">Home</Menu.Item>
+						<Menu.Item key="2">Fashion</Menu.Item>
+						<Menu.Item key="3">Electronics</Menu.Item>
+						<Menu.Item key="4">Gifts</Menu.Item>
+						<Menu.Item key="5">Garden</Menu.Item>
+						<Menu.Item key="6">Music</Menu.Item>
+						<Menu.Item key="7">Motors</Menu.Item>
+						<Menu.Item key="8">Furniture</Menu.Item>
+						<Menu.Item key="9">Trousers</Menu.Item>
+						<Menu.Item key="10">VIEW ALL &gt;</Menu.Item>
+					</Menu>
 				</Col>
 				<Col xs={24} md={24} lg={14}>
 					<Carousel autoplay>
@@ -90,14 +106,12 @@ const HomeHeader = () => {
 				<Col xs={24} md={12} xl={6}>
 					<Row gutter={[16, 16]} align="middle" justify="center">
 						<Col>
-							<CarOutlined className="text-3xl" />
+							<DollarCircleOutlined className="text-3xl" />
 						</Col>
 						<Col>
+							<span className="block">MONEY BACK GUARANTEE</span>
 							<span className="block">
-								FREE SHIPPING & RETURN
-							</span>
-							<span className="block">
-								Free shipping on orders over $99
+								100% money back guarantee
 							</span>
 						</Col>
 					</Row>
@@ -106,14 +120,12 @@ const HomeHeader = () => {
 				<Col xs={24} md={12} xl={6}>
 					<Row gutter={[16, 16]} align="middle" justify="center">
 						<Col>
-							<CarOutlined className="text-3xl" />
+							<CheckCircleOutlined className="text-3xl" />
 						</Col>
 						<Col>
+							<span className="block">ONLINE SUPPORT 24/7</span>
 							<span className="block">
-								FREE SHIPPING & RETURN
-							</span>
-							<span className="block">
-								Free shipping on orders over $99
+								Lorem ipsum dolor sit amet.
 							</span>
 						</Col>
 					</Row>
@@ -122,14 +134,12 @@ const HomeHeader = () => {
 				<Col xs={24} md={12} xl={6}>
 					<Row gutter={[16, 16]} align="middle" justify="center">
 						<Col>
-							<CarOutlined className="text-3xl" />
+							<CreditCardOutlined className="text-3xl" />
 						</Col>
 						<Col>
+							<span className="block">SECURE PAYMENT</span>
 							<span className="block">
-								FREE SHIPPING & RETURN
-							</span>
-							<span className="block">
-								Free shipping on orders over $99
+								Lorem ipsum dolor sit amet.
 							</span>
 						</Col>
 					</Row>

@@ -7,6 +7,7 @@ import {
 import { Col, Input, Layout, Row } from "antd";
 import Head from "next/head";
 import React from "react";
+import HomeMenu from "../menues/homeMenu";
 import Foter from "../shared/footer";
 
 const { Search } = Input;
@@ -29,48 +30,59 @@ const HomeLayout = ({ children, title }) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className="bg-blue-300 py-5 px-3 lg:px-0">
-				<div className="container mx-auto">
-					<Row justify="space-between" align="middle">
-						<Col xs={7} sm={6} md={6} lg={4} className="text-left">
-							Othoba Mart
-						</Col>
+			<header>
+				<div className="bg-blue-300 py-5 px-3 lg:px-0">
+					<div className="container mx-auto">
+						<Row justify="space-between" align="middle">
+							<Col
+								xs={7}
+								sm={6}
+								md={6}
+								lg={4}
+								className="text-left"
+							>
+								Othoba Mart
+							</Col>
 
-						<Col xs={7} sm={12} md={12} lg={16}>
-							<div className="hidden sm:block text-center">
-								<Search
-									placeholder="I'm searching for..."
-									onSearch={onSearch}
-									allowClear
-									enterButton
-								/>
-							</div>
-							<div className="block sm:hidden">
-								<SearchOutlined />
-							</div>
-						</Col>
-						<Col
-							xs={10}
-							sm={6}
-							md={6}
-							lg={4}
-							className="text-right"
-						>
-							<Row gutter={16} align="middle" justify="end">
-								<Col>
-									<UserOutlined />
-								</Col>
-								<Col>
-									<ShoppingOutlined />
-								</Col>
-								<Col>
-									<LikeOutlined />
-								</Col>
-							</Row>
-						</Col>
-					</Row>
+							<Col xs={7} sm={12} md={12} lg={16}>
+								<div className="hidden sm:block text-center">
+									<Search
+										placeholder="I'm searching for..."
+										onSearch={onSearch}
+										allowClear
+										enterButton
+									/>
+								</div>
+								<div className="block sm:hidden">
+									<SearchOutlined />
+								</div>
+							</Col>
+							<Col
+								xs={10}
+								sm={6}
+								md={6}
+								lg={4}
+								className="text-right"
+							>
+								<Row gutter={16} align="middle" justify="end">
+									<Col>
+										<UserOutlined />
+									</Col>
+									<Col>
+										<ShoppingOutlined />
+									</Col>
+									<Col>
+										<LikeOutlined />
+									</Col>
+								</Row>
+							</Col>
+						</Row>
+					</div>
 				</div>
-			</div>
+				<div className="container mx-auto">
+					<HomeMenu />
+				</div>
+			</header>
 
 			<Content style={{ minHeight: "90vh" }}>
 				<div className="container mx-auto px-3 lg:px-0">{children}</div>

@@ -1,9 +1,18 @@
+import { Menu } from "antd";
+import { useState } from "react";
 import HomeHeader from "../components/home/header";
 import useAuth from "../components/hooks/useAuth";
 import HomeLayout from "../components/layouts/homeLayout";
+const { SubMenu } = Menu;
 
 export default function Home() {
 	const { firstName, lastName, role } = useAuth();
+	const [current, setCurrent] = useState("mail");
+
+	const handleClick = (e) => {
+		console.log("click ", e);
+		setCurrent(e.key);
+	};
 
 	return (
 		<HomeLayout title="Othoba Mart">
