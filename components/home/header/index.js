@@ -4,14 +4,15 @@ import {
 	CreditCardOutlined,
 	DollarCircleOutlined,
 } from "@ant-design/icons";
-import { Carousel, Col, Image, Menu, Rate, Row } from "antd";
-import Text from "antd/lib/typography/Text";
+import { Button, Carousel, Col, Divider, Image, Menu, Row } from "antd";
+import Title from "antd/lib/typography/Title";
 import React from "react";
 
 const HomeHeader = () => {
 	return (
-		<div className="mt-3">
+		<div className="mt-3 bg-white">
 			<Row gutter={[16, 16]}>
+				{/* left menu */}
 				<Col xs={0} md={0} lg={4} className="mt-5">
 					<Menu defaultSelectedKeys={["1"]} mode="inline">
 						<Menu.Item key="1">Home</Menu.Item>
@@ -26,7 +27,9 @@ const HomeHeader = () => {
 						<Menu.Item key="10">VIEW ALL &gt;</Menu.Item>
 					</Menu>
 				</Col>
-				<Col xs={24} md={24} lg={14}>
+
+				{/* Carousel */}
+				<Col xs={24} md={24} lg={15}>
 					<Carousel autoplay>
 						<div>
 							<Image
@@ -44,41 +47,69 @@ const HomeHeader = () => {
 						</div>
 					</Carousel>
 				</Col>
-				<Col xs={24} md={24} lg={6}>
-					<Carousel autoplay className="text-center">
-						<div className="bg-white">
+
+				{/* right banner */}
+				<Col xs={24} md={24} lg={5}>
+					<div className="bg-gray-800 text-center text-amber-500 p-3 mb-3">
+						<span className="text-lg font-black block">
+							Pro Buyer Exclusive
+						</span>
+						<p>Get payment terms and much more</p>
+
+						<button className="bg-amber-500 text-black w-full p-1 rounded-full">
+							Upgrade
+						</button>
+					</div>
+					<Button type="primary" block>
+						Selected Machinery
+					</Button>
+
+					<Row align="middle" className="mt-3">
+						<Col xs={20}>
+							<Title level={4}>Woodworking Machinery</Title>
+						</Col>
+						<Col xs={4}>
 							<Image
+								src="http://springvalleymachinery.co.ke/wp-content/uploads/2020/11/IMG-20210225-WA0008.jpg"
+								alt="woodworking"
 								width={"100%"}
-								src="https://www.portotheme.com/wordpress/porto/shop22/wp-content/uploads/sites/94/2018/06/shop22_product7-300x300.jpg"
 								preview={false}
 							/>
-							<div className="-mt-2">
-								<p className="text-lg -mb-1">
-									1080P Wifi IP Camera
-								</p>
-								<Rate disabled defaultValue={3} />
-								<br />
-								<Text delete>$596.00</Text>{" "}
-								<Text strong>$496.00</Text>
-								<p className="py-4" />
-							</div>
-						</div>
-						<div className="bg-white">
+						</Col>
+					</Row>
+					<Divider />
+
+					<Row align="middle">
+						<Col xs={20}>
+							<Title level={4}>Plastic & Rubber Machinery</Title>
+						</Col>
+						<Col xs={4}>
 							<Image
+								src="https://m.plastic-recyclingequipment.com/photo/plastic-recyclingequipment/editor/20180829153605_87070.jpg"
+								alt="woodworking"
 								width={"100%"}
-								src="https://www.portotheme.com/wordpress/porto/shop22/wp-content/uploads/sites/94/2018/06/shop22_product3-300x300.jpg"
 								preview={false}
 							/>
-							<div className="-mt-2">
-								<p className="text-lg -mb-1">HD Camera</p>
-								<Rate disabled defaultValue={3} />
-								<br />
-								<Text delete>$299.00</Text>{" "}
-								<Text strong>$199.00</Text>
-								<p className="py-4" />
-							</div>
-						</div>
-					</Carousel>
+						</Col>
+					</Row>
+					<Divider />
+
+					<Row align="middle">
+						<Col xs={20}>
+							<Title level={4}>
+								Laser & Machine Tool Equipment
+							</Title>
+						</Col>
+						<Col xs={4}>
+							<Image
+								src="https://5.imimg.com/data5/UJ/DE/HP/IOS-1425623/product-jpeg-500x500.png"
+								alt="woodworking"
+								width={"100%"}
+								preview={false}
+							/>
+						</Col>
+					</Row>
+					<Divider />
 				</Col>
 			</Row>
 

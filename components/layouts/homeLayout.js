@@ -30,7 +30,7 @@ const HomeLayout = ({ children, title }) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<header>
+			<header className="bg-white">
 				<div className="bg-blue-300 py-5 px-3 lg:px-0">
 					<div className="container mx-auto">
 						<Row justify="space-between" align="middle">
@@ -84,7 +84,7 @@ const HomeLayout = ({ children, title }) => {
 				</div>
 			</header>
 
-			<Content style={{ minHeight: "90vh" }}>
+			<Content style={{ minHeight: "90vh", backgroundColor: "white" }}>
 				<div className="container mx-auto px-3 lg:px-0">{children}</div>
 			</Content>
 
