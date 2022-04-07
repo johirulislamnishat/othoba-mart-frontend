@@ -6,6 +6,13 @@ import HomeLayout from "../components/layouts/homeLayout";
 const { SubMenu } = Menu;
 
 export default function Home() {
+
+  return (
+    <HomeLayout title="Othoba Mart">
+      <HomeHeader />
+    </HomeLayout>
+  );
+
 	const { firstName, lastName, role } = useAuth();
 	const [current, setCurrent] = useState("mail");
 
@@ -30,4 +37,5 @@ export default function Home() {
 			</div>
 		</HomeLayout>
 	);
+
 }
