@@ -35,6 +35,7 @@ const HomeHeader = () => {
 							<Image
 								width={"100%"}
 								src="https://www.portotheme.com/wordpress/porto/shop22/wp-content/uploads/sites/94/2019/06/shop22_home_slide1.jpg"
+								alt="banner"
 								preview={false}
 							/>
 						</div>
@@ -42,6 +43,7 @@ const HomeHeader = () => {
 							<Image
 								width={"100%"}
 								src="https://www.portotheme.com/wordpress/porto/shop22/wp-content/uploads/sites/94/2019/06/shop22_home_slide2.jpg"
+								alt="banner2"
 								preview={false}
 							/>
 						</div>
