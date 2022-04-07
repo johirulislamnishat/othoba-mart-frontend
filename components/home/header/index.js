@@ -10,7 +10,7 @@ import React from "react";
 
 const HomeHeader = () => {
 	return (
-		<div className="mt-3 bg-white">
+		<div className="mt-3">
 			<Row gutter={[16, 16]}>
 				{/* left menu */}
 				<Col xs={0} md={0} lg={4} className="mt-5">
@@ -52,7 +52,7 @@ const HomeHeader = () => {
 
 				{/* right banner */}
 				<Col xs={24} md={24} lg={5}>
-					<div className="bg-gray-800 text-center text-amber-500 p-3 mb-3">
+					<div className="bg-gray-700 text-center text-amber-500 p-3 mb-3">
 						<span className="text-lg font-black block">
 							Pro Buyer Exclusive
 						</span>
@@ -115,11 +115,7 @@ const HomeHeader = () => {
 				</Col>
 			</Row>
 
-			<Row
-				gutter={[16, 16]}
-				align="middle"
-				className="bg-white py-3 mt-3"
-			>
+			<Row gutter={[16, 16]} align="middle" className="py-3 mt-3">
 				<Col xs={24} md={12} xl={6}>
 					<Row gutter={[16, 16]} align="middle" justify="center">
 						<Col>
