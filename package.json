@@ -11,6 +11,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "antd": "^4.19.3",
+    "axios": "^0.26.1",
     "next": "12.1.2",
     "next-plugin-antd-less": "^1.8.0",
     "react": "18.0.0",

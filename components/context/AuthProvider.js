@@ -1,10 +1,15 @@
 import { createContext } from "react";
+import useUser from '/components/hooks/useUser'
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-	const obj = { firstName: "Lutfor", lastName: "Rahman", role: "Developer" };
-	return <AuthContext.Provider value={obj}>{children}</AuthContext.Provider>;
+	
+	const {user} = useUser()
+console.log(user.email)
+
+	console.log(user)
+	return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

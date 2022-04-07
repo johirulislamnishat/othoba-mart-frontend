@@ -1,15 +1,7 @@
 import { useState } from "react";
 import Link from 'next/link'
 import {GoogleOutlined, FacebookFilled} from '@ant-design/icons'
-// const initialUserInfo = {
-//   username: "",
-//   email: "",
-//   passord1: "",
-//   password2: "",
-//   photoUrl: "",
-//   consumer: "",
-//   vendor: "",
-// };
+import axios from 'axios'
 
 const Register = () => {
   const [user_name, setUser_name] = useState('')
@@ -17,7 +9,10 @@ const Register = () => {
   const [password, setPassword] = useState('')
   const [isVendor, setIsVendor] = useState(false)
   const [isCustomer, setIsCustomer] = useState(false)
-
+  const [success,setSuccess] = useState('')
+  
+  // setUser_name(`${fName} ${lName}`)
+// console.log(user_name,email,password, isVendor, isCustomer)
   // const handleInput = (e) => {
   //   const field = e.target.name;
   //   const value = e.target.value;
@@ -25,50 +20,62 @@ const Register = () => {
   //   setInputs(newUser);
   // };
 
-  const handleRegister = (e) => {
+  const handleRegister = async(e) => {
     e.preventDefault();
+    
+    const user = {
+      user_name,
+      email,
+      password,
+      isCustomer,
+      isVendor,
+    }
+
+    const res = await axios.post('https://othobamart-api.herokuapp.com/auth/register', {user_name,
+    email,
+    password,
+    isCustomer,
+    isVendor})
+
+    setSuccess(res.data.message)
+    console.log(user,res)
   };
   
   return (
-    <div className="w-screen h-screen grid sm:grid-cols-2 place-content-center items-center">
+    <div className="w-screen h-screen grid sm:grid-cols-2 items-center">
       <div className="hidden sm:block">
         {/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
         <img src="/images/register.jpg" alt="" className="h-screen w-full" />
       </div>
-      <div>
+      {/* <div> */}
+      <div className='min-w-full'>
         <div className="mx-4 sm:mx-16 p-4 border-2 border-gray-200">
-          <form className="flex flex-col gap-2 font-semibold text-sm">
+          <form onSubmit={handleRegister} className="flex flex-col gap-2 font-semibold text-sm">
             <div className="flex gap-4 border-b-gray-400">
               <p onClick={()=>setIsCustomer(true)} className="text-gray-500 cursor-pointer">
                 Sign up as Customer
               </p>
               <p onClick={()=>setIsVendor(true)} className="text-gray-500 cursor-pointer">Sign up as Seller</p>
             </div>
-            <div className="flex">
-              <div clasName="flex flex-col gap-2">
-                <label>First Name</label>
-                <input onClick={()=>setIsVendor(true)}
+            
+                <label>User name</label>
+                <input onChange={(e)=>setUser_name(e.target.value)}
+                required={true}
                   placeholder="Enter first name"
                   className="p-2 mb-2 border-2 border-gray-200 "
                 />
-              </div>
-              <div clasName="flex flex-col gap-2">
-                <label>Last Name</label>
-                <input onClick={()=>setIsVendor(true)}
-                  placeholder="Enter last name"
-                  className="p-2 mb-2 border-2 border-gray-200 "
-                />
-              </div>
-            </div>
+             
+              
+           
             <label>Email</label>
-            <input onClick={()=>setIsVendor(true)}
+            <input onChange={(e)=>setEmail(e.target.value)} type='email' required={true}
               placeholder="Enter your email"
               className="p-2 mb-2 border-2 border-gray-200"
             />
 
             <label>Password</label>
             <div>
-              <input onClick={()=>setIsVendor(true)}
+              <input onChange={(e)=>setPassword(e.target.value)} type='password' required={true}
                 placeholder="Enter your password"
                 className="w-full p-2 mb-2 border-2 border-gray-200"
               />
@@ -85,8 +92,9 @@ const Register = () => {
                 Forgot Password?
               </span>
             </div>
-            <button className="bg-blue py-1 mt-2 text-white">Register</button>
+            <button type='submit' className="bg-blue py-1 mt-2 text-white">Register</button>
           </form>
+          {<p className='text-green-700 m-2'>{success}</p>}
           <div className="flex flex-col items-center gap-2 mt-5">
             <p className="text-center border-2 border-gray-200 cursor-pointer flex items-center justify-center gap-2 w-full py-2"><GoogleOutlined style={{ color:'green'}}/>
               Log in with Google

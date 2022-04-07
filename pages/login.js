@@ -1,26 +1,46 @@
+import {useState} from 'react'
 import Image from "next/image";
 import Link from 'next/link'
 import {GoogleOutlined, FacebookFilled} from '@ant-design/icons'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import useUser from '/components/hooks/useUser'
 
 const Login = () => {
+  const [user_name, setUser_name] = useState('')
+  const [password, setPassword] = useState('')
+console.log(user_name,password)
+const router = useRouter()
+const {setUser} = useUser()
+
+const handleLogin = async(e) => {
+  e.preventDefault();
+
+  const res = await axios.post('https://othobamart-api.herokuapp.com/auth/login', {user_name,password})
+setUser(res.data)
+  router.push('/')
+  console.log(res)
+};
   return (
     <div className="w-screen h-screen grid sm:grid-cols-2 place-content-center items-center">
       <div className="hidden sm:block">
         {/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
         <img src="/images/login.jpg" alt="" className="h-screen w-full" />
       </div>
-      <div>
+
+      <div className='min-w-full'>
+        
         <div className="mx-4 sm:mx-16 p-4 border-2 border-gray-200">
-          <form className="flex flex-col gap-2 font-semibold text-sm">
-            <label>Email</label>
-            <input
-              placeholder="Enter your email"
+          <form onSubmit={handleLogin} className="flex flex-col gap-2 font-semibold text-sm">
+            <label>User name</label>
+            <input onChange={(e)=>setUser_name(e.target.value)} type='user_name' required={true}
+              placeholder="Enter your user_name"
               className="p-2 mb-2 border-2 border-gray-200" />
              
             
             <label>Password</label>
             <div>
-              <input
+              <input onChange={(e)=>setPassword(e.target.value)} type='password' required={true}
                 placeholder="Enter your password"
                 className="w-full p-2 mb-2 border-2 border-gray-200"
               />
@@ -37,7 +57,7 @@ const Login = () => {
                 Forgot Password?
               </span>
             </div>
-            <button className="bg-blue py-1 mt-2 text-white">Login</button>
+            <button className="bg-blue py-1 mt-2 text-white" type='submit' >Login</button>
           </form>
           <div className="flex flex-col items-center gap-2 mt-5">
             <p className="text-center border-2 border-gray-200 cursor-pointer flex items-center justify-center gap-2 w-full py-2"><GoogleOutlined style={{ color:'green'}}  />

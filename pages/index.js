@@ -3,8 +3,8 @@ import useAuth from "../components/hooks/useAuth";
 import HomeLayout from "../components/layouts/homeLayout";
 
 export default function Home() {
-	const { firstName, lastName, role } = useAuth();
-
+	const user = useAuth();
+console.log(user.email)
 	return (
 		<HomeLayout title="Othoba Mart">
 			<HomeHeader />
@@ -12,12 +12,7 @@ export default function Home() {
 				<p className="text-3xl">
 					These are comming from context provider
 				</p>
-				<p>First Name: {firstName}</p>
-				<p>Last Name: {lastName}</p>
-				<p className="font-black">
-					Full Name: {firstName.concat(" ").concat(lastName)}
-				</p>
-				<p>Role: {role}</p>
+			
 			</div>
 		</HomeLayout>
 	);
