@@ -10,6 +10,7 @@ import React from "react";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
 
+
 const { Search } = Input;
 
 const { Content, Footer } = Layout;
