@@ -4,22 +4,23 @@ import Link from 'next/link'
 import {GoogleOutlined, FacebookFilled} from '@ant-design/icons'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import useUser from '/components/hooks/useUser'
+
 
 const Login = () => {
   const [user_name, setUser_name] = useState('')
   const [password, setPassword] = useState('')
-console.log(user_name,password)
+
 const router = useRouter()
-const {setUser} = useUser()
+
 
 const handleLogin = async(e) => {
   e.preventDefault();
 
   const res = await axios.post('https://othobamart-api.herokuapp.com/auth/login', {user_name,password})
-setUser(res.data)
+  // setUser(res.data)
+  localStorage.setItem("user", JSON.stringify(res.data))
   router.push('/')
-  console.log(res)
+  console.log(res.data)
 };
   return (
     <div className="w-screen h-screen grid sm:grid-cols-2 place-content-center items-center">

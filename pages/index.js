@@ -4,7 +4,7 @@ import HomeLayout from "../components/layouts/homeLayout";
 
 export default function Home() {
 	const user = useAuth();
-console.log(user.email)
+
 	return (
 		<HomeLayout title="Othoba Mart">
 			<HomeHeader />
@@ -12,7 +12,8 @@ console.log(user.email)
 				<p className="text-3xl">
 					These are comming from context provider
 				</p>
-			
+			<p>{user.user_name}</p>
+			<p>{user.email}</p>
 			</div>
 		</HomeLayout>
 	);
