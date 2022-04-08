@@ -20,10 +20,16 @@ a {
 	text-decoration: none;
 }
 
+/* ant design */
 .ant-carousel {
 	height: 100% !important;
 	line-height: 100% !important;
 }
+.ant-drawer-body {
+	padding: 0 !important;
+}
+/* end ant design */
+
 * {
 	box-sizing: border-box;
 }

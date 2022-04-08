@@ -25,15 +25,60 @@ const HomeMenu = () => {
 				</Col>
 				<Col xs={7} md={16} lg={14}>
 					<div className="hidden lg:block">
-						<Menu mode="horizontal" defaultSelectedKeys={["1"]}>
-							<Menu.Item key="1">Home</Menu.Item>
-							<Menu.Item key="2">Vendor</Menu.Item>
-							<Menu.Item key="3">Categories</Menu.Item>
-							<Menu.Item key="4">Products</Menu.Item>
-							<Menu.Item key="5">Blogs</Menu.Item>
-							<Menu.Item key="6">Features</Menu.Item>
+						<Menu
+							onClick={(e) => console.log(e)}
+							selectedKeys={["mail"]}
+							mode="horizontal"
+						>
+							<Menu.Item key="mail">Home</Menu.Item>
+
+							<SubMenu key="SubMenu" title="Vendor">
+								<Menu.Item key="vendor:1">Option 1</Menu.Item>
+								<Menu.Item key="vendor:2">Option 2</Menu.Item>
+								<Menu.Item key="vendor:3">Option 3</Menu.Item>
+								<Menu.Item key="vendor:4">Option 4</Menu.Item>
+							</SubMenu>
+
+							<SubMenu key="SubMenu2" title="Categories">
+								<Menu.ItemGroup title="Item 1">
+									<Menu.Item key="setting:1">
+										Option 1
+									</Menu.Item>
+									<Menu.Item key="setting:2">
+										Option 2
+									</Menu.Item>
+								</Menu.ItemGroup>
+								<Menu.ItemGroup title="Item 2">
+									<Menu.Item key="setting:3">
+										Option 3
+									</Menu.Item>
+									<Menu.Item key="setting:4">
+										Option 4
+									</Menu.Item>
+								</Menu.ItemGroup>
+							</SubMenu>
+
+							<SubMenu key="SubMenu3" title="Products">
+								<Menu.ItemGroup title="Item 1">
+									<Menu.Item key="products:1">
+										Option 1
+									</Menu.Item>
+									<Menu.Item key="products:2">
+										Option 2
+									</Menu.Item>
+								</Menu.ItemGroup>
+								<Menu.ItemGroup title="Item 2">
+									<Menu.Item key="products:3">
+										Option 3
+									</Menu.Item>
+									<Menu.Item key="products:4">
+										Option 4
+									</Menu.Item>
+								</Menu.ItemGroup>
+							</SubMenu>
 						</Menu>
 					</div>
+
 					<div className="block lg:hidden flex items-center h-full">
 						<MenuOutlined
 							className="text-xl pl-3"
@@ -64,15 +109,15 @@ const HomeMenu = () => {
 
 			<Drawer
 				title="Othoba Mart"
-				placement="left"
+				placement="right"
 				onClose={() => setVisible(!visible)}
 				visible={visible}
+				width={280}
 			>
 				<Menu
 					mode="inline"
 					defaultSelectedKeys={["1"]}
 					defaultOpenKeys={["sub1"]}
-					style={{ width: 256 }}
 				>
 					<SubMenu key="sub1" icon={<MailOutlined />} title="Home">
 						<Menu.Item key="1">Option 1</Menu.Item>
