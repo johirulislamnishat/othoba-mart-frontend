@@ -2,42 +2,22 @@ import { useState } from "react";
 import Link from "next/link";
 import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import axios from "axios";
+import useAuth from "../../components/hooks/useAuth";
 
 const Register = () => {
+    const { signupHandler } = useAuth();
     const [user_name, setUser_name] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isVendor, setIsVendor] = useState(false);
-    const [isCustomer, setIsCustomer] = useState(false);
-    const [success, setSuccess] = useState("");
 
-    // setUser_name(`${fName} ${lName}`)
-    // console.log(user_name,email,password, isVendor, isCustomer)
-    // const handleInput = (e) => {
-    //   const field = e.target.name;
-    //   const value = e.target.value;
-    //   const newUser = { ...inputs, [e.target.name]: e.target.value };
-    //   setInputs(newUser);
-    // };
+    // calling API after data input
+    // useEffect(() => {
+    //     signupHandler(user_name, email, password);
+    // }, [user_name, email, password]);
 
     const handleRegister = async (e) => {
         e.preventDefault();
-
-        const user = {
-            user_name,
-            email,
-            password,
-            isCustomer,
-            isVendor,
-        };
-
-        const res = await axios.post(
-            "https://othobamart-api.herokuapp.com/auth/register",
-            { user_name, email, password, isCustomer, isVendor }
-        );
-
-        setSuccess(res.data.message);
-        console.log(user, res);
+        signupHandler(user_name, email, password);
     };
 
     return (
@@ -116,12 +96,12 @@ const Register = () => {
                         </div>
                         <button
                             type="submit"
-                            className="bg-blue py-1 mt-2 text-white"
+                            className=" py-1 mt-2 border-2"
                         >
                             Register
                         </button>
                     </form>
-                    {<p className="text-green-700 m-2">{success}</p>}
+
                     <div className="flex flex-col items-center gap-2 mt-5">
                         <p className="text-center border-2 border-gray-200 cursor-pointer flex items-center justify-center gap-2 w-full py-2">
                             <GoogleOutlined style={{ color: "green" }} />

@@ -27,7 +27,6 @@ export default function Home() {
             <HomeHeader />
             <NewProducts />
             <PromoLgTwo />
-
             <Row>
                 <Col xs={0} lg={5}>
                     <Sidebar />

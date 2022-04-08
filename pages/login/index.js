@@ -4,30 +4,30 @@ import Link from "next/link";
 import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import axios from "axios";
 import { useRouter } from "next/router";
+import useAuth from "../../components/hooks/useAuth";
 
 const Login = () => {
+    const { signinHandler } = useAuth();
+    const [user, setUser] = useState({});
+    console.log("logged in user", user);
     const [user_name, setUser_name] = useState("");
     const [password, setPassword] = useState("");
-
     const router = useRouter();
+
+    // // calling API after data input
+    // useEffect(() => {
+    //     signinHandler(user_name, password);
+    // }, [user_name, password]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
-        const res = await axios.post(
-            "https://othobamart-api.herokuapp.com/auth/login",
-            { user_name, password }
-        );
-        // setUser(res.data)
-        localStorage.setItem("user", JSON.stringify(res.data));
-        router.push("/");
-        console.log(res.data);
+        signinHandler(user_name, password);
     };
     return (
         <div className="w-screen h-screen grid sm:grid-cols-2 place-content-center items-center">
             <div className="hidden sm:block">
                 {/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
-                
+
                 <img
                     src="/images/img01.png"
                     alt=""
@@ -76,7 +76,7 @@ const Login = () => {
                             </span>
                         </div>
                         <button
-                            className="bg-blue py-1 mt-2 text-white"
+                            className="bg-blue py-1 mt-2 border-2"
                             type="submit"
                         >
                             Login
@@ -92,7 +92,7 @@ const Login = () => {
                             with Facebook
                         </p>
                         <p className="mt-3 text-center">
-                            Don't have an account?
+                            New to OthobaMart?
                             <Link href="/register">
                                 <a>
                                     <span className="text-blue font-semibold cursor-pointer">
