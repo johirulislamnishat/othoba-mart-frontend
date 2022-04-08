@@ -1,18 +1,15 @@
-import { createContext,useState,useEffect } from "react";
+import { createContext } from "react";
+import AuthData from "../hooks/authHandlers";
 
-
-export const AuthContext = createContext(null);
+export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-	const [user, setUser] = useState({})
-	
-	useEffect(()=>{
-		const data = JSON.parse(localStorage.getItem('user'))
-setUser(data)
-},[])
-
-
-	return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+    const allContext = AuthData();
+    return (
+        <AuthContext.Provider value={allContext}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 export default AuthProvider;

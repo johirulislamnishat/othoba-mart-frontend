@@ -17,7 +17,7 @@ const handleLogin = async(e) => {
   e.preventDefault();
 
   const res = await axios.post('https://othobamart-api.herokuapp.com/auth/login', {user_name,password})
-  // setUser(res.data)
+  
   localStorage.setItem("user", JSON.stringify(res.data))
   router.push('/')
   console.log(res.data)
@@ -58,7 +58,7 @@ const handleLogin = async(e) => {
                 Forgot Password?
               </span>
             </div>
-            <button className="bg-blue py-1 mt-2 text-white" type='submit' >Login</button>
+            <button className="bg-sky-500 py-1 mt-2 text-white" type='submit' >Login</button>
           </form>
           <div className="flex flex-col items-center gap-2 mt-5">
             <p className="text-center border-2 border-gray-200 cursor-pointer flex items-center justify-center gap-2 w-full py-2"><GoogleOutlined style={{ color:'green'}}  />

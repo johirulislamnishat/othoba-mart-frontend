@@ -92,7 +92,7 @@ const Register = () => {
                 Forgot Password?
               </span>
             </div>
-            <button type='submit' className="bg-blue py-1 mt-2 text-white">Register</button>
+            <button type='submit' className="bg-sky-500 py-1 mt-2 text-white">Register</button>
           </form>
           {<p className='text-green-700 m-2'>{success}</p>}
           <div className="flex flex-col items-center gap-2 mt-5">
