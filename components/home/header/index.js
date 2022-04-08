@@ -51,7 +51,7 @@ const HomeHeader = () => {
 
 				{/* right banner */}
 				<Col xs={24} md={24} lg={5}>
-					<div className="bg-gray-700 text-center text-amber-500 p-3 mb-3">
+					<div className="bg-gray-700 text-center text-amber-500 p-5 mb-3">
 						<span className="text-lg font-black block">
 							Pro Buyer Exclusive
 						</span>
@@ -61,7 +61,7 @@ const HomeHeader = () => {
 							Upgrade
 						</button>
 					</div>
-					<Button type="primary" block>
+					<Button type="primary" className="mt-3" block>
 						Selected Machinery
 					</Button>
 

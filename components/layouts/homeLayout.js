@@ -30,6 +30,7 @@ const HomeLayout = ({ children, title }) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
+			{/* top header area  */}
 			<header className="bg-white">
 				<div className="bg-blue-300 py-5 px-3 lg:px-0">
 					<div className="container mx-auto">
@@ -41,9 +42,10 @@ const HomeLayout = ({ children, title }) => {
 								lg={4}
 								className="text-left"
 							>
-								Othoba Mart
+								<b className="font-bold text-2xl">
+									Othoba Mart
+								</b>
 							</Col>
-
 							<Col xs={7} sm={12} md={12} lg={16}>
 								<div className="hidden sm:block text-center">
 									<Search
@@ -79,18 +81,22 @@ const HomeLayout = ({ children, title }) => {
 						</Row>
 					</div>
 				</div>
+				{/* header menu area  */}
 				<div className="container mx-auto">
 					<HomeMenu />
 				</div>
 			</header>
-
+			{/* top header area  */}
+			{/* layout header area  */}
 			<Content style={{ minHeight: "90vh", backgroundColor: "white" }}>
 				<div className="container mx-auto px-3 lg:px-0">{children}</div>
 			</Content>
-
+			{/* layout header area  */}
+			{/* layout footer area  */}
 			<Footer className="bg-gray-50 px-2">
 				<HomeFooter />
 			</Footer>
+			{/* layout footer area  */}
 		</Layout>
 	);
 };

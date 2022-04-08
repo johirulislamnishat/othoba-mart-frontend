@@ -1,10 +1,15 @@
 import { createContext } from "react";
+import AuthData from "../hooks/authHandlers";
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-	const obj = { firstName: "Lutfor", lastName: "Rahman", role: "Developer" };
-	return <AuthContext.Provider value={obj}>{children}</AuthContext.Provider>;
+    const allContext = AuthData();
+    return (
+        <AuthContext.Provider value={allContext}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 export default AuthProvider;
