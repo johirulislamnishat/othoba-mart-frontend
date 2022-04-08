@@ -1,7 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -11,12 +12,240 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --brand-color: #f66a05;
+  --black-color: #282828;
+  --grey-color: #999;
+}
+.custom-btn {
+  background-color: var(--brand-color);
+  border: 1px solid var(--brand-color);
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 8px 30px;
+  border-radius: 30px;
+  font-weight: 500;
+  margin: 10px 0;
+  transition: all 300ms ease-in-out;
+}
+.custom-btn:hover {
+  background-color: transparent;
+  color: var(--brand-color);
+}
+.ratings span {
+  color: goldenrod;
+  margin-right: 5px;
+}
+
+/* home main container  */
+.main-container {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-gap: 30px;
+}
+.main-container main,
+.main-container aside {
+  background-color: #fff;
+  margin-top: 100px;
+}
+
+/* --------------------------------------------------
+Home Page Main Area Style
+--------------------------------------------------*/
+/* best seller  */
+
+.single-product {
+  position: relative;
+}
+.wishlist {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  height: 30px;
+  width: 30px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  transition: all 300ms;
+  cursor: pointer;
+}
+.wishlist span {
+  font-size: 1rem;
+}
+.discount {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  height: 20px;
+  width: auto;
+  padding: 5px 10px;
+  background-color: var(--brand-color);
+  border-radius: 10px;
+  color: #fff;
+}
+
+.product-price small {
+  font-size: 1rem;
+  text-decoration: line-through;
+  color: var(--grey-color);
+  line-height: 0;
+}
+.product-price h3 {
+  font-size: 1.3rem;
+  margin: 0;
+  line-height: 1rem;
+  color: var(--brand-color);
+}
+.shopping {
+  height: 40px;
+  width: 40px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 300ms;
+}
+.shopping:hover,
+.wishlist:hover {
+  border: 1px solid var(--brand-color);
+}
+.shopping span {
+  font-size: 1.4rem;
+  color: var(--brand-color);
+}
+/* promo lg style */
+.promo-lg {
+  position: relative;
+}
+.promo-lg .promo-image {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.promo-lg h4 {
+  font-size: 1rem;
+  color: var(--brand-color);
+  margin-bottom: 5px;
+}
+.promo-lg h3 {
+  font-size: 2rem;
+  color: var(--black-color);
+  margin-bottom: 5px;
+}
+.promo-lg p {
+  font-size: 1rem;
+  color: var(--grey-color);
+  margin-bottom: 5px;
+}
+.promo-image {
+  max-width: 100px !important;
+}
+/* latest deals */
+.latest-deals .product-image {
+  position: relative;
+}
+.latest-deals .product-image .discount {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  width: 40px;
+  height: 20px;
+  background-color: var(--brand-color);
+  color: #fff;
+  border-radius: 10px;
+}
+
+.latest-deals .product-price small {
+  font-size: 1rem;
+  text-decoration: line-through;
+  color: var(--grey-color);
+  line-height: 0;
+}
+.latest-deals .product-price h3 {
+  font-size: 1.3rem;
+  margin: 0;
+  line-height: 1rem;
+  color: var(--brand-color);
+}
+.latest-deals .shopping {
+  height: 40px;
+  width: 40px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 300ms;
+}
+.latest-deals .shopping:hover {
+  border: 1px solid var(--brand-color);
+}
+.latest-deals .shopping span {
+  font-size: 1.4rem;
+  color: var(--brand-color);
+}
+.latest-deals .product-data p span:first-child {
+  color: var(--grey-color);
+}
+/* Smartphone & Accessories */
+
+/* --------------------------------------------------
+Home Page Sidebar Style
+--------------------------------------------------*/
+/* super discount */
+
+.super-discount h4 {
+  font-size: 1rem;
+  color: var(--brand-color);
+  margin-bottom: 5px;
+}
+.super-discount h3 {
+  font-size: 2rem;
+  color: var(--black-color);
+  margin-bottom: 5px;
+  line-height: 2.4rem;
+  margin-bottom: 20px;
+}
+.super-discount p {
+  font-size: 1rem;
+  color: var(--grey-color);
+  margin-bottom: 5px;
+}
+
+/* products cards style  =========================*/
+.product-card-grid {
+  display: grid;
+  grid-template-columns: 2fr auto;
+}
+.grid-product-right {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.single-product-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.grid-product-right img {
+  max-width: 250px !important;
+}
+.grid-product-right h4,
+.single-product-left h4 {
+  font-size: 16px;
+  font-weight: 400;
+}
+.grid-product-right h3,
+.single-product-left h4 {
+  font-size: 20px;
+  font-weight: 400;
 }
 
