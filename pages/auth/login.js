@@ -4,26 +4,27 @@ import Link from 'next/link'
 import {GoogleOutlined, FacebookFilled} from '@ant-design/icons'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-
+import useAuth from "../../components/hooks/useAuth";
 
 const Login = () => {
   const [user_name, setUser_name] = useState('')
   const [password, setPassword] = useState('')
-
+  const { signinHandler } = useAuth();
 const router = useRouter()
 
-
+ // // calling API after data input
+    // useEffect(() => {
+    //     signinHandler(user_name, password);
+    // }, [user_name, password]);
+    
 const handleLogin = async(e) => {
   e.preventDefault();
-
-  const res = await axios.post('https://othobamart-api.herokuapp.com/auth/login', {user_name,password})
-  
-  localStorage.setItem("user", JSON.stringify(res.data))
-  router.push('/')
-  console.log(res.data)
+  signinHandler(user_name, password);
+ 
 };
+
   return (
-    <div className="w-screen h-screen grid sm:grid-cols-2 place-content-center items-center">
+    <div className="w-screen h-screen grid sm:grid-cols-2 items-center">
       <div className="hidden sm:block">
         {/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
         <img src="/images/login.jpg" alt="" className="h-screen w-full" />
@@ -70,9 +71,9 @@ const handleLogin = async(e) => {
             </p>
             <p className="mt-3 text-center">
               Don't have an account?{" "}
-              <Link href='/register'>
+              <Link href='/auth/register'>
                 <a>
-              <span className="text-blue font-semibold cursor-pointer">
+              <span className="text-sky-500 font-semibold cursor-pointer">
                 Register
               </span>
               </a>

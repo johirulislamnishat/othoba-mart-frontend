@@ -2,43 +2,37 @@ import { useState } from "react";
 import Link from 'next/link'
 import {GoogleOutlined, FacebookFilled} from '@ant-design/icons'
 import axios from 'axios'
+import useAuth from "../../components/hooks/useAuth";
 
 const Register = () => {
   const [user_name, setUser_name] = useState('')
   const [email, setEmail] = useState('')
+  const [business_name, setBusiness_name] = useState('')
   const [password, setPassword] = useState('')
   const [isVendor, setIsVendor] = useState(false)
-  const [isCustomer, setIsCustomer] = useState(false)
-  const [success,setSuccess] = useState('')
-  
-  // setUser_name(`${fName} ${lName}`)
-// console.log(user_name,email,password, isVendor, isCustomer)
-  // const handleInput = (e) => {
-  //   const field = e.target.name;
-  //   const value = e.target.value;
-  //   const newUser = { ...inputs, [e.target.name]: e.target.value };
-  //   setInputs(newUser);
-  // };
+  const [isCustomer, setIsCustomer] = useState(true)
+
+  const { signupHandler } = useAuth()
+
+const handleCustomer = e => {
+if(e.target.name == 'vendor') {
+  setIsCustomer(false)
+  setIsVendor(true)
+} else{
+  setIsCustomer(true)
+  setIsVendor(false)
+}
+}
+console.log(user_name, email, password, isCustomer, isVendor, business_name)
+  // calling API after data input
+   // useEffect(() => {
+   //     signupHandler(user_name, email, password);
+   // }, [user_name, email, password]);
 
   const handleRegister = async(e) => {
     e.preventDefault();
     
-    const user = {
-      user_name,
-      email,
-      password,
-      isCustomer,
-      isVendor,
-    }
-
-    const res = await axios.post('https://othobamart-api.herokuapp.com/auth/register', {user_name,
-    email,
-    password,
-    isCustomer,
-    isVendor})
-
-    setSuccess(res.data.message)
-    console.log(user,res)
+    signupHandler(user_name, email, password, isCustomer, isVendor, business_name)
   };
   
   return (
@@ -47,21 +41,27 @@ const Register = () => {
         {/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
         <img src="/images/register.jpg" alt="" className="h-screen w-full" />
       </div>
-      {/* <div> */}
+      
       <div className='min-w-full'>
-        <div className="mx-4 sm:mx-16 p-4 border-2 border-gray-200">
+        <div className="mx-16 p-4 border-2 border-gray-200">
           <form onSubmit={handleRegister} className="flex flex-col gap-2 font-semibold text-sm">
-            <div className="flex gap-4 border-b-gray-400">
-              <p onClick={()=>setIsCustomer(true)} className="text-gray-500 cursor-pointer">
-                Sign up as Customer
-              </p>
-              <p onClick={()=>setIsVendor(true)} className="text-gray-500 cursor-pointer">Sign up as Seller</p>
+            <div className="mb-2 flex gap-4">
+              <label className={isCustomer ? "text-sky-500 cursor-pointer" : "text-gray-500  cursor-pointer" }> Sign up as Customer
+              <input name='customer' onClick={(e)=>handleCustomer(e)} className="hidden"
+               
+              />
+              { isCustomer && <div className='w-10 h-0.5 rounded bg-sky-500'></div>}
+              </label>
+<label className={isVendor ? "text-sky-500 cursor-pointer" : "text-gray-500 cursor-pointer" }>Sign up as Seller
+              <input name='vendor' onClick={(e)=>handleCustomer(e)} className="hidden" />
+              { isVendor && <div className='w-10 h-0.5 rounded bg-sky-500'></div>}
+</label>
             </div>
             
-                <label>User name</label>
+                <label>User Name</label>
                 <input onChange={(e)=>setUser_name(e.target.value)}
                 required={true}
-                  placeholder="Enter first name"
+                  placeholder="Enter user name"
                   className="p-2 mb-2 border-2 border-gray-200 "
                 />
              
@@ -72,7 +72,15 @@ const Register = () => {
               placeholder="Enter your email"
               className="p-2 mb-2 border-2 border-gray-200"
             />
-
+{ isVendor && <>
+            <label>Business Name </label>
+                <input onChange={(e)=>setBusiness_name(e.target.value)}
+                required={true}
+                placeholder="Enter business name"
+                className="p-2 mb-2 border-2 border-gray-200 "
+                />
+                </>
+              }
             <label>Password</label>
             <div>
               <input onChange={(e)=>setPassword(e.target.value)} type='password' required={true}
@@ -83,6 +91,7 @@ const Register = () => {
                 Password must be minimum 8 characters.
               </p>
             </div>
+            
             <div className="flex justify-between items-center">
               <div className="flex gap-1 items-center">
                 <input type="checkbox" className="cursor-pointer" />
@@ -94,7 +103,6 @@ const Register = () => {
             </div>
             <button type='submit' className="bg-sky-500 py-1 mt-2 text-white">Register</button>
           </form>
-          {<p className='text-green-700 m-2'>{success}</p>}
           <div className="flex flex-col items-center gap-2 mt-5">
             <p className="text-center border-2 border-gray-200 cursor-pointer flex items-center justify-center gap-2 w-full py-2"><GoogleOutlined style={{ color:'green'}}/>
               Log in with Google
@@ -105,9 +113,9 @@ const Register = () => {
             </p>
             <p className="mt-3 text-center">
               Have an account?{" "}
-              <Link href='/login'>
+              <Link href='/auth/login'>
                 <a>
-              <span className="text-blue font-semibold cursor-pointer">
+              <span className="text-sky-500 font-semibold cursor-pointer">
                 Log In
               </span>
               </a>
