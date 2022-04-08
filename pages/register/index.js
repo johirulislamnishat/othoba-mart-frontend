@@ -96,7 +96,7 @@ const Register = () => {
                         </div>
                         <button
                             type="submit"
-                            className=" py-1 mt-2 border-2"
+                            className="bg-sky-500 py-1 mt-2 border-2"
                         >
                             Register
                         </button>

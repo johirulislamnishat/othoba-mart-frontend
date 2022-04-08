@@ -76,7 +76,7 @@ const Login = () => {
                             </span>
                         </div>
                         <button
-                            className="bg-blue py-1 mt-2 border-2"
+                            className="bg-sky-500 py-1 mt-2 border-2"
                             type="submit"
                         >
                             Login
