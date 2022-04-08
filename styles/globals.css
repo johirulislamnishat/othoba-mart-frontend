@@ -5,18 +5,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: "Poppins", sans-serif;
+	padding: 0;
+	margin: 0;
+	font-family: "Poppins", sans-serif;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
+.ant-carousel {
+	height: 100% !important;
+	line-height: 100% !important;
+}

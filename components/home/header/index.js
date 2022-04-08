@@ -4,16 +4,16 @@ import {
 	CreditCardOutlined,
 	DollarCircleOutlined,
 } from "@ant-design/icons";
-import { Button, Carousel, Col, Divider, Image, Menu, Row } from "antd";
+import { Button, Carousel, Col, Image, Menu, Row } from "antd";
 import Title from "antd/lib/typography/Title";
 import React from "react";
 
 const HomeHeader = () => {
 	return (
 		<div className="mt-3">
-			<Row gutter={[16, 16]}>
+			<Row gutter={[16, 16]} align="middle">
 				{/* left menu */}
-				<Col xs={0} md={0} lg={4} className="mt-5">
+				<Col xs={0} md={0} lg={4}>
 					<Menu defaultSelectedKeys={["1"]} mode="inline">
 						<Menu.Item key="1">Home</Menu.Item>
 						<Menu.Item key="2">Fashion</Menu.Item>
@@ -23,8 +23,7 @@ const HomeHeader = () => {
 						<Menu.Item key="6">Music</Menu.Item>
 						<Menu.Item key="7">Motors</Menu.Item>
 						<Menu.Item key="8">Furniture</Menu.Item>
-						<Menu.Item key="9">Trousers</Menu.Item>
-						<Menu.Item key="10">VIEW ALL &gt;</Menu.Item>
+						<Menu.Item key="9">VIEW ALL &gt;</Menu.Item>
 					</Menu>
 				</Col>
 
@@ -68,7 +67,7 @@ const HomeHeader = () => {
 
 					<Row align="middle" className="mt-3">
 						<Col xs={20}>
-							<Title level={4}>Woodworking Machinery</Title>
+							<Title level={5}>Woodworking Machinery</Title>
 						</Col>
 						<Col xs={4}>
 							<Image
@@ -79,11 +78,11 @@ const HomeHeader = () => {
 							/>
 						</Col>
 					</Row>
-					<Divider />
+					<hr className="my-3" />
 
 					<Row align="middle">
 						<Col xs={20}>
-							<Title level={4}>Plastic & Rubber Machinery</Title>
+							<Title level={5}>Plastic & Rubber Machinery</Title>
 						</Col>
 						<Col xs={4}>
 							<Image
@@ -94,11 +93,11 @@ const HomeHeader = () => {
 							/>
 						</Col>
 					</Row>
-					<Divider />
+					<hr className="my-3" />
 
 					<Row align="middle">
 						<Col xs={20}>
-							<Title level={4}>
+							<Title level={5}>
 								Laser & Machine Tool Equipment
 							</Title>
 						</Col>
@@ -111,7 +110,7 @@ const HomeHeader = () => {
 							/>
 						</Col>
 					</Row>
-					<Divider />
+					<hr className="my-3" />
 				</Col>
 			</Row>
 
