@@ -98,7 +98,7 @@ const HomeFooter = () => {
             </ul>
           </div>
 
-          {/* 3nd footer menu  */}
+          {/* 3rd footer menus  */}
           <div className="px-4 w-full md:w-1/4 xl:w-1/5">
             <h5 className="text-xl font-bold mb-6">Top Brands</h5>
             <ul className="list-none footer-links">
