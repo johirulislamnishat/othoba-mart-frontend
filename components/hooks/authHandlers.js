@@ -6,7 +6,7 @@ import { API_BASE_URL } from "../../apiconstants";
 const AuthData = () => {
     const router = useRouter();
     // register api handler function
-    const signupHandler = (user_name, email, password,isCustomer, isVendor, business_name) => {
+    const signupHandler = (user_name, email, password,isCustomer, isVendor,phoneNum, business_name) => {
         
         axios
             .post(API_BASE_URL + "/auth/register", {
@@ -15,6 +15,7 @@ const AuthData = () => {
                 password: password,
                 isCustomer: isCustomer, 
                 isVendor: isVendor, 
+                phoneNum: phoneNum,
                 business_name: business_name
             })
             .then(function (response) {
