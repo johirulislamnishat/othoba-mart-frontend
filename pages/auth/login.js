@@ -2,45 +2,34 @@ import {useState} from 'react'
 import Image from "next/image";
 import Link from 'next/link'
 import {GoogleOutlined, FacebookFilled} from '@ant-design/icons'
-import { useRouter } from 'next/router'
 import useAuth from "../../components/hooks/useAuth";
 
 const Login = () => {
   const [user_name, setUser_name] = useState('')
   const [password, setPassword] = useState('')
   const { signinHandler } = useAuth();
-const router = useRouter()
 
- // // calling API after data input
-    // useEffect(() => {
-    //     signinHandler(user_name, password);
-    // }, [user_name, password]);
-    
-const handleLogin = async(e) => {
-  e.preventDefault();
-  signinHandler(user_name, password);
- 
-};
+  const handleLogin = async(e) => {
+    e.preventDefault();
+    signinHandler(user_name, password);
+  };
 
   return (
-    <div className="w-screen h-screen grid sm:grid-cols-2 items-center">
+    <div className="w-screen h-screen grid    sm:grid-cols-2 items-center">
       <div className="hidden sm:block">
         {/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
         <img src="/images/login.jpg" alt="" className="h-screen w-full" />
       </div>
 
       <div className='min-w-full'>
-        
         <div className="mx-4 sm:mx-16 p-4 border-2 border-gray-200">
           <form onSubmit={handleLogin} className="flex flex-col gap-2 font-semibold text-sm">
             <label>User Name</label>
             <input onChange={(e)=>setUser_name(e.target.value)} type='user_name' required={true}
               placeholder="Enter your user_name"
               className="p-2 mb-2 border-2 border-gray-200" />
-             
-            
-            <label>Password</label>
             <div>
+            <label>Password</label>
               <input onChange={(e)=>setPassword(e.target.value)} type='password' required={true}
                 placeholder="Enter your password"
                 className="w-full p-2 mb-2 border-2 border-gray-200"

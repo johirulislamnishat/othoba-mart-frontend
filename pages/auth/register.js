@@ -34,14 +34,10 @@ const Register = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  
-  // calling API after data input
-  // useEffect(() => {
-  //     signupHandler(user_name, email, password);
-  // }, [user_name, email, password]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    
     if (password === password2) {
       signupHandler(
         user_name,
@@ -124,6 +120,7 @@ const Register = () => {
               placeholder="Enter your email"
               className="p-2 mb-2 border-2 border-gray-200"
             />
+            
             {isVendor && (
               <>
                 <label>Phone Number</label>
@@ -143,6 +140,7 @@ const Register = () => {
                 />
               </>
             )}
+
             <div>
               <label>Password</label>
               <input

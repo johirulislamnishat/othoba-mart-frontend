@@ -1,15 +1,11 @@
-import { Col, Menu, Row } from "antd";
-import { useState } from "react";
+import { Col, Row } from "antd";
 import HomeHeader from "../components/home/header";
 import NewProducts from "../components/home/NewProducts/NewProducts";
 import ProductCards from "../components/home/ProductCards/ProductCards";
 import PromoLgThree from "../components/home/PromoLgThree/PromoLgThree";
 import PromoLgTwo from "../components/home/PromoLgTwo/PromoLgTwo";
 import Sidebar from "../components/home/Sidebar/Sidebar";
-import useAuth from "../components/hooks/useAuth";
 import HomeLayout from "../components/layouts/homeLayout";
-
-const { SubMenu } = Menu;
 
 export default function Home() {
 
