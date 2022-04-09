@@ -94,7 +94,7 @@ const HomeMenu = () => {
 				>
 					<Menu mode="horizontal" defaultSelectedKeys={["0"]}>
 						<Menu.Item key="1">
-							<Link href="/login">
+							<Link href="/auth/login">
 								<a>
 									<span className="text-blue font-semibold cursor-pointer">
 										Log In

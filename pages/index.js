@@ -8,13 +8,14 @@ import Sidebar from "../components/home/Sidebar/Sidebar";
 import HomeLayout from "../components/layouts/homeLayout";
 
 export default function Home() {
+
 	return (
 		<HomeLayout title="Othoba Mart">
 			<HomeHeader />
 			<NewProducts />
 			<PromoLgTwo />
 			<Row>
-				<Col xs={0} lg={5}>
+                <Col>
 					<Sidebar />
 				</Col>
 				<Col
