@@ -2,7 +2,6 @@ import {useState} from 'react'
 import Image from "next/image";
 import Link from 'next/link'
 import {GoogleOutlined, FacebookFilled} from '@ant-design/icons'
-import axios from 'axios'
 import { useRouter } from 'next/router'
 import useAuth from "../../components/hooks/useAuth";
 
@@ -34,7 +33,7 @@ const handleLogin = async(e) => {
         
         <div className="mx-4 sm:mx-16 p-4 border-2 border-gray-200">
           <form onSubmit={handleLogin} className="flex flex-col gap-2 font-semibold text-sm">
-            <label>User name</label>
+            <label>User Name</label>
             <input onChange={(e)=>setUser_name(e.target.value)} type='user_name' required={true}
               placeholder="Enter your user_name"
               className="p-2 mb-2 border-2 border-gray-200" />
@@ -55,9 +54,13 @@ const handleLogin = async(e) => {
                 <input type="checkbox" className="cursor-pointer" />
                 <span className=" min-w-max">Remember me</span>
               </div>
-              <span className="text-blue min-w-max cursor-pointer">
+              <Link href='/auth/reset'>
+                <a>
+              <span className="text-sky-500 min-w-max cursor-pointer">
                 Forgot Password?
               </span>
+              </a>
+              </Link>
             </div>
             <button className="bg-sky-500 py-1 mt-2 text-white" type='submit' >Login</button>
           </form>
@@ -82,15 +85,27 @@ const handleLogin = async(e) => {
           </div>
         </div>
         <div className="mt-10 flex gap-4 items-center justify-center">
+        <Link href='/policy/termsOfService'>
+            <a>
           <span className="underline text-gray-500 cursor-pointer">
-            Terms of use
+            Terms of Service
           </span>
+          </a>
+          </Link>
+          <Link href='/policy/privacyPolicy'>
+            <a>
           <span className="underline text-gray-500 cursor-pointer">
             Privacy Policy
           </span>
+          </a>
+          </Link>
+          <Link href='/policy/support'>
+            <a>
           <span className="underline text-gray-500 cursor-pointer">
             Support
           </span>
+          </a>
+          </Link>
         </div>
       </div>
     </div>

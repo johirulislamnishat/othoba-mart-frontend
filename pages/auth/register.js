@@ -174,9 +174,13 @@ const Register = () => {
                 <input type="checkbox" className="cursor-pointer" />
                 <span className=" min-w-max">Remember me</span>
               </div>
-              <span className="text-blue min-w-max cursor-pointer">
+              <Link href='/auth/reset'>
+                <a>
+              <span className="text-sky-500 min-w-max cursor-pointer">
                 Forgot Password?
               </span>
+              </a>
+              </Link>
             </div>
             <button type="submit" className="bg-sky-500 py-1 mt-2 text-white">
               Register
@@ -209,15 +213,27 @@ const Register = () => {
           </div>
         </div>
         <div className="mt-10 flex gap-4 items-center justify-center">
+        <Link href='/policy/termsOfService'>
+            <a>
           <span className="underline text-gray-500 cursor-pointer">
-            Terms of use
+            Terms of Service
           </span>
+          </a>
+          </Link>
+          <Link href='/policy/privacyPolicy'>
+            <a>
           <span className="underline text-gray-500 cursor-pointer">
             Privacy Policy
           </span>
+          </a>
+          </Link>
+          <Link href='/policy/support'>
+            <a>
           <span className="underline text-gray-500 cursor-pointer">
             Support
           </span>
+          </a>
+          </Link>
         </div>
       </div>
     </div>
