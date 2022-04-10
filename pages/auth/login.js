@@ -15,24 +15,26 @@ const Login = () => {
   };
 
   return (
-    <div className="w-screen h-screen grid    sm:grid-cols-2 items-center">
+    <div className="w-screen h-screen bg-blue-200 grid    sm:grid-cols-2 items-center">
       <div className="hidden sm:block">
         {/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
-        <img src="/images/login.jpg" alt="" className="h-screen w-full" />
+        <img src="/images/auth.png" alt="" className="h-screen w-full" />
       </div>
 
-      <div className='min-w-full'>
-        <div className="mx-4 sm:mx-16 p-4 border-2 border-gray-200">
-          <form onSubmit={handleLogin} className="flex flex-col gap-2 font-semibold text-sm">
-            <label>User Name</label>
+      <div className='min-w-full rounded-r-lg bg-blue-200 '>
+        <div className="mx-4 sm:mx-16 p-2 border-2 border-gray-200 rounded-lg flex flex-col items-center">
+          <form onSubmit={handleLogin} className="w-full sm:w-3/4 flex flex-col gap-2 font-semibold text-sm mt-10">
+
+            <label>User Name
             <input onChange={(e)=>setUser_name(e.target.value)} type='user_name' required={true}
               placeholder="Enter your user_name"
-              className="p-2 mb-2 border-2 border-gray-200" />
+              className="w-full p-2 mb-2 border-2 border-gray-200 rounded-lg" />
+              </label>
             <div>
             <label>Password</label>
               <input onChange={(e)=>setPassword(e.target.value)} type='password' required={true}
                 placeholder="Enter your password"
-                className="w-full p-2 mb-2 border-2 border-gray-200"
+                className="w-full p-2 mb-2 border-2 border-gray-200 rounded-lg"
               />
               <p className="mt-0 pt-0 text-gray-500 text-xs">
                 Password must be minimum 8 characters.
@@ -40,7 +42,7 @@ const Login = () => {
             </div>
             <div className="flex justify-between items-center">
               <div className="flex gap-1 items-center">
-                <input type="checkbox" className="cursor-pointer" />
+                <input type="checkbox" className="cursor-pointer rounded-lg" />
                 <span className=" min-w-max">Remember me</span>
               </div>
               <Link href='/auth/reset'>
@@ -51,16 +53,22 @@ const Login = () => {
               </a>
               </Link>
             </div>
-            <button className="bg-sky-500 py-1 mt-2 text-white" type='submit' >Login</button>
-          </form>
-          <div className="flex flex-col items-center gap-2 mt-5">
-            <p className="text-center border-2 border-gray-200 cursor-pointer flex items-center justify-center gap-2 w-full py-2"><GoogleOutlined style={{ color:'green'}}  />
+            <button className="bg-sky-500 py-2 my-3 text-white font-semibold rounded-lg" type='submit' >Login</button>
+            <div className=" text-center border-2 border-gray-200 flex items-center pl-8 gap-2 rounded-lg">
+              <img src='/images/google.png' alt='google logo' />
+            <p className="  cursor-pointer py-2">
               Log in with Google
             </p>
-            <p className="text-center border-2 border-gray-200 cursor-pointer flex items-center justify-center gap-2 w-full py-2"><FacebookFilled style={{ color:'blue'}} />
-              {" "}
+            </div>
+            <div className="text-center border-2 border-gray-200 flex items-center gap-2 pl-8 rounded-lg">
+            <img src='/images/facebook.png' alt='facebook logo' />
+            <p className=" cursor-pointer py-2">
               Log in with Facebook
             </p>
+            </div>
+          </form>
+
+    <div className="flex flex-col  gap-2 mt-5 mb-3"> 
             <p className="mt-3 text-center">
               Don't have an account?{" "}
               <Link href='/auth/register'>
@@ -73,6 +81,7 @@ const Login = () => {
             </p>
           </div>
         </div>
+       
         <div className="mt-10 flex gap-4 items-center justify-center">
         <Link href='/policy/termsOfService'>
             <a>
