@@ -35,14 +35,14 @@ const CheckoutCart = () => {
                     </p>
                   </div>
                 </div>
-                <div className="mt-4 flex items-center justify-between">
+                <div className="mt-2 flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-2">
                       <HeartTwoTone
                         twoToneColor="#eb2f96"
                         className="cursor-pointer"
                       />
-                      <p className="text-gray-300 m-0">Wishlist</p>
+                      <p className="text-gray-400 m-0">Wishlist</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <img
@@ -52,25 +52,27 @@ const CheckoutCart = () => {
                         height="14px"
                         className="cursor-pointer"
                       />
-                      <p className="text-gray-300 m-0">Compare</p>
+                      <p className="text-gray-400 m-0">Compare</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <CloseOutlined className="text-red-500 cursor-pointer" />
-                      <p className="text-gray-300 m-0">Remove</p>
+                      <p className="text-gray-400 m-0">Remove</p>
                     </div>
                   </div>
-                  <div>
-                    <div>
-                      <StarFilled className="text-orange-500" />
-                      <StarFilled className="text-orange-500" />
-                      <StarFilled className="text-orange-500" />
-                      <StarFilled className="text-orange-500" />
+                  <div className='flex flex-col gap-2'>
+                    <div className='ratings'>
+                      <StarFilled />
+                      <StarFilled />
+                      <StarFilled />
+                      <StarFilled />
                       <StarOutlined />
                     </div>
-                    <p className="min-w-max text-green-500 text-lg font-semibold">
+                    <div>
+                    <p className="min-w-max text-green-500 text-lg font-semibold m-0">
                       36.99 USD
                     </p>
-                    <p className="line-through text-sm">48.56 USD</p>
+                    <p className="line-through text-sm m-0">48.56 USD</p>
+                    </div>
                   </div>
                   <div className="">
                     <ul className=" relative bg-gray-100 border-2 border-gray-300 rounded-2xl min-h-max p-2">
@@ -116,7 +118,7 @@ const CheckoutCart = () => {
                         twoToneColor="#eb2f96"
                         className="cursor-pointer"
                       />
-                      <p className="text-gray-300 m-0">Wishlist</p>
+                      <p className="text-gray-400 m-0">Wishlist</p>
                     </div>
                     <div className="flex gap-2 items-center">
                       <img
@@ -126,25 +128,27 @@ const CheckoutCart = () => {
                         height="14px"
                         className="cursor-pointer"
                       />
-                      <p className="text-gray-300 m-0">Compare</p>
+                      <p className="text-gray-400 m-0">Compare</p>
                     </div>
                     <div className="flex gap-2 items-center">
                       <CloseOutlined className="text-red-500 cursor-pointer" />
-                      <p className="text-gray-300 m-0">Remove</p>
+                      <p className="text-gray-400 m-0">Remove</p>
                     </div>
                   </div>
-                  <div>
-                    <div>
-                      <StarFilled className="text-orange-500" />
-                      <StarFilled className="text-orange-500" />
-                      <StarFilled className="text-orange-500" />
-                      <StarFilled className="text-orange-500" />
+                  <div className='flex flex-col gap-2'>
+                    <div className="ratings">
+                      <StarFilled />
+                      <StarFilled />
+                      <StarFilled />
+                      <StarFilled />
                       <StarOutlined />
                     </div>
-                    <p className="min-w-max text-green-500 text-lg font-semibold">
+                    <div>
+                    <p className="min-w-max text-green-500 text-lg font-semibold m-0">
                       36.99 USD
                     </p>
-                    <p className="line-through text-sm">48.56 USD</p>
+                    <p className="line-through text-sm m-0">48.56 USD</p>
+                    </div>
                   </div>
                   <div className="">
                     <ul className=" relative bg-gray-100 border-2 border-gray-300 rounded-2xl min-h-max p-2">
