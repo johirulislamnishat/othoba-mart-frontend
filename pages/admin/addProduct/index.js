@@ -13,37 +13,68 @@ import {
 	Upload,
 } from "antd";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
-import useAuth from "../../../components/hooks/useAuth";
 import AdminLayout from "../../../components/layouts/adminLayout";
 
 const { Option } = Select;
 const { Dragger } = Upload;
 
 const AddProduct = () => {
+	const [form] = Form.useForm();
 	const [optionName, setOptionName] = useState("");
 	const [loading, setLoading] = useState(false);
-	const { token } = useAuth();
+	const [token, setToken] = useState(null);
 	const [categoryChildren, setCategoryChildren] = useState([
-		<Option key={1}>Smart phone</Option>,
+		<Option key={"Smart phone"}>Smart phone</Option>,
 	]);
 	const [tagChildren, setTagChildren] = useState([
-		<Option key={1}>New</Option>,
+		<Option key={"New"}>New</Option>,
 	]);
 	const [colorChildren, setColorChildren] = useState([
-		<Option key={1}>White</Option>,
+		<Option key={"White"}>White</Option>,
 	]);
 	const [sizeChildren, setSizeChildren] = useState([
-		<Option key={1}>sm</Option>,
+		<Option key={"sm"}>sm</Option>,
 	]);
+	const [img, setImg] = useState(null);
+
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			setToken(localStorage.getItem("token"));
+		}
+	}, []);
 
 	const handleSubmit = (values) => {
+		setLoading(true);
 		const formData = new FormData();
+		formData.append("product_name", values.product_name);
+		formData.append("product_description", values.product_description);
+		formData.append("product_price", values.product_price);
+		formData.append("photo", img);
 
-		for (const item in values) {
-			if (values[item] !== undefined)
-				formData.append(`${item}: ${values[item]}`);
+		if (values.product_category) {
+			for (const item of values.product_category) {
+				formData.append("product_category", item);
+			}
+		}
+
+		if (values.product_colors) {
+			for (const item of values.product_colors) {
+				formData.append("product_colors", item);
+			}
+		}
+
+		if (values.product_tags) {
+			for (const item of values.product_tags) {
+				formData.append("product_tags", item);
+			}
+		}
+
+		if (values.product_sizes) {
+			for (const item of values.product_sizes) {
+				formData.append("product_sizes", item);
+			}
 		}
 
 		axios
@@ -54,32 +85,31 @@ const AddProduct = () => {
 				},
 			})
 			.then((res) => {
-				console.log(res.result);
+				if (res.status === 200) {
+					message.success(res.data.message);
+					setLoading(false);
+					form.resetFields();
+				}
 			})
-			.catch((err) => console.log(err));
+			.catch(() => {
+				message.error("Failed to add product");
+				setLoading(false);
+			});
 	};
 
 	const addCategory = (field, setField) => {
-		setField([
-			...field,
-			<Option key={field.length + 1}>{optionName}</Option>,
-		]);
+		setField([...field, <Option key={optionName}>{optionName}</Option>]);
 		setOptionName("");
-	};
-
-	const normFile = (e) => {
-		if (Array.isArray(e)) {
-			return e;
-		}
-		return e && e.fileList;
 	};
 
 	const props = {
 		beforeUpload: (file) => {
 			if (file.size > 3000) {
 				message.error(`${file.name}'s size is over 300kb`);
+				setImg(null);
 				return Upload.LIST_IGNORE;
 			}
+			setImg(file);
 		},
 	};
 
@@ -89,6 +119,7 @@ const AddProduct = () => {
 
 			<section className="mt-5 bg-white p-5">
 				<Form
+					form={form}
 					name="Add Product"
 					layout="vertical"
 					requiredMark={false}
@@ -126,9 +157,9 @@ const AddProduct = () => {
 								message: "Please enter the product description",
 							},
 							{
-								min: 50,
+								min: 30,
 								message:
-									"Product description should be at least 50 characters long",
+									"Product description should be at least 30 characters long",
 							},
 						]}
 					>
@@ -329,9 +360,7 @@ const AddProduct = () => {
 
 					<Form.Item label="Picture" required>
 						<Form.Item
-							name="photo"
 							valuePropName="fileList"
-							getValueFromEvent={normFile}
 							rules={[
 								{
 									required: true,
