@@ -1,12 +1,14 @@
 import { InboxOutlined } from "@ant-design/icons";
 import {
 	Button,
+	Col,
 	Divider,
 	Form,
 	Input,
 	InputNumber,
 	message,
 	PageHeader,
+	Row,
 	Select,
 	Space,
 	Typography,
@@ -126,25 +128,45 @@ const AddProduct = () => {
 					initialValues={{ remember: true }}
 					onFinish={handleSubmit}
 				>
-					<Form.Item
-						label="Product Name"
-						name="product_name"
-						hasFeedback
-						validateFirst
-						rules={[
-							{
-								required: true,
-								message: "Please enter the product name",
-							},
-							{
-								min: 3,
-								message:
-									"Product name should be at least 3 characters long",
-							},
-						]}
-					>
-						<Input placeholder="Product Name" allowClear />
-					</Form.Item>
+					<Row gutter={[16, 16]}>
+						<Col xs={24} md={12}>
+							<Form.Item
+								label="Product Name"
+								name="product_name"
+								hasFeedback
+								validateFirst
+								rules={[
+									{
+										required: true,
+										message:
+											"Please enter the product name",
+									},
+									{
+										min: 3,
+										message:
+											"Product name should be at least 3 characters long",
+									},
+								]}
+							>
+								<Input placeholder="Product Name" allowClear />
+							</Form.Item>
+						</Col>
+
+						<Col xs={24} md={12}>
+							<Form.Item
+								label="Price"
+								name="product_price"
+								rules={[
+									{
+										required: true,
+										message: "Please input procuct price",
+									},
+								]}
+							>
+								<InputNumber style={{ width: "100%" }} />
+							</Form.Item>
+						</Col>
+					</Row>
 
 					<Form.Item
 						label="Description"
@@ -169,224 +191,251 @@ const AddProduct = () => {
 						/>
 					</Form.Item>
 
-					<Form.Item
-						label="Price"
-						name="product_price"
-						rules={[
-							{
-								required: true,
-								message: "Please input procuct price",
-							},
-						]}
-					>
-						<InputNumber style={{ width: "100%" }} />
-					</Form.Item>
-
-					<Form.Item
-						label="Category"
-						name="product_category"
-						hasFeedback
-						validateFirst
-					>
-						<Select
-							mode="multiple"
-							placeholder="Select category"
-							optionFilterProp="categoryChildren"
-							dropdownRender={(menu) => (
-								<>
-									{menu}
-									<Divider style={{ margin: "8px 0" }} />
-									<Space
-										align="center"
-										style={{ padding: "0 8px 4px" }}
-									>
-										<Input
-											placeholder="Enter category name"
-											value={optionName}
-											onChange={(e) =>
-												setOptionName(e.target.value)
-											}
-										/>
-										<Typography.Link
-											onClick={() =>
-												addCategory(
-													categoryChildren,
-													setCategoryChildren
-												)
-											}
-											style={{ whiteSpace: "nowrap" }}
-										>
-											Add Category
-										</Typography.Link>
-									</Space>
-								</>
-							)}
-						>
-							{categoryChildren}
-						</Select>
-					</Form.Item>
-
-					<Form.Item
-						label="Tags"
-						name="product_tags"
-						hasFeedback
-						validateFirst
-					>
-						<Select
-							mode="multiple"
-							placeholder="Select tags"
-							optionFilterProp="tagChildren"
-							dropdownRender={(menu) => (
-								<>
-									{menu}
-									<Divider style={{ margin: "8px 0" }} />
-									<Space
-										align="center"
-										style={{ padding: "0 8px 4px" }}
-									>
-										<Input
-											placeholder="Enter tag name"
-											value={optionName}
-											onChange={(e) =>
-												setOptionName(e.target.value)
-											}
-										/>
-										<Typography.Link
-											onClick={() =>
-												addCategory(
-													tagChildren,
-													setTagChildren
-												)
-											}
-											style={{ whiteSpace: "nowrap" }}
-										>
-											Add Tag
-										</Typography.Link>
-									</Space>
-								</>
-							)}
-						>
-							{tagChildren}
-						</Select>
-					</Form.Item>
-
-					<Form.Item
-						label="Colours"
-						name="product_colors"
-						hasFeedback
-						validateFirst
-					>
-						<Select
-							mode="multiple"
-							placeholder="Select colors"
-							optionFilterProp="colorChildren"
-							dropdownRender={(menu) => (
-								<>
-									{menu}
-									<Divider style={{ margin: "8px 0" }} />
-									<Space
-										align="center"
-										style={{ padding: "0 8px 4px" }}
-									>
-										<Input
-											placeholder="Enter colour name"
-											value={optionName}
-											onChange={(e) =>
-												setOptionName(e.target.value)
-											}
-										/>
-										<Typography.Link
-											onClick={() =>
-												addCategory(
-													colorChildren,
-													setColorChildren
-												)
-											}
-											style={{ whiteSpace: "nowrap" }}
-										>
-											Add Colour
-										</Typography.Link>
-									</Space>
-								</>
-							)}
-						>
-							{colorChildren}
-						</Select>
-					</Form.Item>
-
-					<Form.Item
-						label="Sizes"
-						name="product_sizes"
-						hasFeedback
-						validateFirst
-					>
-						<Select
-							mode="multiple"
-							placeholder="Select sizes"
-							optionFilterProp="sizeChildren"
-							dropdownRender={(menu) => (
-								<>
-									{menu}
-									<Divider style={{ margin: "8px 0" }} />
-									<Space
-										align="center"
-										style={{ padding: "0 8px 4px" }}
-									>
-										<Input
-											placeholder="Enter size"
-											value={optionName}
-											onChange={(e) =>
-												setOptionName(e.target.value)
-											}
-										/>
-										<Typography.Link
-											onClick={() =>
-												addCategory(
-													sizeChildren,
-													setSizeChildren
-												)
-											}
-											style={{ whiteSpace: "nowrap" }}
-										>
-											Add Size
-										</Typography.Link>
-									</Space>
-								</>
-							)}
-						>
-							{sizeChildren}
-						</Select>
-					</Form.Item>
-
-					<Form.Item label="Picture" required>
-						<Form.Item
-							valuePropName="fileList"
-							rules={[
-								{
-									required: true,
-									message: `Please insert procuct's photo`,
-								},
-							]}
-							noStyle
-						>
-							<Dragger
-								{...props}
-								maxCount={1}
-								accept=".png, .jpg"
+					<Row gutter={[16, 16]}>
+						<Col xs={24} md={12}>
+							<Form.Item
+								label="Category"
+								name="product_category"
+								hasFeedback
+								validateFirst
 							>
-								<p className="ant-upload-drag-icon">
-									<InboxOutlined />
-								</p>
-								<p className="ant-upload-text">
-									Click or drag file to this area to upload
-								</p>
-								<p className="ant-upload-hint">
-									Support for a single upload. Only accept
-									png, jpg file.
-								</p>
-							</Dragger>
-						</Form.Item>
-					</Form.Item>
+								<Select
+									mode="multiple"
+									placeholder="Select category"
+									optionFilterProp="categoryChildren"
+									dropdownRender={(menu) => (
+										<>
+											{menu}
+											<Divider
+												style={{ margin: "8px 0" }}
+											/>
+											<Space
+												align="center"
+												style={{ padding: "0 8px 4px" }}
+											>
+												<Input
+													placeholder="Enter category name"
+													value={optionName}
+													onChange={(e) =>
+														setOptionName(
+															e.target.value
+														)
+													}
+												/>
+												<Typography.Link
+													onClick={() =>
+														addCategory(
+															categoryChildren,
+															setCategoryChildren
+														)
+													}
+													style={{
+														whiteSpace: "nowrap",
+													}}
+												>
+													Add Category
+												</Typography.Link>
+											</Space>
+										</>
+									)}
+								>
+									{categoryChildren}
+								</Select>
+							</Form.Item>
+						</Col>
+
+						<Col xs={24} md={12}>
+							<Form.Item
+								label="Tags"
+								name="product_tags"
+								hasFeedback
+								validateFirst
+							>
+								<Select
+									mode="multiple"
+									placeholder="Select tags"
+									optionFilterProp="tagChildren"
+									dropdownRender={(menu) => (
+										<>
+											{menu}
+											<Divider
+												style={{ margin: "8px 0" }}
+											/>
+											<Space
+												align="center"
+												style={{ padding: "0 8px 4px" }}
+											>
+												<Input
+													placeholder="Enter tag name"
+													value={optionName}
+													onChange={(e) =>
+														setOptionName(
+															e.target.value
+														)
+													}
+												/>
+												<Typography.Link
+													onClick={() =>
+														addCategory(
+															tagChildren,
+															setTagChildren
+														)
+													}
+													style={{
+														whiteSpace: "nowrap",
+													}}
+												>
+													Add Tag
+												</Typography.Link>
+											</Space>
+										</>
+									)}
+								>
+									{tagChildren}
+								</Select>
+							</Form.Item>
+						</Col>
+					</Row>
+
+					<Row gutter={[16, 16]}>
+						<Col xs={24} md={12}>
+							<Form.Item
+								label="Colours"
+								name="product_colors"
+								hasFeedback
+								validateFirst
+							>
+								<Select
+									mode="multiple"
+									placeholder="Select colors"
+									optionFilterProp="colorChildren"
+									dropdownRender={(menu) => (
+										<>
+											{menu}
+											<Divider
+												style={{ margin: "8px 0" }}
+											/>
+											<Space
+												align="center"
+												style={{ padding: "0 8px 4px" }}
+											>
+												<Input
+													placeholder="Enter colour name"
+													value={optionName}
+													onChange={(e) =>
+														setOptionName(
+															e.target.value
+														)
+													}
+												/>
+												<Typography.Link
+													onClick={() =>
+														addCategory(
+															colorChildren,
+															setColorChildren
+														)
+													}
+													style={{
+														whiteSpace: "nowrap",
+													}}
+												>
+													Add Colour
+												</Typography.Link>
+											</Space>
+										</>
+									)}
+								>
+									{colorChildren}
+								</Select>
+							</Form.Item>
+						</Col>
+						<Col xs={24} md={12}>
+							<Form.Item
+								label="Sizes"
+								name="product_sizes"
+								hasFeedback
+								validateFirst
+							>
+								<Select
+									mode="multiple"
+									placeholder="Select sizes"
+									optionFilterProp="sizeChildren"
+									dropdownRender={(menu) => (
+										<>
+											{menu}
+											<Divider
+												style={{ margin: "8px 0" }}
+											/>
+											<Space
+												align="center"
+												style={{ padding: "0 8px 4px" }}
+											>
+												<Input
+													placeholder="Enter size"
+													value={optionName}
+													onChange={(e) =>
+														setOptionName(
+															e.target.value
+														)
+													}
+												/>
+												<Typography.Link
+													onClick={() =>
+														addCategory(
+															sizeChildren,
+															setSizeChildren
+														)
+													}
+													style={{
+														whiteSpace: "nowrap",
+													}}
+												>
+													Add Size
+												</Typography.Link>
+											</Space>
+										</>
+									)}
+								>
+									{sizeChildren}
+								</Select>
+							</Form.Item>
+						</Col>
+					</Row>
+
+					<Row gutter={[16, 16]}>
+						<Col xs={24} md={12}>
+							<Form.Item label="Picture" required>
+								<Form.Item
+									valuePropName="fileList"
+									rules={[
+										{
+											required: true,
+											message: `Please insert procuct's photo`,
+										},
+									]}
+									noStyle
+								>
+									<Dragger
+										{...props}
+										maxCount={1}
+										accept=".png, .jpg"
+									>
+										<p className="ant-upload-drag-icon">
+											<InboxOutlined />
+										</p>
+										<p className="ant-upload-text">
+											Click or drag file to this area to
+											upload
+										</p>
+										<p className="ant-upload-hint">
+											Support for a single upload. Only
+											accept png, jpg file.
+										</p>
+									</Dragger>
+								</Form.Item>
+							</Form.Item>
+						</Col>
+					</Row>
 
 					<Form.Item>
 						<Button
