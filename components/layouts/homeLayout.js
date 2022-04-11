@@ -1,3 +1,4 @@
+import { useState } from 'react' 
 import {
 	LikeOutlined,
 	SearchOutlined,
@@ -6,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import { Col, Input, Layout, Row } from "antd";
 import Head from "next/head";
-import React from "react";
+import CartMini from '../cart/CartMini'
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
 
@@ -15,6 +16,9 @@ const { Search } = Input;
 const { Content, Footer } = Layout;
 
 const HomeLayout = ({ children, title }) => {
+
+	const [active, setActive] = useState(false)
+
 	const onSearch = (e) => {
 		console.log(e);
 	};
@@ -70,8 +74,9 @@ const HomeLayout = ({ children, title }) => {
 									<Col>
 										<UserOutlined />
 									</Col>
-									<Col>
-										<ShoppingOutlined />
+									<Col style={{position:'relative'}}>
+										<ShoppingOutlined onClick={()=>setActive(!active)} />
+										<CartMini active={active} setActive={setActive} />
 									</Col>
 									<Col>
 										<LikeOutlined />

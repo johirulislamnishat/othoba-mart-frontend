@@ -7,18 +7,17 @@ import useAuth from "../../components/hooks/useAuth";
 const Register = () => {
   const [user_name, setUser_name] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [business_name, setBusiness_name] = useState("");
+  const [shop_name, setShop_name] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [isVendor, setIsVendor] = useState(false);
   const [isCustomer, setIsCustomer] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const { signupHandler } = useAuth();
+  const { signupHandlerCustomer, signupHandlerVendor } = useAuth();
 
   const handleClient = (e) => {
-    if (e.target.name == "vendor") {
+    if (e.target.name === "vendor") {
       setIsCustomer(false);
       setIsVendor(true);
     } else {
@@ -38,16 +37,25 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (password === password2) {
-      signupHandler(
+    if (!isVendor && password === password2) {
+      signupHandlerCustomer(
         user_name,
         email,
         password,
-        isCustomer,
-        isVendor,
-        business_name
+        isCustomer
       );
-    } else {
+    } else if (isVendor && password === password2) {
+      signupHandlerVendor(
+        user_name,
+        email,
+        password,
+        shop_name,
+        isCustomer,
+        isVendor
+      )
+      console.log(shop_name)
+    }
+     else {
       setIsModalVisible(true);
     }
   };
@@ -79,7 +87,7 @@ const Register = () => {
                   className="hidden"
                 />
                 {isCustomer && (
-                  <div className="w-10 h-0.5 rounded bg-sky-500"></div>
+                  <div className="w-8 h-0.5 rounded bg-sky-500"></div>
                 )}
               </label>
               <label
@@ -95,7 +103,7 @@ const Register = () => {
                   className="hidden"
                 />
                 {isVendor && (
-                  <div className="w-10 h-0.5 rounded bg-sky-500"></div>
+                  <div className="w-8 h-0.5 rounded bg-sky-500"></div>
                 )}
               </label>
             </div>
@@ -121,7 +129,7 @@ const Register = () => {
             </label>
             {isVendor && (
               <>
-                <label>
+                {/* <label>
                   Phone Number
                   <input
                     onChange={(e) => setPhoneNum(e.target.value)}
@@ -130,13 +138,13 @@ const Register = () => {
                     placeholder="Enter phone number"
                     className="w-full p-2 mb-2 border-2 border-gray-200 rounded-lg"
                   />
-                </label>
+                </label> */}
                 <label>
-                  Business Name
+                  Shop Name
                   <input
-                    onChange={(e) => setBusiness_name(e.target.value)}
+                    onChange={(e) => setShop_name(e.target.value)}
                     required={true}
-                    placeholder="Enter business name"
+                    placeholder="Enter shop name"
                     className="w-full p-2 mb-2 border-2 border-gray-200 rounded-lg"
                   />
                 </label>
@@ -199,12 +207,12 @@ const Register = () => {
             {isCustomer && (
               <>
                 <div className="flex items-center border-2 border-gray-200  pl-8 gap-2 rounded-lg">
-                  <img src="/images/google.png" alt="google logo" />
-                  <p className="  cursor-pointer py-2">Log in with Google</p>
+                  <img src="/images/icons/google.png" alt="google logo" />
+                  <p className="  cursor-pointer py-2 m-0">Log in with Google</p>
                 </div>
                 <div className="flex items-center border-2 border-gray-200  gap-2 pl-8 rounded-lg">
-                  <img src="/images/facebook.png" alt="facebook logo" />
-                  <p className=" cursor-pointer py-2">Log in with Facebook</p>
+                  <img src="/images/icons/facebook.png" alt="facebook logo" />
+                  <p className=" cursor-pointer py-2 m-0">Log in with Facebook</p>
                 </div>
               </>
             )}

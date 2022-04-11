@@ -55,13 +55,13 @@ const Login = () => {
             </div>
             <button className="bg-sky-500 py-2 my-3 text-white font-semibold rounded-lg" type='submit' >Login</button>
             <div className=" text-center border-2 border-gray-200 flex items-center pl-8 gap-2 rounded-lg">
-              <img src='/images/google.png' alt='google logo' />
+              <img src='/images/icons/google.png' alt='google logo' />
             <p className="  cursor-pointer py-2">
               Log in with Google
             </p>
             </div>
             <div className="text-center border-2 border-gray-200 flex items-center gap-2 pl-8 rounded-lg">
-            <img src='/images/facebook.png' alt='facebook logo' />
+            <img src='/images/icons/facebook.png' alt='facebook logo' />
             <p className=" cursor-pointer py-2">
               Log in with Facebook
             </p>
