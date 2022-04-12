@@ -178,7 +178,7 @@ const CartMini = ({active, setActive}) => {
               <div className="py-3">
                   <div className="text-left">
                     <h5 className="font-semibold font-xs m-0">Sub Total</h5>
-                    <h5 className="text-green-500 m-0 text-sky-500">
+                    <h5 className="text-sky-500 m-0 text-sky-500">
                      89 USD
                     </h5>
                   </div>

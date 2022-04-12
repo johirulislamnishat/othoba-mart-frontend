@@ -6,14 +6,14 @@ import { API_BASE_URL } from "../../apiconstants";
 const AuthData = () => {
     const router = useRouter();
     // register api handler function
-    const signupHandlerCustomer = (user_name, email, password,isCustomer) => {
+    const signupHandlerCustomer = (user_name, email, password) => {
         
         axios
             .post(API_BASE_URL + "/auth/register", {
                 user_name: user_name,
                 email: email,
                 password: password,
-                isCustomer: isCustomer, 
+                
             })
             .then(function (response) {
                 console.log(response);
@@ -24,15 +24,13 @@ const AuthData = () => {
             });
     };
 
-    const signupHandlerVendor = (user_name, email, password, isCustomer, isVendor, shop_name) => {
+    const signupHandlerVendor = (user_name, email, password, shop_name) => {
         
         axios
             .post(API_BASE_URL + "/auth/register/vendor", {
                 user_name: user_name,
                 email: email,
                 password: password,
-                isCustomer: isCustomer, 
-                isVendor: isVendor, 
                 shop_name: shop_name
             })
             .then(function (response) {

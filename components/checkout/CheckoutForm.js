@@ -88,7 +88,7 @@ const CheckoutForm = () => {
                 <img src="/images/icons/dhl.png" alt="dhl logo" />
               </div>
 
-              <h3 className="font-semibold text-xl mt-12">Payment method</h3>
+              {/* <h3 className="font-semibold text-xl mt-12">Payment method</h3>
               <p className="text-xs text-gray-500">
                 Please enter your payment method.
               </p>
@@ -159,7 +159,7 @@ const CheckoutForm = () => {
                 </div>
 
                 <img src="/images/icons/bitcoin.png" alt="dhl logo" />
-              </div>
+              </div> */}
 
               <h3 className="font-semibold text-xl mt-12">Additional info</h3>
               <p className="text-xs text-gray-500">

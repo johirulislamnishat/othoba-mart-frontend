@@ -42,7 +42,7 @@ const Register = () => {
         user_name,
         email,
         password,
-        isCustomer
+       
       );
     } else if (isVendor && password === password2) {
       signupHandlerVendor(
@@ -50,8 +50,6 @@ const Register = () => {
         email,
         password,
         shop_name,
-        isCustomer,
-        isVendor
       )
       console.log(shop_name)
     }
