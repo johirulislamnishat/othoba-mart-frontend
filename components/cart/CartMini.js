@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from 'next/link';
 import {
     StarOutlined,
     StarFilled,
@@ -7,45 +8,48 @@ import {
     CaretDownOutlined,
   } from "@ant-design/icons";
 
-const CheckoutCart = () => {
+const CartMini = ({active, setActive}) => {
     const [activeOption, setActiveOption] = useState(false);
-    
+
     return(
         <>
-            <h3 className="font-semibold text-xl mt-4">Order Summary</h3>
-            <p className="text-xs text-gray-500">
-              Price can be changed depending on your shipping method and taxes
-              in your state.{" "}
-            </p>
-            <div className="grid grid-cols-1 gap-6 divide-y-2">
-              <div className="mt-5 ">
-                <div className="flex gap-4">
+        {  
+            active && 
+            <div className='absolute z-10 top-1 w-max -right-6 bg-white shadow-lg shadow-gray-500'>
+                <div className='border-gray-200 rounded-lg p-3'>
+                    <div className='flex items-center justify-between'>
+            <h3 className="font-semibold text-xl m-0 text-left">Shopping Cart</h3>
+            <p className='flex items-center gap-1 font-semibold text-lg  m-0'><span className='text-xs text-gray-300'>close</span> <CloseOutlined className='cursor-pointer' onClick={()=>setActive(!active)} /> </p>
+            </div>
+            <div className="grid grid-cols-1 gap-2 divide-y-2">
+              <div className="mt-4 ">
+                <div className="flex gap-2">
                   <img
                     src=""
                     alt=""
-                    className="bg-gray-200 w-28 h-20 rounded-lg"
+                    className="bg-gray-200 w-20 h-16 rounded-lg"
                   />
-                  <div>
-                    <h4 className="font-semibold">Product title</h4>
-                    <p className="">
+                  <div className='text-left'>
+                    <h4 className="font-semibold m-0">Product title</h4>
+                    <p className="text-xs m-0">
                       <span className="text-gray-400">Farm:</span> Tharamis Farm
                     </p>
-                    <p className="">
-                      <span className="text-gray-400">Freshness:</span> 1 day
+                    <p className="text-xs m-0">
+                      <span className="text-gray-400 m-0">Freshness:</span> 1 day
                       old
                     </p>
                   </div>
                 </div>
-                <div className="mt-2 flex items-center justify-between">
+                <div className="mt-1 flex items-center justify-between gap-2">
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
                       <HeartTwoTone
                         twoToneColor="#eb2f96"
                         className="cursor-pointer"
                       />
-                      <p className="text-gray-400 m-0">Wishlist</p>
+                      <p className="text-gray-400 text-sm m-0">Wishlist</p>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
                       <img
                         src="/images/icons/compare.png"
                         alt=""
@@ -55,13 +59,13 @@ const CheckoutCart = () => {
                       />
                       <p className="text-gray-400 m-0">Compare</p>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
                       <CloseOutlined className="text-red-500 cursor-pointer" />
                       <p className="text-gray-400 m-0">Remove</p>
                     </div>
                   </div>
-                  <div className='flex flex-col gap-2'>
-                    <div className='ratings'>
+                  <div className='flex flex-col gap-1'>
+                    <div className='ratings-mini'>
                       <StarFilled />
                       <StarFilled />
                       <StarFilled />
@@ -69,14 +73,14 @@ const CheckoutCart = () => {
                       <StarOutlined />
                     </div>
                     <div>
-                    <p className="min-w-max text-green-500 text-lg font-semibold m-0">
+                    <p className="min-w-max text-sky-500 text-md font-semibold m-0">
                       36.99 USD
                     </p>
                     <p className="line-through text-sm m-0">48.56 USD</p>
                     </div>
                   </div>
                   <div className="">
-                    <ul className=" relative bg-gray-100 border-2 border-gray-300 rounded-2xl min-h-max p-2">
+                    <ul className=" relative bg-gray-100 border-2 border-gray-300 rounded-2xl min-h-max px-1">
                       <span className="text-gray-400">1pc |</span> Pcs{" "}
                       <CaretDownOutlined
                         className="cursor-pointer"
@@ -94,34 +98,34 @@ const CheckoutCart = () => {
                 </div>
               </div>
 
-              <div className="py-5">
-                <div className="flex gap-4">
+              <div className="py-3">
+                <div className="flex gap-2">
                   <img
                     src=""
                     alt=""
-                    className="bg-gray-200 w-28 h-20 rounded-lg"
+                    className="bg-gray-200 w-20 h-16 rounded-lg"
                   />
-                  <div>
-                    <h4 className="font-semibold">Product title</h4>
-                    <p className="">
+                  <div className='text-left'>
+                    <h4 className="font-semibold m-0">Product title</h4>
+                    <p className="text-xs m-0">
                       <span className="text-gray-400">Farm:</span> Tharamis Farm
                     </p>
-                    <p className="">
-                      <span className="text-gray-400">Freshness:</span> 1 day
+                    <p className="text-xs m-0">
+                      <span className="text-gray-400 m-0">Freshness:</span> 1 day
                       old
                     </p>
                   </div>
                 </div>
-                <div className="mt-4 flex items-center justify-between">
+                <div className="mt-1 flex items-center justify-between gap-1">
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
                       <HeartTwoTone
                         twoToneColor="#eb2f96"
                         className="cursor-pointer"
                       />
                       <p className="text-gray-400 m-0">Wishlist</p>
                     </div>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex items-center gap-1">
                       <img
                         src="/images/icons/compare.png"
                         alt=""
@@ -131,13 +135,13 @@ const CheckoutCart = () => {
                       />
                       <p className="text-gray-400 m-0">Compare</p>
                     </div>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex items-center gap-1">
                       <CloseOutlined className="text-red-500 cursor-pointer" />
                       <p className="text-gray-400 m-0">Remove</p>
                     </div>
                   </div>
-                  <div className='flex flex-col gap-2'>
-                    <div className="ratings">
+                  <div className='flex flex-col gap-1'>
+                    <div className='ratings-mini'>
                       <StarFilled />
                       <StarFilled />
                       <StarFilled />
@@ -145,14 +149,14 @@ const CheckoutCart = () => {
                       <StarOutlined />
                     </div>
                     <div>
-                    <p className="min-w-max text-green-500 text-lg font-semibold m-0">
+                    <p className="min-w-max text-sky-500 text-md font-semibold m-0">
                       36.99 USD
                     </p>
                     <p className="line-through text-sm m-0">48.56 USD</p>
                     </div>
                   </div>
-                  <div className="">
-                    <ul className=" relative bg-gray-100 border-2 border-gray-300 rounded-2xl min-h-max p-2">
+                  <div>
+                    <ul className=" relative bg-gray-100 border-2 border-gray-300 rounded-2xl min-h-max px-1">
                       <span className="text-gray-400">1pc |</span> Pcs{" "}
                       <CaretDownOutlined
                         className="cursor-pointer"
@@ -169,47 +173,32 @@ const CheckoutCart = () => {
                   </div>
                 </div>
               </div>
-              <div className="py-5">
-                <div className="grid grid-cols-3 font-semibold">
-                  <div>
-                    <p>Subtotal</p>
-                    <p>Tax</p>
-                    <p>Shipping</p>
-                  </div>
-                  <div className="justify-self-center">
-                    <p>Item: 2</p>
-                    <p>17%</p>
-                    <p>FedEx</p>
-                  </div>
-                  <div className="justify-self-end text-right">
-                    <p>73.98 USD</p>
-                    <p>16 USD</p>
-                    <p>5 USD</p>
-                  </div>
-                </div>
-                <div className="mt-16 flex justify-between bg-gray-100 border-2 border-gray-300 py-1 px-2 rounded-lg">
-                  <input
-                    placeholder="Apply coupon code"
-                    className="text-lg border-none bg-gray-100 py-2 rounded-lg outline-none"
-                  />
-                  <button className="text-lg font-bold">Apply now</button>
-                </div>
-                <div className="mt-16 flex justify-between">
-                  <div className="">
-                    <h5 className="font-semibold">Total Order</h5>
-                    <p className="text-green-500">
-                      Guaranteed delivery day: June 12, 2020
-                    </p>
-                  </div>
 
-                  <h4 className="text-2xl font-semibold text-green-500">
-                    89 USD
-                  </h4>
-                </div>
+              
+              <div className="py-3">
+                  <div className="text-left">
+                    <h5 className="font-semibold font-xs m-0">Sub Total</h5>
+                    <h5 className="text-sky-500 m-0 text-sky-500">
+                     89 USD
+                    </h5>
+                  </div>
+              </div>
+              <div className='py-1 flex items-center justify-between'>
+
+                  <button className='p-2 bg-transparent font-semibold text-gray-500 rounded-lg hover:text-black'>Continue shopping</button>
+                  
+                  <Link href='/cart'>
+                      <a>      
+                  <button className='py-2 px-4 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black'>View Full Cart</button>
+                  </a>
+                  </Link>
               </div>
             </div>
+            </div>
+            </div>
+        }
         </>
     )
 }
 
-export default CheckoutCart
+export default CartMini

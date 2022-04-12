@@ -30,10 +30,6 @@ a {
 }
 /* end ant design */
 
-* {
-	box-sizing: border-box;
-}
-
 :root {
 	--brand-color: #f66a05;
 	--black-color: #282828;
@@ -57,6 +53,11 @@ a {
 .ratings span {
 	color: goldenrod;
 	margin-right: 5px;
+}
+.ratings-mini{
+	color: goldenrod;
+	font-size: 13px;
+	margin-right: 2px;
 }
 
 /* home main container  */
