@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
 
 const AuthData = () => {
@@ -42,33 +42,33 @@ const AuthData = () => {
             });
     };
 
-    const [user, setUser] = useState({});
-    console.log("logged in user", user);
-    const [token, setToken] = useState("");
-    console.log("token", token);
+	const [user, setUser] = useState({});
+	// console.log("logged in user", user);
+	const [token, setToken] = useState("");
+	// console.log("token", token);
 
-    // login api handler function
-    const signinHandler = (user_name, password) => {
-        axios
-            .post(API_BASE_URL + "/auth/login", {
-                user_name: user_name,
-                password: password,
-            })
-            .then(function (response) {
-                // console.log(response);
-                setUser(response?.data);
-                localStorage.setItem("token", response?.data?.accessToken);
-                setToken(localStorage.getItem("token"));
-                router.push("/");
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
+	// login api handler function
+	const signinHandler = (user_name, password) => {
+		axios
+			.post(API_BASE_URL + "/auth/login", {
+				user_name: user_name,
+				password: password,
+			})
+			.then(function (response) {
+				// console.log(response);
+				setUser(response?.data);
+				localStorage.setItem("token", response?.data?.accessToken);
+				setToken(localStorage.getItem("token"));
+				router.push("/");
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
 
-    const logout = () => {
-        localStorage.removeItem("token");
-    };
+	const logout = () => {
+		localStorage.removeItem("token");
+	};
 
     return {
         signupHandlerCustomer,
