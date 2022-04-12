@@ -7,6 +7,7 @@ import {
 	Input,
 	InputNumber,
 	message,
+	Modal,
 	PageHeader,
 	Row,
 	Select,
@@ -20,7 +21,6 @@ import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
 
 const { Option } = Select;
-const { Dragger } = Upload;
 
 const AddProduct = () => {
 	const [form] = Form.useForm();
@@ -39,7 +39,9 @@ const AddProduct = () => {
 	const [sizeChildren, setSizeChildren] = useState([
 		<Option key={"sm"}>sm</Option>,
 	]);
-	const [img, setImg] = useState(null);
+	const [previewVisible, setPreviewVisible] = useState(false);
+	const [previewImage, setPreviewImage] = useState("");
+	const [previewTitle, setPreviewTitle] = useState("");
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {
@@ -53,7 +55,11 @@ const AddProduct = () => {
 		formData.append("product_name", values.product_name);
 		formData.append("product_description", values.product_description);
 		formData.append("product_price", values.product_price);
-		formData.append("photo", img);
+		formData.append("photo", values.photo[0]);
+
+		for (const item of values.gelery) {
+			formData.append("gelery", item);
+		}
 
 		if (values.product_category) {
 			for (const item of values.product_category) {
@@ -104,6 +110,24 @@ const AddProduct = () => {
 		setOptionName("");
 	};
 
+	const normFile = (e) => {
+		if (Array.isArray(e)) {
+			return e;
+		}
+
+		return e && e.fileList;
+	};
+
+	const mainPhoto = {
+		beforeUpload: (file) => {
+			if (file.size > 3000) {
+				message.error(`${file.name}'s size is over 300kb`);
+				setImg(null);
+				return Upload.LIST_IGNORE;
+			}
+		},
+	};
+
 	const props = {
 		beforeUpload: (file) => {
 			if (file.size > 3000) {
@@ -111,24 +135,45 @@ const AddProduct = () => {
 				setImg(null);
 				return Upload.LIST_IGNORE;
 			}
-			setImg(file);
 		},
+	};
+
+	function getBase64(file) {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = (error) => reject(error);
+		});
+	}
+
+	const handlePreview = async (file) => {
+		if (!file.url && !file.preview) {
+			file.preview = await getBase64(file.originFileObj);
+		}
+
+		setPreviewImage(file.url || file.preview);
+		setPreviewVisible(true);
+		setPreviewTitle(
+			file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+		);
 	};
 
 	return (
 		<AdminLayout title={"Admin || Add Product"}>
 			<PageHeader ghost={false} title="Add product" />
 
-			<section className="mt-5 bg-white p-5">
+			<section className="mt-5 bg-white p-8 pb-3">
 				<Form
 					form={form}
 					name="Add Product"
 					layout="vertical"
+					size="large"
 					requiredMark={false}
 					initialValues={{ remember: true }}
 					onFinish={handleSubmit}
 				>
-					<Row gutter={[16, 16]}>
+					<Row gutter={[32]}>
 						<Col xs={24} md={12}>
 							<Form.Item
 								label="Product Name"
@@ -191,7 +236,7 @@ const AddProduct = () => {
 						/>
 					</Form.Item>
 
-					<Row gutter={[16, 16]}>
+					<Row gutter={[32]}>
 						<Col xs={24} md={12}>
 							<Form.Item
 								label="Category"
@@ -297,7 +342,7 @@ const AddProduct = () => {
 						</Col>
 					</Row>
 
-					<Row gutter={[16, 16]}>
+					<Row gutter={[32]}>
 						<Col xs={24} md={12}>
 							<Form.Item
 								label="Colours"
@@ -402,11 +447,11 @@ const AddProduct = () => {
 						</Col>
 					</Row>
 
-					<Row gutter={[16, 16]}>
+					<Row gutter={[32]}>
 						<Col xs={24} md={12}>
-							<Form.Item label="Picture" required>
+							<Form.Item label="Picture">
 								<Form.Item
-									valuePropName="fileList"
+									name="photo"
 									rules={[
 										{
 											required: true,
@@ -414,11 +459,14 @@ const AddProduct = () => {
 										},
 									]}
 									noStyle
+									getValueFromEvent={normFile}
 								>
-									<Dragger
-										{...props}
+									<Upload.Dragger
+										{...mainPhoto}
 										maxCount={1}
+										listType="picture-card"
 										accept=".png, .jpg"
+										onPreview={handlePreview}
 									>
 										<p className="ant-upload-drag-icon">
 											<InboxOutlined />
@@ -431,10 +479,57 @@ const AddProduct = () => {
 											Support for a single upload. Only
 											accept png, jpg file.
 										</p>
-									</Dragger>
+									</Upload.Dragger>
 								</Form.Item>
 							</Form.Item>
 						</Col>
+						<Col xs={24} md={12}>
+							<Form.Item label="Gelery Images">
+								<Form.Item
+									name="gelery"
+									rules={[
+										{
+											required: true,
+											message: `Please insert procuct's photos`,
+										},
+									]}
+									noStyle
+									getValueFromEvent={normFile}
+								>
+									<Upload.Dragger
+										{...props}
+										maxCount={5}
+										listType="picture-card"
+										accept=".png, .jpg"
+										onPreview={handlePreview}
+									>
+										<p className="ant-upload-drag-icon">
+											<InboxOutlined />
+										</p>
+										<p className="ant-upload-text">
+											Click or drag file to this area to
+											upload
+										</p>
+										<p className="ant-upload-hint">
+											Support for a single upload. Only
+											accept png, jpg file.
+										</p>
+									</Upload.Dragger>
+								</Form.Item>
+							</Form.Item>
+						</Col>
+						<Modal
+							visible={previewVisible}
+							title={previewTitle}
+							footer={null}
+							onCancel={() => setPreviewVisible(false)}
+						>
+							<img
+								alt="example"
+								style={{ width: "100%" }}
+								src={previewImage}
+							/>
+						</Modal>
 					</Row>
 
 					<Form.Item>
