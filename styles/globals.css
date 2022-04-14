@@ -28,6 +28,12 @@ a {
 .ant-drawer-body {
 	padding: 0 !important;
 }
+
+/* img preview */
+.ant-image-preview-img {
+	margin: 0 auto;
+}
+
 /* end ant design */
 
 :root {
@@ -54,7 +60,7 @@ a {
 	color: goldenrod;
 	margin-right: 5px;
 }
-.ratings-mini{
+.ratings-mini {
 	color: goldenrod;
 	font-size: 13px;
 	margin-right: 2px;
