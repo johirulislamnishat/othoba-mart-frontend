@@ -27,7 +27,6 @@ const AdminHome = () => {
 	}, []);
 
 	const deleteProduct = (product) => {
-		console.log(product);
 		axios
 			.delete(`${API_BASE_URL}/product/${product._id}`, {
 				headers: {
