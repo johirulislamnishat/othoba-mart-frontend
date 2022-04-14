@@ -1,7 +1,6 @@
 import {useState} from 'react'
 import Image from "next/image";
 import Link from 'next/link'
-import {GoogleOutlined, FacebookFilled} from '@ant-design/icons'
 import useAuth from "../../components/hooks/useAuth";
 
 const Login = () => {

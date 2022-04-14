@@ -40,7 +40,7 @@ const CheckoutForm = () => {
               <p className="text-xs text-gray-500">
                 Please enter your billing info.
               </p>
-              <div className="grid grid-cols-2 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                 {inputFields.map((inp, i) => (
                   <label
                     key={i}
@@ -183,7 +183,7 @@ const CheckoutForm = () => {
                 </label>
               </div>
               <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center gap-2 w-full">
-                <input type="checkbox" />
+                <input type="checkbox"  />
                 <label className="min-w-max">
                   I agree with the <span>terms and conditions</span> and{" "}
                   <span>privacy policy</span>{" "}

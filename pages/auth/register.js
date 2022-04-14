@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Modal } from "antd";
-import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import useAuth from "../../components/hooks/useAuth";
 
 const Register = () => {
@@ -51,7 +50,6 @@ const Register = () => {
         password,
         shop_name,
       )
-      console.log(shop_name)
     }
      else {
       setIsModalVisible(true);
