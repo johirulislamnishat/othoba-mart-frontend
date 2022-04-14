@@ -1,0 +1,105 @@
+import { BarsOutlined, BorderInnerOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Drawer, Radio, Space } from "antd";
+import React, { useState } from "react";
+import MainArea from "../MainArea/MainArea";
+import Sidebar from "../Sidebar/Sidebar";
+
+const CategoriesPage = () => {
+  const [visible, setVisible] = useState(false);
+  const [size, setSize] = useState();
+  const [value, setValue] = useState("filter-text");
+
+  const [view, setView] = useState("gide-view");
+
+  const handleView = (view) => {
+    setView(view);
+  };
+
+  const onChange = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue(e.target.value);
+  };
+  function getChecked(e) {
+    console.log(`checked = ${e.target.checked}`);
+  }
+  const showDefaultDrawer = () => {
+    setSize("default");
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+  return (
+    <>
+      <div className="categories-page-top">
+        <div className="flex justify-between items-center">
+          <h2>Smartphone & Accessories</h2>
+          <div className="grid-or-list-view flex justify-between items-center">
+            <div
+              onClick={() => handleView("gide-view")}
+              className="filter-icon flex justify-center items-center mr-5"
+            >
+              <BorderInnerOutlined />
+              <span>Grid View</span>
+            </div>
+            <div
+              onClick={() => handleView("list-view")}
+              className="filter-icon flex justify-center items-center"
+            >
+              <BarsOutlined />
+              <span>List View</span>
+            </div>
+          </div>
+        </div>
+        <div className="categories-page-top-filter flex items-center">
+          <div className="custom-filter-btn">
+            <Space>
+              <button className="custom-btn" onClick={showDefaultDrawer}>
+                Filter
+              </button>
+            </Space>
+          </div>
+
+          <Drawer
+            title={`Filter Products`}
+            placement="left"
+            size={size}
+            onClose={onClose}
+            visible={visible}
+            extra={
+              <Space>
+                <Button type="primary" onClick={onClose}>
+                  Submit Filter
+                </Button>
+              </Space>
+            }
+          >
+            <div className="category-page-drawer-filter">
+              <Sidebar></Sidebar>
+            </div>
+          </Drawer>
+
+          <div>
+            <Radio.Group onChange={onChange} value={value}>
+              <Radio value={"filter-text"}>Filter text</Radio>
+              <Radio value={"filter-text2"}>Filter text</Radio>
+            </Radio.Group>
+          </div>
+          <div>
+            <Checkbox onChange={getChecked}>Filter</Checkbox>
+          </div>
+          <div>
+            <Checkbox onChange={getChecked}>Filter</Checkbox>
+          </div>
+        </div>
+      </div>
+      <div className="categories-page-container">
+        <Sidebar></Sidebar>
+        <MainArea view={view}></MainArea>
+      </div>
+    </>
+  );
+};
+
+export default CategoriesPage;

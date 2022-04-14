@@ -7,7 +7,7 @@ import productSm from "../../../public/images/Products/product-sm-1.jpeg";
 const LatestDeals = () => {
   return (
     <div className="container latest-deals">
-      <div className="section-title mt-8 px-4 flex justify-between items-center border-b-2">
+      <div className="section-title mt-8 flex justify-between items-center border-b-2">
         <h2 className="text-2xl">Latest Deals</h2>
         <Link href="/">See All</Link>
       </div>

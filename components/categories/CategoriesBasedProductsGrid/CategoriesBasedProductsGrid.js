@@ -10,13 +10,13 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 
-const NewProducts = () => {
+const CategoriesBasedProductsGrid = () => {
   const [items, setItems] = useState([]);
   console.log(items);
 
   useEffect(() => {
     axios
-      .get(API_BASE_URL + "/product/paginated?page=0&size=4")
+      .get(API_BASE_URL + "/product/paginated?page=0&size=6")
       .then(function (response) {
         console.log(response?.data?.result);
         setItems(response?.data?.result);
@@ -25,15 +25,11 @@ const NewProducts = () => {
 
   return (
     <div className="container new-products">
-      <div className="section-title mt-8 flex justify-between items-center border-b-2">
-        <h2 className="text-2xl">New Products</h2>
-        <Link href="/">See All</Link>
-      </div>
       <Row>
         {items.map((item, index) => {
           return (
-            <Col xs={24} sm={12} md={6} lg={6} key={index}>
-              <div className="p-5 single-product">
+            <Col xs={24} sm={12} md={8} lg={8} key={index}>
+              <div className="p-5 single-product border-2 rounded-md m-2">
                 {/* <Image src={item.product_img} alt="" /> */}
 
                 <img src={item?.product_img} alt="" />
@@ -42,7 +38,7 @@ const NewProducts = () => {
                   <HeartOutlined />
                 </div>
                 <div className="discount flex justify-center items-center">
-                  <small>Super Price</small>
+                  <small>40% off</small>
                 </div>
                 <h3>
                   <Link href="/" className="text-1xl">
@@ -65,7 +61,6 @@ const NewProducts = () => {
                     <ShoppingOutlined />
                   </div>
                 </div>
-                <p className="text-1xl mt-3">2 Day Delivery</p>
               </div>
             </Col>
           );
@@ -75,4 +70,4 @@ const NewProducts = () => {
   );
 };
 
-export default NewProducts;
+export default CategoriesBasedProductsGrid;
