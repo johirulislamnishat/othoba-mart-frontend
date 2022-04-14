@@ -1,6 +1,7 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Divider, Image, message, Popconfirm, Space, Table, Tag } from "antd";
 import axios from "axios";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
@@ -155,8 +156,9 @@ const AdminHome = () => {
 					>
 						<DeleteOutlined />
 					</Popconfirm>
-
-					<EditOutlined />
+					<Link href={`/admin/products/${product._id}`} passHref>
+						<EditOutlined />
+					</Link>
 				</Space>
 			),
 		},
