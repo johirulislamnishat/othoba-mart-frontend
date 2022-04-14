@@ -44,10 +44,11 @@ const AdminHome = () => {
 		{
 			title: "Preview",
 			key: "img",
+			width: 60,
 			render: (product) => (
 				<Image
 					src={product.product_img}
-					width={50}
+					width={30}
 					alt={product.product_name}
 				/>
 			),
@@ -56,22 +57,30 @@ const AdminHome = () => {
 			title: "Product Name",
 			dataIndex: "product_name",
 			key: "name",
+			width: 200,
 		},
 		{
 			title: "Price",
 			dataIndex: "product_price",
 			key: "price",
+			width: 100,
 		},
 		{
 			title: "Category",
 			dataIndex: "product_category",
 			key: "product_category",
+			width: 280,
 			render: (categories) =>
 				categories ? (
 					<>
 						{categories.map((category) => (
-							<Tag color={"#FF6A00"} key={category}>
-								{category}
+							<Tag
+								color={"rgba(255, 239, 217, 1)"}
+								key={category}
+							>
+								<span className="text-orange-500">
+									{category}
+								</span>
 							</Tag>
 						))}
 					</>
@@ -81,6 +90,7 @@ const AdminHome = () => {
 			title: "Colors",
 			dataIndex: "product_colors",
 			key: "product_colors",
+			width: 180,
 			render: (colors) =>
 				colors ? (
 					<>
@@ -96,12 +106,13 @@ const AdminHome = () => {
 			title: "Tags",
 			dataIndex: "product_tags",
 			key: "product_tags",
+			width: 200,
 			render: (tags) =>
 				tags ? (
 					<>
 						{tags.map((tag) => (
-							<Tag color={"#FF6A00"} key={tag}>
-								{tag}
+							<Tag color={"rgba(216, 255, 238, 1)"} key={tag}>
+								<span className="text-green-500">{tag}</span>
 							</Tag>
 						))}
 					</>
@@ -111,12 +122,13 @@ const AdminHome = () => {
 			title: "Sizes",
 			dataIndex: "product_sizes",
 			key: "product_sizes",
+			width: 120,
 			render: (sizes) =>
 				sizes ? (
 					<>
 						{sizes.map((size) => (
-							<Tag color={"#FF6A00"} key={size}>
-								{size}
+							<Tag color={"rgba(240, 255, 214, 1)"} key={size}>
+								<span className="text-gray-700">{size}</span>
 							</Tag>
 						))}
 					</>
@@ -126,10 +138,12 @@ const AdminHome = () => {
 			title: "Description",
 			dataIndex: "product_description",
 			key: "product_description",
+			width: 320,
 		},
 		{
 			title: "",
 			key: "actions",
+			width: 80,
 			render: (product) => (
 				<Space split={<Divider type="vertical" />}>
 					<Popconfirm
@@ -153,8 +167,9 @@ const AdminHome = () => {
 			<Table
 				columns={columns}
 				dataSource={data}
-				scroll={{ x: 1200 }}
+				scroll={{ x: 1550 }}
 				pagination={{ position: ["bottomCenter"] }}
+				size="small"
 			/>
 		</AdminLayout>
 	);
