@@ -22,7 +22,7 @@ export const data = [
   },
 ];
 
-const useLocalDB = () => {
+const UseLocalDB = () => {
   const [productData, setProductData] = useState(data);
   const [totalQuantity, setTotalQuantity] = useState(null);
   const [totalPrice, setTotalPrice] = useState(null);
@@ -39,7 +39,7 @@ const useLocalDB = () => {
     }
   }, []);
 
-  const addToCart = (product) => {
+  const AddToCart = (product) => {
     useEffect(() => {
     //   let product = cartData.find((pd) => pd.id == product.id);
         if(!product.quantity || product.quantity==0){
@@ -58,7 +58,7 @@ const useLocalDB = () => {
     }, []);
   };
 
-  const updateQuantity = (productId, quantity) => {
+  const UpdateQuantity = (productId, quantity) => {
     useEffect(() => {
         if(cart.lenght !=0){
             for (let product of cart) {
@@ -72,47 +72,46 @@ const useLocalDB = () => {
     }, []);
   };
 
-  const totalQuantityReducer = () => {
+  const TotalQuantityReducer = () => {
     useEffect(()=>{
         let quantity = cart?.map(p=> p.quantity)
         let allQuantity = quantity?.reduce((prev, quantity)=>prev + quantity, 0)
         setTotalQuantity(allQuantity)
     },[cart])
   }
-  totalQuantityReducer()
+  TotalQuantityReducer()
 
-  const totalPriceReducer = () => {
+  const TotalPriceReducer = () => {
       useEffect(() => {
         let price = cart?.map((product) => product.price * product.quantity);
         let sum = price?.reduce((prev, price) => prev + price, 0);
-        setTotalPrice(sum.toFixed(2))
+        setTotalPrice(sum?.toFixed(2))
       }, [cart]);
   };
-  totalPriceReducer()
+  TotalPriceReducer()
 
-  const removeFromCart = (productId) => {
+  const RemoveFromCart = (productId) => {
       useEffect(() => {
-        let rest = cart?.filter((pd) => pd._id != productId);
-        
+        let rest = cart?.filter((pd) => pd._id != productId);     
         localStorage.setItem("cart", JSON.stringify(rest));
       }, []);
   };
 
-  addToCart({
+  AddToCart({
     _id: 1,
     title: "vegetable",
     farm: 'field',
     price: 21.2,
     quantity:0
   },);
-  addToCart({
+  AddToCart({
     _id: 2,
     title: "vegetable-2",
     farm: 'field',
     price: 18.2,
     quantity:0
   },);
-  addToCart(({ 
+  AddToCart(({ 
     _id: 3,
     title: "vegetable-3",
     farm: 'field',
@@ -120,9 +119,9 @@ const useLocalDB = () => {
     quantity:0
   }),);
 
-  removeFromCart()
+  RemoveFromCart()
 
-  updateQuantity(2, 2);
+  UpdateQuantity(2, 2);
 
     // totalQuantity()
 
@@ -133,10 +132,10 @@ const useLocalDB = () => {
   return {
     cart,
     totalQuantity,
-    updateQuantity,
+    UpdateQuantity,
     totalPrice,
-    removeFromCart,
+    RemoveFromCart,
   }
 };
 
-export default useLocalDB;
+export default UseLocalDB;

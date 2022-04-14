@@ -1,16 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { MinusOutlined, PlusOutlined, DeleteTwoTone } from "@ant-design/icons";
-import useLocalDB from "/components/hooks/useLocalDB";
+import UseLocalDB from "/components/hooks/useLocalDB";
 
 const CartFull = () => {
-  const { cart, updateQuantity, removeFromCart } = useLocalDB();
+  const { cart, UpdateQuantity } = UseLocalDB();
   console.log(cart);
   const remove = (productId) => {
-    removeFromCart(productId);
+      useEffect(() => {
+        let rest = cart?.filter((pd) => pd._id != productId);     
+        localStorage.setItem("cart", JSON.stringify(rest));
+      }, [productId]);
   };
 
   const handleQuantity = (dir, productId) => {
-    updateQuantity(productId)
+    UpdateQuantity(productId)
   };
 
   return (

@@ -6,10 +6,17 @@ import {
     CloseOutlined,
     CaretDownOutlined,
   } from "@ant-design/icons";
+import UseLocalDB from '../hooks/useLocalDB'
 
 const CheckoutCart = () => {
     const [activeOption, setActiveOption] = useState(false);
-    
+
+    const { cart, totalQuantity, totalPrice, RemoveFromCart } = UseLocalDB()
+
+    const tax = totalPrice * 0.17
+    const shipping = totalPrice * 0.01
+    const grandTotal = parseFloat(totalPrice) + parseFloat(tax) + parseFloat(shipping)
+
     return(
         <>
             <h3 className="font-semibold text-xl mt-4">Order Summary</h3>
@@ -18,7 +25,9 @@ const CheckoutCart = () => {
               in your state.{" "}
             </p>
             <div className="grid grid-cols-1 gap-6 divide-y-2">
-              <div className="mt-5 ">
+              { cart?.map(product=>(
+                <>
+                <div className="mt-5 ">
                 <div className="flex gap-4">
                   <img
                     src=""
@@ -26,9 +35,9 @@ const CheckoutCart = () => {
                     className="bg-gray-200 w-28 h-20 rounded-lg"
                   />
                   <div>
-                    <h4 className="font-semibold">Product title</h4>
+                    <h4 className="font-semibold">{product.title}</h4>
                     <p className="">
-                      <span className="text-gray-400">Farm:</span> Tharamis Farm
+                      <span className="text-gray-400">Farm:</span> {product.farm}
                     </p>
                     <p className="">
                       <span className="text-gray-400">Freshness:</span> 1 day
@@ -56,7 +65,7 @@ const CheckoutCart = () => {
                       <p className="text-gray-400 m-0">Compare</p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CloseOutlined className="text-red-500 cursor-pointer" />
+                      <CloseOutlined className="text-red-500 cursor-pointer" onClick={()=>RemoveFromCart(product._id)} />
                       <p className="text-gray-400 m-0">Remove</p>
                     </div>
                   </div>
@@ -70,7 +79,7 @@ const CheckoutCart = () => {
                     </div>
                     <div>
                     <p className="min-w-max text-green-500 text-lg font-semibold m-0">
-                      36.99 USD
+                      {product.price} USD
                     </p>
                     <p className="line-through text-sm m-0">48.56 USD</p>
                     </div>
@@ -93,82 +102,11 @@ const CheckoutCart = () => {
                   </div>
                 </div>
               </div>
+                </>
+              ))}
+              
 
-              <div className="py-5">
-                <div className="flex gap-4">
-                  <img
-                    src=""
-                    alt=""
-                    className="bg-gray-200 w-28 h-20 rounded-lg"
-                  />
-                  <div>
-                    <h4 className="font-semibold">Product title</h4>
-                    <p className="">
-                      <span className="text-gray-400">Farm:</span> Tharamis Farm
-                    </p>
-                    <p className="">
-                      <span className="text-gray-400">Freshness:</span> 1 day
-                      old
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-4 flex items-center justify-between">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <HeartTwoTone
-                        twoToneColor="#eb2f96"
-                        className="cursor-pointer"
-                      />
-                      <p className="text-gray-400 m-0">Wishlist</p>
-                    </div>
-                    <div className="flex gap-2 items-center">
-                      <img
-                        src="/images/icons/compare.png"
-                        alt=""
-                        width="14px"
-                        height="14px"
-                        className="cursor-pointer"
-                      />
-                      <p className="text-gray-400 m-0">Compare</p>
-                    </div>
-                    <div className="flex gap-2 items-center">
-                      <CloseOutlined className="text-red-500 cursor-pointer" />
-                      <p className="text-gray-400 m-0">Remove</p>
-                    </div>
-                  </div>
-                  <div className='flex flex-col gap-2'>
-                    <div className="ratings">
-                      <StarFilled />
-                      <StarFilled />
-                      <StarFilled />
-                      <StarFilled />
-                      <StarOutlined />
-                    </div>
-                    <div>
-                    <p className="min-w-max text-green-500 text-lg font-semibold m-0">
-                      36.99 USD
-                    </p>
-                    <p className="line-through text-sm m-0">48.56 USD</p>
-                    </div>
-                  </div>
-                  <div className="">
-                    <ul className=" relative bg-gray-100 border-2 border-gray-300 rounded-2xl min-h-max p-2">
-                      <span className="text-gray-400">1pc |</span> Pcs{" "}
-                      <CaretDownOutlined
-                        className="cursor-pointer"
-                        onClick={() => setActiveOption(!activeOption)}
-                      />
-                      {activeOption && (
-                        <div className="absolute bg-gray-100 right-0 p-3">
-                          <li className="cursor-pointer">1</li>
-                          <li className="cursor-pointer">2</li>
-                          <li className="cursor-pointer">3</li>
-                        </div>
-                      )}
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              
               <div className="py-5">
                 <div className="grid grid-cols-3 font-semibold">
                   <div>
@@ -177,14 +115,14 @@ const CheckoutCart = () => {
                     <p>Shipping</p>
                   </div>
                   <div className="justify-self-center">
-                    <p>Item: 2</p>
+                    <p>Quantity: {totalQuantity}</p>
                     <p>17%</p>
                     <p>FedEx</p>
                   </div>
                   <div className="justify-self-end text-right">
-                    <p>73.98 USD</p>
-                    <p>16 USD</p>
-                    <p>5 USD</p>
+                    <p>{totalPrice} USD</p>
+                    <p>{tax.toFixed(2)} USD</p>
+                    <p>{shipping.toFixed(2)} USD</p>
                   </div>
                 </div>
                 <div className="mt-16 flex justify-between bg-gray-100 border-2 border-gray-300 py-1 px-2 rounded-lg">
@@ -202,8 +140,8 @@ const CheckoutCart = () => {
                     </p>
                   </div>
 
-                  <h4 className="text-2xl font-semibold text-green-500">
-                    89 USD
+                  <h4 className="min-w-max text-xl font-semibold text-green-500">
+                    {grandTotal.toFixed(2)} USD
                   </h4>
                 </div>
               </div>
