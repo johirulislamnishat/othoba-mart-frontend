@@ -1,10 +1,13 @@
-import { Image, Table, Tag } from "antd";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Divider, Image, message, Popconfirm, Space, Table, Tag } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
 
 const AdminHome = () => {
 	const [data, setData] = useState(null);
+	const [token, setToken] = useState(null);
 
 	useEffect(() => {
 		axios
@@ -17,7 +20,26 @@ const AdminHome = () => {
 				setData(arr);
 			})
 			.catch((e) => console.log(e));
+
+		if (typeof window !== "undefined") {
+			setToken(localStorage.getItem("token"));
+		}
 	}, []);
+
+	const deleteProduct = (product) => {
+		console.log(product);
+		axios
+			.delete(`${API_BASE_URL}/product/${product._id}`, {
+				headers: {
+					token: `Bearer ${token}`,
+				},
+			})
+			.then((res) => {
+				message.success(res.data.message);
+				setData(data.filter((item) => item != product));
+			})
+			.catch((e) => console.log(e));
+	};
 
 	const columns = [
 		{
@@ -105,6 +127,25 @@ const AdminHome = () => {
 			title: "Description",
 			dataIndex: "product_description",
 			key: "product_description",
+		},
+		{
+			title: "",
+			key: "actions",
+			render: (product) => (
+				<Space split={<Divider type="vertical" />}>
+					<Popconfirm
+						title="Are you sure you want to delete this product?"
+						onConfirm={() => deleteProduct(product)}
+						okText="Yes"
+						cancelText="No"
+						placement="topRight"
+					>
+						<DeleteOutlined />
+					</Popconfirm>
+
+					<EditOutlined />
+				</Space>
+			),
 		},
 	];
 
