@@ -1,5 +1,5 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { message, Popconfirm, Select, Table } from "antd";
+import { message, Popconfirm, Select, Table, Tag } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
@@ -83,11 +83,25 @@ const Users = () => {
 			render: (user) => (
 				<div>
 					{user.isSuperAdmin && (
-						<span className="mr-2">Super Admin</span>
+						<Tag color={"rgba(255, 239, 217, 1)"}>
+							<span className="text-orange-500">Super Admin</span>
+						</Tag>
 					)}
-					{user.isAdmin && <span className="mr-2">Admin</span>}
-					{user.isVendor && <span className="mr-2">vendor</span>}
-					{user.isCustomer && <span className="mr-2">Customer</span>}
+					{user.isAdmin && (
+						<Tag color={"rgba(216, 255, 238, 1)"}>
+							<span className="text-green-500">Admin</span>
+						</Tag>
+					)}
+					{user.isVendor && (
+						<Tag color={"rgba(240, 255, 214, 1)"}>
+							<span className="text-gray-700">Vendor</span>
+						</Tag>
+					)}
+					{user.isCustomer && (
+						<Tag color={"rgba(255, 239, 217, 1)"}>
+							<span className="text-orange-500">Customer</span>
+						</Tag>
+					)}
 				</div>
 			),
 		},
@@ -109,13 +123,13 @@ const Users = () => {
 				>
 					<Option id={user._id} value="pending">
 						<div className="flex items-center">
-							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-yellow-400" />
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-yellow-500" />
 							Pending
 						</div>
 					</Option>
 					<Option id={user._id} value="approved">
 						<div className="flex items-center">
-							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-lime-300" />
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-green-500" />
 							Approved
 						</div>
 					</Option>
