@@ -1,9 +1,10 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Divider, message, Popconfirm, Space, Table } from "antd";
+import { message, Select, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
+
+const { Option } = Select;
 
 const Users = () => {
 	const [token, setToken] = useState(null);
@@ -44,6 +45,24 @@ const Users = () => {
 			.catch(() => message.error("Failed to delete user!"));
 	};
 
+	const handleStatus = (value, field) => {
+		axios
+			.put(
+				`${API_BASE_URL}/user/vendor/${field.id}`,
+				{ status: value },
+				{
+					headers: {
+						token: `Bearer ${token}`,
+					},
+				}
+			)
+			.then((res) => {
+				console.log(res.data);
+				message.success(res.data.message);
+			})
+			.catch(() => message.success("Failed to change status"));
+	};
+
 	const columns = [
 		{
 			title: "Name",
@@ -80,27 +99,23 @@ const Users = () => {
 		},
 		{
 			title: "Vendor Status",
-			dataIndex: "vendor_status",
 			key: "5",
 			width: 100,
-		},
-		{
-			title: "",
-			key: "actions",
-			width: 80,
 			render: (user) => (
-				<Space split={<Divider type="vertical" />}>
-					<Popconfirm
-						title="Are you sure you want to delete this user?"
-						onConfirm={() => deleteUser(user)}
-						okText="Yes"
-						cancelText="No"
-						placement="topRight"
-					>
-						<DeleteOutlined />
-					</Popconfirm>
-					<EditOutlined />
-				</Space>
+				<Select
+					defaultValue={user.vendor_status.toLowerCase()}
+					onChange={(value, field) => handleStatus(value, field)}
+				>
+					<Option id={user._id} value="pending">
+						pending
+					</Option>
+					<Option id={user._id} value="approved">
+						approved
+					</Option>
+					<Option id={user._id} value="rejected">
+						rejected
+					</Option>
+				</Select>
 			),
 		},
 	];
