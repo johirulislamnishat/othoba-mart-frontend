@@ -1,3 +1,5 @@
+import { useForm } from 'react-hook-form'
+
 const inputFields = [
     {
       title: "First name",
@@ -34,8 +36,10 @@ const inputFields = [
   ];
 
 const CheckoutForm = () => {
+  const { register, handleSubmit, reset} = useForm()
+  const onSubmit = data => console.log(data)
     return(
-            <form className="">
+            <form onSubmit={handleSubmit(onSubmit)} >
               <h3 className="font-semibold text-xl mt-10">Billing info</h3>
               <p className="text-xs text-gray-500">
                 Please enter your billing info.
@@ -50,6 +54,7 @@ const CheckoutForm = () => {
                       type={inp.type}
                       placeholder={inp.title}
                       className="p-1 bg-gray-100 border-2 border-gray-200 rounded-lg"
+                      {...register(inp.title, {required: true})}
                     />
                   </label>
                 ))}
@@ -191,7 +196,7 @@ const CheckoutForm = () => {
               </div>
               <button
                 type="submit"
-                className="mt-7 py-5 px-10 bg-orange-600 text-white font-semibold rounded-lg">
+                className="mt-7 py-5 px-10 bg-orange-600 text-white font-semibold border-2 border-white rounded-lg hover:bg-transparent hover:text-orange-600 hover:border-2 hover:border-orange-600">
                 Complete order
               </button>
               <div className="mt-7 flex flex-col gap-2">
