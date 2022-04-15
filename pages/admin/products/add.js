@@ -57,8 +57,10 @@ const AddProduct = () => {
 		formData.append("product_price", values.product_price);
 		formData.append("photo", values.photo[0]);
 
-		for (const item of values.gallery) {
-			formData.append("gallery", item);
+		if (values.gallery) {
+			for (const item of values.gallery) {
+				formData.append("gallery", item);
+			}
 		}
 
 		if (values.product_category) {
@@ -489,7 +491,7 @@ const AddProduct = () => {
 									name="gallery"
 									rules={[
 										{
-											required: true,
+											required: false,
 											message: `Please insert procuct's photos`,
 										},
 									]}

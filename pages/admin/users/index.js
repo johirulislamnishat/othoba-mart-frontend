@@ -79,6 +79,12 @@ const Users = () => {
 			width: 200,
 		},
 		{
+			title: "Vendor Status",
+			dataIndex: "vendor_status",
+			key: "5",
+			width: 100,
+		},
+		{
 			title: "",
 			key: "actions",
 			width: 80,

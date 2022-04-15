@@ -546,7 +546,7 @@ export default function EditProduct({ product, id }) {
 									name="gallery"
 									rules={[
 										{
-											required: true,
+											required: false,
 											message: `Please insert procuct's photos`,
 										},
 									]}

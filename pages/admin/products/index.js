@@ -12,7 +12,7 @@ const Products = () => {
 
 	useEffect(() => {
 		axios
-			.get("https://othobamart-api.herokuapp.com/product")
+			.get(`${API_BASE_URL}/product`)
 			.then((res) => {
 				const arr = [];
 				for (const value of res.data.result) {
