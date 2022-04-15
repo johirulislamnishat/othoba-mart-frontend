@@ -4,43 +4,40 @@ import { useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
 
 const AuthData = () => {
-    const router = useRouter();
-    // register api handler function
-    const signupHandlerCustomer = (user_name, email, password) => {
-        
-        axios
-            .post(API_BASE_URL + "/auth/register", {
-                user_name: user_name,
-                email: email,
-                password: password,
-                
-            })
-            .then(function (response) {
-                console.log(response);
-                router.push("/auth/login");
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
+	const router = useRouter();
+	// register api handler function
+	const signupHandlerCustomer = (user_name, email, password) => {
+		axios
+			.post(API_BASE_URL + "/auth/register", {
+				user_name: user_name,
+				email: email,
+				password: password,
+			})
+			.then(function (response) {
+				console.log(response);
+				router.push("/auth/login");
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
 
-    const signupHandlerVendor = (user_name, email, password, shop_name) => {
-        
-        axios
-            .post(API_BASE_URL + "/auth/register/vendor", {
-                user_name: user_name,
-                email: email,
-                password: password,
-                shop_name: shop_name
-            })
-            .then(function (response) {
-                console.log(response);
-                router.push('/auth/vendorProfile')
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
+	const signupHandlerVendor = (user_name, email, password, shop_name) => {
+		axios
+			.post(API_BASE_URL + "/auth/register/vendor", {
+				user_name: user_name,
+				email: email,
+				password: password,
+				shop_name: shop_name,
+			})
+			.then(function (response) {
+				console.log(response);
+				router.push("/auth/vendorProfile");
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
 
 	const [user, setUser] = useState({});
 	// console.log("logged in user", user);
@@ -70,14 +67,14 @@ const AuthData = () => {
 		localStorage.removeItem("token");
 	};
 
-    return {
-        signupHandlerCustomer,
-        signupHandlerVendor,
-        signinHandler,
-        token,
-        user,
-        logout,
-    };
+	return {
+		signupHandlerCustomer,
+		signupHandlerVendor,
+		signinHandler,
+		token,
+		user,
+		logout,
+	};
 };
 
 export default AuthData;

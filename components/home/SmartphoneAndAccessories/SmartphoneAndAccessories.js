@@ -5,15 +5,27 @@ import {
   StarOutlined,
 } from "@ant-design/icons";
 import { Col, Row } from "antd";
-import Image from "next/image";
+import axios from "axios";
 import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../../../apiconstants";
 import SuperDiscountSidebar from "../SuperDiscountSidebar/SuperDiscountSidebar";
-import productSm from "../../../public/images/Products/product-sm-1.jpeg";
-import smartphone from "../../../public/images/Products/smartphone.jpg";
+
 const SmartphoneAndAccessories = () => {
+  const [items, setItems] = useState([]);
+  console.log(items);
+
+  useEffect(() => {
+    axios
+      .get(API_BASE_URL + "/product/paginated?page=0&size=6")
+      .then(function (response) {
+        console.log(response?.data?.result);
+        setItems(response?.data?.result);
+      });
+  }, []);
   return (
     <div className="container smartphone-and-accessories">
-      <div className="section-title mt-8 px-4 flex justify-between items-center border-b-2">
+      <div className="section-title mt-8 mb-4 flex justify-between items-center border-b-2 ">
         <h2 className="text-2xl">Smartphone & Accessories</h2>
         <Link href="/">See All</Link>
       </div>
@@ -23,198 +35,46 @@ const SmartphoneAndAccessories = () => {
         </Col>
         <Col md={15}>
           <Row>
-            <Col xs={24} sm={12} md={8} lg={8}>
-              <div className="p-5 single-product">
-                <Image src={productSm} alt="" />
-                <div className="wishlist flex justify-center items-center">
-                  <HeartOutlined />
-                </div>
-                <div className="discount flex justify-center items-center">
-                  <small>30%</small>
-                </div>
+            {items.map((item, index) => {
+              return (
+                <Col xs={24} sm={12} md={8} lg={8} key={index}>
+                  <div className="p-5 single-product">
+                    {/* <Image src={item.product_img} alt="" /> */}
 
-                <Link href="/" className="text-1xl">
-                  Flexible Black Smart Watches For Men & Women
-                </Link>
-                <div className="ratings">
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarOutlined />
-                </div>
-                <div className="flex justify-between items-center mt-4">
-                  <div className="product-price">
-                    <small>$779.99</small>
-                    <h3>$699.99</h3>
-                  </div>
-                  <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
-                  </div>
-                </div>
-                <p className="text-1xl mt-3">2 Day Delivery</p>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={8} lg={8}>
-              <div className="p-5 single-product">
-                <Image src={productSm} alt="" />
-                <div className="wishlist flex justify-center items-center">
-                  <HeartOutlined />
-                </div>
-                <div className="discount flex justify-center items-center">
-                  <small>30%</small>
-                </div>
+                    <img src={item?.product_img} alt="" />
 
-                <Link href="/" className="text-1xl">
-                  Flexible Black Smart Watches For Men & Women
-                </Link>
-                <div className="ratings">
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarOutlined />
-                </div>
-                <div className="flex justify-between items-center mt-4">
-                  <div className="product-price">
-                    <small>$779.99</small>
-                    <h3>$699.99</h3>
+                    <div className="wishlist flex justify-center items-center">
+                      <HeartOutlined />
+                    </div>
+                    <div className="discount flex justify-center items-center">
+                      <small>25%</small>
+                    </div>
+                    <h3>
+                      <Link href="/product/[id]" as={`/product/${item._id}`}>
+                        <a className="text-1xl"> {item?.product_name}</a>
+                      </Link>
+                    </h3>
+                    <div className="ratings">
+                      <StarFilled />
+                      <StarFilled />
+                      <StarFilled />
+                      <StarFilled />
+                      <StarOutlined />
+                    </div>
+                    <div className="flex justify-between items-center mt-4">
+                      <div className="product-price">
+                        <small>$779.99</small>
+                        <h3>${item?.product_price}.00</h3>
+                      </div>
+                      <div className="shopping flex justify-center items-center">
+                        <ShoppingOutlined />
+                      </div>
+                    </div>
+                    <p className="text-1xl mt-3">2 Day Delivery</p>
                   </div>
-                  <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
-                  </div>
-                </div>
-                <p className="text-1xl mt-3">2 Day Delivery</p>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={8} lg={8}>
-              <div className="p-5 single-product">
-                <Image src={productSm} alt="" />
-                <div className="wishlist flex justify-center items-center">
-                  <HeartOutlined />
-                </div>
-                <div className="discount flex justify-center items-center">
-                  <small>30%</small>
-                </div>
-
-                <Link href="/" className="text-1xl">
-                  Flexible Black Smart Watches For Men & Women
-                </Link>
-                <div className="ratings">
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarOutlined />
-                </div>
-                <div className="flex justify-between items-center mt-4">
-                  <div className="product-price">
-                    <small>$779.99</small>
-                    <h3>$699.99</h3>
-                  </div>
-                  <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
-                  </div>
-                </div>
-                <p className="text-1xl mt-3">2 Day Delivery</p>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={8} lg={8}>
-              <div className="p-5 single-product">
-                <Image src={productSm} alt="" />
-                <div className="wishlist flex justify-center items-center">
-                  <HeartOutlined />
-                </div>
-                <div className="discount flex justify-center items-center">
-                  <small>30%</small>
-                </div>
-
-                <Link href="/" className="text-1xl">
-                  Flexible Black Smart Watches For Men & Women
-                </Link>
-                <div className="ratings">
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarOutlined />
-                </div>
-                <div className="flex justify-between items-center mt-4">
-                  <div className="product-price">
-                    <small>$779.99</small>
-                    <h3>$699.99</h3>
-                  </div>
-                  <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
-                  </div>
-                </div>
-                <p className="text-1xl mt-3">2 Day Delivery</p>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={8} lg={8}>
-              <div className="p-5 single-product">
-                <Image src={productSm} alt="" />
-                <div className="wishlist flex justify-center items-center">
-                  <HeartOutlined />
-                </div>
-                <div className="discount flex justify-center items-center">
-                  <small>30%</small>
-                </div>
-
-                <Link href="/" className="text-1xl">
-                  Flexible Black Smart Watches For Men & Women
-                </Link>
-                <div className="ratings">
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarOutlined />
-                </div>
-                <div className="flex justify-between items-center mt-4">
-                  <div className="product-price">
-                    <small>$779.99</small>
-                    <h3>$699.99</h3>
-                  </div>
-                  <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
-                  </div>
-                </div>
-                <p className="text-1xl mt-3">2 Day Delivery</p>
-              </div>
-            </Col>
-            <Col xs={24} sm={12} md={8} lg={8}>
-              <div className="p-5 single-product">
-                <Image src={productSm} alt="" />
-                <div className="wishlist flex justify-center items-center">
-                  <HeartOutlined />
-                </div>
-                <div className="discount flex justify-center items-center">
-                  <small>30%</small>
-                </div>
-
-                <Link href="/" className="text-1xl">
-                  Flexible Black Smart Watches For Men & Women
-                </Link>
-                <div className="ratings">
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarOutlined />
-                </div>
-                <div className="flex justify-between items-center mt-4">
-                  <div className="product-price">
-                    <small>$779.99</small>
-                    <h3>$699.99</h3>
-                  </div>
-                  <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
-                  </div>
-                </div>
-                <p className="text-1xl mt-3">2 Day Delivery</p>
-              </div>
-            </Col>
+                </Col>
+              );
+            })}
           </Row>
         </Col>
       </Row>
