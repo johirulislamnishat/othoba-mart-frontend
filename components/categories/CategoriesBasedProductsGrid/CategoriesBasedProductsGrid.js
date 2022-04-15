@@ -18,7 +18,6 @@ const CategoriesBasedProductsGrid = () => {
     axios
       .get(API_BASE_URL + "/product/paginated?page=0&size=6")
       .then(function (response) {
-        console.log(response?.data?.result);
         setItems(response?.data?.result);
       });
   }, []);
@@ -41,8 +40,8 @@ const CategoriesBasedProductsGrid = () => {
                   <small>40% off</small>
                 </div>
                 <h3>
-                  <Link href="/" className="text-1xl">
-                    {item?.product_name}
+                  <Link href="/product/[id]" as={`/product/${item._id}`}>
+                    <a className="text-1xl"> {item?.product_name}</a>
                   </Link>
                 </h3>
                 <div className="ratings">

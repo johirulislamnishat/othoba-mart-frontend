@@ -45,8 +45,8 @@ const NewProducts = () => {
                   <small>Super Price</small>
                 </div>
                 <h3>
-                  <Link href="/" className="text-1xl">
-                    {item?.product_name}
+                  <Link href="/product/[id]" as={`/product/${item._id}`}>
+                    <a className="text-1xl"> {item?.product_name}</a>
                   </Link>
                 </h3>
                 <div className="ratings">
