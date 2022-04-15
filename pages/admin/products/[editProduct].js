@@ -22,7 +22,7 @@ import AdminLayout from "../../../components/layouts/adminLayout";
 
 const { Option } = Select;
 
-export default function EditProduct({ product }) {
+export default function EditProduct({ product, id }) {
 	const [form] = Form.useForm();
 	const [optionName, setOptionName] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -42,6 +42,7 @@ export default function EditProduct({ product }) {
 	const [previewVisible, setPreviewVisible] = useState(false);
 	const [previewImage, setPreviewImage] = useState("");
 	const [previewTitle, setPreviewTitle] = useState("");
+	const router = useRouter();
 
 	useEffect(() => {
 		if (product.product_category) {
@@ -89,8 +90,8 @@ export default function EditProduct({ product }) {
 		formData.append("product_price", values.product_price);
 		formData.append("photo", values.photo[0]);
 
-		for (const item of values.gelery) {
-			formData.append("gelery", item);
+		for (const item of values.gallery) {
+			formData.append("gallery", item);
 		}
 
 		if (values.product_category) {
@@ -118,7 +119,7 @@ export default function EditProduct({ product }) {
 		}
 
 		axios
-			.put(`${API_BASE_URL}/product`, formData, {
+			.put(`${API_BASE_URL}/product/${id}`, formData, {
 				headers: {
 					"Content-Type": "multipart/form-data",
 					token: `Bearer ${token}`,
@@ -129,6 +130,7 @@ export default function EditProduct({ product }) {
 					message.success(res.data.message);
 					setLoading(false);
 					form.resetFields();
+					router.push("/admin/products");
 				}
 			})
 			.catch(() => {
@@ -175,9 +177,9 @@ export default function EditProduct({ product }) {
 				return Upload.LIST_IGNORE;
 			}
 		},
-		defaultFileList: product.gelery
-			? product.gelery.map((item, index) => {
-					return { uid: index, url: item.product_gelery };
+		defaultFileList: product.gallery
+			? product.gallery.map((item, index) => {
+					return { uid: index, url: item.gallery };
 			  })
 			: null,
 	};
@@ -541,7 +543,7 @@ export default function EditProduct({ product }) {
 						<Col xs={24} md={12}>
 							<Form.Item label="Gelery Images">
 								<Form.Item
-									name="gelery"
+									name="gallery"
 									rules={[
 										{
 											required: true,
@@ -549,6 +551,7 @@ export default function EditProduct({ product }) {
 										},
 									]}
 									noStyle
+									initialValue={product.gallery}
 									getValueFromEvent={normFile}
 								>
 									<Upload.Dragger
@@ -610,6 +613,6 @@ EditProduct.getInitialProps = async (ctx) => {
 	);
 	if (res.ok) {
 		const product = await res.json();
-		return { product: product.result };
+		return { product: product.result, id: editProduct };
 	}
 };
