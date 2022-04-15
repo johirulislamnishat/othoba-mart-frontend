@@ -4,15 +4,13 @@ import AuthData from "../hooks/authHandlers";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const allContext = AuthData();
-    
-    console.log(allContext)
+	const allContext = AuthData();
 
-    return (
-        <AuthContext.Provider value={allContext}>
-            {children}
-        </AuthContext.Provider>
-    );
+	return (
+		<AuthContext.Provider value={allContext}>
+			{children}
+		</AuthContext.Provider>
+	);
 };
 
 export default AuthProvider;
