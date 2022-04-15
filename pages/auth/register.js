@@ -12,6 +12,8 @@ const Register = () => {
   const [isVendor, setIsVendor] = useState(false);
   const [isCustomer, setIsCustomer] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isTerms, setIsTerms] = useState(false)
+  const [isNext, setIsNext] = useState(false)
 
   const { signupHandlerCustomer, signupHandlerVendor } = useAuth();
 
@@ -19,6 +21,7 @@ const Register = () => {
     if (e.target.name === "vendor") {
       setIsCustomer(false);
       setIsVendor(true);
+      setIsTerms(true)
     } else {
       setIsCustomer(true);
       setIsVendor(false);
@@ -32,6 +35,11 @@ const Register = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
+  const handleNext = () => {
+    setIsTerms(false)
+    setIsNext(false)
+  }
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -63,8 +71,66 @@ const Register = () => {
         <img src="/images/auth.png" alt="" className="h-screen w-full" />
       </div>
 
-      <div className="min-w-full rounded-r-lg mt-3">
+      <div className="relative min-w-full rounded-r-lg mt-3">
+      { isTerms && 
+          <div className='absolute z-10 w-5/6 bg-white sm:mx-16 p-16 border-2 border-gray-200 rounded-lg text-s
+          m'>
+            <h3>Required Inforamtion</h3>
+            <h3>APPLICATION FORM FOR CERTIFICATION OF E-COMMERCE WEBSITE</h3>
+<p className='text-xs m-0'>
+Note: If there is insufficient space in the application form for the required information, the 
+information is to be given in a separate annexure.<br/>
+</p>
+<div className='flex flex-col'>
+  <p>1. (i) Name of applicant:</p>
+<p>(ii) Place of incorporation:</p>
+<p>(iii) Number of incorporation:</p>
+<p>(iv) Address of principal place of business:</p>
+<p>(v) Nature of business:</p>
+<p>(vi) Income Tax file reference number:</p>
+<p>(vii) Name of contact person:</p>
+<p>(viii) Telephone:</p>
+<p>(ix) Fax or email:</p>
+<p>2. (i) URL/address of website:</p>
+<p>(ii) Name of web hosting company (if not hosted by applicant):</p>
+<button className='px-3 py-1 bg-sky-500 text-white' onClick={()=>setIsNext(true)}>Next</button>
+</div>
+</div>
+}
+{
+  isNext &&  <div className='absolute z-10 w-5/6 h-full bg-white sm:mx-16 p-16 border-2 border-gray-200 rounded-lg'>
+<div className='flex flex-col text-sm'>
+<p>(iii) Type of server software used for processing commercial transactions:</p>
+<p>(iv) List of functionalities of server software:</p>
+
+<p>(v) Method/s of payment and collection used for commercial transactions:</p>
+<p>(vi) Type of security capabilities used:</p>
+<p>3. (i) Process flow of the entire commercial transaction from the time customer 
+browse the Applicant’s web site for product information to the placement of 
+order and delivery of the goods or services.</p>
+<p>4. Declaration (if the Applicant is not an individual, the declaration must be signed by two 
+directors/partners or one director/partner and one secretary).</p> 
+<p>(i) I hereby certify and declare that all the particulars furnished in this form are true 
+and correct.
+Signature:
+Name:
+Designation:
+Company seal:
+Date:</p>
+<p>(ii) I hereby certify and declare that all the particulars furnished in this form are true 
+and correct.
+Signature:
+Name:
+Designation:
+Company seal:
+Date</p>
+<button className='px-3 py-1 bg-sky-500 text-white' onClick={handleNext}>Ok</button>
+</div>
+  </div>
+}
         <div className="mx-4 sm:mx-16 p-2 border-2 border-gray-200 rounded-lg flex flex-col items-center">
+         
+
           <form
             onSubmit={handleRegister}
             className="w-full sm:w-3/4 flex flex-col gap-2 font-semibold text-sm mt-5">

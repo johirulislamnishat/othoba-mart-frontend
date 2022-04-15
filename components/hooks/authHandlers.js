@@ -35,7 +35,7 @@ const AuthData = () => {
             })
             .then(function (response) {
                 console.log(response);
-                router.push("/auth/login");
+                router.push('/auth/vendorProfile')
             })
             .catch(function (error) {
                 console.log(error);
