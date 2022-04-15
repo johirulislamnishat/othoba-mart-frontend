@@ -1,4 +1,5 @@
-import { message, Select, Table } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+import { message, Popconfirm, Select, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
@@ -116,6 +117,22 @@ const Users = () => {
 						rejected
 					</Option>
 				</Select>
+			),
+		},
+		{
+			title: "",
+			key: "actions",
+			width: 80,
+			render: (user) => (
+				<Popconfirm
+					title="Are you sure you want to delete this user?"
+					onConfirm={() => deleteUser(user)}
+					okText="Yes"
+					cancelText="No"
+					placement="topRight"
+				>
+					<DeleteOutlined />
+				</Popconfirm>
 			),
 		},
 	];
