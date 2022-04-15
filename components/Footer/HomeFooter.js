@@ -3,10 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../assets/Logo/othoba-mart-logo.png";
 import Payment from "../../assets/Images/payment.png";
-import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import InstagramIcon from "@mui/icons-material/Instagram";
+// import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
+// import TwitterIcon from "@mui/icons-material/Twitter";
+// import LinkedInIcon from "@mui/icons-material/LinkedIn";
+// import InstagramIcon from "@mui/icons-material/Instagram";
 
 const footerMenus01 = [
   { id: "0", LinkName: "FAQ", href: "#" },
@@ -133,28 +133,28 @@ const HomeFooter = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FacebookRoundedIcon className="text-blue-600 text-xl md:text-3xl" />
+                  {/* <FacebookRoundedIcon className="text-blue-600 text-xl md:text-3xl" /> */}
                 </a>
                 <a
                   href="http://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <InstagramIcon className="mx-2 text-pink-600 text-xl md:text-3xl" />
+                  {/* <InstagramIcon className="mx-2 text-pink-600 text-xl md:text-3xl" /> */}
                 </a>
                 <a
                   href="http://twitter.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <TwitterIcon className="mx-2 text-blue-600 text-xl md:text-3xl" />
+                  {/* <TwitterIcon className="mx-2 text-blue-600 text-xl md:text-3xl" /> */}
                 </a>
                 <a
                   href="http://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <LinkedInIcon className=" text-xl md:text-3xl text-blue-800" />
+                  {/* <LinkedInIcon className=" text-xl md:text-3xl text-blue-800" /> */}
                 </a>
               </li>
             </ul>
