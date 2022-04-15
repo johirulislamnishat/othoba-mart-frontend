@@ -28,6 +28,12 @@ a {
 .ant-drawer-body {
 	padding: 0 !important;
 }
+
+/* img preview */
+.ant-image-preview-img {
+	margin: 0 auto;
+}
+
 /* end ant design */
 
 :root {

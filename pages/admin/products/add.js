@@ -57,8 +57,10 @@ const AddProduct = () => {
 		formData.append("product_price", values.product_price);
 		formData.append("photo", values.photo[0]);
 
-		for (const item of values.gelery) {
-			formData.append("gelery", item);
+		if (values.gallery) {
+			for (const item of values.gallery) {
+				formData.append("gallery", item);
+			}
 		}
 
 		if (values.product_category) {
@@ -486,10 +488,10 @@ const AddProduct = () => {
 						<Col xs={24} md={12}>
 							<Form.Item label="Gelery Images">
 								<Form.Item
-									name="gelery"
+									name="gallery"
 									rules={[
 										{
-											required: true,
+											required: false,
 											message: `Please insert procuct's photos`,
 										},
 									]}
