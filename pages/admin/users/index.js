@@ -58,7 +58,6 @@ const Users = () => {
 				}
 			)
 			.then((res) => {
-				console.log(res.data);
 				message.success(res.data.message);
 			})
 			.catch(() => message.success("Failed to change status"));
@@ -69,18 +68,18 @@ const Users = () => {
 			title: "Name",
 			dataIndex: "user_name",
 			key: "1",
-			width: 300,
+			width: 250,
 		},
 		{
 			title: "email",
 			dataIndex: "email",
 			key: "2",
-			width: 400,
+			width: 300,
 		},
 		{
 			title: "Role",
 			key: "3",
-			width: 350,
+			width: 300,
 			render: (user) => (
 				<div>
 					{user.isSuperAdmin && (
@@ -96,7 +95,7 @@ const Users = () => {
 			title: "Shop Name",
 			dataIndex: "shop_name",
 			key: "4",
-			width: 200,
+			width: 160,
 		},
 		{
 			title: "Vendor Status",
@@ -122,7 +121,7 @@ const Users = () => {
 		{
 			title: "",
 			key: "actions",
-			width: 80,
+			width: 40,
 			render: (user) => (
 				<Popconfirm
 					title="Are you sure you want to delete this user?"
@@ -141,7 +140,7 @@ const Users = () => {
 			<Table
 				columns={columns}
 				dataSource={data}
-				scroll={{ x: 1550 }}
+				scroll={{ x: 1150 }}
 				pagination={{ position: ["bottomCenter"] }}
 				size="small"
 			/>

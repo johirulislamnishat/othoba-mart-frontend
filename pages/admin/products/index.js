@@ -1,10 +1,22 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Divider, Image, message, Popconfirm, Space, Table, Tag } from "antd";
+import {
+	Divider,
+	Image,
+	message,
+	Popconfirm,
+	Select,
+	Space,
+	Table,
+	Tag,
+	Tooltip,
+} from "antd";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
+
+const { Option } = Select;
 
 const Products = () => {
 	const [data, setData] = useState(null);
@@ -39,6 +51,23 @@ const Products = () => {
 				setData(data.filter((item) => item != product));
 			})
 			.catch((e) => console.log(e));
+	};
+
+	const handleStatus = (value, field) => {
+		axios
+			.put(
+				`${API_BASE_URL}/product/status/${field.id}`,
+				{ status: value },
+				{
+					headers: {
+						token: `Bearer ${token}`,
+					},
+				}
+			)
+			.then((res) => {
+				message.success(res.data.message);
+			})
+			.catch(() => message.success("Failed to change status"));
 	};
 
 	const columns = [
@@ -94,13 +123,16 @@ const Products = () => {
 			width: 180,
 			render: (colors) =>
 				colors ? (
-					<>
+					<div className="flex flex-row">
 						{colors.map((color) => (
-							<Tag color={color.toUpperCase()} key={color}>
-								{color}
-							</Tag>
+							<Tooltip key={color} title={color}>
+								<div
+									className="m-1 mr-2 w-5 h-5 relative rounded-full"
+									style={{ backgroundColor: color }}
+								/>
+							</Tooltip>
 						))}
-					</>
+					</div>
 				) : null,
 		},
 		{
@@ -136,10 +168,31 @@ const Products = () => {
 				) : null,
 		},
 		{
-			title: "Description",
-			dataIndex: "product_description",
-			key: "product_description",
-			width: 320,
+			title: "Status",
+			key: "status",
+			width: 100,
+			render: (product) => (
+				<Select
+					defaultValue={product.status.toLowerCase()}
+					onChange={(value, field) => handleStatus(value, field)}
+				>
+					<Option id={product._id} value="pending">
+						pending
+					</Option>
+					<Option id={product._id} value="approved">
+						approved
+					</Option>
+					<Option id={product._id} value="cancled">
+						cancled
+					</Option>
+					<Option id={product._id} value="shifted">
+						shifted
+					</Option>
+					<Option id={product._id} value="completed">
+						completed
+					</Option>
+				</Select>
+			),
 		},
 		{
 			title: "",
@@ -165,7 +218,7 @@ const Products = () => {
 	];
 
 	return (
-		<AdminLayout title="Othoba Mart | Products">
+		<AdminLayout title="Admin | Products">
 			<Table
 				columns={columns}
 				dataSource={data}
