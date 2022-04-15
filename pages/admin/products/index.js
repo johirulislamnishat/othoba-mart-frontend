@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
 
-const AdminHome = () => {
+const Products = () => {
 	const [data, setData] = useState(null);
 	const [token, setToken] = useState(null);
 
@@ -165,7 +165,7 @@ const AdminHome = () => {
 	];
 
 	return (
-		<AdminLayout title="Othoba Mart | Admin">
+		<AdminLayout title="Othoba Mart | Products">
 			<Table
 				columns={columns}
 				dataSource={data}
@@ -177,4 +177,4 @@ const AdminHome = () => {
 	);
 };
 
-export default AdminHome;
+export default Products;
