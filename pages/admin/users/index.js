@@ -98,22 +98,32 @@ const Users = () => {
 			width: 160,
 		},
 		{
-			title: "Vendor Status",
+			title: "Status",
 			key: "5",
-			width: 100,
+			width: 150,
 			render: (user) => (
 				<Select
+					style={{ width: 150 }}
 					defaultValue={user.vendor_status.toLowerCase()}
 					onChange={(value, field) => handleStatus(value, field)}
 				>
 					<Option id={user._id} value="pending">
-						pending
+						<div className="flex items-center">
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-yellow-400" />
+							Pending
+						</div>
 					</Option>
 					<Option id={user._id} value="approved">
-						approved
+						<div className="flex items-center">
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-lime-300" />
+							Approved
+						</div>
 					</Option>
 					<Option id={user._id} value="rejected">
-						rejected
+						<div className="flex items-center">
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-red-500" />
+							Rejected
+						</div>
 					</Option>
 				</Select>
 			),

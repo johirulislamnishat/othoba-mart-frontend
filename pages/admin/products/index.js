@@ -203,7 +203,7 @@ const Products = () => {
 					</Option>
 					<Option id={product._id} value="cancled">
 						<div className="flex items-center">
-							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-pink-500" />
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-stone-300" />
 							Cancled
 						</div>
 					</Option>
