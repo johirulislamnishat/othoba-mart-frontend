@@ -8,9 +8,9 @@ import { Col, Row } from "antd";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from "../../../apiconstants";
+import { API_BASE_URL } from "../../apiconstants";
 
-const BestSellers = () => {
+const RelateProducts = () => {
   const [items, setItems] = useState([]);
   console.log(items);
 
@@ -22,17 +22,18 @@ const BestSellers = () => {
         setItems(response?.data?.result);
       });
   }, []);
+
   return (
-    <div className="container best-sellers">
-      <div className="section-title mt-6 flex justify-between items-center border-b-2">
-        <h2 className="text-2xl">Best Sellers</h2>
+    <div className="container new-products">
+      <div className="section-title mt-8 flex justify-between items-center border-b-2">
+        <h2 className="text-2xl mb-6">Related Products</h2>
         <Link href="/">See All</Link>
       </div>
       <Row>
         {items.map((item, index) => {
           return (
-            <Col xs={24} sm={12} md={6} lg={6} key={index}>
-              <div className="p-5 single-product">
+            <Col className="my-6" xs={24} sm={12} md={6} lg={6} key={index}>
+              <div className="p-5 single-product border-2 rounded-lg m-2">
                 {/* <Image src={item.product_img} alt="" /> */}
 
                 <img src={item?.product_img} alt="" />
@@ -74,4 +75,4 @@ const BestSellers = () => {
   );
 };
 
-export default BestSellers;
+export default RelateProducts;

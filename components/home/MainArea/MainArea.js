@@ -5,11 +5,13 @@ import NewProducts from "../NewProducts/NewProducts";
 import PromoLgOne from "../PromoLgOne/PromoLgOne";
 import PromoLgThree from "../PromoLgThree/PromoLgThree";
 import PromoLgTwo from "../PromoLgTwo/PromoLgTwo";
+import PromoSmOne from "../PromoSmOne/PromoSmOne";
 import SmartphoneAndAccessories from "../SmartphoneAndAccessories/SmartphoneAndAccessories";
 
 const MainArea = () => {
   return (
     <main>
+      <PromoSmOne></PromoSmOne>
       <BestSellers></BestSellers>
       <PromoLgOne></PromoLgOne>
       <LatestDeals></LatestDeals>
