@@ -127,7 +127,7 @@ const Products = () => {
 						{colors.map((color) => (
 							<Tooltip key={color} title={color}>
 								<div
-									className="m-1 mr-2 w-5 h-5 relative rounded-full"
+									className="m-1 mr-2 w-4 h-4 relative rounded-full"
 									style={{ backgroundColor: color }}
 								/>
 							</Tooltip>
@@ -170,26 +170,48 @@ const Products = () => {
 		{
 			title: "Status",
 			key: "status",
-			width: 100,
+			width: 150,
 			render: (product) => (
 				<Select
 					defaultValue={product.status.toLowerCase()}
+					style={{ width: 150 }}
 					onChange={(value, field) => handleStatus(value, field)}
 				>
 					<Option id={product._id} value="pending">
-						pending
+						<div className="flex items-center">
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-yellow-400" />
+							Pending
+						</div>
 					</Option>
 					<Option id={product._id} value="approved">
-						approved
-					</Option>
-					<Option id={product._id} value="cancled">
-						cancled
+						<div className="flex items-center">
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-lime-300" />
+							Approved
+						</div>
 					</Option>
 					<Option id={product._id} value="shifted">
-						shifted
+						<div className="flex items-center">
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-violet-500" />
+							Shifted
+						</div>
 					</Option>
 					<Option id={product._id} value="completed">
-						completed
+						<div className="flex items-center">
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-green-500" />
+							Completed
+						</div>
+					</Option>
+					<Option id={product._id} value="cancled">
+						<div className="flex items-center">
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-pink-500" />
+							Cancled
+						</div>
+					</Option>
+					<Option id={product._id} value="rejected">
+						<div className="flex items-center">
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-red-500" />
+							Rejected
+						</div>
 					</Option>
 				</Select>
 			),
@@ -222,7 +244,7 @@ const Products = () => {
 			<Table
 				columns={columns}
 				dataSource={data}
-				scroll={{ x: 1550 }}
+				scroll={{ x: 1600 }}
 				pagination={{ position: ["bottomCenter"] }}
 				size="small"
 			/>
