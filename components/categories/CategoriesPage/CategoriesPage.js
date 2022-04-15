@@ -1,4 +1,8 @@
-import { BarsOutlined, BorderInnerOutlined } from "@ant-design/icons";
+import {
+  BarsOutlined,
+  BorderInnerOutlined,
+  FilterOutlined,
+} from "@ant-design/icons";
 import { Button, Checkbox, Drawer, Radio, Space } from "antd";
 import React, { useState } from "react";
 import MainArea from "../MainArea/MainArea";
@@ -51,16 +55,16 @@ const CategoriesPage = () => {
               <span>List View</span>
             </div>
           </div>
-        </div>
-        <div className="categories-page-top-filter flex items-center">
           <div className="custom-filter-btn">
             <Space>
               <button className="custom-btn" onClick={showDefaultDrawer}>
-                Filter
+                <FilterOutlined />
+                <span>Filter</span>
               </button>
             </Space>
           </div>
-
+        </div>
+        <div className="categories-page-top-filter flex items-center">
           <Drawer
             title={`Filter Products`}
             placement="left"
@@ -82,15 +86,15 @@ const CategoriesPage = () => {
 
           <div>
             <Radio.Group onChange={onChange} value={value}>
-              <Radio value={"filter-text"}>Filter text</Radio>
-              <Radio value={"filter-text2"}>Filter text</Radio>
+              <Radio value={"filter-text"}>Low to High</Radio>
+              <Radio value={"filter-text2"}>High to Low</Radio>
             </Radio.Group>
           </div>
           <div>
-            <Checkbox onChange={getChecked}>Filter</Checkbox>
+            <Checkbox onChange={getChecked}>New</Checkbox>
           </div>
           <div>
-            <Checkbox onChange={getChecked}>Filter</Checkbox>
+            <Checkbox onChange={getChecked}>Top</Checkbox>
           </div>
         </div>
       </div>

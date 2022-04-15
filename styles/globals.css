@@ -354,15 +354,29 @@ categories page style
   margin-top: 100px;
   width: 100%;
 }
-@media screen and (max-width: 668px) {
-  .categories-page-top .grid-or-list-view {
-    display: none;
-  }
+.categories-page-top .custom-filter-btn {
+  border: 0;
+  background-color: #fff;
+  padding: 0;
+  display: none;
 }
+
 .categories-page-top h2 {
   font-size: 30px;
   font-weight: 600;
 }
+@media screen and (max-width: 668px) {
+  .categories-page-top .grid-or-list-view {
+    display: none;
+  }
+  .categories-page-top h2 {
+    font-size: 25px;
+  }
+  .categories-page-top .custom-filter-btn {
+    display: block;
+  }
+}
+
 .categories-page-top .filter-icon span {
   color: var(--black-color);
   font-size: 0.8rem;
@@ -422,27 +436,17 @@ categories page style
 .product-list-view .product-price h3 {
   margin-bottom: 10px;
 }
-/* @media screen and (max-width: 668px) {
+@media screen and (max-width: 668px) {
   .product-list-view {
     flex-direction: column;
     text-align: center;
   }
-} */
+}
 /* categories sidebar*/
 .category-page-drawer-filter {
   padding: 40px;
 }
-.categories-page-top-filter .custom-filter-btn {
-  border: 0;
-  background-color: #fff;
-  padding: 0;
-  display: none;
-}
-@media only screen and (max-width: 668px) {
-  .categories-page-top-filter .custom-filter-btn {
-    display: block;
-  }
-}
+
 .categories-page-container .single-filter,
 .category-page-drawer-filter .single-filter {
   margin-bottom: 50px;

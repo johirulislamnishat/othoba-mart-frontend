@@ -20,7 +20,6 @@ const Product = () => {
 
   useEffect(() => {
     axios.get(API_BASE_URL + `/product/${id}`).then(function (response) {
-      console.log(response?.data?.result);
       setItem(response?.data?.result);
     });
   }, [id]);
@@ -34,7 +33,7 @@ const Product = () => {
   const url = item.product_img;
   console.log(url);
   return (
-    <HomeLayout title="Othoba Mart">
+    <HomeLayout title={item.product_name}>
       <div className="single-product-page">
         <Row>
           <Col sm={12} gutter={8} className="border rounded-md">
