@@ -1,5 +1,13 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Divider, Popconfirm, Select, Space, Table, Tooltip } from "antd";
+import {
+	Divider,
+	message,
+	Popconfirm,
+	Select,
+	Space,
+	Table,
+	Tooltip,
+} from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
@@ -61,18 +69,19 @@ const Orders = () => {
 
 	const columns = [
 		{
+			title: "User id",
+			dataIndex: "user_id",
+			key: "2",
+			width: 100,
+			render: (id) => <Tooltip title={id}>#{id.slice(15)}</Tooltip>,
+		},
+		{
 			title: "User Name",
 			dataIndex: "user_name",
 			key: "name",
 			width: 200,
 		},
-		{
-			title: "User id",
-			dataIndex: "user_id",
-			key: "2",
-			width: 100,
-			render: (id) => <Tooltip title={id}>...{id.slice(15)}</Tooltip>,
-		},
+
 		{
 			title: "User Email",
 			dataIndex: "email",
