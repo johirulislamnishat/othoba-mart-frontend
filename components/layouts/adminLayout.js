@@ -9,8 +9,9 @@ import Sider from "antd/lib/layout/Sider";
 import Head from "next/head";
 import React, { useState } from "react";
 import Foter from "../shared/footer";
+import AdminTop from "./others/adminTop";
 
-const AdminLayout = ({ title, children }) => {
+const AdminLayout = ({ title, children, pageTitle }) => {
 	const [collapsed, setCollapsed] = useState(false);
 
 	const toggle = () => {
@@ -59,13 +60,15 @@ const AdminLayout = ({ title, children }) => {
 				</div>
 			</Sider>
 
-			<Layout className={`${collapsed ? "ml-20" : "ml-52"}`}>
+			<Layout className={`${collapsed ? "ml-20" : "ml-52"} pl-4 pr-5`}>
+				<AdminTop pageTitle={pageTitle} />
 				<Content
 					style={{
 						minHeight: "90vh",
+						marginTop: "2.5rem",
 					}}
 				>
-					<div className="px-3">{children}</div>
+					<div>{children}</div>
 				</Content>
 				<Footer style={{ textAlign: "center" }}>
 					<Foter />

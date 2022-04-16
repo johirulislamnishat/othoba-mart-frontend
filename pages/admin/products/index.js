@@ -240,7 +240,7 @@ const Products = () => {
 	];
 
 	return (
-		<AdminLayout title="Admin | Products">
+		<AdminLayout title="Admin | Products" pageTitle="Products">
 			<Table
 				columns={columns}
 				dataSource={data}

@@ -177,7 +177,7 @@ const Orders = () => {
 	];
 
 	return (
-		<AdminLayout title="Othoba Mart | Orders">
+		<AdminLayout title="Othoba Mart | Orders" pageTitle="Orders">
 			<Table
 				columns={columns}
 				dataSource={data}
