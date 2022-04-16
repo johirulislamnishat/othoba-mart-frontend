@@ -8,7 +8,6 @@ import {
 	InputNumber,
 	message,
 	Modal,
-	PageHeader,
 	Row,
 	Select,
 	Space,
@@ -162,9 +161,7 @@ const AddProduct = () => {
 	};
 
 	return (
-		<AdminLayout title={"Admin || Add Product"}>
-			<PageHeader ghost={false} title="Add product" />
-
+		<AdminLayout title={"Admin || Add Product"} pageTitle="Add Product">
 			<section className="mt-5 bg-white p-8 pb-3">
 				<Form
 					form={form}
