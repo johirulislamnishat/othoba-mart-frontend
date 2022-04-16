@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import Foter from "../shared/footer";
 import AdminTop from "./others/adminTop";
 
-const AdminLayout = ({ title, children, pageTitle }) => {
+const AdminLayout = ({ title, children, pageTitle, child = false }) => {
 	const [collapsed, setCollapsed] = useState(false);
 
 	const toggle = () => {
@@ -61,7 +61,7 @@ const AdminLayout = ({ title, children, pageTitle }) => {
 			</Sider>
 
 			<Layout className={`${collapsed ? "ml-20" : "ml-52"} pl-4 pr-5`}>
-				<AdminTop pageTitle={pageTitle} />
+				<AdminTop pageTitle={pageTitle} child={child} />
 				<Content
 					style={{
 						minHeight: "90vh",

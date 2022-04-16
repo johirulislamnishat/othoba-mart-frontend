@@ -7,7 +7,7 @@ import { Dropdown, Menu, PageHeader } from "antd";
 import Link from "next/link";
 import React from "react";
 
-const AdminTop = ({ pageTitle }) => {
+const AdminTop = ({ pageTitle, child }) => {
 	const menu = (
 		<Menu>
 			<Menu.Item key={1}>
@@ -28,18 +28,19 @@ const AdminTop = ({ pageTitle }) => {
 			className="site-page-header"
 			title={pageTitle || "Dashboard"}
 			ghost={false}
+			onBack={child ? () => window.history.back() : false}
 			extra={[
 				<SearchOutlined
-					key={5}
+					key={1}
 					className="text-xl"
 					style={{ color: "#f66a05" }}
 				/>,
 				<BellOutlined
-					key={6}
+					key={2}
 					className="text-xl mx-3"
 					style={{ color: "#f66a05" }}
 				/>,
-				<Dropdown overlay={menu} key={4}>
+				<Dropdown overlay={menu} key={3}>
 					<QuestionCircleOutlined
 						className="text-xl"
 						style={{ color: "#f66a05" }}
