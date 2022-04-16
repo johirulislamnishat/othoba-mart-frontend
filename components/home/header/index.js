@@ -118,7 +118,10 @@ const HomeHeader = () => {
 				<Col xs={24} md={12} xl={6}>
 					<Row gutter={[16, 16]} align="middle" justify="center">
 						<Col>
-							<CarOutlined className="text-3xl" />
+							<CarOutlined
+								className="text-3xl"
+								style={{ color: "#f66a05" }}
+							/>
 						</Col>
 						<Col>
 							<span className="block">
@@ -134,7 +137,10 @@ const HomeHeader = () => {
 				<Col xs={24} md={12} xl={6}>
 					<Row gutter={[16, 16]} align="middle" justify="center">
 						<Col>
-							<DollarCircleOutlined className="text-3xl" />
+							<DollarCircleOutlined
+								className="text-3xl"
+								style={{ color: "#f66a05" }}
+							/>
 						</Col>
 						<Col>
 							<span className="block">MONEY BACK GUARANTEE</span>
@@ -148,7 +154,10 @@ const HomeHeader = () => {
 				<Col xs={24} md={12} xl={6}>
 					<Row gutter={[16, 16]} align="middle" justify="center">
 						<Col>
-							<CheckCircleOutlined className="text-3xl" />
+							<CheckCircleOutlined
+								className="text-3xl"
+								style={{ color: "#f66a05" }}
+							/>
 						</Col>
 						<Col>
 							<span className="block">ONLINE SUPPORT 24/7</span>
@@ -162,7 +171,10 @@ const HomeHeader = () => {
 				<Col xs={24} md={12} xl={6}>
 					<Row gutter={[16, 16]} align="middle" justify="center">
 						<Col>
-							<CreditCardOutlined className="text-3xl" />
+							<CreditCardOutlined
+								className="text-3xl"
+								style={{ color: "#f66a05" }}
+							/>
 						</Col>
 						<Col>
 							<span className="block">SECURE PAYMENT</span>
