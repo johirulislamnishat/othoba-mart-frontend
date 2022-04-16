@@ -1,94 +1,117 @@
+import axios from "axios";
+import useLocalDB from "../hooks/useLocalDB";
+import { API_BASE_URL } from "../../apiconstants";
+
 const inputFields = [
     {
-      title: "First name",
-      type: "text",
+        title: "First name",
+        type: "text",
     },
     {
-      title: "Last name",
-      type: "text",
+        title: "Last name",
+        type: "text",
     },
     {
-      title: "Email address",
-      type: "text",
+        title: "Email address",
+        type: "text",
     },
     {
-      title: "Phone number",
-      type: "number",
+        title: "Phone number",
+        type: "number",
     },
     {
-      title: "Address",
-      type: "text",
+        title: "Address",
+        type: "text",
     },
     {
-      title: "Town / City",
-      type: "text",
+        title: "Town / City",
+        type: "text",
     },
     {
-      title: "State / Country",
-      type: "text",
+        title: "State / Country",
+        type: "text",
     },
     {
-      title: "ZIP / Postal code",
-      type: "text",
+        title: "ZIP / Postal code",
+        type: "text",
     },
-  ];
+];
 
 const CheckoutForm = () => {
-    return(
-            <form className="">
-              <h3 className="font-semibold text-xl mt-10">Billing info</h3>
-              <p className="text-xs text-gray-500">
+    const { cart } = useLocalDB();
+    console.log("cart", cart);
+
+    const handlePayment = async (e) => {
+        e.preventDefault();
+
+        await axios
+            .post(API_BASE_URL + "/payment", {
+                items: [cart],
+            })
+            .then(function (response) {
+                console.log(response);
+                // router.push("/auth/login");
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+    return (
+        <form className="">
+            <h3 className="font-semibold text-xl mt-10">Billing info</h3>
+            <p className="text-xs text-gray-500">
                 Please enter your billing info.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                 {inputFields.map((inp, i) => (
-                  <label
-                    key={i}
-                    className="flex flex-col font-semibold text-sm">
-                    {inp.title}
-                    <input
-                      type={inp.type}
-                      placeholder={inp.title}
-                      className="p-1 bg-gray-100 border-2 border-gray-200 rounded-lg"
-                    />
-                  </label>
+                    <label
+                        key={i}
+                        className="flex flex-col font-semibold text-sm"
+                    >
+                        {inp.title}
+                        <input
+                            type={inp.type}
+                            placeholder={inp.title}
+                            className="p-1 bg-gray-100 border-2 border-gray-200 rounded-lg"
+                        />
+                    </label>
                 ))}
-              </div>
-              <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center gap-2 w-full sm:w-1/3">
+            </div>
+            <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center gap-2 w-full sm:w-1/3">
                 <input type="checkbox" />
                 <label className="min-w-max">Ship to a different address</label>
-              </div>
+            </div>
 
-              <h3 className="font-semibold text-xl mt-12">Shipping method</h3>
-              <p className="text-xs text-gray-500">
+            <h3 className="font-semibold text-xl mt-12">Shipping method</h3>
+            <p className="text-xs text-gray-500">
                 Please enter your shipping method.
-              </p>
-              <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center justify-between gap-2">
+            </p>
+            <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <input type="radio" />
-                  <label>FedEx</label>
+                    <input type="radio" />
+                    <label>FedEx</label>
                 </div>
                 <div className="flex gap-2">
-                  <p className="text-green-500">+32 USD</p>
-                  <p>Additional price</p>
+                    <p className="text-green-500">+32 USD</p>
+                    <p>Additional price</p>
                 </div>
                 <div className="font-bold flex">
-                  <img src="/images/icons/fedex.png" alt="" />
+                    <img src="/images/icons/fedex.png" alt="" />
                 </div>
-              </div>
-              <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center justify-between gap-2">
+            </div>
+            <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <input type="radio" />
-                  <label>DHL</label>
+                    <input type="radio" />
+                    <label>DHL</label>
                 </div>
                 <div className="flex gap-2">
-                  <p className="text-green-500">+17 USD</p>
-                  <p>Additional price</p>
+                    <p className="text-green-500">+17 USD</p>
+                    <p>Additional price</p>
                 </div>
                 <img src="/images/icons/dhl.png" alt="dhl logo" />
-              </div>
+            </div>
 
-              {/* <h3 className="font-semibold text-xl mt-12">Payment method</h3>
+            {/* <h3 className="font-semibold text-xl mt-12">Payment method</h3>
               <p className="text-xs text-gray-500">
                 Please enter your payment method.
               </p>
@@ -161,49 +184,48 @@ const CheckoutForm = () => {
                 <img src="/images/icons/bitcoin.png" alt="dhl logo" />
               </div> */}
 
-              <h3 className="font-semibold text-xl mt-12">Additional info</h3>
-              <p className="text-xs text-gray-500">
+            <h3 className="font-semibold text-xl mt-12">Additional info</h3>
+            <p className="text-xs text-gray-500">
                 Need something else? We will make it for you!
-              </p>
-              <textarea
-                className="mt-3 bg-gray-200 w-full rounded-lg"
-                rows="4"
-              />
+            </p>
+            <textarea className="mt-3 bg-gray-200 w-full rounded-lg" rows="4" />
 
-              <h3 className="font-semibold text-xl mt-12">Confirmation</h3>
-              <p className="text-xs text-gray-500">
+            <h3 className="font-semibold text-xl mt-12">Confirmation</h3>
+            <p className="text-xs text-gray-500">
                 We are getting to the end. Just few clicks and your order is
                 ready!
-              </p>
-              <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center gap-2 w-full">
+            </p>
+            <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center gap-2 w-full">
                 <input type="checkbox" />
                 <label className="">
-                  I agree with sending an Marketing and Newsletter emails. No
-                  spam, promised!
+                    I agree with sending an Marketing and Newsletter emails. No
+                    spam, promised!
                 </label>
-              </div>
-              <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center gap-2 w-full">
-                <input type="checkbox"  />
+            </div>
+            <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center gap-2 w-full">
+                <input type="checkbox" />
                 <label className="min-w-max">
-                  I agree with the <span>terms and conditions</span> and{" "}
-                  <span>privacy policy</span>{" "}
+                    I agree with the <span>terms and conditions</span> and{" "}
+                    <span>privacy policy</span>{" "}
                 </label>
-              </div>
-              <button
+            </div>
+            <button
                 type="submit"
-                className="mt-7 py-5 px-10 bg-orange-600 text-white font-semibold rounded-lg">
+                onClick={handlePayment}
+                className="mt-7 py-5 px-10 bg-orange-600 text-white font-semibold rounded-lg"
+            >
                 Complete order
-              </button>
-              <div className="mt-7 flex flex-col gap-2">
+            </button>
+            <div className="mt-7 flex flex-col gap-2">
                 <img src="images/icons/check.png" width="32px" alt="ok" />
                 <h5 className="font-semibold">All your data are safe.</h5>
                 <p className="w-1/3">
-                  We are using the most advanced security to provide you the
-                  best experience ever.
+                    We are using the most advanced security to provide you the
+                    best experience ever.
                 </p>
-              </div>
-            </form>
-    )
-}
+            </div>
+        </form>
+    );
+};
 
-export default CheckoutForm
+export default CheckoutForm;
