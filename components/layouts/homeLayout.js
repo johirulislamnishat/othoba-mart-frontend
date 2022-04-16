@@ -1,13 +1,14 @@
-import { useState } from 'react' 
 import {
-	LikeOutlined,
+	HeartOutlined,
 	SearchOutlined,
 	ShoppingOutlined,
 	UserOutlined,
+	MenuOutlined,
 } from "@ant-design/icons";
-import { Col, Input, Layout, Row } from "antd";
+import { Col, Input, Layout, Row, Image } from "antd";
 import Head from "next/head";
-import CartMini from '../cart/CartMini'
+import { useState } from "react";
+import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
 
@@ -16,8 +17,8 @@ const { Search } = Input;
 const { Content, Footer } = Layout;
 
 const HomeLayout = ({ children, title }) => {
-
-	const [active, setActive] = useState(false)
+	const [active, setActive] = useState(false);
+	const [visible, setVisible] = useState(false);
 
 	const onSearch = (e) => {
 		console.log(e);
@@ -36,22 +37,34 @@ const HomeLayout = ({ children, title }) => {
 
 			{/* top header area  */}
 			<header className="bg-white">
-				<div className="bg-blue-300 py-5 px-3 lg:px-0">
+				<div className="py-5 px-3 lg:px-0">
 					<div className="container mx-auto">
-						<Row justify="space-between" align="middle">
+						<Row gutter={16} justify="space-between" align="middle">
 							<Col
-								xs={7}
-								sm={6}
+								xs={12}
+								sm={12}
 								md={6}
 								lg={4}
 								className="text-left"
 							>
-								<b className="font-bold text-2xl">
-									Othoba Mart
-								</b>
+								<div className="flex items-center w-full">
+									<div className="block lg:hidden flex items-center h-full">
+										<MenuOutlined
+											className="text-xl pl-3"
+											onClick={() => setVisible(!visible)}
+										/>
+									</div>
+									<div className="text-center">
+										<Image
+											preview={false}
+											src="/othoba-mart-logo.png"
+											alt="Othoba Mart"
+										/>
+									</div>
+								</div>
 							</Col>
-							<Col xs={7} sm={12} md={12} lg={16}>
-								<div className="hidden sm:block text-center">
+							<Col xs={0} sm={0} md={12} lg={16}>
+								<div className="w-3/5 mx-auto">
 									<Search
 										placeholder="I'm searching for..."
 										onSearch={onSearch}
@@ -59,36 +72,48 @@ const HomeLayout = ({ children, title }) => {
 										enterButton
 									/>
 								</div>
-								<div className="block sm:hidden">
-									<SearchOutlined />
-								</div>
 							</Col>
 							<Col
-								xs={10}
-								sm={6}
+								xs={12}
+								sm={12}
 								md={6}
 								lg={4}
 								className="text-right"
 							>
 								<Row gutter={16} align="middle" justify="end">
 									<Col>
-										<UserOutlined />
-									</Col>
-									<Col style={{position:'relative'}}>
-										<ShoppingOutlined onClick={()=>setActive(!active)} />
-										<CartMini active={active} setActive={setActive} />
+										<UserOutlined
+											className="text-xl"
+											style={{ color: "#f66a05" }}
+										/>
 									</Col>
 									<Col>
-										<LikeOutlined />
+										<HeartOutlined
+											className="text-xl"
+											style={{ color: "#f66a05" }}
+										/>
+									</Col>
+									<Col style={{ position: "relative" }}>
+										<ShoppingOutlined
+											className="text-xl"
+											style={{ color: "#f66a05" }}
+											onClick={() => setActive(!active)}
+										/>
+										<CartMini
+											active={active}
+											setActive={setActive}
+										/>
 									</Col>
 								</Row>
 							</Col>
 						</Row>
 					</div>
+					<br />
+					<hr />
 				</div>
 				{/* header menu area  */}
-				<div className="container mx-auto">
-					<HomeMenu />
+				<div className="container mx-auto hidden lg:block">
+					<HomeMenu visible={visible} setVisible={setVisible} />
 				</div>
 			</header>
 			{/* top header area  */}

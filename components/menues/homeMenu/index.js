@@ -7,13 +7,11 @@ import {
 } from "@ant-design/icons";
 import { Col, Drawer, Menu, Row } from "antd";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 
 const { SubMenu } = Menu;
 
-const HomeMenu = () => {
-	const [visible, setVisible] = useState(false);
-
+const HomeMenu = ({ visible, setVisible }) => {
 	return (
 		<>
 			<Row>
