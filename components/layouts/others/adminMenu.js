@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
-const AdminMenu = () => {
+const AdminMenu = ({ collapsed }) => {
 	const router = useRouter();
 	const pageName = router.pathname.split("/");
 
@@ -20,6 +20,7 @@ const AdminMenu = () => {
 					preview={false}
 					src="/othoba-mart-logo.png"
 					alt="Othoba Mart"
+					className={`${collapsed ? "px-1 py-5" : "px-12 py-5"} mb-3`}
 				/>
 			</div>
 			<Menu

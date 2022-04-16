@@ -34,10 +34,10 @@ const AdminLayout = ({ title, children, pageTitle, child = false }) => {
 				onCollapse={toggle}
 				style={{ position: "fixed", height: "100vh" }}
 			>
-				<AdminMenu />
+				<AdminMenu collapsed={collapsed} />
 			</Sider>
 
-			<Layout className={`${collapsed ? "ml-20" : "ml-52"} pl-4 pr-5`}>
+			<Layout className={`${collapsed ? "ml-20" : "ml-52"}`}>
 				<AdminTop pageTitle={pageTitle} child={child} />
 				<Content
 					style={{
@@ -45,7 +45,7 @@ const AdminLayout = ({ title, children, pageTitle, child = false }) => {
 						marginTop: "2.5rem",
 					}}
 				>
-					<div>{children}</div>
+					<div className="pl-4 pr-5">{children}</div>
 				</Content>
 				<Footer style={{ textAlign: "center" }}>
 					<Foter />
