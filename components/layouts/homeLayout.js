@@ -5,7 +5,7 @@ import {
 	UserOutlined,
 	MenuOutlined,
 } from "@ant-design/icons";
-import { Col, Input, Layout, Row, Image } from "antd";
+import { Col, Input, Layout, Row, Image, Badge } from "antd";
 import Head from "next/head";
 import { useState } from "react";
 import CartMini from "../cart/CartMini";
@@ -83,22 +83,26 @@ const HomeLayout = ({ children, title }) => {
 								<Row gutter={16} align="middle" justify="end">
 									<Col>
 										<UserOutlined
-											className="text-xl"
+											className="text-3xl"
 											style={{ color: "#f66a05" }}
 										/>
 									</Col>
 									<Col>
 										<HeartOutlined
-											className="text-xl"
+											className="text-3xl"
 											style={{ color: "#f66a05" }}
 										/>
 									</Col>
 									<Col style={{ position: "relative" }}>
-										<ShoppingOutlined
-											className="text-xl"
-											style={{ color: "#f66a05" }}
-											onClick={() => setActive(!active)}
-										/>
+										<Badge count={1} size="small">
+											<ShoppingOutlined
+												className="text-3xl"
+												style={{ color: "#f66a05" }}
+												onClick={() =>
+													setActive(!active)
+												}
+											/>
+										</Badge>
 										<CartMini
 											active={active}
 											setActive={setActive}
