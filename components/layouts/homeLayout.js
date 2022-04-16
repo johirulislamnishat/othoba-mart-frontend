@@ -1,11 +1,11 @@
 import {
 	HeartOutlined,
+	MenuOutlined,
 	SearchOutlined,
 	ShoppingOutlined,
 	UserOutlined,
-	MenuOutlined,
 } from "@ant-design/icons";
-import { Col, Input, Layout, Row, Image, Badge } from "antd";
+import { Badge, Col, Image, Input, Layout, Row } from "antd";
 import Head from "next/head";
 import { useState } from "react";
 import CartMini from "../cart/CartMini";
@@ -19,10 +19,6 @@ const { Content, Footer } = Layout;
 const HomeLayout = ({ children, title }) => {
 	const [active, setActive] = useState(false);
 	const [visible, setVisible] = useState(false);
-
-	const onSearch = (e) => {
-		console.log(e);
-	};
 
 	return (
 		<Layout>
@@ -64,13 +60,18 @@ const HomeLayout = ({ children, title }) => {
 								</div>
 							</Col>
 							<Col xs={0} sm={0} md={12} lg={16}>
-								<div className="w-3/5 mx-auto">
-									<Search
+								<div className="flex w-4/5 lg:w-3/5 mx-auto">
+									<input
+										type="search"
+										className="block w-full px-5 py-3 text-small text-gray-700 border border-solid border-gray-300 rounded-l-3xl focus:text-gray-700 focus:border-orange-500 focus:outline-none"
 										placeholder="I'm searching for..."
-										onSearch={onSearch}
-										allowClear
-										enterButton
 									/>
+									<button
+										className="btn inline-block py-3 px-5 bg-orange-500 text-white font-medium text-xl rounded-r-3xl hover:bg-orange-400 focus:bg-orange-400  focus:outline-none flex items-center"
+										type="button"
+									>
+										<SearchOutlined />
+									</button>
 								</div>
 							</Col>
 							<Col
