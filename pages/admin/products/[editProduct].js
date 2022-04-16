@@ -207,7 +207,7 @@ export default function EditProduct({ product, id }) {
 
 	return (
 		<AdminLayout
-			title={"Admin || Update Product"}
+			title={"Admin | Update Product"}
 			pageTitle="Update Product"
 			child={true}
 		>
