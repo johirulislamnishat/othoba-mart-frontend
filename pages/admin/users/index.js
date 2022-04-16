@@ -160,7 +160,7 @@ const Users = () => {
 		},
 	];
 	return (
-		<AdminLayout title={"Admin || All Users"}>
+		<AdminLayout title={"Admin || All Users"} pageTitle="Users">
 			<Table
 				columns={columns}
 				dataSource={data}

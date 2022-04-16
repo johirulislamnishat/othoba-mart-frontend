@@ -1,16 +1,13 @@
-import {
-	UploadOutlined,
-	UserOutlined,
-	VideoCameraOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 import { Content, Footer } from "antd/lib/layout/layout";
 import Sider from "antd/lib/layout/Sider";
 import Head from "next/head";
 import React, { useState } from "react";
 import Foter from "../shared/footer";
+import AdminMenu from "./others/adminMenu";
+import AdminTop from "./others/adminTop";
 
-const AdminLayout = ({ title, children }) => {
+const AdminLayout = ({ title, children, pageTitle, child = false }) => {
 	const [collapsed, setCollapsed] = useState(false);
 
 	const toggle = () => {
@@ -37,35 +34,18 @@ const AdminLayout = ({ title, children }) => {
 				onCollapse={toggle}
 				style={{ position: "fixed", height: "100vh" }}
 			>
-				<div>
-					<div className="text-white py-3 text-center">
-						Othoba Mart
-					</div>
-					<Menu
-						theme="dark"
-						mode="inline"
-						defaultSelectedKeys={["1"]}
-					>
-						<Menu.Item key="1" icon={<UserOutlined />}>
-							Home
-						</Menu.Item>
-						<Menu.Item key="2" icon={<VideoCameraOutlined />}>
-							Home
-						</Menu.Item>
-						<Menu.Item key="3" icon={<UploadOutlined />}>
-							Home
-						</Menu.Item>
-					</Menu>
-				</div>
+				<AdminMenu collapsed={collapsed} />
 			</Sider>
 
 			<Layout className={`${collapsed ? "ml-20" : "ml-52"}`}>
+				<AdminTop pageTitle={pageTitle} child={child} />
 				<Content
 					style={{
 						minHeight: "90vh",
+						marginTop: "2.5rem",
 					}}
 				>
-					<div className="px-3">{children}</div>
+					<div className="pl-4 pr-5">{children}</div>
 				</Content>
 				<Footer style={{ textAlign: "center" }}>
 					<Foter />
