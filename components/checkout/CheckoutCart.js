@@ -10,13 +10,13 @@ import UseLocalDB from "../hooks/useLocalDB";
 
 const CheckoutCart = () => {
 	const [activeOption, setActiveOption] = useState(false);
+	const [orderData, setOrderData] = useState({})
 
 	const { cart, totalQuantity, totalPrice, RemoveFromCart } = UseLocalDB();
 
 	const tax = totalPrice * 0.17;
 	const shipping = totalPrice * 0.01;
-	const grandTotal =
-		parseFloat(totalPrice) + parseFloat(tax) + parseFloat(shipping);
+	const grandTotal = parseFloat(totalPrice) + parseFloat(tax) + parseFloat(shipping);
 
 	return (
 		<>
@@ -28,7 +28,7 @@ const CheckoutCart = () => {
 			<div className="grid grid-cols-1 gap-6 divide-y-2">
 				{cart?.map((product) => (
 					<>
-						<div className="mt-5 ">
+						<div className="mt-5 " key={product._id}>
 							<div className="flex gap-4">
 								<img
 									src=""

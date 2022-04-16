@@ -1,43 +1,71 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import UseLocalDB from '../hooks/useLocalDB'
+import useOrder from '../hooks/useOrder'
 
 const inputFields = [
     {
-      title: "First name",
+      label: "First name",
+      title: 'fName',
       type: "text",
     },
     {
-      title: "Last name",
+      label: "Last name",
+      title: 'lName',
       type: "text",
     },
     {
-      title: "Email address",
+      label: "Email address",
+      title: 'email',
       type: "text",
     },
     {
-      title: "Phone number",
+      label: "Phone number",
+      title: 'phone',
       type: "number",
     },
     {
-      title: "Address",
+      label: "Address",
+      title: 'address',
       type: "text",
     },
     {
-      title: "Town / City",
+      label: "Town / City",
+      title: 'city',
       type: "text",
     },
     {
-      title: "State / Country",
+      label: "State / Country",
+      title: 'country',
       type: "text",
     },
     {
-      title: "ZIP / Postal code",
+      label: "ZIP / Postal code",
+      title: 'zip_code',
       type: "text",
     },
   ];
 
 const CheckoutForm = () => {
+  const { cart, totalQuantity, totalPrice} = UseLocalDB();
   const { register, handleSubmit, reset} = useForm()
-  const onSubmit = data => console.log(data)
+  
+  const onSubmit = data => {
+    console.log(data)
+    const orderData = {
+      user_name: `${data.fName} ${data.lName}`,
+      email: data.email,
+      phone: data.phone,
+      address:`${data.address}, ${data.zip_code}, ${data.city}, ${data.country}.`,
+      purchased_items : cart,
+      total_price: totalPrice,
+      total_quantity: totalQuantity 
+    }
+    console.log(orderData)
+    useOrder(orderData)
+    reset()
+  }
+
     return(
             <form onSubmit={handleSubmit(onSubmit)} >
               <h3 className="font-semibold text-xl mt-10">Billing info</h3>
@@ -49,12 +77,12 @@ const CheckoutForm = () => {
                   <label
                     key={i}
                     className="flex flex-col font-semibold text-sm">
-                    {inp.title}
+                    {inp.label}
                     <input
                       type={inp.type}
-                      placeholder={inp.title}
+                      placeholder={inp.label}
                       className="p-1 bg-gray-100 border-2 border-gray-200 rounded-lg"
-                      {...register(inp.title, {required: true})}
+                      {...register(inp.title, {required:true})}
                     />
                   </label>
                 ))}

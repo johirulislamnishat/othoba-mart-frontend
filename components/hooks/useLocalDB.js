@@ -1,29 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export const data = [
-  {
-    id: 1,
-    title: "vegetable",
-    price: 21.2,
-    quantity:0
-  },
-  {
-    id: 2,
-    title: "vegetable-2",
-    price: 18.2,
-    quantity:0
-  },
-  {
-    id: 3,
-    title: "vegetable-3",
-    price: 16.2,
-    quantity:0
-  },
-];
 
 const UseLocalDB = () => {
-  const [productData, setProductData] = useState(data);
   const [totalQuantity, setTotalQuantity] = useState(null);
   const [totalPrice, setTotalPrice] = useState(null);
 
