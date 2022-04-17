@@ -98,9 +98,9 @@ const UseLocalDB = () => {
     quantity:0
   }),);
 
-  RemoveFromCart()
+  // RemoveFromCart()
 
-  UpdateQuantity(2, 2);
+  // UpdateQuantity(2, 2);
 
     // totalQuantity()
 

@@ -28,6 +28,20 @@ a {
 .ant-drawer-body {
 	padding: 0 !important;
 }
+
+/* img preview */
+.ant-image-preview-img {
+	margin: 0 auto;
+}
+
+/* table */
+.ant-table-thead {
+	font-size: 16px;
+}
+.ant-table-thead > tr > th {
+	font-weight: bold !important;
+}
+
 /* end ant design */
 
 :root {

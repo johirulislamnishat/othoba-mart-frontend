@@ -7,6 +7,7 @@ const AuthData = () => {
 	const [loading, setLoading] = useState(false)
 	const [message, setMessage] = useState('')
 	const router = useRouter();
+	
 	// register api handler function
 	const signupHandlerCustomer = (user_name, email, password) => {
 		setLoading(true)
