@@ -4,11 +4,11 @@ import {
 	Col,
 	Divider,
 	Form,
+	Image,
 	Input,
 	InputNumber,
 	message,
 	Modal,
-	PageHeader,
 	Row,
 	Select,
 	Space,
@@ -162,9 +162,7 @@ const AddProduct = () => {
 	};
 
 	return (
-		<AdminLayout title={"Admin || Add Product"}>
-			<PageHeader ghost={false} title="Add product" />
-
+		<AdminLayout title={"Admin || Add Product"} pageTitle="Add Product">
 			<section className="mt-5 bg-white p-8 pb-3">
 				<Form
 					form={form}
@@ -526,7 +524,8 @@ const AddProduct = () => {
 							footer={null}
 							onCancel={() => setPreviewVisible(false)}
 						>
-							<img
+							<Image
+								preview={false}
 								alt="example"
 								style={{ width: "100%" }}
 								src={previewImage}

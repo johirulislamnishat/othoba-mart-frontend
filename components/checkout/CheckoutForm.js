@@ -125,7 +125,8 @@ const CheckoutForm = () => {
                       />
                       <label>Credit card</label>
                     </div>
-                    <img src="images/icons/visa.png" alt="" />
+                    <Image
+										preview={false} src="images/icons/visa.png" alt="" />
                   </div>
                 </div>
                 <div className="flex flex-col gap-4">
@@ -172,7 +173,8 @@ const CheckoutForm = () => {
                 </div>
 
                 <div className="font-bold flex">
-                  <img src="/images/icons/paypal.png" alt="" />
+                  <Image
+										preview={false} src="/images/icons/paypal.png" alt="" />
                 </div>
               </div>
               <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center justify-between gap-2">
@@ -181,7 +183,8 @@ const CheckoutForm = () => {
                   <label>Bitcoin</label>
                 </div>
 
-                <img src="/images/icons/bitcoin.png" alt="dhl logo" />
+                <Image
+										preview={false} src="/images/icons/bitcoin.png" alt="dhl logo" />
               </div> */}
 
             <h3 className="font-semibold text-xl mt-12">Additional info</h3>

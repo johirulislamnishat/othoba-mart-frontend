@@ -1,8 +1,10 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import {
+	Col,
 	Divider,
 	message,
 	Popconfirm,
+	Row,
 	Select,
 	Space,
 	Table,
@@ -10,12 +12,12 @@ import {
 } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from "../../../apiconstants";
-import AdminLayout from "../../../components/layouts/adminLayout";
+import { API_BASE_URL } from "../../apiconstants";
+import AdminLayout from "../../components/layouts/adminLayout";
 
 const { Option } = Select;
 
-const Orders = () => {
+const Dashboard = () => {
 	const [data, setData] = useState(null);
 	const [token, setToken] = useState(null);
 
@@ -177,16 +179,72 @@ const Orders = () => {
 	];
 
 	return (
-		<AdminLayout title="Admin | Orders" pageTitle="Orders">
-			<Table
-				columns={columns}
-				dataSource={data}
-				scroll={{ x: 1550 }}
-				pagination={{ position: ["bottomCenter"] }}
-				size="small"
-			/>
+		<AdminLayout title="Admin | Dashboard" pageTitle="Dashboard">
+			<Space direction="vertical" size={45} className="w-full">
+				<Row gutter={[12, 12]} justify="space-around" align="middle">
+					<Col xs={24} md={12} lg={6}>
+						<Row
+							justify="space-between"
+							align="middle"
+							className="p-5 rounded-2xl font-semibold"
+							style={{
+								backgroundColor: "rgba(240, 255, 248, 1)",
+							}}
+						>
+							<Col>New Delivery</Col>
+							<Col className="text-xl">2</Col>
+						</Row>
+					</Col>
+					<Col xs={24} md={12} lg={6}>
+						<Row
+							justify="space-between"
+							align="middle"
+							className="p-5 rounded-2xl font-semibold"
+							style={{
+								backgroundColor: "rgba(240, 255, 235, 1)",
+							}}
+						>
+							<Col>Active Orders</Col>
+							<Col className="text-xl">5</Col>
+						</Row>
+					</Col>
+					<Col xs={24} md={12} lg={6}>
+						<Row
+							justify="space-between"
+							align="middle"
+							className="p-5 rounded-2xl font-semibold"
+							style={{
+								backgroundColor: "rgba(255, 251, 235, 1)",
+							}}
+						>
+							<Col>Total Orders</Col>
+							<Col className="text-xl">{data?.length || 0}</Col>
+						</Row>
+					</Col>
+					<Col xs={24} md={12} lg={6}>
+						<Row
+							justify="space-between"
+							align="middle"
+							className="p-5 rounded-2xl font-semibold"
+							style={{
+								backgroundColor: "rgba(240, 255, 214, 1)",
+							}}
+						>
+							<Col>Order in Progress</Col>
+							<Col className="text-xl">4</Col>
+						</Row>
+					</Col>
+				</Row>
+				<Table
+					columns={columns}
+					dataSource={data}
+					scroll={{ x: 1550 }}
+					pagination={{ position: ["bottomCenter"] }}
+					size="small"
+				/>
+			</Space>
 		</AdminLayout>
 	);
 };
 
-export default Orders;
+export default Dashboard;

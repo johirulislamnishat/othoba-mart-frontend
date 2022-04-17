@@ -4,11 +4,11 @@ import {
 	Col,
 	Divider,
 	Form,
+	Image,
 	Input,
 	InputNumber,
 	message,
 	Modal,
-	PageHeader,
 	Row,
 	Select,
 	Space,
@@ -207,9 +207,11 @@ export default function EditProduct({ product, id }) {
 	};
 
 	return (
-		<AdminLayout title={"Admin || Update Product"}>
-			<PageHeader ghost={false} title="Update product" />
-
+		<AdminLayout
+			title={"Admin | Update Product"}
+			pageTitle="Update Product"
+			child={true}
+		>
 			<section className="mt-5 bg-white p-8 pb-3">
 				<Form
 					form={form}
@@ -583,7 +585,8 @@ export default function EditProduct({ product, id }) {
 							footer={null}
 							onCancel={() => setPreviewVisible(false)}
 						>
-							<img
+							<Image
+								preview={false}
 								alt="preview"
 								style={{ width: "100%" }}
 								src={previewImage}
