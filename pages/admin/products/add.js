@@ -4,6 +4,7 @@ import {
 	Col,
 	Divider,
 	Form,
+	Image,
 	Input,
 	InputNumber,
 	message,
@@ -523,7 +524,8 @@ const AddProduct = () => {
 							footer={null}
 							onCancel={() => setPreviewVisible(false)}
 						>
-							<img
+							<Image
+								preview={false}
 								alt="example"
 								style={{ width: "100%" }}
 								src={previewImage}

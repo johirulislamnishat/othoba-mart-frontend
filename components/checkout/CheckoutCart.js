@@ -5,6 +5,7 @@ import {
 	StarFilled,
 	StarOutlined,
 } from "@ant-design/icons";
+import { Image } from "antd";
 import { useState } from "react";
 import UseLocalDB from "../hooks/useLocalDB";
 
@@ -30,7 +31,8 @@ const CheckoutCart = () => {
 					<>
 						<div className="mt-5 ">
 							<div className="flex gap-4">
-								<img
+								<Image
+									preview={false}
 									src=""
 									alt=""
 									className="bg-gray-200 w-28 h-20 rounded-lg"
@@ -65,7 +67,8 @@ const CheckoutCart = () => {
 										</p>
 									</div>
 									<div className="flex items-center gap-2">
-										<img
+										<Image
+											preview={false}
 											src="/images/icons/compare.png"
 											alt=""
 											width="14px"

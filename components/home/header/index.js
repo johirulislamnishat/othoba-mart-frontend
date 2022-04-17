@@ -71,7 +71,7 @@ const HomeHeader = () => {
 						</Col>
 						<Col xs={4}>
 							<Image
-								src="http://springvalleymachinery.co.ke/wp-content/uploads/2020/11/IMG-20210225-WA0008.jpg"
+								src="https://springvalleymachinery.co.ke/wp-content/uploads/2020/11/IMG-20210225-WA0008.jpg"
 								alt="woodworking"
 								width={"100%"}
 								preview={false}

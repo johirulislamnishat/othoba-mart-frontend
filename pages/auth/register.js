@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+import { Image, Modal } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 import useAuth from "../../components/hooks/useAuth";
@@ -57,7 +57,8 @@ const Register = () => {
 		<div className="w-screen min-h-screen grid sm:grid-cols-2 items-center">
 			<div className="hidden sm:block min-h-full min-w-full">
 				{/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
-				<img
+				<Image
+					preview={false}
 					src="/images/auth.png"
 					alt=""
 					className="h-screen w-full"
@@ -306,7 +307,8 @@ const Register = () => {
 						{isCustomer && (
 							<>
 								<div className="flex items-center border-2 border-gray-200  pl-8 gap-2 rounded-lg">
-									<img
+									<Image
+										preview={false}
 										src="/images/icons/google.png"
 										alt="google logo"
 									/>
@@ -315,7 +317,8 @@ const Register = () => {
 									</p>
 								</div>
 								<div className="flex items-center border-2 border-gray-200  gap-2 pl-8 rounded-lg">
-									<img
+									<Image
+										preview={false}
 										src="/images/icons/facebook.png"
 										alt="facebook logo"
 									/>
