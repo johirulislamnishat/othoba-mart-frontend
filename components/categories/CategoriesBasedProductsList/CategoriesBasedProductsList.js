@@ -4,7 +4,7 @@ import {
   StarFilled,
   StarOutlined,
 } from "@ant-design/icons";
-import { Col, Row } from "antd";
+import { Col, Image, Row } from "antd";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -31,7 +31,7 @@ const CategoriesBasedProductsList = () => {
               <div className="product-list-view p-5 flex justify-between items-center border-2 mb-5 rounded-lg">
                 {/* <Image src={item.product_img} alt="" /> */}
 
-                <img src={item?.product_img} alt="" />
+                <Image preview={false} src={item?.product_img} alt="" />
 
                 <div>
                   <h3>

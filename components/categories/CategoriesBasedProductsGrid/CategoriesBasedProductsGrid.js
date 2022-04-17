@@ -4,7 +4,7 @@ import {
   StarFilled,
   StarOutlined,
 } from "@ant-design/icons";
-import { Col, Row } from "antd";
+import { Col, Image, Row } from "antd";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -31,7 +31,7 @@ const CategoriesBasedProductsGrid = () => {
               <div className="p-5 single-product border-2 rounded-md m-2">
                 {/* <Image src={item.product_img} alt="" /> */}
 
-                <img src={item?.product_img} alt="" />
+                <Image preview={false} src={item?.product_img} alt="" />
 
                 <div className="wishlist flex justify-center items-center">
                   <HeartOutlined />

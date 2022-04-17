@@ -1,5 +1,5 @@
 import { ShoppingOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
-import { Col, Row } from "antd";
+import { Col, Image, Row } from "antd";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -37,7 +37,7 @@ const LatestDeals = () => {
                 <Row className="">
                   <div className="border-2 p-4 m-4 flex justify-between items-center">
                     <Col md={10} className="product-image">
-                      <img src={item?.product_img} alt="" />
+                      <Image preview={false} src={item?.product_img} alt="" />
                       <div className="discount flex justify-center items-center">
                         <small>24%</small>
                       </div>
@@ -56,7 +56,10 @@ const LatestDeals = () => {
                       <div className="flex justify-between items-center mt-4">
                         <div className="product-price">
                           <small>$779.99</small>
-                          <h3>${item?.product_price}.00</h3>
+                          <h3>
+                            ${item?.product_price}
+                            .00
+                          </h3>
                         </div>
                         <div className="shopping flex justify-center items-center">
                           <ShoppingOutlined />

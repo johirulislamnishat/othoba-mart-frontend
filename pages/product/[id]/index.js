@@ -5,7 +5,7 @@ import {
   StarFilled,
   StarOutlined,
 } from "@ant-design/icons";
-import { Col, InputNumber, Row, Tabs } from "antd";
+import { Col, Image, InputNumber, Row, Tabs } from "antd";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -37,7 +37,7 @@ const Product = () => {
       <div className="single-product-page">
         <Row>
           <Col sm={12} gutter={8} className="border rounded-md">
-            <img src={url} alt="" />
+            <Image preview={false} src={url} alt="" />
           </Col>
           <Col sm={12} className="pl-6">
             <h2>{item.product_name}</h2>
