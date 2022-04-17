@@ -82,7 +82,7 @@ const CheckoutForm = () => {
                       type={inp.type}
                       placeholder={inp.label}
                       className="p-1 bg-gray-100 border-2 border-gray-200 rounded-lg"
-                      {...register(inp.title, {required:true})}
+                      {...register(inp.title)}
                     />
                   </label>
                 ))}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 
@@ -76,27 +76,27 @@ const UseLocalDB = () => {
       }, []);
   };
 
-  AddToCart({
-    _id: 1,
-    title: "vegetable",
-    farm: 'field',
-    price: 21.2,
-    quantity:0
-  },);
-  AddToCart({
-    _id: 2,
-    title: "vegetable-2",
-    farm: 'field',
-    price: 18.2,
-    quantity:0
-  },);
-  AddToCart(({ 
-    _id: 3,
-    title: "vegetable-3",
-    farm: 'field',
-    price: 16.2,
-    quantity:0
-  }),);
+  // AddToCart({
+  //   _id: 1,
+  //   title: "vegetable",
+  //   farm: 'field',
+  //   price: 21.2,
+  //   quantity:0
+  // },);
+  // AddToCart({
+  //   _id: 2,
+  //   title: "vegetable-2",
+  //   farm: 'field',
+  //   price: 18.2,
+  //   quantity:0
+  // },);
+  // AddToCart(({ 
+  //   _id: 3,
+  //   title: "vegetable-3",
+  //   farm: 'field',
+  //   price: 16.2,
+  //   quantity:0
+  // }),);
 
   // RemoveFromCart()
 

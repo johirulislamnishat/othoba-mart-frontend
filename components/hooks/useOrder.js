@@ -4,6 +4,8 @@ import axios from 'axios'
 import {API_BASE_URL} from '../../apiconstants'
 
 const useOrder = (orderData) => {
+  const token = localStorage.getItem('token')
+  console.log(token)
     const headers = {
         'Content-Type' : 'application/json',
         'token' : `Bearer ${localStorage.getItem('token')}`
@@ -24,6 +26,7 @@ const useOrder = (orderData) => {
   .then(res=>{
       console.log(res)
   })
+  .then(err=>console.log(err))
 }
 
 export default useOrder
