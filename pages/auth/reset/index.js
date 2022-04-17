@@ -2,7 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import useAuth from "../../components/hooks/useAuth";
+import useAuth from "/components/hooks/useAuth";
 
 const Reset = () => {
   const [email, setEmail] = useState("");
