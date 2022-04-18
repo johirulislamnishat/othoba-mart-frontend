@@ -5,20 +5,41 @@ import {
 	ShoppingOutlined,
 	UserOutlined,
 } from "@ant-design/icons";
-import { Badge, Col, Image, Input, Layout, Row } from "antd";
+import { Badge, Col, Dropdown, Image, Layout, Menu, Row } from "antd";
 import Head from "next/head";
+import Link from "next/link";
 import { useState } from "react";
 import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
+import useAuth from "../hooks/useAuth";
 import HomeMenu from "../menues/homeMenu";
-
-const { Search } = Input;
 
 const { Content, Footer } = Layout;
 
 const HomeLayout = ({ children, title }) => {
 	const [active, setActive] = useState(false);
 	const [visible, setVisible] = useState(false);
+	const { user } = useAuth();
+
+	const menu = (
+		<Menu>
+			<Menu.Item key="1">
+				<Link href="/admin" passHref>
+					Dashboard
+				</Link>
+			</Menu.Item>
+			<Menu.Item key="2">
+				<Link href="/" passHref>
+					Your Profile
+				</Link>
+			</Menu.Item>
+			<Menu.Item key="3" danger>
+				<Link href="/auth/login" passHref>
+					Login
+				</Link>
+			</Menu.Item>
+		</Menu>
+	);
 
 	return (
 		<Layout>
@@ -58,6 +79,7 @@ const HomeLayout = ({ children, title }) => {
 									</div>
 								</div>
 							</Col>
+
 							<Col xs={0} sm={0} md={12} lg={16}>
 								<div className="flex w-4/5 lg:w-3/5 mx-auto">
 									<input
@@ -73,6 +95,7 @@ const HomeLayout = ({ children, title }) => {
 									</button>
 								</div>
 							</Col>
+
 							<Col
 								xs={12}
 								sm={12}
@@ -82,10 +105,15 @@ const HomeLayout = ({ children, title }) => {
 							>
 								<Row gutter={16} align="middle" justify="end">
 									<Col>
-										<UserOutlined
-											className="text-3xl"
-											style={{ color: "#f66a05" }}
-										/>
+										<Dropdown
+											overlay={menu}
+											onClick={(e) => e.preventDefault()}
+										>
+											<UserOutlined
+												className="text-3xl"
+												style={{ color: "#f66a05" }}
+											/>
+										</Dropdown>
 									</Col>
 									<Col>
 										<HeartOutlined
@@ -117,7 +145,7 @@ const HomeLayout = ({ children, title }) => {
 				</div>
 			</header>
 
-			{/* header menu area  */}
+			{/* Top menu */}
 			<div className="bg-white">
 				<div className="container mx-auto hidden lg:block">
 					<HomeMenu visible={visible} setVisible={setVisible} />

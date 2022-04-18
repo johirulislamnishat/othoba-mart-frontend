@@ -8,10 +8,13 @@ import {
 import { Col, Drawer, Menu, Row } from "antd";
 import Link from "next/link";
 import React from "react";
+import useAuth from "../../hooks/useAuth";
 
 const { SubMenu } = Menu;
 
 const HomeMenu = ({ visible, setVisible }) => {
+	const { user } = useAuth();
+
 	return (
 		<>
 			<Row>
@@ -66,6 +69,14 @@ const HomeMenu = ({ visible, setVisible }) => {
 									FAQs
 								</Link>
 							</Menu.Item>
+
+							{user.isVendor && (
+								<Menu.Item key="5">
+									<Link href="/admin" passHref>
+										Admin
+									</Link>
+								</Menu.Item>
+							)}
 						</Menu>
 					</div>
 
@@ -82,16 +93,14 @@ const HomeMenu = ({ visible, setVisible }) => {
 					lg={6}
 					className="pl-5 sm:pl-32 md:pl-0 lg:pl-8 xl:pl-16"
 				>
-					<Menu mode="horizontal" defaultSelectedKeys={["0"]}>
-						<Menu.Item key="1">
-							<Link href="/auth/login">
-								<a>
-									<span className="text-blue font-semibold cursor-pointer">
-										Log In
-									</span>
-								</a>
-							</Link>
-						</Menu.Item>
+					<Menu mode="horizontal" defaultSelectedKeys={["1"]}>
+						{user.isCustomer && (
+							<Menu.Item key="1">
+								<Link href="/auth/register" passHref>
+									Become a Seller
+								</Link>
+							</Menu.Item>
+						)}
 						<Menu.Item key="2">USD</Menu.Item>
 					</Menu>
 				</Col>
