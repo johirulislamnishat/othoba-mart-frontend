@@ -2,20 +2,26 @@ import { Layout } from "antd";
 import { Content, Footer } from "antd/lib/layout/layout";
 import Sider from "antd/lib/layout/Sider";
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 import Foter from "../shared/footer";
 import AdminMenu from "./others/adminMenu";
 import AdminTop from "./others/adminTop";
 
 const AdminLayout = ({ title, children, pageTitle, child = false }) => {
 	const [collapsed, setCollapsed] = useState(false);
+	const { width } = useWindowDimensions();
 
 	const toggle = () => {
 		setCollapsed(!collapsed);
 	};
-	const onSearch = (e) => {
-		console.log(e);
-	};
+	useEffect(() => {
+		if (width < 768) {
+			setCollapsed(true);
+		} else {
+			setCollapsed(false);
+		}
+	}, [width]);
 
 	return (
 		<Layout hasSider>

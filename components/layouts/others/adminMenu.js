@@ -9,35 +9,57 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
+const { SubMenu } = Menu;
+
 const AdminMenu = ({ collapsed }) => {
 	const router = useRouter();
 	const pageName = router.pathname.split("/");
 
 	return (
 		<div>
-			<div className="text-center">
-				<Image
-					preview={false}
-					src="/othoba-mart-logo.png"
-					alt="Othoba Mart"
-					className={`${collapsed ? "px-1 py-5" : "px-12 py-5"} mb-3`}
-				/>
-			</div>
+			<Link href="/" passHref>
+				<div className="text-center cursor-pointer">
+					<Image
+						preview={false}
+						src="/othoba-mart-logo.png"
+						alt="Othoba Mart"
+						className={`${
+							collapsed ? "px-1 py-5" : "px-12 py-5"
+						} mb-3`}
+					/>
+				</div>
+			</Link>
 			<Menu
 				theme="dark"
 				mode="inline"
 				defaultSelectedKeys={pageName[pageName.length - 1]}
+				defaultOpenKeys={
+					pageName.length > 3
+						? [pageName[pageName.length - 2].toUpperCase()]
+						: [pageName[pageName.length - 1].toUpperCase()]
+				}
 			>
 				<Menu.Item key="admin" icon={<DashboardOutlined />}>
 					<Link href="/admin" passHref>
 						Dashboard
 					</Link>
 				</Menu.Item>
-				<Menu.Item key="products" icon={<GoldOutlined />}>
-					<Link href="/admin/products" passHref>
-						Products
-					</Link>
-				</Menu.Item>
+				<SubMenu
+					key="PRODUCTS"
+					icon={<GoldOutlined />}
+					title="Products"
+				>
+					<Menu.Item key="products">
+						<Link href="/admin/products" passHref>
+							Products
+						</Link>
+					</Menu.Item>
+					<Menu.Item key="add">
+						<Link href="/admin/products/add" passHref>
+							Add Product
+						</Link>
+					</Menu.Item>
+				</SubMenu>
 				<Menu.Item key="orders" icon={<ShopOutlined />}>
 					<Link href="/admin/orders" passHref>
 						Orders
