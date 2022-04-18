@@ -31,7 +31,6 @@ const HomeLayout = ({ children, title }) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			{/* top header area  */}
 			<header className="bg-white">
 				<div className="py-5 px-3 lg:px-0">
 					<div className="container mx-auto">
@@ -116,22 +115,21 @@ const HomeLayout = ({ children, title }) => {
 					<br />
 					<hr />
 				</div>
-				{/* header menu area  */}
+			</header>
+
+			{/* header menu area  */}
+			<div className="bg-white">
 				<div className="container mx-auto hidden lg:block">
 					<HomeMenu visible={visible} setVisible={setVisible} />
 				</div>
-			</header>
-			{/* top header area  */}
-			{/* layout header area  */}
+			</div>
+
 			<Content style={{ minHeight: "90vh", backgroundColor: "white" }}>
 				<div className="container mx-auto px-3 lg:px-0">{children}</div>
 			</Content>
-			{/* layout header area  */}
-			{/* layout footer area  */}
 			<Footer className="bg-gray-50 px-2">
 				<HomeFooter />
 			</Footer>
-			{/* layout footer area  */}
 		</Layout>
 	);
 };
