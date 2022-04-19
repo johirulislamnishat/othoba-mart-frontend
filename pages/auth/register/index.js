@@ -2,7 +2,7 @@ import { Modal } from "antd";
 import Link from "next/link";
 import { useRouter } from 'next/router'
 import { useState } from "react";
-import useAuth from "/components/hooks/useAuth";
+import AuthHandlers from "/components/hooks/authHandlers";
 
 const Register = () => {
 	const [user_name, setUser_name] = useState("");
@@ -18,7 +18,7 @@ const Register = () => {
     
 	const router = useRouter()
 
-	const { loading, message, setMessage, signupHandlerCustomer, signupHandlerVendor } = useAuth();
+	const { loading, message, setMessage, signupHandlerCustomer, signupHandlerVendor } = AuthHandlers();
 	
 	const handleClient = (e) => {
 		if (e.target.name === "vendor") {
@@ -39,7 +39,7 @@ const Register = () => {
 			router.push('/auth/vendorProfile')
 		} else {
 			setMessage('')
-			router.push('/auth/login')
+			router.push('/')
 		}
 	};
 
@@ -86,7 +86,7 @@ const Register = () => {
 							APPLICATION FORM FOR CERTIFICATION OF E-COMMERCE
 							WEBSITE
 						</h3>
-						<p className="text-xs lg:w-5/6">
+						<p className="text-xs lg:w-3/4">
 							Note: If there is insufficient space in the
 							application form for the required information, the
 							information is to be given in a separate annexure.

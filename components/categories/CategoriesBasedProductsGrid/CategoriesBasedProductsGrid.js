@@ -11,6 +11,8 @@ import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 
 const CategoriesBasedProductsGrid = () => {
+  
+
   const [items, setItems] = useState([]);
   console.log(items);
 

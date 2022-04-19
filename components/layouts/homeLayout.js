@@ -8,6 +8,7 @@ import {
 import { Badge, Col, Image, Input, Layout, Row } from "antd";
 import Head from "next/head";
 import { useState } from "react";
+import useCart from '../hooks/useCart'
 import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
@@ -17,6 +18,7 @@ const { Search } = Input;
 const { Content, Footer } = Layout;
 
 const HomeLayout = ({ children, title }) => {
+	const {state:{cart}} = useCart()
 	const [active, setActive] = useState(false);
 	const [visible, setVisible] = useState(false);
 
@@ -95,7 +97,7 @@ const HomeLayout = ({ children, title }) => {
 										/>
 									</Col>
 									<Col style={{ position: "relative" }}>
-										<Badge count={1} size="small">
+										<Badge count={cart.length} size="small">
 											<ShoppingOutlined
 												className="text-3xl"
 												style={{ color: "#f66a05" }}

@@ -50,7 +50,7 @@ a {
 	--grey-color: #999;
 	--light-grey-color: #f9f9f9;
 }
-table {
+/* table {
 	border-collapse: collapse;
 	width: 100%;
 }
@@ -64,7 +64,7 @@ th {
 
 tr:nth-child(even) {
 	background-color: #dddddd;
-}
+} */
 .custom-btn {
 	background-color: var(--brand-color);
 	border: 1px solid var(--brand-color);

@@ -2,10 +2,13 @@ import { ShoppingOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
 import { Col, Row } from "antd";
 import axios from "axios";
 import Link from "next/link";
+import useCart from '../../hooks/useCart'
+import { addToCart } from '../../context/Actions'
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 
 const LatestDeals = () => {
+  const { state : { cart}, dispatch } = useCart()
   const [items, setItems] = useState([]);
   console.log(items);
 
@@ -59,7 +62,7 @@ const LatestDeals = () => {
                           <h3>${item?.product_price}.00</h3>
                         </div>
                         <div className="shopping flex justify-center items-center">
-                          <ShoppingOutlined />
+                          <ShoppingOutlined onClick={()=>dispatch(addToCart(item, cart))} />
                         </div>
                       </div>
                       <div className="product-data flex justify-between items-center mt-4">

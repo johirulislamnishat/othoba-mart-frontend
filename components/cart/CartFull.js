@@ -1,100 +1,106 @@
-import { DeleteTwoTone, MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import { useEffect } from "react";
-import UseLocalDB from "/components/hooks/useLocalDB";
+import { DeleteTwoTone } from "@ant-design/icons";
+import { useState, useEffect } from "react";
+import useCart from "../hooks/useCart";
+import { decrease } from "../context/Actions";
+import { increase } from "../context/Actions";
+import { removeFromCart } from "../context/Actions";
+import CartTotal from "./CartTotal";
 
 const CartFull = () => {
-    const { cart, UpdateQuantity} = UseLocalDB();
-    // console.log(cart);
-    
-    const RemoveFromCart = async(productId) => {
-                  const cart = await JSON.parse(localStorage.getItem('cart'))
-                  let rest = await cart?.filter((pd) => pd._id != productId);     
-                  localStorage.setItem("cart", JSON.stringify(rest));
-    };
+  const {
+    state: { cart },
+    dispatch,
+  } = useCart();
 
-    const handleQuantity = (dir, productId) => {
-        // UpdateQuantity(productId);
-    };
+  const [total, setTotal] = useState();
 
-    return (
-        <div className="py-4 col-span-1 sm:col-span-2">
-            <table
-                className="w-full table-fixed border-2 border-gray-200 text-center"
-                style={{ borderSpacing: "20px" }}
-            >
-                <thead className="py-2 border-2 border-b-gray-200 w-full">
-                    <tr className="">
-                        <th colSpan="3">Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody className="">
-                    {cart?.map((product) => (
-                        <>
-                            <tr key={product._id} className="font-semibold">
-                                <td className="">
-                                    <img
-                                        src="/images/auth.png"
-                                        alt=""
-                                        className="block w-24 h-20 rounded-lg m-2"
-                                    />
-                                </td>
-                                <td colSpan="2" className="w-full">
-                                    <p className="text-left break-words">
-                                        {product.title}
-                                    </p>
-                                    <p className="text-left break-words">
-                                        {product.farm}
-                                    </p>
-                                </td>
-                                <td>{product.price}</td>
-                                <td>
-                                    <div className="w-max flex items-center">
-                                        <MinusOutlined
-                                            onClick={() =>
-                                                handleQuantity(
-                                                    "dec",
-                                                    product._id
-                                                )
-                                            }
-                                            className="cursor-pointer p-0.5"
-                                        />
-                                        <input
-                                            value={product.quantity}
-                                            readOnly
-                                            className="w-10 font-semibold text-center border-2 border-gray-200 rounded-lg"
-                                        />
-                                        <PlusOutlined
-                                            onClick={() =>
-                                                handleQuantity(
-                                                    "inc",
-                                                    product._id
-                                                )
-                                            }
-                                            className=" p-0.5 cursor-pointer"
-                                        />
-                                    </div>
-                                </td>
-                                <td>{product.price}</td>
-                                <td>
-                                    <DeleteTwoTone
-                                        twoToneColor="#dd1111"
-                                        className="cursor-pointer"
-                                        onClick={() =>
-                                            RemoveFromCart(product._id)
-                                        }
-                                    />
-                                </td>
-                            </tr>
-                        </>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+  useEffect(() => {
+    setTotal(
+      cart.reduce(
+        (prev, next) => prev + Number(next.item_price) * next.item_qty,
+        0
+      )
     );
+  }, [cart]);
+
+  if (cart.length === 0) return <div>Cart is empty</div>;
+
+  return (
+    <div>
+      <h3 className="text-2xl text-sky-500 font-semibold">SHOPPING CART</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="py-4 col-span-1 sm:col-span-2">
+          {cart.length === 0 && <div>Cart is empty </div>}
+          <table
+            className="w-full table-fixed border-2 border-gray-200 text-center"
+            style={{ borderSpacing: "20px" }}>
+            <thead className="py-3 border-2 border-b-gray-200 w-full">
+              <tr className="py-3">
+                <th colSpan="3">Product</th>
+                <th colSpan="1">Quantity</th>
+                <th colSpan="1">Subtotal</th>
+                <th colSpan="1">Remove</th>
+              </tr>
+            </thead>
+            <tbody className="">
+              {cart?.map((p) => (
+                <>
+                  <tr key={p._id} className="font-semibold">
+                    <td colSpan="1">
+                      <img
+                        src={p.item_img}
+                        alt=""
+                        className="block w-28 h-24 rounded-lg m-1"
+                      />
+                    </td>
+                    <td colSpan="2" className="w-full">
+                      <h5 className="text-left text-sky-500 break-words cursor-pointer">
+                        {p.item_name}
+                      </h5>
+                      {/* <p className="text-left break-words">
+                          {p.product_description}
+                          </p> */}
+                      <p className="text-left">Price: {p.item_price} USD</p>
+                    </td>
+                    <td colSpan="1">
+                      <div className="w-max flex items-center mx-auto">
+                        <button
+                          disabled={p.item_qty === 1 ? true : false}
+                          onClick={() => dispatch(decrease(cart, p._id))}
+                          className="cursor-pointer text-3xl p-1 pt-0">
+                          -
+                        </button>
+
+                        <span className="border-2 border-gray-400 px-2 py-0.5 rounded m-0">
+                          {p.item_qty}
+                        </span>
+                        <button
+                          onClick={() => dispatch(increase(cart, p._id))}
+                          className="cursor-pointer text-2xl p-1 pt-0">
+                          +
+                        </button>
+                      </div>
+                    </td>
+                    <td colSpan="1" className="text-sky-500 text-center">
+                      {p.item_price * p.item_qty} USD
+                    </td>
+                    <td colSpan="1">
+                      <DeleteTwoTone
+                        twoToneColor="#dd1111"
+                        className="cursor-pointer"
+                        onClick={() => dispatch(removeFromCart(cart, p._id))}
+                      />
+                    </td>
+                  </tr>
+                </>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <CartTotal total={total} />
+      </div>
+    </div>
+  );
 };
 
 export default CartFull;

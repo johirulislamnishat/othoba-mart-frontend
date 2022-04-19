@@ -1,12 +1,12 @@
 import {useState} from 'react'
 import Image from "next/image";
 import Link from 'next/link'
-import useAuth from "/components/hooks/useAuth";
+import AuthHandlers from "/components/hooks/authHandlers";
 
 const Login = () => {
   const [user_name, setUser_name] = useState('')
   const [password, setPassword] = useState('')
-  const { loading, signinHandler } = useAuth();
+  const { loading, signinHandler } = AuthHandlers();
 
   const handleLogin = async(e) => {
     e.preventDefault();

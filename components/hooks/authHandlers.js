@@ -2,8 +2,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
+import useAuth from './useAuth'
+import { userData } from '../context/Actions'
 
-const AuthData = () => {
+const AuthHandlers = () => {
+	const data = useAuth()
+	const dispatch = data?.dispatch
 	const [loading, setLoading] = useState(false)
 	const [message, setMessage] = useState('')
 	const router = useRouter();
@@ -20,6 +24,7 @@ const AuthData = () => {
 			.then(function (response) {
 				setMessage(response.data.message)
 				setLoading(false)
+				router.push('/')
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -44,11 +49,6 @@ const AuthData = () => {
 			});
 	};
 
-	const [user, setUser] = useState({});
-	// console.log("logged in user", user);
-	const [token, setToken] = useState("");
-	// console.log("token", token);
-
 	// login api handler function
 	const signinHandler = (user_name, password) => {
 		setLoading(true)
@@ -59,9 +59,10 @@ const AuthData = () => {
 			})
 			.then(function (response) {
 				// console.log(response);
-				setUser(response?.data);
+				// setUser(response?.data);
 				localStorage.setItem("token", response?.data?.accessToken);
-				setToken(localStorage.getItem("token"));
+				// setToken(localStorage.getItem("token"));
+				dispatch(userData(response?.data))
 				setLoading(false)
 				router.push("/");
 			})
@@ -81,10 +82,8 @@ const AuthData = () => {
 		signupHandlerCustomer,
 		signupHandlerVendor,
 		signinHandler,
-		token,
-		user,
 		logout,
 	};
 };
 
-export default AuthData;
+export default AuthHandlers;

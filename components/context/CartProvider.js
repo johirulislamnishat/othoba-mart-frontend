@@ -1,41 +1,31 @@
-import { createContext, useReducer} from 'react'
-import { cartReducer } from './Reducers'
+import { useEffect, createContext, useReducer } from "react";
+import reducers from "./Reducers";
 
-export const CartContext = createContext()
+export const CartContext = createContext();
 
-const CartProvider = ({children}) => {
-    const products = [
-        {_id: 1,
-        title: "vegetable",
-        farm: 'field',
-        price: 21.2,
-        quantity:0
-      },
-     {
-        _id: 2,
-        title: "vegetable-2",
-        farm: 'field',
-        price: 18.2,
-        quantity:0
-      },{ 
-        _id: 3,
-        title: "vegetable-3",
-        farm: 'field',
-        price: 16.2,
-        quantity:0
-      }
-    ]
+const CartProvider = ({ children }) => {
+  const initialState = { cart: [] };
+  const [state, dispatch] = useReducer(reducers, initialState);
 
-    const [state, dispatch] = useReducer(cartReducer, {
-        products: products,
-        cart: []
-    })
+  const { cart } = state;
+
+  useEffect(() => {
+    const shopping_cart = JSON.parse(localStorage.getItem("shopping_cart"));
+
+    if (shopping_cart) {
+      dispatch({ type: "ADD_CART", payload: shopping_cart });
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("shopping_cart", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <CartContext.Provider value={{ state, dispatch }}>
-        {children}
+      {children}
     </CartContext.Provider>
-  )
-}
+  );
+};
 
-export default CartProvider
+export default CartProvider;
