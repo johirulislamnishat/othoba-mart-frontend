@@ -6,7 +6,17 @@ import {
 	ShoppingOutlined,
 	UserOutlined,
 } from "@ant-design/icons";
-import { Badge, Col, Dropdown, Image, Layout, Menu, Row, Tag } from "antd";
+import {
+	Badge,
+	Col,
+	Dropdown,
+	Image,
+	Layout,
+	Menu,
+	message,
+	Row,
+	Tag,
+} from "antd";
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
@@ -48,22 +58,26 @@ const HomeLayout = ({ children, title }) => {
 	);
 
 	const handleSearch = () => {
-		setLoading(true);
-		axios
-			.get(
-				`${API_BASE_URL}/product?item=${searchItem}&search=${searchText}`
-			)
-			.then((res) => {
-				setSearchData(res.data.result);
-				setShowResult(true);
-				setLoading(false);
-			})
-			.catch(() => {
-				setShowResult(false);
-				setLoading(false);
-			});
+		if (searchText) {
+			setLoading(true);
+			axios
+				.get(
+					`${API_BASE_URL}/product?item=${searchItem}&search=${searchText}`
+				)
+				.then((res) => {
+					setSearchData(res.data.result);
+					setShowResult(true);
+					setLoading(false);
+				})
+				.catch(() => {
+					setShowResult(false);
+					setLoading(false);
+				});
+		} else {
+			message.warning("Please write first what do you want to find!");
+		}
 	};
-	console.log(searchData[0]);
+
 	return (
 		<Layout>
 			<Head>
