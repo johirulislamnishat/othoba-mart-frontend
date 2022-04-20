@@ -8,10 +8,13 @@ import {
 import { Col, Drawer, Menu, Row } from "antd";
 import Link from "next/link";
 import React from "react";
+import useAuth from "../../hooks/useAuth";
 
 const { SubMenu } = Menu;
 
 const HomeMenu = ({ visible, setVisible }) => {
+	const { user } = useAuth();
+
 	return (
 		<>
 			<Row>
@@ -25,55 +28,55 @@ const HomeMenu = ({ visible, setVisible }) => {
 					<div className="hidden lg:block">
 						<Menu
 							onClick={(e) => console.log(e)}
-							selectedKeys={["mail"]}
+							selectedKeys={["1"]}
 							mode="horizontal"
 						>
-							<Menu.Item key="mail">Home</Menu.Item>
+							<Menu.Item key="1">
+								<Link href="/" passHref>
+									Home
+								</Link>
+							</Menu.Item>
 
-							<SubMenu key="SubMenu" title="Vendor">
-								<Menu.Item key="vendor:1">Option 1</Menu.Item>
-								<Menu.Item key="vendor:2">Option 2</Menu.Item>
-								<Menu.Item key="vendor:3">Option 3</Menu.Item>
-								<Menu.Item key="vendor:4">Option 4</Menu.Item>
-							</SubMenu>
+							<Menu.Item key="2">
+								<Link href="/categories" passHref>
+									Categories
+								</Link>
+							</Menu.Item>
 
-							<SubMenu key="SubMenu2" title="Categories">
-								<Menu.ItemGroup title="Item 1">
-									<Menu.Item key="setting:1">
-										Option 1
-									</Menu.Item>
-									<Menu.Item key="setting:2">
-										Option 2
-									</Menu.Item>
-								</Menu.ItemGroup>
-								<Menu.ItemGroup title="Item 2">
-									<Menu.Item key="setting:3">
-										Option 3
-									</Menu.Item>
-									<Menu.Item key="setting:4">
-										Option 4
-									</Menu.Item>
-								</Menu.ItemGroup>
-							</SubMenu>
+							<Menu.Item key="3">
+								<Link href="/" passHref>
+									About Us
+								</Link>
+							</Menu.Item>
 
-							<SubMenu key="SubMenu3" title="Products">
-								<Menu.ItemGroup title="Item 1">
-									<Menu.Item key="products:1">
-										Option 1
-									</Menu.Item>
-									<Menu.Item key="products:2">
-										Option 2
-									</Menu.Item>
-								</Menu.ItemGroup>
-								<Menu.ItemGroup title="Item 2">
-									<Menu.Item key="products:3">
-										Option 3
-									</Menu.Item>
-									<Menu.Item key="products:4">
-										Option 4
-									</Menu.Item>
-								</Menu.ItemGroup>
+							<SubMenu key="SubMenu3" title="Suport">
+								<Menu.Item key="products:1">
+									Contact US
+								</Menu.Item>
+								<Menu.Item key="products:2">Support</Menu.Item>
+								<Menu.Item key="products:3">
+									Track Order
+								</Menu.Item>
+								<Menu.Item key="products:4">
+									Privacy Policy
+								</Menu.Item>
+								<Menu.Item key="products:5">
+									Terms & Conditions
+								</Menu.Item>
 							</SubMenu>
+							<Menu.Item key="4">
+								<Link href="/" passHref>
+									FAQs
+								</Link>
+							</Menu.Item>
+
+							{user.isVendor && (
+								<Menu.Item key="5">
+									<Link href="/admin" passHref>
+										Admin
+									</Link>
+								</Menu.Item>
+							)}
 						</Menu>
 					</div>
 
@@ -90,16 +93,14 @@ const HomeMenu = ({ visible, setVisible }) => {
 					lg={6}
 					className="pl-5 sm:pl-32 md:pl-0 lg:pl-8 xl:pl-16"
 				>
-					<Menu mode="horizontal" defaultSelectedKeys={["0"]}>
-						<Menu.Item key="1">
-							<Link href="/auth/login">
-								<a>
-									<span className="text-blue font-semibold cursor-pointer">
-										Log In
-									</span>
-								</a>
-							</Link>
-						</Menu.Item>
+					<Menu mode="horizontal" defaultSelectedKeys={["1"]}>
+						{user.isCustomer && (
+							<Menu.Item key="1">
+								<Link href="/auth/register" passHref>
+									Become a Seller
+								</Link>
+							</Menu.Item>
+						)}
 						<Menu.Item key="2">USD</Menu.Item>
 					</Menu>
 				</Col>

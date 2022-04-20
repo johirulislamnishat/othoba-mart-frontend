@@ -4,12 +4,12 @@ import React from "react";
 import UseLocalDB from "/components/hooks/useLocalDB";
 
 const CartFull = () => {
-    const { cart, UpdateQuantity, RemoveFromCart } = UseLocalDB();
-    // console.log(cart);
+	const { cart, UpdateQuantity, RemoveFromCart } = UseLocalDB();
+	// console.log(cart);
 
-    const handleQuantity = (dir, productId) => {
-        UpdateQuantity(productId);
-    };
+	const handleQuantity = (dir, productId) => {
+		UpdateQuantity(productId);
+	};
 
 	return (
 		<div className="py-4 col-span-1 sm:col-span-2">
