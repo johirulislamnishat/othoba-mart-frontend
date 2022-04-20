@@ -21,10 +21,10 @@ const AdminMenu = ({ collapsed }) => {
 				<div className="text-center cursor-pointer">
 					<Image
 						preview={false}
-						src="/othoba-mart-logo.png"
+						src="/othoba-mart-logo-dark.png"
 						alt="Othoba Mart"
 						className={`${
-							collapsed ? "px-1 py-5" : "px-12 py-5"
+							collapsed ? "px-1 py-5" : "px-8 py-5"
 						} mb-3`}
 					/>
 				</div>

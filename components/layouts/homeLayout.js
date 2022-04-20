@@ -96,7 +96,7 @@ const HomeLayout = ({ children, title }) => {
 									<div className="text-center">
 										<Image
 											preview={false}
-											src="/othoba-mart-logo.png"
+											src="/othoba-mart-logo-light.png"
 											alt="Othoba Mart"
 										/>
 									</div>
