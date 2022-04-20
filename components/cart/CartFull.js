@@ -1,9 +1,9 @@
 import { DeleteTwoTone } from "@ant-design/icons";
 import { useState, useEffect } from "react";
-import useProvider from "../hooks/useProvider";
-import { decrease } from "../context/actions/Actions";
-import { increase } from "../context/actions/Actions";
-import { removeFromCart } from "../context/actions/Actions";
+import useProvider from "../../hooks/useProvider";
+import { decrease } from "../../context/actions/Actions";
+import { increase } from "../../context/actions/Actions";
+import { removeFromCart } from "../../context/actions/Actions";
 import CartTotal from "./CartTotal";
 
 const CartFull = () => {
@@ -43,9 +43,9 @@ const CartFull = () => {
               </tr>
             </thead>
             <tbody className="">
-              {cart?.map((p) => (
+              {cart?.map((p,i) => (
                 <>
-                  <tr key={p._id} className="font-semibold">
+                  <tr key={i} className="font-semibold">
                     <td colSpan="1">
                       <img
                         src={p.item_img}

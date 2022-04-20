@@ -1,4 +1,4 @@
-import useProvider from '../hooks/useProvider'
+import useProvider from '../../hooks/useProvider'
 import Notification from './Notification'
 
 const Notify = () => {

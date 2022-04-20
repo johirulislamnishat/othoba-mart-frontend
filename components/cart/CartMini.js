@@ -6,10 +6,10 @@ import {
   HeartTwoTone,
   CloseOutlined,
 } from "@ant-design/icons";
-import useProvider from "../hooks/useProvider";
-import { decrease } from "../context/actions/Actions";
-import { increase } from "../context/actions/Actions";
-import { removeFromCart } from "../context/actions/Actions";
+import useProvider from "../../hooks/useProvider";
+import { decrease } from "../../context/actions/Actions";
+import { increase } from "../../context/actions/Actions";
+import { removeFromCart } from "../../context/actions/Actions";
 
 const CartMini = ({ active, setActive }) => {
   const {

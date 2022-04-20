@@ -1,14 +1,14 @@
 import {
-  HeartOutlined,
-  ShoppingOutlined,
-  StarFilled,
-  StarOutlined,
+	HeartOutlined,
+	ShoppingOutlined,
+	StarFilled,
+	StarOutlined,
 } from "@ant-design/icons";
-import { Col, Row } from "antd";
+import { Col, Image, Row } from "antd";
 import axios from "axios";
 import Link from "next/link";
-import useProvider from '../../hooks/useProvider'
-import { addToCart } from '../../context/actions/Actions'
+import useProvider from '../../../hooks/useProvider'
+import { addToCart } from '../../../context/actions/Actions'
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 
@@ -18,28 +18,32 @@ const BestSellers = () => {
   const [items, setItems] = useState([]);
   console.log(items);
 
-  useEffect(() => {
-    axios
-      .get(API_BASE_URL + "/product/paginated?page=0&size=4")
-      .then(function (response) {
-        console.log(response?.data?.result);
-        setItems(response?.data?.result);
-      });
-  }, []);
-  return (
-    <div className="container best-sellers">
-      <div className="section-title mt-6 flex justify-between items-center border-b-2">
-        <h2 className="text-2xl">Best Sellers</h2>
-        <Link href="/">See All</Link>
-      </div>
-      <Row>
-        {items.map((item, index) => {
-          return (
-            <Col xs={24} sm={12} md={6} lg={6} key={index}>
-              <div className="p-5 single-product">
-                {/* <Image src={item.product_img} alt="" /> */}
+	useEffect(() => {
+		axios
+			.get(API_BASE_URL + "/product/paginated?page=0&size=4")
+			.then(function (response) {
+				console.log(response?.data?.result);
+				setItems(response?.data?.result);
+			});
+	}, []);
+	return (
+		<div className="container best-sellers">
+			<div className="section-title mt-6 flex justify-between items-center border-b-2">
+				<h2 className="text-2xl">Best Sellers</h2>
+				<Link href="/">See All</Link>
+			</div>
+			<Row>
+				{items.map((item, index) => {
+					return (
+						<Col xs={24} sm={12} md={6} lg={6} key={index}>
+							<div className="p-5 single-product">
+								{/* <Image src={item.product_img} alt="" /> */}
 
-                <img src={item?.product_img} alt="" />
+								<Image
+									preview={false}
+									src={item?.product_img}
+									alt=""
+								/>
 
                 <div className="wishlist flex justify-center items-center">
                   <HeartOutlined />

@@ -11,7 +11,7 @@ import {
 import { Image, Menu } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import useProvider from '/components/hooks/useProvider'
+import useProvider from '../../../hooks/useProvider'
 
 const VendorMenu = ({ collapsed }) => {
 	const { state:{ user }} = useProvider()

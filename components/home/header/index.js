@@ -71,7 +71,7 @@ const HomeHeader = () => {
 						</Col>
 						<Col xs={4}>
 							<Image
-								src="http://springvalleymachinery.co.ke/wp-content/uploads/2020/11/IMG-20210225-WA0008.jpg"
+								src="https://springvalleymachinery.co.ke/wp-content/uploads/2020/11/IMG-20210225-WA0008.jpg"
 								alt="woodworking"
 								width={"100%"}
 								preview={false}
@@ -114,9 +114,14 @@ const HomeHeader = () => {
 				</Col>
 			</Row>
 
-			<Row gutter={[16, 16]} align="middle" className="py-3 mt-3">
+			<Row
+				gutter={[16, 16]}
+				align="middle"
+				justify="center"
+				className="py-3 mt-3"
+			>
 				<Col xs={24} md={12} xl={6}>
-					<Row gutter={[16, 16]} align="middle" justify="center">
+					<Row gutter={[16, 16]} align="middle" className="w-full">
 						<Col>
 							<CarOutlined
 								className="text-3xl"
@@ -135,7 +140,7 @@ const HomeHeader = () => {
 				</Col>
 
 				<Col xs={24} md={12} xl={6}>
-					<Row gutter={[16, 16]} align="middle" justify="center">
+					<Row gutter={[16, 16]} align="middle">
 						<Col>
 							<DollarCircleOutlined
 								className="text-3xl"
@@ -152,7 +157,7 @@ const HomeHeader = () => {
 				</Col>
 
 				<Col xs={24} md={12} xl={6}>
-					<Row gutter={[16, 16]} align="middle" justify="center">
+					<Row gutter={[16, 16]} align="middle">
 						<Col>
 							<CheckCircleOutlined
 								className="text-3xl"
@@ -169,7 +174,7 @@ const HomeHeader = () => {
 				</Col>
 
 				<Col xs={24} md={12} xl={6}>
-					<Row gutter={[16, 16]} align="middle" justify="center">
+					<Row gutter={[16, 16]} align="middle">
 						<Col>
 							<CreditCardOutlined
 								className="text-3xl"

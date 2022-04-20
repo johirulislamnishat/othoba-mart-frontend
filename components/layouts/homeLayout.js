@@ -1,19 +1,30 @@
 import {
+	CloseOutlined,
 	HeartOutlined,
 	MenuOutlined,
 	SearchOutlined,
 	ShoppingOutlined,
 	UserOutlined,
 } from "@ant-design/icons";
-import { Badge, Col, Image, Input, Layout, Row } from "antd";
+import {
+	Badge,
+	Col,
+	Dropdown,
+	Image,
+	Layout,
+	Menu,
+	message,
+	Row,
+	Tag,
+} from "antd";
+import axios from "axios";
 import Head from "next/head";
+import Link from "next/link";
 import { useState } from "react";
-import useProvider from '../hooks/useProvider'
+import useProvider from '../../hooks/useProvider'
 import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
-
-const { Search } = Input;
 
 const { Content, Footer } = Layout;
 
@@ -21,6 +32,52 @@ const HomeLayout = ({ children, title }) => {
 	const {state:{cart}} = useProvider()
 	const [active, setActive] = useState(false);
 	const [visible, setVisible] = useState(false);
+	const [searchText, setSearchText] = useState(null);
+	const [searchItem, setSearchItem] = useState("product");
+	const [showResult, setShowResult] = useState(false);
+	const [searchData, setSearchData] = useState([]);
+	const [loading, setLoading] = useState(false);
+
+	const menu = (
+		<Menu>
+			<Menu.Item key="1">
+				<Link href="/admin" passHref>
+					Dashboard
+				</Link>
+			</Menu.Item>
+			<Menu.Item key="2">
+				<Link href="/" passHref>
+					Your Profile
+				</Link>
+			</Menu.Item>
+			<Menu.Item key="3" danger>
+				<Link href="/auth/login" passHref>
+					Login
+				</Link>
+			</Menu.Item>
+		</Menu>
+	);
+
+	const handleSearch = () => {
+		if (searchText) {
+			setLoading(true);
+			axios
+				.get(
+					`${API_BASE_URL}/product?item=${searchItem}&search=${searchText}`
+				)
+				.then((res) => {
+					setSearchData(res.data.result);
+					setShowResult(true);
+					setLoading(false);
+				})
+				.catch(() => {
+					setShowResult(false);
+					setLoading(false);
+				});
+		} else {
+			message.warning("Please write first what do you want to find!");
+		}
+	};
 
 	return (
 		<Layout>
@@ -33,7 +90,6 @@ const HomeLayout = ({ children, title }) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			{/* top header area  */}
 			<header className="bg-white">
 				<div className="py-5 px-3 lg:px-0">
 					<div className="container mx-auto">
@@ -52,43 +108,170 @@ const HomeLayout = ({ children, title }) => {
 											onClick={() => setVisible(!visible)}
 										/>
 									</div>
-									<div className="text-center">
-										<Image
-											preview={false}
-											src="/othoba-mart-logo.png"
-											alt="Othoba Mart"
-										/>
-									</div>
+									<Link href="/" passHref>
+										<div className="text-center">
+											<Image
+												preview={false}
+												src="/othoba-mart-logo-light.png"
+												alt="Othoba Mart"
+											/>
+										</div>
+									</Link>
 								</div>
 							</Col>
-							<Col xs={0} sm={0} md={12} lg={16}>
-								<div className="flex w-4/5 lg:w-3/5 mx-auto">
+
+							{/* search */}
+							<Col
+								xs={0}
+								sm={0}
+								md={13}
+								lg={16}
+								style={{ position: "relative" }}
+							>
+								<div className="flex w-11/12 lg:w-10/12 mx-auto">
 									<input
 										type="search"
-										className="block w-full px-5 py-3 text-small text-gray-700 border border-solid border-gray-300 rounded-l-3xl focus:text-gray-700 focus:border-orange-500 focus:outline-none"
+										className="block w-full px-5 py-2 xl:py-3 text-small text-gray-700 border border-solid border-gray-300 rounded-l-3xl focus:text-gray-700 focus:border-orange-500 focus:outline-none"
 										placeholder="I'm searching for..."
+										onChange={(e) =>
+											e.target.value === ""
+												? setSearchText(null)
+												: setSearchText(e.target.value)
+										}
 									/>
+									<div className="pl-1 pr-1 lg:pr-3 text-small text-gray-700 border border-solid border-gray-300 active:text-gray-700 active:border-orange-500 active:outline-none bg-white m-0 ">
+										<select
+											className="outline-none bg-white h-full py-2 xl:py-3 border-0 px-0 lg:px-3"
+											onChange={(e) =>
+												setSearchItem(e.target.value)
+											}
+										>
+											<option value={"product"}>
+												Products
+											</option>
+											<option value={"categories"}>
+												Categories
+											</option>
+											<option value={"sub-categories"}>
+												Tags
+											</option>
+										</select>
+									</div>
 									<button
-										className="btn inline-block py-3 px-5 bg-orange-500 text-white font-medium text-xl rounded-r-3xl hover:bg-orange-400 focus:bg-orange-400  focus:outline-none flex items-center"
+										className={`btn inline-block py-2 xl:py-3 px-3 lg:px-5 bg-orange-500 text-white font-medium text-xl rounded-r-3xl hover:bg-orange-400 focus:bg-orange-400 focus:outline-none flex items-center ${
+											loading && "cursor-not-allowed"
+										}`}
 										type="button"
+										onClick={handleSearch}
+										disabled={loading}
 									>
 										<SearchOutlined />
 									</button>
 								</div>
+
+								{/* searchResult */}
+								{showResult && (
+									<div className="absolute z-10 top-12 w-full pl-8 pr-12">
+										<div className="w-11/12 lg:w-10/12 mx-auto p-5 bg-white shadow relative">
+											<div className="absolute z-10 top-1 lg:top-3 right-2 lg:right-4">
+												<CloseOutlined
+													className=" text-lg lg:text-2xl font-bold"
+													onClick={() =>
+														setShowResult(false)
+													}
+												/>
+											</div>
+											{searchData
+												.slice(0, 5)
+												.map((item) => (
+													<Link
+														href={`/product/${item._id}`}
+														passHref
+														key={item._id}
+													>
+														<Row
+															gutter={16}
+															align="middle"
+															className="cursor-pointer hover:border hover:border-orange-500 hover:text-orange-500"
+														>
+															<Col xs={6}>
+																<Image
+																	preview={
+																		false
+																	}
+																	src={
+																		item.product_img
+																	}
+																	alt={
+																		item.product_name
+																	}
+																/>
+															</Col>
+															<Col xs={18}>
+																<p>
+																	{
+																		item.product_name
+																	}
+																</p>
+																{item.product_category && (
+																	<div className="hidden lg:block">
+																		{item.product_category.map(
+																			(
+																				item
+																			) => (
+																				<Tag
+																					color={
+																						"rgba(255, 239, 217, 1)"
+																					}
+																					key={
+																						item
+																					}
+																				>
+																					<span className="text-orange-500">
+																						{
+																							item
+																						}
+																					</span>
+																				</Tag>
+																			)
+																		)}
+																	</div>
+																)}
+																{item.product_price && (
+																	<p className="mt-0 lg:mt-3">
+																		Price:{" "}
+																		{
+																			item.product_price
+																		}
+																	</p>
+																)}
+															</Col>
+														</Row>
+													</Link>
+												))}
+										</div>
+									</div>
+								)}
 							</Col>
+
 							<Col
 								xs={12}
 								sm={12}
-								md={6}
+								md={5}
 								lg={4}
 								className="text-right"
 							>
 								<Row gutter={16} align="middle" justify="end">
 									<Col>
-										<UserOutlined
-											className="text-3xl"
-											style={{ color: "#f66a05" }}
-										/>
+										<Dropdown
+											overlay={menu}
+											onClick={(e) => e.preventDefault()}
+										>
+											<UserOutlined
+												className="text-3xl"
+												style={{ color: "#f66a05" }}
+											/>
+										</Dropdown>
 									</Col>
 									<Col>
 										<HeartOutlined
@@ -118,22 +301,21 @@ const HomeLayout = ({ children, title }) => {
 					<br />
 					<hr />
 				</div>
-				{/* header menu area  */}
+			</header>
+
+			{/* Top menu */}
+			<div className="bg-white">
 				<div className="container mx-auto hidden lg:block">
 					<HomeMenu visible={visible} setVisible={setVisible} />
 				</div>
-			</header>
-			{/* top header area  */}
-			{/* layout header area  */}
+			</div>
+
 			<Content style={{ minHeight: "90vh", backgroundColor: "white" }}>
 				<div className="container mx-auto px-3 lg:px-0">{children}</div>
 			</Content>
-			{/* layout header area  */}
-			{/* layout footer area  */}
 			<Footer className="bg-gray-50 px-2">
 				<HomeFooter />
 			</Footer>
-			{/* layout footer area  */}
 		</Layout>
 	);
 };

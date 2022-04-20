@@ -4,6 +4,7 @@ import {
 	Col,
 	Divider,
 	Form,
+	Image,
 	Input,
 	InputNumber,
 	message,
@@ -584,7 +585,8 @@ export default function EditProduct({ product, id }) {
 							footer={null}
 							onCancel={() => setPreviewVisible(false)}
 						>
-							<img
+							<Image
+								preview={false}
 								alt="preview"
 								style={{ width: "100%" }}
 								src={previewImage}

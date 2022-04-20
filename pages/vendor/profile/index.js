@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import VendorLayout from '/components/layouts/vendorLayout'
+import VendorLayout from '../../../components/layouts/vendorLayout'
 
 const inputFields = [
     {

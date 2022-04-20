@@ -1,13 +1,14 @@
 import {useState} from 'react'
 import Image from "next/image";
 import Link from 'next/link'
-import AuthHandlers from "/components/hooks/authHandlers";
-import useProvider from './../../../components/hooks/useProvider';
+import AuthHandlers from "../../../hooks/useAuthHandlers";
+import useProvider from '../../../hooks/useProvider';
+
 
 const Login = () => {
-  const [user_name, setUser_name] = useState('')
-  const [password, setPassword] = useState('')
-  const { loading, signinHandler } = AuthHandlers();
+	const [user_name, setUser_name] = useState("");
+	const [password, setPassword] = useState("");
+	const { loading, signinHandler } = AuthHandlers();
   
   const { dispatch } = useProvider()
 
@@ -20,7 +21,7 @@ const Login = () => {
     <div className="w-screen h-screen grid sm:grid-cols-2 items-center">
       <div className="hidden sm:block">
         {/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
-        <img src="/images/auth.png" alt="" className="min-h-screen w-full" />
+        <img src="/images/auth.png" alt="" className="h-screen w-full" />
       </div>
 
       <div className='min-w-full rounded-r-lg'>
@@ -70,46 +71,46 @@ const Login = () => {
             </div>
           </form>
 
-    <div className="flex flex-col  gap-2 mt-5 mb-3"> 
-            <p className="mt-3 text-center">
-              Don't have an account?{" "}
-              <Link href='/auth/register'>
-                <a>
-              <span className="text-sky-500 font-semibold cursor-pointer">
-                Register
-              </span>
-              </a>
-              </Link>
-            </p>
-          </div>
-        </div>
-       
-        <div className="mt-10 flex gap-4 items-center justify-center">
-        <Link href='/policy/termsOfService'>
-            <a>
-          <span className="underline text-gray-500 cursor-pointer">
-            Terms of Service
-          </span>
-          </a>
-          </Link>
-          <Link href='/policy/privacyPolicy'>
-            <a>
-          <span className="underline text-gray-500 cursor-pointer">
-            Privacy Policy
-          </span>
-          </a>
-          </Link>
-          <Link href='/policy/support'>
-            <a>
-          <span className="underline text-gray-500 cursor-pointer">
-            Support
-          </span>
-          </a>
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
+					<div className="flex flex-col  gap-2 mt-5 mb-3">
+						<p className="mt-3 text-center">
+							Don&#39;t have an account?{" "}
+							<Link href="/auth/register">
+								<a>
+									<span className="text-sky-500 font-semibold cursor-pointer">
+										Register
+									</span>
+								</a>
+							</Link>
+						</p>
+					</div>
+				</div>
+
+				<div className="mt-10 flex gap-4 items-center justify-center">
+					<Link href="/policy/termsOfService">
+						<a>
+							<span className="underline text-gray-500 cursor-pointer">
+								Terms of Service
+							</span>
+						</a>
+					</Link>
+					<Link href="/policy/privacyPolicy">
+						<a>
+							<span className="underline text-gray-500 cursor-pointer">
+								Privacy Policy
+							</span>
+						</a>
+					</Link>
+					<Link href="/policy/support">
+						<a>
+							<span className="underline text-gray-500 cursor-pointer">
+								Support
+							</span>
+						</a>
+					</Link>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Login;
