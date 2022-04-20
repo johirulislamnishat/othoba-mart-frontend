@@ -2,162 +2,141 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../assets/Logo/othoba-mart-logo.png";
-import Payment from "../../assets/Images/payment.png";
-// import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-// import TwitterIcon from "@mui/icons-material/Twitter";
-// import LinkedInIcon from "@mui/icons-material/LinkedIn";
-// import InstagramIcon from "@mui/icons-material/Instagram";
 
 const footerMenus01 = [
-  { id: "0", LinkName: "FAQ", href: "#" },
-  { id: "1", LinkName: "Track Order", href: "#" },
-  { id: "2", LinkName: "About Us", href: "#" },
-  { id: "3", LinkName: "Contact Us", href: "#" },
-  { id: "4", LinkName: "Support", href: "#" },
-  { id: "5", LinkName: "Returns", href: "#" },
-  { id: "6", LinkName: "Privacy Policy", href: "#" },
-  { id: "7", LinkName: "Terms & Conditions", href: "#" },
+  { id: "0", LinkName: "My Account", href: "#" },
+  { id: "1", LinkName: "Track Your Order", href: "#" },
+  { id: "2", LinkName: "Payment Methods", href: "#" },
+  { id: "3", LinkName: "Shipping Guide", href: "#" },
+  { id: "4", LinkName: "FAQs", href: "#" },
+  { id: "5", LinkName: "Product Support", href: "#" },
+  { id: "6", LinkName: "Policy", href: "#" },
 ];
 
 const footerMenus02 = [
-  { id: "0", LinkName: "Cars", href: "#" },
-  { id: "1", LinkName: "Fashion", href: "#" },
-  { id: "2", LinkName: "Clothing", href: "#" },
-  { id: "3", LinkName: "Electronics", href: "#" },
-  { id: "4", LinkName: "Furniture", href: "#" },
-  { id: "5", LinkName: "Cooking", href: "#" },
-  { id: "6", LinkName: "Accessories", href: "#" },
+  { id: "0", LinkName: "Orders History", href: "#" },
+  { id: "1", LinkName: "Advanced Search", href: "#" },
+  { id: "2", LinkName: "Advanced Search", href: "#" },
+  { id: "3", LinkName: "Advanced Search", href: "#" },
+  { id: "4", LinkName: "Advanced Search", href: "#" },
+  { id: "5", LinkName: "Advanced Search", href: "#" },
 ];
+
 const footerMenus03 = [
-  { id: "0", LinkName: "Daraz", href: "#" },
+  { id: "0", LinkName: "Advanced Search", href: "#" },
+  { id: "1", LinkName: "Our Guarantees", href: "#" },
+  { id: "2", LinkName: "Terms And Conditions", href: "#" },
+  { id: "3", LinkName: "Privacy policy", href: "#" },
+  { id: "4", LinkName: "Return Policy", href: "#" },
+  { id: "5", LinkName: "Intellectual Property Claims", href: "#" },
+  { id: "6", LinkName: "Site Map", href: "#" },
+];
+const footerMenus04 = [
+  { id: "0", LinkName: "Daraz Bangladesh", href: "#" },
   { id: "1", LinkName: "Amazon", href: "#" },
-  { id: "2", LinkName: "Alibaba", href: "#" },
-  { id: "3", LinkName: "Pikabo", href: "#" },
-  { id: "4", LinkName: "E-orange", href: "#" },
-  { id: "5", LinkName: "Bongo", href: "#" },
+  { id: "2", LinkName: "Alibaba Online", href: "#" },
+  { id: "3", LinkName: "Pikabo Bangladesh", href: "#" },
+  { id: "4", LinkName: "Mena Bazar", href: "#" },
+  { id: "5", LinkName: "Bongo Bazar", href: "#" },
   { id: "6", LinkName: "Ali-Express", href: "#" },
 ];
 
 const HomeFooter = () => {
   return (
-    <div className="container mx-auto py-8 sm:py-12 px-4">
+    <div className="container mx-auto pt-24 px-10">
       <div>
-        <div className="sm:flex sm:flex-wrap sm:-mx-4 md:py-4">
+        <div className="block md:flex py-4">
           {/* company Info  */}
-          <div className="px-4 w-full md:w-1/4 xl:w-1/5">
+          <div className="pr-0 md:pr-3 w-full md:w-1/3">
             <ul className="list-none footer-links">
-              <li className="mb-2">
+              <li className="mb-4">
                 <a href="#">
-                  <Image src={Logo} alt="Othoba Mart" />
+                  <Image src={Logo} alt="Othoba Mart" className="w-full" />
                 </a>
               </li>
               <li className="mb-2">
+                <h1 className="font-medium">Address:</h1>
                 <p>
-                  Online Shopping BD has never been easier. Othoba Mart is the
-                  best online shopping store in Bangladesh that features 10+
-                  million products at affordable prices. As Bangaldesh&aposs
-                  online shopping landscape is expanding every year, online
-                  shopping in dhaka, chittagong, khulna, sylhet and other big
-                  cities are also gaining momentum.
+                  House # 7/B, Flat # A-1, Road # 103, Gulshan-2, Dhaka-1212
                 </p>
               </li>
-            </ul>
-          </div>
-
-          {/* 1st footer menu  */}
-          <div className="px-4 w-full md:w-1/4 xl:w-1/5">
-            <h5 className="text-xl font-bold mb-6">Help</h5>
-            <ul className="list-none footer-links">
-              {footerMenus01.map((fmenu01) => (
-                <li key={fmenu01.id} className="mb-2">
-                  <a
-                    href={fmenu01.href}
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    {fmenu01.LinkName}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* 2nd footer menu  */}
-          <div className="px-4 w-full md:w-1/4 xl:w-1/5">
-            <h5 className="text-xl font-bold mb-6">Top Categories</h5>
-            <ul className="list-none footer-links">
-              {footerMenus02.map((fmenu02) => (
-                <li key={fmenu02.id} className="mb-2">
-                  <a
-                    href={fmenu02.href}
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    {fmenu02.LinkName}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* 3rd footer menus  */}
-          <div className="px-4 w-full md:w-1/4 xl:w-1/5">
-            <h5 className="text-xl font-bold mb-6">Top Brands</h5>
-            <ul className="list-none footer-links">
-              {footerMenus03.map((fmenu03) => (
-                <li key={fmenu03.id} className="mb-2">
-                  <a
-                    href={fmenu03.href}
-                    className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                  >
-                    {fmenu03.LinkName}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* company Info  */}
-          <div className="px-4 w-full md:w-1/4 xl:w-1/5">
-            <ul className="list-none footer-links">
               <li className="mb-2">
-                <a href="#">
-                  <Image src={Payment} alt="Othoba Mart" />
-                </a>
-              </li>
-              <li className="mb-2">
-                <p>Address: House 13/A, Road# 35, Gulshan# 2, Dhaka# 1215</p>
-              </li>
-
-              <li className="mt-3">
-                <a
-                  href="http://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {/* <FacebookRoundedIcon className="text-blue-600 text-xl md:text-3xl" /> */}
-                </a>
-                <a
-                  href="http://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {/* <InstagramIcon className="mx-2 text-pink-600 text-xl md:text-3xl" /> */}
-                </a>
-                <a
-                  href="http://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {/* <TwitterIcon className="mx-2 text-blue-600 text-xl md:text-3xl" /> */}
-                </a>
-                <a
-                  href="http://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {/* <LinkedInIcon className=" text-xl md:text-3xl text-blue-800" /> */}
-                </a>
+                <h1 className="font-medium">Email:</h1>
+                <p>othobamart@gmail.com</p>
               </li>
             </ul>
+          </div>
+
+          <div className="pt-4 md:pt-0 px-0 md:px-3 flex w-full md:w-1/3">
+            {/* 1st footer menu  */}
+            <div className="w-1/2 md:w-full">
+              <h5 className="text-xl font-bold mb-6">Account</h5>
+              <ul className="list-none footer-links">
+                {footerMenus01.map((fmenu01) => (
+                  <li key={fmenu01.id} className="mb-2">
+                    <a
+                      href={fmenu01.href}
+                      className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
+                    >
+                      {fmenu01.LinkName}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 2nd footer menu  */}
+            <div className="pl-5 md:pl-0 w-1/2 md:w-full">
+              <h5 className="text-xl font-bold">{""}</h5>
+              <ul className="list-none footer-links mt-6">
+                {footerMenus02.map((fmenu02) => (
+                  <li key={fmenu02.id} className="mb-2">
+                    <a
+                      href={fmenu02.href}
+                      className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
+                    >
+                      {fmenu02.LinkName}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="pt-4 md:pt-0 px-0 md:px-3 flex w-full md:w-1/3">
+            {/* 3rd footer menus  */}
+            <div className="w-1/2 md:w-full">
+              <h5 className="text-xl font-bold mb-6">About</h5>
+              <ul className="list-none footer-links">
+                {footerMenus03.map((fmenu03) => (
+                  <li key={fmenu03.id} className="mb-2">
+                    <a
+                      href={fmenu03.href}
+                      className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
+                    >
+                      {fmenu03.LinkName}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 4th footer menus  */}
+            <div className="pl-5 w-1/2 md:w-full">
+              <h5 className="text-xl font-bold mb-6">Top Brands</h5>
+              <ul className="list-none footer-links">
+                {footerMenus04.map((fmenu04) => (
+                  <li key={fmenu04.id} className="mb-2">
+                    <a
+                      href={fmenu04.href}
+                      className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
+                    >
+                      {fmenu04.LinkName}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
