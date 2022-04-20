@@ -12,21 +12,13 @@ import { API_BASE_URL } from "../../../apiconstants";
 
 const NewProducts = () => {
 	const [items, setItems] = useState([]);
-<<<<<<< HEAD
 	console.log(items);
-=======
-	// console.log(items);
->>>>>>> 2e1ad975e430e6e45c8eefff463f64065d0814d9
 
 	useEffect(() => {
 		axios
 			.get(API_BASE_URL + "/product/paginated?page=0&size=4")
 			.then(function (response) {
-<<<<<<< HEAD
 				console.log(response?.data?.result);
-=======
-				// console.log(response?.data?.result);
->>>>>>> 2e1ad975e430e6e45c8eefff463f64065d0814d9
 				setItems(response?.data?.result);
 			});
 	}, []);
