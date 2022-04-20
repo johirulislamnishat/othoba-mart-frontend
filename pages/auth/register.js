@@ -1,7 +1,7 @@
 import { Image, Modal } from "antd";
 import Link from "next/link";
 import { useState } from "react";
-import useAuth from "../../components/hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
 	const [user_name, setUser_name] = useState("");

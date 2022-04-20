@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { API_BASE_URL } from "../../apiconstants";
+import { API_BASE_URL } from "../apiconstants";
 
 const AuthData = () => {
 	const router = useRouter();
