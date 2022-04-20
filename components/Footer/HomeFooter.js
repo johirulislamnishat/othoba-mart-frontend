@@ -1,5 +1,3 @@
-import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../assets/Logo/othoba-mart-logo.png";
 

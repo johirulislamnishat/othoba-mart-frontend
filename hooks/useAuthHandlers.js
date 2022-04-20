@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { API_BASE_URL } from "../../apiconstants";
+import { API_BASE_URL } from "../apiconstants";
 
 const AuthData = () => {
 	const router = useRouter();
@@ -52,7 +52,7 @@ const AuthData = () => {
 				password: password,
 			})
 			.then(function (response) {
-				// console.log(response);
+				console.log(response.data);
 				setUser(response?.data);
 				localStorage.setItem("token", response?.data?.accessToken);
 				setToken(localStorage.getItem("token"));

@@ -1,7 +1,7 @@
 import { Image } from "antd";
 import axios from "axios";
 import { API_BASE_URL } from "../../apiconstants";
-import useLocalDB from "../hooks/useLocalDB";
+import useLocalDB from "../../hooks/useLocalDB";
 
 const inputFields = [
 	{
