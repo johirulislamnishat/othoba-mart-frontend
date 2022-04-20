@@ -1,7 +1,9 @@
 import { Image, Modal } from "antd";
 import Link from "next/link";
+import { useRouter } from 'next/router'
 import { useState } from "react";
-import useAuth from "../../hooks/useAuth";
+import useProvider from '../../../hooks/useProvider'
+import AuthHandlers from "../../../hooks/useAuthHandlers";
 
 const Register = () => {
 	const [user_name, setUser_name] = useState("");
@@ -14,9 +16,12 @@ const Register = () => {
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [isTerms, setIsTerms] = useState(false);
 	const [isNext, setIsNext] = useState(false);
+    
+	const { dispatch } =  useProvider()
+	const router = useRouter()
 
-	const { signupHandlerCustomer, signupHandlerVendor } = useAuth();
-
+	const { loading, message, setMessage, signupHandlerCustomer, signupHandlerVendor } = AuthHandlers();
+	
 	const handleClient = (e) => {
 		if (e.target.name === "vendor") {
 			setIsCustomer(false);
@@ -27,13 +32,22 @@ const Register = () => {
 			setIsVendor(false);
 		}
 	};
+    
 
 	const handleOk = () => {
 		setIsModalVisible(false);
+		if(message == 'Vendor added successfully!'){
+			setMessage('')
+			router.push('/vendor/profile')
+		} else {
+			setMessage('')
+			router.push('/')
+		}
 	};
 
 	const handleCancel = () => {
 		setIsModalVisible(false);
+		setMessage('')
 	};
 
 	const handleNext = () => {
@@ -47,14 +61,14 @@ const Register = () => {
 		if (!isVendor && password === password2) {
 			signupHandlerCustomer(user_name, email, password);
 		} else if (isVendor && password === password2) {
-			signupHandlerVendor(user_name, email, password, shop_name);
+			signupHandlerVendor(user_name, email, password, shop_name, dispatch);
 		} else {
 			setIsModalVisible(true);
 		}
 	};
 
 	return (
-		<div className="w-screen min-h-screen grid sm:grid-cols-2 items-center">
+		<div className="w-screen min-h-screen grid sm:grid-cols-2 items-center overflow-hidden">
 			<div className="hidden sm:block min-h-full min-w-full">
 				{/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
 				<Image
@@ -68,15 +82,14 @@ const Register = () => {
 			<div className="relative min-w-full rounded-r-lg mt-3">
 				{isTerms && (
 					<div
-						className="absolute z-10 w-5/6 bg-white sm:mx-16 p-16 border-2 border-gray-200 rounded-lg text-s
-          m"
+						className="absolute z-10 bg-white h-full mx-2 lg:mx-16 p-3 border-2 border-gray-200 rounded-lg flex flex-col items-center"
 					>
 						<h3>Required Inforamtion</h3>
 						<h3>
 							APPLICATION FORM FOR CERTIFICATION OF E-COMMERCE
 							WEBSITE
 						</h3>
-						<p className="text-xs m-0">
+						<p className="text-xs lg:w-3/4">
 							Note: If there is insufficient space in the
 							application form for the required information, the
 							information is to be given in a separate annexure.
@@ -98,7 +111,7 @@ const Register = () => {
 								by applicant):
 							</p>
 							<button
-								className="px-3 py-1 bg-sky-500 text-white"
+								className="bg-sky-500 py-2 my-5 text-white font-semibold rounded-lg"
 								onClick={() => setIsNext(true)}
 							>
 								Next
@@ -107,7 +120,7 @@ const Register = () => {
 					</div>
 				)}
 				{isNext && (
-					<div className="absolute z-10 w-5/6 h-full bg-white sm:mx-16 p-16 border-2 border-gray-200 rounded-lg">
+					<div className="absolute z-10 bg-white h-full mx-2 lg:mx-16 p-3 py-5 lg:p-10 border-2 border-gray-200 rounded-lg flex flex-col items-center">
 						<div className="flex flex-col text-sm">
 							<p>
 								(iii) Type of server software used for
@@ -148,18 +161,18 @@ const Register = () => {
 								seal: Date
 							</p>
 							<button
-								className="px-3 py-1 bg-sky-500 text-white"
+								className="bg-sky-500 py-2 my-5 text-white font-semibold rounded-lg"
 								onClick={handleNext}
 							>
-								Ok
+								I Agree
 							</button>
 						</div>
 					</div>
 				)}
-				<div className="mx-4 sm:mx-16 p-2 border-2 border-gray-200 rounded-lg flex flex-col items-center">
+				<div className="mx-4 lg:mx-16 p-3 border-2 border-gray-200 rounded-lg flex flex-col items-center">
 					<form
 						onSubmit={handleRegister}
-						className="w-full sm:w-3/4 flex flex-col gap-2 font-semibold text-sm mt-5"
+						className="w-full lg:w-3/4 flex flex-col gap-4 sm:gap-2 lg:gap-2 font-semibold text-sm"
 					>
 						<div className="mb-2 flex gap-4">
 							<label
@@ -251,7 +264,7 @@ const Register = () => {
 								type="password"
 								required={true}
 								placeholder="Enter your password"
-								className="w-full p-2 mb-2 border-2 border-gray-200"
+								className="w-full p-2 mb-2 border-2 border-gray-200 rounded-lg"
 							/>
 						</label>
 						<label>
@@ -261,17 +274,18 @@ const Register = () => {
 								type="password"
 								required={true}
 								placeholder="Re-type your password"
-								className="w-full p-2 mb-2 border-2 border-gray-200"
+								className="w-full p-2 mb-2 border-2 border-gray-200 rounded-lg"
 							/>
 							<p className="mt-0 pt-0 text-gray-500 text-xs">
 								*Password must be minimum 8 characters.
 							</p>
+							{ !message && 
 							<Modal
-								title="*Warning"
+							title="*Warning"
 								visible={isModalVisible}
 								onOk={handleOk}
 								onCancel={handleCancel}
-							>
+								>
 								<p className="text-yellow-500 text-2xl">
 									Passwords do not match.
 								</p>
@@ -279,6 +293,7 @@ const Register = () => {
 									Please check your passwords.
 								</p>
 							</Modal>
+							}
 						</label>
 
 						<div className="flex justify-between items-center">
@@ -298,11 +313,25 @@ const Register = () => {
 							</Link>
 						</div>
 						<button
-							className="bg-sky-500 py-2 my-3 text-white font-semibold rounded-lg"
+							className={loading ? "bg-sky-500 py-2 my-3 text-white font-semibold rounded-lg cursor-wait" : "bg-sky-500 py-2 my-3 text-white font-semibold rounded-lg "}
 							type="submit"
 						>
-							Register
+						{ loading ? 'loading...' : 'Register' }	
 						</button>
+                        { message && <Modal
+								title="Suceesfull"
+								visible={()=>setIsModalVisible(true)}
+								onOk={handleOk}
+								onCancel={handleCancel}
+							>
+								<p className="text-green-500 text-2xl">
+									Congratualtion! <br/>
+									You have registered successfully.
+								</p>
+								<p className="text-xl">
+									{ message=='Vendor added successfully!' ? 'Please go to profile settings page.' : 'Please got to login page.' } 
+								</p>
+							</Modal> }
 
 						{isCustomer && (
 							<>
@@ -330,7 +359,7 @@ const Register = () => {
 						)}
 					</form>
 
-					<div className="flex flex-col  gap-2 mt-5 mb-3">
+					<div className="flex flex-col  gap-2 mt-3 mb-1">
 						<p className="mt-3 text-center">
 							Have an account?{" "}
 							<Link href="/auth/login">
@@ -343,7 +372,7 @@ const Register = () => {
 						</p>
 					</div>
 				</div>
-				<div className="mt-10 flex gap-4 items-center justify-center">
+				<div className="mt-5 flex gap-4 items-center justify-center">
 					<Link href="/policy/termsOfService">
 						<a>
 							<span className="underline text-gray-500 cursor-pointer">
