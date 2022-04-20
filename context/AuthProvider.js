@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import AuthData from "../hooks/authHandlers";
+import AuthData from "../hooks/useAuthHandlers";
 
 export const AuthContext = createContext();
 

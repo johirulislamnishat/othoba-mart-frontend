@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import { Image } from "antd";
 import { useState } from "react";
-import UseLocalDB from "../hooks/useLocalDB";
+import UseLocalDB from "../../hooks/useLocalDB";
 
 const CheckoutCart = () => {
 	const [activeOption, setActiveOption] = useState(false);
