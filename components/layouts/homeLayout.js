@@ -25,6 +25,7 @@ import useProvider from '../../hooks/useProvider'
 import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
+import API_BASE_URL from '../../apiconstants'
 
 const { Content, Footer } = Layout;
 
