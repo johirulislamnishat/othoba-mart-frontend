@@ -1,5 +1,5 @@
 import Link from "next/link";
-import useLocalDB from "../hooks/useLocalDB";
+import useLocalDB from "../../hooks/useLocalDB";
 
 const CartTotal = () => {
 	const { totalQuantity, totalPrice } = useLocalDB();

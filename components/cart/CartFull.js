@@ -1,7 +1,7 @@
 import { DeleteTwoTone, MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Image } from "antd";
 import React from "react";
-import UseLocalDB from "/components/hooks/useLocalDB";
+import UseLocalDB from "../../hooks/useLocalDB";
 
 const CartFull = () => {
 	const { cart, UpdateQuantity, RemoveFromCart } = UseLocalDB();
