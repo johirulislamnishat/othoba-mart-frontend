@@ -6,16 +6,16 @@ import {
   HeartTwoTone,
   CloseOutlined,
 } from "@ant-design/icons";
-import useCart from "../hooks/useCart";
-import { decrease } from "../context/Actions";
-import { increase } from "../context/Actions";
-import { removeFromCart } from "../context/Actions";
+import useProvider from "../hooks/useProvider";
+import { decrease } from "../context/actions/Actions";
+import { increase } from "../context/actions/Actions";
+import { removeFromCart } from "../context/actions/Actions";
 
 const CartMini = ({ active, setActive }) => {
   const {
     state: { cart },
     dispatch,
-  } = useCart();
+  } = useProvider();
 
   const [total, setTotal] = useState();
 

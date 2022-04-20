@@ -1,9 +1,8 @@
-import useCart from '../hooks/useCart'
+import useProvider from '../hooks/useProvider'
 import Notification from './Notification'
-import Loading from './Loading'
 
 const Notify = () => {
-  const { state: {notify}, dispatch } = useCart()
+  const { state: {notify}, dispatch } = useProvider()
 
   return (
     <>

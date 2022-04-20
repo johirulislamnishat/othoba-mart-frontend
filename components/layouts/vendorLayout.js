@@ -4,7 +4,7 @@ import Sider from "antd/lib/layout/Sider";
 import Head from "next/head";
 import React, { useState } from "react";
 import Foter from "../shared/footer";
-import AdminMenu from "./others/adminMenu";
+import VendorMenu from "./others/VendorMenu";
 import AdminTop from "./others/adminTop";
 
 const VendorLayout = ({ title, children, pageTitle, child = false }) => {
@@ -34,7 +34,7 @@ const VendorLayout = ({ title, children, pageTitle, child = false }) => {
 				onCollapse={toggle}
 				style={{ position: "fixed", height: "100vh" }}
 			>
-				<AdminMenu collapsed={collapsed} />
+				<VendorMenu collapsed={collapsed} />
 			</Sider>
 
 			<Layout className={`${collapsed ? "ml-20" : "ml-52"}`}>

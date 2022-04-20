@@ -1,16 +1,16 @@
 import { DeleteTwoTone } from "@ant-design/icons";
 import { useState, useEffect } from "react";
-import useCart from "../hooks/useCart";
-import { decrease } from "../context/Actions";
-import { increase } from "../context/Actions";
-import { removeFromCart } from "../context/Actions";
+import useProvider from "../hooks/useProvider";
+import { decrease } from "../context/actions/Actions";
+import { increase } from "../context/actions/Actions";
+import { removeFromCart } from "../context/actions/Actions";
 import CartTotal from "./CartTotal";
 
 const CartFull = () => {
   const {
     state: { cart },
     dispatch,
-  } = useCart();
+  } = useProvider();
 
   const [total, setTotal] = useState();
 

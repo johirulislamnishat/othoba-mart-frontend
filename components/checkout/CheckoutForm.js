@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import useCart from "../hooks/useCart";
-import { decrease } from "../context/Actions";
-import { increase } from "../context/Actions";
-import { removeFromCart } from "../context/Actions";
+import useProvider from "../hooks/useProvider";
+import { decrease } from "../context/actions/Actions";
+import { increase } from "../context/actions/Actions";
+import { removeFromCart } from "../context/actions/Actions";
 import CheckoutCart from "./CheckoutCart";
 import { API_BASE_URL } from "../../apiconstants";
 
@@ -53,9 +53,9 @@ const inputFields = [
 
 const CheckoutForm = () => {
   const {
-    state: { cart },
+    state: { cart, user: { accessToken } },
     dispatch,
-  } = useCart();
+  } = useProvider();
 
   const [total, setTotal] = useState();
 
@@ -73,30 +73,29 @@ const CheckoutForm = () => {
   const grandTotal = parseFloat(total) + parseFloat(tax) + parseFloat(shipping);
   const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = async (data) => {
-    const token = localStorage.getItem("token");
+  const onSubmit = (data) => {
     const item = {
       user_name: `${data.fName} ${data.lName}`,
       email: data.email,
       user_id: "11",
       phone: data.phone,
-      address: `${data.address}, ${data.zip_code}, ${data.city}, ${data.country}.`,
+      address: `${data.address}, ${data.city}- ${data.zip_code}, ${data.country}.`,
       purchased_items: cart,
       total_price: total,
     };
-
-    await axios
+    console.log(item)
+    axios
       .post(API_BASE_URL + "/order/place", item, {
         headers: {
           "Content-Type": "application/json",
-          token: `Bearer ${token}`,
+          token: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
         console.log(res);
         reset();
       })
-      .then((err) => console.log(err));
+      .catch((err) =>()=> console.log(err));
   };
 
   return (

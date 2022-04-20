@@ -7,10 +7,14 @@ import {
 import { Col, Row } from "antd";
 import axios from "axios";
 import Link from "next/link";
+import useProvider from '../../hooks/useProvider'
+import { addToCart } from '../../context/actions/Actions'
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 
 const BestSellers = () => {
+  const { state: {cart}, dispatch } = useProvider()
+
   const [items, setItems] = useState([]);
   console.log(items);
 
@@ -61,7 +65,7 @@ const BestSellers = () => {
                     <h3>${item?.product_price}.00</h3>
                   </div>
                   <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
+                    <ShoppingOutlined onClick={()=>dispatch(addToCart(cart, item))} />
                   </div>
                 </div>
                 <p className="text-1xl mt-3">2 Day Delivery</p>

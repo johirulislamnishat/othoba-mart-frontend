@@ -1,4 +1,4 @@
-export const addToCart = (item, cart) => {
+export const addToCart = (cart, item) => {
   const check = cart.every((c) => {
     return c._id !== item._id;
   });
@@ -45,6 +45,6 @@ export const removeFromCart = (data, id) => {
   return { type: "REMOVE_FROM_CART", payload: rest };
 };
 
-export const userData = (user) => {
+export const addUser = (user) => {
   return { type: 'AUTH', payload: user}
 }

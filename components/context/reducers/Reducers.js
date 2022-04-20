@@ -1,5 +1,7 @@
 const reducers = (state, action) => {
   switch (action.type) {
+    case "AUTH": 
+      return { ...state, user: action.payload };
     case "NOTIFY":
       return { ...state, notify: action.payload };
     case "ADD_CART":

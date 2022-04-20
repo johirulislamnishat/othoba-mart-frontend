@@ -8,7 +8,7 @@ import {
 import { Badge, Col, Image, Input, Layout, Row } from "antd";
 import Head from "next/head";
 import { useState } from "react";
-import useCart from '../hooks/useCart'
+import useProvider from '../hooks/useProvider'
 import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
@@ -18,7 +18,7 @@ const { Search } = Input;
 const { Content, Footer } = Layout;
 
 const HomeLayout = ({ children, title }) => {
-	const {state:{cart}} = useCart()
+	const {state:{cart}} = useProvider()
 	const [active, setActive] = useState(false);
 	const [visible, setVisible] = useState(false);
 
