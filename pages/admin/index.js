@@ -1,4 +1,5 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Area } from "@ant-design/plots";
 import {
 	Col,
 	Divider,
@@ -20,6 +21,35 @@ const { Option } = Select;
 const Dashboard = () => {
 	const [data, setData] = useState(null);
 	const [token, setToken] = useState(null);
+	const [graphData, setGraphData] = useState([
+		{ Date: "1 Jul", Revenew: 10000 },
+		{ Date: "8 Jul", Revenew: 18000 },
+		{ Date: "16 Jul", Revenew: 12000 },
+		{ Date: "24 Jul", Revenew: 24500 },
+		{ Date: "31 Jul", Revenew: 35000 },
+		{ Date: "1 Aug", Revenew: 20000 },
+		{ Date: "8 Aug", Revenew: 25200 },
+		{ Date: "16 Aug", Revenew: 16000 },
+		{ Date: "24 Aug", Revenew: 24500 },
+		{ Date: "30 Aug", Revenew: 35000 },
+	]);
+
+	const config = {
+		data: graphData,
+		xField: "Date",
+		yField: "Revenew",
+		xAxis: {
+			range: [0, 1],
+			tickCount: 5,
+		},
+		areaStyle: () => {
+			return {
+				fill: "l(270) 0:#ffffff 0.5:#7ec2f3 1:#1890ff",
+			};
+		},
+		smooth: true,
+		autoFit: true,
+	};
 
 	useEffect(() => {
 		axios
@@ -181,6 +211,36 @@ const Dashboard = () => {
 	return (
 		<AdminLayout title="Admin | Dashboard" pageTitle="Dashboard">
 			<Space direction="vertical" size={45} className="w-full">
+				<Row gutter={[32, 32]} justify="space-between" align="middle">
+					<Col xs={24} lg={12}>
+						<div className="bg-white rounded-xl">
+							<div className="w-full flex justify-between py-5 px-8">
+								<p className="text-lg font-bold">
+									Money Revenue
+								</p>
+								<p>Weekly</p>
+							</div>
+							<Area
+								{...config}
+								className="w-full"
+								appendPadding={35}
+							/>
+						</div>
+					</Col>
+					<Col xs={24} lg={12}>
+						<div className="bg-white rounded-xl">
+							<div className="w-full flex justify-between py-5 px-8">
+								<p className="text-lg font-bold">Profit</p>
+								<p>Weekly</p>
+							</div>
+							<Area
+								{...config}
+								className="w-full bg-white rounded-xl"
+								appendPadding={35}
+							/>
+						</div>
+					</Col>
+				</Row>
 				<Row gutter={[12, 12]} justify="space-around" align="middle">
 					<Col xs={24} md={12} lg={6}>
 						<Row
