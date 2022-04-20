@@ -14,7 +14,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
-import VendorLayout from "../../components/layouts/VendorLayout";
+import VendorLayout from '../../components/layouts/vendorLayout';
 
 const { Option } = Select;
 
@@ -181,7 +181,8 @@ const Dashboard = () => {
 
 	return (
 		<VendorLayout title='Vendor | Dashboard' pageTitle="Dashboard">
-			<Space direction="vertical" size={45} className="w-full">
+			<h4>Waiting for Admin approval</h4>
+			{/* <Space direction="vertical" size={45} className="w-full">
 				<Row gutter={[12, 12]} justify="space-around" align="middle">
 					<Col xs={24} md={12} lg={6}>
 						<Row
@@ -243,7 +244,7 @@ const Dashboard = () => {
 					pagination={{ position: ["bottomCenter"] }}
 					size="small"
 				/>
-			</Space>
+			</Space> */}
 		</VendorLayout>
 	);
 };
