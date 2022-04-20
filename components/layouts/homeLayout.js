@@ -122,22 +122,24 @@ const HomeLayout = ({ children, title }) => {
 												: setSearchText(e.target.value)
 										}
 									/>
-									<select
-										className="block px-5 py-3 text-small text-gray-700 border border-solid border-gray-300 focus:text-gray-700 focus:border-orange-500 focus:outline-none bg-white m-0 "
-										onChange={(e) =>
-											setSearchItem(e.target.value)
-										}
-									>
-										<option value={"product"}>
-											Products
-										</option>
-										<option value={"categories"}>
-											Categories
-										</option>
-										<option value={"sub-categories"}>
-											Tags
-										</option>
-									</select>
+									<div className="pl-1 pr-3 text-small text-gray-700 border border-solid border-gray-300 active:text-gray-700 active:border-orange-500 active:outline-none bg-white m-0 ">
+										<select
+											className="outline-none bg-white h-full py-3 border-0 px-3"
+											onChange={(e) =>
+												setSearchItem(e.target.value)
+											}
+										>
+											<option value={"product"}>
+												Products
+											</option>
+											<option value={"categories"}>
+												Categories
+											</option>
+											<option value={"sub-categories"}>
+												Tags
+											</option>
+										</select>
+									</div>
 									<button
 										className={`btn inline-block py-3 px-5 bg-orange-500 text-white font-medium text-xl rounded-r-3xl hover:bg-orange-400 focus:bg-orange-400 focus:outline-none flex items-center ${
 											loading && "cursor-not-allowed"
