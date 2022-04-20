@@ -6,7 +6,7 @@ import {
 	ShoppingOutlined,
 	UserOutlined,
 } from "@ant-design/icons";
-import { Badge, Col, Dropdown, Image, Layout, Menu, Row } from "antd";
+import { Badge, Col, Dropdown, Image, Layout, Menu, Row, Tag } from "antd";
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
@@ -63,7 +63,7 @@ const HomeLayout = ({ children, title }) => {
 				setLoading(false);
 			});
 	};
-
+	console.log(searchData[0]);
 	return (
 		<Layout>
 			<Head>
@@ -93,13 +93,15 @@ const HomeLayout = ({ children, title }) => {
 											onClick={() => setVisible(!visible)}
 										/>
 									</div>
-									<div className="text-center">
-										<Image
-											preview={false}
-											src="/othoba-mart-logo-light.png"
-											alt="Othoba Mart"
-										/>
-									</div>
+									<Link href="/" passHref>
+										<div className="text-center">
+											<Image
+												preview={false}
+												src="/othoba-mart-logo-light.png"
+												alt="Othoba Mart"
+											/>
+										</div>
+									</Link>
 								</div>
 							</Col>
 
@@ -107,14 +109,14 @@ const HomeLayout = ({ children, title }) => {
 							<Col
 								xs={0}
 								sm={0}
-								md={12}
+								md={13}
 								lg={16}
 								style={{ position: "relative" }}
 							>
-								<div className="flex w-4/5 lg:w-3/5 mx-auto">
+								<div className="flex w-11/12 lg:w-10/12 mx-auto">
 									<input
 										type="search"
-										className="block w-full px-5 py-3 text-small text-gray-700 border border-solid border-gray-300 rounded-l-3xl focus:text-gray-700 focus:border-orange-500 focus:outline-none"
+										className="block w-full px-5 py-2 xl:py-3 text-small text-gray-700 border border-solid border-gray-300 rounded-l-3xl focus:text-gray-700 focus:border-orange-500 focus:outline-none"
 										placeholder="I'm searching for..."
 										onChange={(e) =>
 											e.target.value === ""
@@ -122,9 +124,9 @@ const HomeLayout = ({ children, title }) => {
 												: setSearchText(e.target.value)
 										}
 									/>
-									<div className="pl-1 pr-3 text-small text-gray-700 border border-solid border-gray-300 active:text-gray-700 active:border-orange-500 active:outline-none bg-white m-0 ">
+									<div className="pl-1 pr-1 lg:pr-3 text-small text-gray-700 border border-solid border-gray-300 active:text-gray-700 active:border-orange-500 active:outline-none bg-white m-0 ">
 										<select
-											className="outline-none bg-white h-full py-3 border-0 px-3"
+											className="outline-none bg-white h-full py-2 xl:py-3 border-0 px-0 lg:px-3"
 											onChange={(e) =>
 												setSearchItem(e.target.value)
 											}
@@ -141,7 +143,7 @@ const HomeLayout = ({ children, title }) => {
 										</select>
 									</div>
 									<button
-										className={`btn inline-block py-3 px-5 bg-orange-500 text-white font-medium text-xl rounded-r-3xl hover:bg-orange-400 focus:bg-orange-400 focus:outline-none flex items-center ${
+										className={`btn inline-block py-2 xl:py-3 px-3 lg:px-5 bg-orange-500 text-white font-medium text-xl rounded-r-3xl hover:bg-orange-400 focus:bg-orange-400 focus:outline-none flex items-center ${
 											loading && "cursor-not-allowed"
 										}`}
 										type="button"
@@ -155,7 +157,7 @@ const HomeLayout = ({ children, title }) => {
 								{/* searchResult */}
 								{showResult && (
 									<div className="absolute z-10 top-12 w-full pl-8 pr-12">
-										<div className="w-4/5 lg:w-3/5 mx-auto p-5 bg-white shadow relative">
+										<div className="w-11/12 lg:w-10/12 mx-auto p-5 bg-white shadow relative">
 											<div className="absolute z-10 top-1 lg:top-3 right-2 lg:right-4">
 												<CloseOutlined
 													className=" text-lg lg:text-2xl font-bold"
@@ -165,32 +167,72 @@ const HomeLayout = ({ children, title }) => {
 												/>
 											</div>
 											{searchData
-												.slice(0, 9)
+												.slice(0, 5)
 												.map((item) => (
-													<Row
-														gutter={16}
-														align="middle"
+													<Link
+														href={`/product/${item._id}`}
+														passHref
 														key={item._id}
 													>
-														<Col xs={6}>
-															<Image
-																preview={false}
-																src={
-																	item.product_img
-																}
-																alt={
-																	item.product_name
-																}
-															/>
-														</Col>
-														<Col xs={18}>
-															<p>
-																{
-																	item.product_name
-																}
-															</p>
-														</Col>
-													</Row>
+														<Row
+															gutter={16}
+															align="middle"
+															className="cursor-pointer hover:border hover:border-orange-500 hover:text-orange-500"
+														>
+															<Col xs={6}>
+																<Image
+																	preview={
+																		false
+																	}
+																	src={
+																		item.product_img
+																	}
+																	alt={
+																		item.product_name
+																	}
+																/>
+															</Col>
+															<Col xs={18}>
+																<p>
+																	{
+																		item.product_name
+																	}
+																</p>
+																{item.product_category && (
+																	<div className="hidden lg:block">
+																		{item.product_category.map(
+																			(
+																				item
+																			) => (
+																				<Tag
+																					color={
+																						"rgba(255, 239, 217, 1)"
+																					}
+																					key={
+																						item
+																					}
+																				>
+																					<span className="text-orange-500">
+																						{
+																							item
+																						}
+																					</span>
+																				</Tag>
+																			)
+																		)}
+																	</div>
+																)}
+																{item.product_price && (
+																	<p className="mt-0 lg:mt-3">
+																		Price:{" "}
+																		{
+																			item.product_price
+																		}
+																	</p>
+																)}
+															</Col>
+														</Row>
+													</Link>
 												))}
 										</div>
 									</div>
@@ -200,7 +242,7 @@ const HomeLayout = ({ children, title }) => {
 							<Col
 								xs={12}
 								sm={12}
-								md={6}
+								md={5}
 								lg={4}
 								className="text-right"
 							>
