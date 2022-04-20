@@ -29,7 +29,7 @@ const AuthHandlers = () => {
 			});
 	};
 
-	const signupHandlerVendor = (user_name, email, password, shop_name) => {
+	const signupHandlerVendor = (user_name, email, password, shop_name, dispatch) => {
 		setLoading(true)
 		axios
 			.post(API_BASE_URL + "/auth/register/vendor", {
@@ -39,7 +39,12 @@ const AuthHandlers = () => {
 				shop_name: shop_name,
 			})
 			.then(function (response) {
+				console.log(response)
 				setMessage(response.data.message)
+				dispatch({
+					type: 'AUTH',
+					payload: response.data
+				})
 				setLoading(false)
 			})
 			.catch(function (error) {
@@ -58,7 +63,7 @@ const AuthHandlers = () => {
 			.then(function (response) {
 				console.log(response);
 				// setUser(response?.data);
-				localStorage.setItem("token", response?.data?.accessToken);
+				// localStorage.setItem("token", response?.data?.accessToken);
 				// setToken(localStorage.getItem("token"));
 				dispatch({
 					type: 'AUTH',

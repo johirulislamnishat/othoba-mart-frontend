@@ -71,6 +71,7 @@ const CheckoutForm = () => {
   const tax = total * 0.17;
   const shipping = total * 0.01;
   const grandTotal = parseFloat(total) + parseFloat(tax) + parseFloat(shipping);
+  
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {

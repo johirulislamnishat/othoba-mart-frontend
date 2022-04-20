@@ -2,6 +2,7 @@ import { Modal } from "antd";
 import Link from "next/link";
 import { useRouter } from 'next/router'
 import { useState } from "react";
+import useProvider from '/components/hooks/useProvider'
 import AuthHandlers from "/components/hooks/authHandlers";
 
 const Register = () => {
@@ -16,6 +17,7 @@ const Register = () => {
 	const [isTerms, setIsTerms] = useState(false);
 	const [isNext, setIsNext] = useState(false);
     
+	const { dispatch } =  useProvider()
 	const router = useRouter()
 
 	const { loading, message, setMessage, signupHandlerCustomer, signupHandlerVendor } = AuthHandlers();
@@ -36,7 +38,7 @@ const Register = () => {
 		setIsModalVisible(false);
 		if(message == 'Vendor added successfully!'){
 			setMessage('')
-			router.push('/auth/vendorProfile')
+			router.push('/vendor/profile')
 		} else {
 			setMessage('')
 			router.push('/')
@@ -59,7 +61,7 @@ const Register = () => {
 		if (!isVendor && password === password2) {
 			signupHandlerCustomer(user_name, email, password);
 		} else if (isVendor && password === password2) {
-			signupHandlerVendor(user_name, email, password, shop_name);
+			signupHandlerVendor(user_name, email, password, shop_name, dispatch);
 		} else {
 			setIsModalVisible(true);
 		}

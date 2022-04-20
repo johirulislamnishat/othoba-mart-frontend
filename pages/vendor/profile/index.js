@@ -1,64 +1,84 @@
+import { useForm } from 'react-hook-form'
 import VendorLayout from '/components/layouts/vendorLayout'
 
 const inputFields = [
     {
-      title: "First name",
+      label:'First name',
+      field: "fName",
       type: "text",
     },
     {
-      title: "Last name",
+      label:'Last name',
+      field: "lName",
       type: "text",
     },
     {
-      title: "Email address",
-      type: "text",
+      label:'Email address',
+      field: "email",
+      type: "email",
     },
     {
-      title: "Phone number",
+      label:'Phone number',
+      field: "phone",
       type: "number",
     },
   ];
   const shopData = [
     {
-      title: "Shop Name",
+      label:'Shop Name',
+      field: "shop",
       type: "text",
+      required: true,
     },
     {
-      title: "Street",
+      label:'Road',
+      field: "road",
       type: "text",
+      required: true,
     },
     {
-      title: "Town / City",
+      label:'Town / City',
+      field: "city",
       type: "text",
+      required: true,
     },
     {
-      title: "State / Country",
+      label:'State / Country',
+      field: "country",
       type: "text",
+      required: true,
     },
     {
-      title: "ZIP / Postal code",
+      label:'ZIP / Postal code',
+      field: "zip_code",
       type: "text",
+      required: true,
     },
     {
-      title: 'Website',
-      type: 'text'
+      label:'Website',
+      field: 'website',
+      type: 'text',
+      required: false,
     }
   ];
   
   const VendorProfile = () => {
+    const { register, handleSubmit, reset } = useForm();
+   const onSubmit = data => console.log(data)
     return (
       <VendorLayout>
       <div className="grid grid-cols-1 gap-4 lg:gap-x-8 p-2 lg:p-10 lg:pt-4">
-        <form className="">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <h3 className="font-semibold text-xl">Personal Information</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
             {inputFields.map((inp, i) => (
               <label key={i} className="flex flex-col font-semibold text-sm">
-                {inp.title}
+                {inp.label}
                 <input
                   type={inp.type}
-                  placeholder={inp.title}
+                  placeholder={inp.label}
                   className="p-1 border-2 border-gray-200 rounded-lg"
+                  {...register(inp.field, {required: true})}
                 />
               </label>
             ))}
@@ -69,11 +89,12 @@ const inputFields = [
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
             {shopData.map((inp, i) => (
               <label key={i} className="flex flex-col font-semibold text-sm">
-                {inp.title}
+                {inp.label}
                 <input
                   type={inp.type}
-                  placeholder={inp.title}
+                  placeholder={inp.label}
                   className="p-1 border-2 border-gray-100 rounded-lg"
+                  {...register(inp.field,{ required: true })}
                 />
               </label>
             ))}
@@ -99,14 +120,12 @@ const inputFields = [
                 rows="4"
               />
             </div>
-          </div>
-        </form>
-  
-        <h3 className="font-semibold text-xl mt-12 mb-0">Your Bank Information</h3>
+            <div>
+            <h3 className="font-semibold text-xl mt-12 mb-0">Your Bank Information</h3>
         <p className="text-xs text-gray-500 m-0">
           Account number you like to get paid
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label className="flex flex-col font-semibold text-sm">
             Account Number
             <input
@@ -135,7 +154,17 @@ const inputFields = [
               className="p-1 border-2 border-gray-200 rounded-lg"
             />
           </label>
-        </div>
+          </div>
+          <button
+            type="submit"
+            className="w-max mt-7 py-2 px-16 bg-orange-600 
+            text-lg text-white 
+            font-semibold border-2 border-white rounded-lg hover:bg-transparent hover:text-orange-600 hover:border-2 hover:border-orange-600">
+            Save
+          </button>
+          </div>
+          </div>
+        </form>
       </div>
       </VendorLayout>
     );
