@@ -69,21 +69,21 @@ const Orders = () => {
 
 	const columns = [
 		{
-			title: "User id",
-			dataIndex: "user_id",
+			title: "Order id",
+			dataIndex: "_id",
 			key: "2",
 			width: 100,
 			render: (id) => <Tooltip title={id}>#{id.slice(15)}</Tooltip>,
 		},
 		{
-			title: "User Name",
+			title: "Customer Name",
 			dataIndex: "user_name",
 			key: "name",
 			width: 200,
 		},
 
 		{
-			title: "User Email",
+			title: "Customer Email",
 			dataIndex: "email",
 			key: "email",
 			width: 250,
@@ -104,7 +104,9 @@ const Orders = () => {
 			title: "Total Price",
 			dataIndex: "total_price",
 			key: "5",
-			width: 100,
+			width: 120,
+			defaultSortOrder: "descend",
+			sorter: (a, b) => a.total_price - b.total_price,
 		},
 		{
 			title: "Status",
@@ -154,6 +156,33 @@ const Orders = () => {
 					</Option>
 				</Select>
 			),
+			filters: [
+				{
+					text: "Pending",
+					value: "pending",
+				},
+				{
+					text: "Approved",
+					value: "approved",
+				},
+				{
+					text: "Shifted",
+					value: "shifted",
+				},
+				{
+					text: "Completed",
+					value: "completed",
+				},
+				{
+					text: "Cancled",
+					value: "cancled",
+				},
+				{
+					text: "Rejected",
+					value: "rejected",
+				},
+			],
+			onFilter: (value, record) => record.status.indexOf(value) === 0,
 		},
 		{
 			title: "",
