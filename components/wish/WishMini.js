@@ -5,28 +5,21 @@ import {
   StarFilled,
   HeartTwoTone,
   CloseOutlined,
+  ShoppingTwoTone
 } from "@ant-design/icons";
 import useProvider from "../../hooks/useProvider";
-import { decrease } from "../../context/actions/Actions";
-import { increase } from "../../context/actions/Actions";
-import { removeFromCart } from "../../context/actions/Actions";
+import { removeFromWish, addToCart } from "../../context/actions/Actions";
 
 const WishMini = ({activeWish, setActiveWish}) => {
     const {
         state: { cart, wish },
         dispatch,
       } = useProvider();
-    
-      const [total, setTotal] = useState();
-    
-      useEffect(() => {
-        setTotal(
-          cart.reduce(
-            (prev, next) => prev + Number(next.item_price) * next.item_qty,
-            0
-          )
-        );
-      }, [cart]);
+
+      const handleAddToCart = (item) => {
+          dispatch(addToCart(cart,item))
+          dispatch(removeFromWish(wish, item._id))
+      }
       
     return(
         <>
@@ -70,10 +63,10 @@ const WishMini = ({activeWish, setActiveWish}) => {
                   <div className="mt-1 flex items-center justify-between gap-2">
                     <div className="">
                       <div className="flex items-center gap-1 cursor-pointer">
-                        <HeartTwoTone twoToneColor="#eb2f96" />
-                        <p className="text-gray-400 text-sm m-0">Wishlist</p>
+                      <ShoppingTwoTone twoToneColor='#ff6347' className='text-xl' />
+                        <p className="text-gray-400 text-sm m-0">Add</p>
                       </div>
-                      <div className="flex items-center gap-1 cursor-pointer">
+                      {/* <div className="flex items-center gap-1 cursor-pointer">
                         <img
                           src="/images/icons/compare.png"
                           alt=""
@@ -81,10 +74,10 @@ const WishMini = ({activeWish, setActiveWish}) => {
                           height="14px"
                         />
                         <p className="text-gray-400 m-0">Compare</p>
-                      </div>
+                      </div> */}
                       <div
                         className="flex items-center gap-1 cursor-pointer"
-                        onClick={() => dispatch(removeFromCart(cart, p._id))}>
+                        onClick={() => dispatch(removeFromWish(wish, p._id))}>
                         <CloseOutlined className="text-red-500" />
                         <p className="text-gray-400 m-0">Remove</p>
                       </div>
@@ -105,39 +98,24 @@ const WishMini = ({activeWish, setActiveWish}) => {
                       </div>
                     </div>
                     <div className="w-max flex items-center mx-auto">
-                      <button
-                        disabled={p?.item_qty === 1 ? true : false}
-                        onClick={() => dispatch(decrease(cart, p._id))}
-                        className="cursor-pointer text-3xl p-1 pt-0">
-                        -
-                      </button>
-
-                      <span className="border-2 border-gray-400 px-2 py-0.5 rounded m-0">
-                        {p.item_qty}
-                      </span>
-                      <button
-                        onClick={() => dispatch(increase(cart, p._id))}
-                        className="cursor-pointer text-2xl p-1 pt-0">
-                        +
-                      </button>
+                    <button
+                      className="py-0.5 px-2 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black" onClick={()=>handleAddToCart(p)}
+                      >
+                      Add To Cart
+                    </button>
                     </div>
                   </div>
                 </div>
               ))}
 
-              <div className="py-3">
-                <div className="text-left">
-                  <h5 className="font-semibold font-xs m-0">Sub Total</h5>
-                  <h5 className="text-sky-500 m-0 text-sky-500">{total} USD</h5>
-                </div>
-              </div>
-              <div className="py-1 flex items-center justify-between">
+              
+              <div className="pt-3 flex items-center justify-between">
                 <Link href="/categories">
                   <a>
                     <button
                       className="p-2 bg-transparent font-semibold text-gray-500 rounded-lg hover:text-black"
                       onClick={() => setActiveWish(!activeWish)}>
-                      Continue shopping
+                      Continue
                     </button>
                   </a>
                 </Link>
@@ -146,7 +124,7 @@ const WishMini = ({activeWish, setActiveWish}) => {
                     <button
                       className="py-2 px-4 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
                       onClick={() => setActiveWish(!activeWish)}>
-                      View Full Cart
+                      View Full Wish List
                     </button>
                   </a>
                 </Link>

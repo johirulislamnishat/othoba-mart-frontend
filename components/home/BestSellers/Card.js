@@ -16,12 +16,12 @@ const Card = ({item}) => {
     const[wishClicked,setWishClicked] = useState(false)
     const { state: {cart, wish }, dispatch } = useProvider()
 
-    const handleAddToWish = (wish, item) => {
+    const handleAddToWish = (item) => {
       setWishClicked(true)
       dispatch(addToWish(wish, item))
       }
 
-    const handleAddToCart = (cart, item) => {
+    const handleAddToCart = (item) => {
         setCartClicked(true)
         dispatch(addToCart(cart, item))
       }
@@ -38,7 +38,7 @@ const Card = ({item}) => {
 								/>
 
                 <div className="wishlist flex justify-center items-center">
-                  <HeartOutlined onClick={()=>handleAddToWish(wish,item)} style={wishClicked ? {color:'red'} : {color:'inherit'}} />
+                  <HeartOutlined onClick={()=>handleAddToWish(item)} style={wishClicked ? {color:'red'} : {color:'inherit'}} />
                 </div>
                 <div className="discount flex justify-center items-center">
                   <small>Super Price</small>
@@ -63,7 +63,7 @@ const Card = ({item}) => {
                   <div className="shopping flex justify-center items-center">
                    
 
-                    <ShoppingOutlined onClick={()=>handleAddToCart(cart,item)} style={cartClicked ? {color:'red'} : {color:'inherit'}} />
+                    <ShoppingOutlined onClick={()=>handleAddToCart(item)} style={cartClicked ? {color:'red'} : {color:'inherit'}} />
                     
                   </div>
                 </div>

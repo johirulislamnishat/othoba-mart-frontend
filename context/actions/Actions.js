@@ -10,13 +10,13 @@ export const addToWish = (wish,item) => {
     
   return {
     type: "ADD_WISH",
-    payload: [...wish, { ...{_id: item?._id, item_name: item?.product_name, item_price: item?.product_price,
-      item_img: item?.product_img, item_qty: 1, item_total_price: item?.product_price * 1, shop_name:'fff', shop_id:'1213' }  }],
+    payload: [...wish, { ...{_id: item?._id, item_name: item?.product_name || item?.item_name, item_price: item?.product_price || item?.item_price,
+      item_img: item?.product_img || item?.item_img, item_qty: 1, item_total_price: (item?.product_price || item?.item_price) * 1, shop_name:'fff', shop_id:'1213' }  }],
   };
 }
 
 export const addToCart = (cart, item) => {
-  const check = cart.every((c) => {
+  const check = cart?.every((c) => {
     return c._id !== item._id;
   });
   if (!check)
@@ -27,8 +27,8 @@ export const addToCart = (cart, item) => {
     
   return {
     type: "ADD_CART",
-    payload: [...cart, { ...{_id: item?._id, item_name: item?.product_name, item_price: item?.product_price,
-      item_img: item?.product_img, item_qty: 1, item_total_price: item?.product_price * 1, shop_name:'fff', shop_id:'1213' }  }],
+    payload: [...cart, { ...{_id: item?._id, item_name: item?.product_name || item?.item_name, item_price: item?.product_price || item?.item_price,
+      item_img: item?.product_img || item?.item_img, item_qty: 1, item_total_price: (item?.product_price || item?.item_price) * 1, shop_name:'fff', shop_id:'1213' }  }],
   };
 };
 
@@ -53,6 +53,12 @@ export const increase = (data, id) => {
   });
 
   return { type: "ADD_CART", payload: newData };
+};
+
+export const removeFromWish = (data, id) => {
+  const rest = data.filter((item) => item._id !== id);
+
+  return { type: "REMOVE_FROM_WISH", payload: rest };
 };
 
 export const removeFromCart = (data, id) => {

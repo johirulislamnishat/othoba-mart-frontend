@@ -8,6 +8,8 @@ const reducers = (state, action) => {
       return { ...state, wish: action.payload };
     case "ADD_CART":
       return { ...state, cart: action.payload };
+    case "REMOVE_FROM_WISH":
+      return { ...state, wish: action.payload };
     case "REMOVE_FROM_CART":
       return { ...state, cart: action.payload };
     default:
