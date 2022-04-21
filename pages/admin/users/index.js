@@ -4,33 +4,34 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
+import useProvider from "../../../hooks/useProvider";
 
 const { Option } = Select;
 
 const Users = () => {
-	const [token, setToken] = useState(null);
 	const [data, setData] = useState(null);
+	const {
+		state: {
+			user: { accessToken },
+		},
+	} = useProvider();
 
 	useEffect(() => {
-		if (typeof window !== "undefined") {
-			setToken(localStorage.getItem("token"));
-
-			axios
-				.get(`${API_BASE_URL}/user/all`, {
-					headers: {
-						token: `Bearer ${localStorage.getItem("token")}`,
-					},
-				})
-				.then((res) => {
-					const arr = [];
-					for (const value of res.data.result) {
-						arr.push({ ...value, key: value._id });
-					}
-					setData(arr);
-				})
-				.catch((e) => console.log(e));
-		}
-	}, []);
+		axios
+			.get(`${API_BASE_URL}/user/all`, {
+				headers: {
+					token: `Bearer ${accessToken}`,
+				},
+			})
+			.then((res) => {
+				const arr = [];
+				for (const value of res.data.result) {
+					arr.push({ ...value, key: value._id });
+				}
+				setData(arr);
+			})
+			.catch((e) => console.log(e));
+	}, [accessToken]);
 
 	const deleteUser = (user) => {
 		axios
@@ -69,6 +70,9 @@ const Users = () => {
 			dataIndex: "user_name",
 			key: "1",
 			width: 250,
+			defaultSortOrder: "descend",
+			sorter: (a, b) =>
+				a.user_name.charCodeAt(0) - b.user_name.charCodeAt(0),
 		},
 		{
 			title: "email",
@@ -141,6 +145,22 @@ const Users = () => {
 					</Option>
 				</Select>
 			),
+			filters: [
+				{
+					text: "Pending",
+					value: "pending",
+				},
+				{
+					text: "Approved",
+					value: "approved",
+				},
+				{
+					text: "Rejected",
+					value: "rejected",
+				},
+			],
+			onFilter: (value, record) =>
+				record.vendor_status.indexOf(value) === 0,
 		},
 		{
 			title: "",
@@ -159,6 +179,7 @@ const Users = () => {
 			),
 		},
 	];
+
 	return (
 		<AdminLayout title={"Admin || All Users"} pageTitle="Users">
 			<Table
