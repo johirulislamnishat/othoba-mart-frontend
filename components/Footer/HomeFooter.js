@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Logo from "../../assets/Logo/othoba-mart-logo.png";
-
+import Link from "next/Link";
 const footerMenus01 = [
   { id: "0", LinkName: "My Account", href: "#" },
   { id: "1", LinkName: "Track Your Order", href: "#" },
@@ -45,12 +45,16 @@ const HomeFooter = () => {
       <div>
         <div className="block md:flex py-4">
           {/* company Info  */}
-          <div className="pr-0 md:pr-3 w-full md:w-1/3">
+          <div className="pr-0 md:pr-3 w-full  md:w-1/3">
             <ul className="list-none footer-links">
               <li className="mb-4">
-                <a href="#">
-                  <Image src={Logo} alt="Othoba Mart" className="w-full" />
-                </a>
+                <Link href="/">
+                  <Image
+                    src={Logo}
+                    alt="Othoba Mart"
+                    className="w-full cursor-pointer"
+                  />
+                </Link>
               </li>
               <li className="mb-2">
                 <h1 className="font-medium">Address:</h1>
@@ -65,7 +69,7 @@ const HomeFooter = () => {
             </ul>
           </div>
 
-          <div className="pt-4 md:pt-0 px-0 md:px-3 flex w-full md:w-1/3">
+          <div className="pt-4 md:pt-0 px-0 md:px-3 flex w-full  md:w-1/3">
             {/* 1st footer menu  */}
             <div className="w-1/2 md:w-full">
               <h5 className="text-xl font-bold mb-6">Account</h5>
@@ -84,7 +88,7 @@ const HomeFooter = () => {
             </div>
 
             {/* 2nd footer menu  */}
-            <div className="pl-5 md:pl-0 w-1/2 md:w-full">
+            <div className="pl-5 md:pl-0 w-1/2 md:w-full left-align-padding">
               <h5 className="text-xl font-bold">{""}</h5>
               <ul className="list-none footer-links mt-6">
                 {footerMenus02.map((fmenu02) => (

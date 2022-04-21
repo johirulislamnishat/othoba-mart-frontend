@@ -520,3 +520,13 @@ single product page style
 .single-product-page .ant-tabs-tab-btn {
   font-size: 20px;
 }
+
+/* faqs header  */
+.faq-header {
+  font-size: 17px;
+}
+
+/* homefooter  */
+.left-align-padding {
+  padding-left: 20px;
+}

@@ -26,7 +26,7 @@ import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 const HomeLayout = ({ children, title }) => {
   const [active, setActive] = useState(false);
@@ -255,9 +255,9 @@ const HomeLayout = ({ children, title }) => {
       <Content style={{ minHeight: "90vh", backgroundColor: "white" }}>
         <div className="container mx-auto px-3 lg:px-0">{children}</div>
       </Content>
-      <Footer className="bg-gray-50 px-2">
+      <footer className="bg-white px-2">
         <HomeFooter />
-      </Footer>
+      </footer>
     </Layout>
   );
 };
