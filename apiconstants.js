@@ -1,1 +1,1 @@
-export const API_BASE_URL = "https://othobamart-backend.herokuapp.com";
+export const API_BASE_URL = "https://othobamart-api.herokuapp.com";
