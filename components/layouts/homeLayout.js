@@ -21,19 +21,22 @@ import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import { API_BASE_URL } from "../../apiconstants";
-import useProvider from "../../hooks/useProvider";
+
+import useProvider from '../../hooks/useProvider'
+
 import CartMini from "../cart/CartMini";
+import WishMini from '../wish/WishMini' 
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
 
 const { Content, Footer } = Layout;
 
 const HomeLayout = ({ children, title }) => {
-	const {
-		state: { cart },
-	} = useProvider();
-	const [active, setActive] = useState(false);
+
+	const {state:{cart, wish}} = useProvider()
+	const [activeCart, setActiveCart] = useState(false);
+	const [activeWish, setActiveWish] = useState(false);
+
 	const [visible, setVisible] = useState(false);
 	const [searchText, setSearchText] = useState(null);
 	const [searchItem, setSearchItem] = useState("product");
@@ -276,11 +279,17 @@ const HomeLayout = ({ children, title }) => {
 											/>
 										</Dropdown>
 									</Col>
-									<Col>
+
+									<Col style={{ position: "relative" }} >
+										<Badge count={wish.length} size='small'>
 										<HeartOutlined
 											className="text-3xl"
 											style={{ color: "#f66a05" }}
+											onClick={()=>setActiveWish(!activeWish)}
 										/>
+										</Badge>
+										<WishMini activeWish={activeWish} setActiveWish={setActiveWish} />
+
 									</Col>
 									<Col style={{ position: "relative" }}>
 										<Badge count={cart.length} size="small">
@@ -288,13 +297,17 @@ const HomeLayout = ({ children, title }) => {
 												className="text-3xl"
 												style={{ color: "#f66a05" }}
 												onClick={() =>
-													setActive(!active)
+
+													setActiveCart(!activeCart)
+
 												}
 											/>
 										</Badge>
 										<CartMini
-											active={active}
-											setActive={setActive}
+
+											activeCart={activeCart}
+											setActiveCart={setActiveCart}
+
 										/>
 									</Col>
 								</Row>
