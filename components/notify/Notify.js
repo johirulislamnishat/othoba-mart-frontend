@@ -3,7 +3,7 @@ import Notification from './Notification'
 
 const Notify = () => {
   const { state: {notify}, dispatch } = useProvider()
-
+  console.log(notify)
   return (
     <>
     { notify?.error &&

@@ -2,13 +2,12 @@ export const addToCart = (cart, item) => {
   const check = cart.every((c) => {
     return c._id !== item._id;
   });
-
   if (!check)
     return {
       type: "NOTIFY",
       payload: { error: "Product has already been added to the cart." },
     };
-
+    
   return {
     type: "ADD_CART",
     payload: [...cart, { ...{_id: item?._id, item_name: item?.product_name, item_price: item?.product_price,
