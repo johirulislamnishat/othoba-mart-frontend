@@ -1,6 +1,6 @@
 import Link from "next/link";
 import useProvider from '../../../hooks/useProvider'
-import { addToCart, notify } from '../../../context/actions/Actions'
+import { addToCart, addToWish } from '../../../context/actions/Actions'
 import { Col, Image, Row } from 'antd';
 import { useState } from 'react'
 import {
@@ -12,11 +12,17 @@ import {
 
 
 const Card = ({item}) => {
-    const[clicked,setClicked] = useState(false)
-  const { state: {cart, notify}, dispatch } = useProvider()
+    const[cartClicked,setCartClicked] = useState(false)
+    const[wishClicked,setWishClicked] = useState(false)
+    const { state: {cart, wish }, dispatch } = useProvider()
 
-    const handleClick = (cart, item) =>{
-        setClicked(true)
+    const handleAddToWish = (wish, item) => {
+      setWishClicked(true)
+      dispatch(addToWish(wish, item))
+      }
+
+    const handleAddToCart = (cart, item) => {
+        setCartClicked(true)
         dispatch(addToCart(cart, item))
       }
 
@@ -32,7 +38,7 @@ const Card = ({item}) => {
 								/>
 
                 <div className="wishlist flex justify-center items-center">
-                  <HeartOutlined />
+                  <HeartOutlined onClick={()=>handleAddToWish(wish,item)} style={wishClicked ? {color:'red'} : {color:'inherit'}} />
                 </div>
                 <div className="discount flex justify-center items-center">
                   <small>Super Price</small>
@@ -55,10 +61,10 @@ const Card = ({item}) => {
                     <h3>${item?.product_price}.00</h3>
                   </div>
                   <div className="shopping flex justify-center items-center">
-                    <span onClick={()=>handleClick(cart,item)} >
+                   
 
-                    <ShoppingOutlined style={clicked ? {color:'red'} : {color:'inherit'}} />
-                    </span>
+                    <ShoppingOutlined onClick={()=>handleAddToCart(cart,item)} style={cartClicked ? {color:'red'} : {color:'inherit'}} />
+                    
                   </div>
                 </div>
                 <p className="text-1xl mt-3">2 Day Delivery</p>

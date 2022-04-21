@@ -11,46 +11,46 @@ import { decrease } from "../../context/actions/Actions";
 import { increase } from "../../context/actions/Actions";
 import { removeFromCart } from "../../context/actions/Actions";
 
-const CartMini = ({ activeCart, setActiveCart }) => {
-  const {
-    state: { cart },
-    dispatch,
-  } = useProvider();
-
-  const [total, setTotal] = useState();
-
-  useEffect(() => {
-    setTotal(
-      cart.reduce(
-        (prev, next) => prev + Number(next.item_price) * next.item_qty,
-        0
-      )
-    );
-  }, [cart]);
-
-  return (
-    <>
-      {activeCart && (
+const WishMini = ({activeWish, setActiveWish}) => {
+    const {
+        state: { cart, wish },
+        dispatch,
+      } = useProvider();
+    
+      const [total, setTotal] = useState();
+    
+      useEffect(() => {
+        setTotal(
+          cart.reduce(
+            (prev, next) => prev + Number(next.item_price) * next.item_qty,
+            0
+          )
+        );
+      }, [cart]);
+      
+    return(
+        <>
+      {activeWish && (
         <div className="absolute z-10 top-0 w-72 right-0 bg-white shadow-lg shadow-gray-500">
           <div className="border-gray-200 rounded-lg p-3">
             <div className="flex items-center justify-between">
               <h3 className="font-semibold text-xl m-0 text-left">
-                Shopping Cart
+                Wish List
               </h3>
               <p className="flex items-center gap-1 font-semibold text-lg  m-0">
                 <CloseOutlined
                   className="cursor-pointer"
-                  onClick={() => setActiveCart(!activeCart)}
+                  onClick={() => setActiveWish(!activeWish)}
                 />
               </p>
             </div>
             <div className="grid grid-cols-1 gap-2 divide-y-2">
-              {cart.length === 0 && (
+              {wish.length === 0 && (
                 <div className="text-left text-lg font-semibold my-5">
-                  Cart is empty!
+                  Wish is empty!
                 </div>
               )}
-              {cart.map((p) => (
+              {wish.map((p) => (
                 <div className="mt-4 " key={p._id}>
                   <div className="flex gap-2">
                     <img
@@ -136,7 +136,7 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                   <a>
                     <button
                       className="p-2 bg-transparent font-semibold text-gray-500 rounded-lg hover:text-black"
-                      onClick={() => setActiveCart(!activeCart)}>
+                      onClick={() => setActiveWish(!activeWish)}>
                       Continue shopping
                     </button>
                   </a>
@@ -145,7 +145,7 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                   <a>
                     <button
                       className="py-2 px-4 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
-                      onClick={() => setActiveCart(!activeCart)}>
+                      onClick={() => setActiveWish(!activeWish)}>
                       View Full Cart
                     </button>
                   </a>
@@ -156,7 +156,7 @@ const CartMini = ({ activeCart, setActiveCart }) => {
         </div>
       )}
     </>
-  );
-};
+    )
+}
 
-export default CartMini;
+export default WishMini
