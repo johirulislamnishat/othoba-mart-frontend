@@ -93,7 +93,9 @@ const Products = () => {
 			title: "Price",
 			dataIndex: "product_price",
 			key: "price",
-			width: 100,
+			width: 120,
+			defaultSortOrder: "descend",
+			sorter: (a, b) => a.product_price - b.product_price,
 		},
 		{
 			title: "Category",
@@ -215,6 +217,33 @@ const Products = () => {
 					</Option>
 				</Select>
 			),
+			filters: [
+				{
+					text: "Pending",
+					value: "pending",
+				},
+				{
+					text: "Approved",
+					value: "approved",
+				},
+				{
+					text: "Shifted",
+					value: "shifted",
+				},
+				{
+					text: "Completed",
+					value: "completed",
+				},
+				{
+					text: "Cancled",
+					value: "cancled",
+				},
+				{
+					text: "Rejected",
+					value: "rejected",
+				},
+			],
+			onFilter: (value, record) => record.status.indexOf(value) === 0,
 		},
 		{
 			title: "",
