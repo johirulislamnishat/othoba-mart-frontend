@@ -62,7 +62,7 @@ const WishMini = ({activeWish, setActiveWish}) => {
                   </div>
                   <div className="mt-1 flex items-center justify-between gap-2">
                     <div className="">
-                      <div className="flex items-center gap-1 cursor-pointer">
+                      <div className="flex items-center gap-1 cursor-pointer" onClick={()=>handleAddToCart(p)}>
                       <ShoppingTwoTone twoToneColor='#ff6347' className='text-xl' />
                         <p className="text-gray-400 text-sm m-0">Add</p>
                       </div>
@@ -99,7 +99,7 @@ const WishMini = ({activeWish, setActiveWish}) => {
                     </div>
                     <div className="w-max flex items-center mx-auto">
                     <button
-                      className="py-0.5 px-2 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black" onClick={()=>handleAddToCart(p)}
+                      className="py-0.5 px-2 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
                       >
                       Add To Cart
                     </button>

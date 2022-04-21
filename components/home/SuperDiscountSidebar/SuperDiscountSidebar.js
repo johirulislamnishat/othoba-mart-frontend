@@ -6,12 +6,14 @@ const SuperDiscountSidebar = () => {
   return (
     <div className="super-discount">
       <Row>
-        <div className="bg-gray-100 p-4">
+        <div className="bg-gray-100 super-discount-item p-6">
           <h4>Super Discount</h4>
           <h3>New Phone 11</h3>
           <p>Do not miss the last opportunity</p>
           <button className="custom-btn">Shop Now</button>
-          <Image src={smartphone} alt="" />
+          <div className="sidebar-image">
+            <Image preview={false} src={smartphone} alt="" />
+          </div>
         </div>
       </Row>
     </div>
