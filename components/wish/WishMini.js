@@ -5,33 +5,31 @@ import {
   StarFilled,
   HeartTwoTone,
   CloseOutlined,
-  ShoppingTwoTone
+  ShoppingTwoTone,
 } from "@ant-design/icons";
 import useProvider from "../../hooks/useProvider";
 import { removeFromWish, addToCart } from "../../context/actions/Actions";
 
-const WishMini = ({activeWish, setActiveWish}) => {
-    const {
-        state: { cart, wish },
-        dispatch,
-      } = useProvider();
+const WishMini = ({ activeWish, setActiveWish }) => {
+  const {
+    state: { cart, wish },
+    dispatch,
+  } = useProvider();
 
-      const handleAddToCart = (item) => {
-          dispatch(addToCart(cart,item))
-          dispatch(removeFromWish(wish, item._id))
-      }
-      
-    return(
-        <>
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(cart, item));
+    dispatch(removeFromWish(wish, item._id));
+  };
+
+  return (
+    <>
       {activeWish && (
         <div className="absolute z-10 top-0 w-72 right-0 bg-white shadow-lg shadow-gray-500">
-          <div className="border-gray-200 rounded-lg p-3">
+          <div className="border-gray-200 rounded-lg p-4">
             <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-xl m-0 text-left">
-                Wish List
-              </h3>
+              <h3 className="font-semibold text-xl m-0 text-left">Wish List</h3>
               <p className="flex items-center gap-1 font-semibold text-lg  m-0">
-                <CloseOutlined
+                <CloseOutlined style={{color:'red'}}
                   className="cursor-pointer"
                   onClick={() => setActiveWish(!activeWish)}
                 />
@@ -44,7 +42,7 @@ const WishMini = ({activeWish, setActiveWish}) => {
                 </div>
               )}
               {wish.map((p) => (
-                <div className="mt-4 " key={p._id}>
+                <div className="mt-4" key={p._id}>
                   <div className="flex gap-2">
                     <img
                       src={p.item_img}
@@ -53,20 +51,29 @@ const WishMini = ({activeWish, setActiveWish}) => {
                     />
                     <div className="text-left">
                       <h4 className="font-semibold m-0">{p.item_name}</h4>
-                      <p className="text-xs m-0">
-                        <span className="text-gray-400 w-1/2">
-                          {p?.item_description}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-1 flex items-center justify-between gap-2">
-                    <div className="">
-                      <div className="flex items-center gap-1 cursor-pointer" onClick={()=>handleAddToCart(p)}>
-                      <ShoppingTwoTone twoToneColor='#ff6347' className='text-xl' />
-                        <p className="text-gray-400 text-sm m-0">Add</p>
+
+                      <div className="ratings-mini">
+                        <StarFilled />
+                        <StarFilled />
+                        <StarFilled />
+                        <StarFilled />
+                        <StarOutlined />
                       </div>
-                      {/* <div className="flex items-center gap-1 cursor-pointer">
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-around">
+                        <div className="mt-1 flex flex-col gap-2">
+                          <div
+                            className="flex items-center gap-1 cursor-pointer"
+                            onClick={() => handleAddToCart(p)}>
+                            <ShoppingTwoTone
+                              twoToneColor="#ff6347"
+                              className="text-xl"
+                            />
+                            <p className="text-gray-400 text-sm m-0">Add</p>
+                          </div>
+                          {/* <div className="flex items-center gap-1 cursor-pointer">
                         <img
                           src="/images/icons/compare.png"
                           alt=""
@@ -75,51 +82,38 @@ const WishMini = ({activeWish, setActiveWish}) => {
                         />
                         <p className="text-gray-400 m-0">Compare</p>
                       </div> */}
-                      <div
-                        className="flex items-center gap-1 cursor-pointer"
-                        onClick={() => dispatch(removeFromWish(wish, p._id))}>
-                        <CloseOutlined className="text-red-500" />
-                        <p className="text-gray-400 m-0">Remove</p>
+                          <div
+                            className="flex items-center gap-1 cursor-pointer"
+                            onClick={() =>
+                              dispatch(removeFromWish(wish, p._id))
+                            }>
+                            <CloseOutlined className="text-red-500" />
+                            <p className="text-gray-400 m-0">Remove</p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col gap-1 text-left">
+                          <p className="w-max text-orange-500 text-md font-semibold m-0">
+                            {p.item_price * p.item_qty} USD
+                          </p>
+                          <p className="line-through text-sm m-0">12.11 USD</p>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-1">
-                      <div className="ratings-mini">
-                        <StarFilled />
-                        <StarFilled />
-                        <StarFilled />
-                        <StarFilled />
-                        <StarOutlined />
-                      </div>
-                      <div>
-                        <p className="min-w-max text-sky-500 text-md font-semibold m-0">
-                          {p.item_price} USD
-                        </p>
-                        <p className="line-through text-sm m-0">48.56 USD</p>
-                      </div>
-                    </div>
-                    <div className="w-max flex items-center mx-auto">
-                    <button
-                      className="py-0.5 px-2 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
-                      >
-                      Add To Cart
-                    </button>
-                    </div>
-                  </div>
                 </div>
               ))}
 
-              
               <div className="pt-3 flex items-center justify-between">
                 <Link href="/categories">
                   <a>
                     <button
-                      className="p-2 bg-transparent font-semibold text-gray-500 rounded-lg hover:text-black"
+                      className="p-2 bg-white font-semibold 
+                      text-gray-500 rounded-lg border-2  hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
                       onClick={() => setActiveWish(!activeWish)}>
-                      Continue
+                      Shop
                     </button>
                   </a>
                 </Link>
-                <Link href="/cart">
+                <Link href="/wishList">
                   <a>
                     <button
                       className="py-2 px-4 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
@@ -134,7 +128,7 @@ const WishMini = ({activeWish, setActiveWish}) => {
         </div>
       )}
     </>
-    )
-}
+  );
+};
 
-export default WishMini
+export default WishMini;
