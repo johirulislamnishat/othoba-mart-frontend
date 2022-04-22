@@ -9,7 +9,7 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
-import SuperDiscountSidebar from "../SuperDiscountSidebar/SuperDiscountSidebar";
+import SuperDiscountTwoSidebar from "../SuperDiscountTwoSidebar/SuperDiscountTwoSidebar";
 
 const SmartphoneAndAccessories = () => {
   const [items, setItems] = useState([]);
@@ -31,7 +31,7 @@ const SmartphoneAndAccessories = () => {
       </div>
       <Row>
         <Col md={9}>
-          <SuperDiscountSidebar></SuperDiscountSidebar>
+          <SuperDiscountTwoSidebar></SuperDiscountTwoSidebar>
         </Col>
         <Col md={15}>
           <Row>
