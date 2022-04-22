@@ -29,11 +29,24 @@ a {
   padding: 0 !important;
 }
 
-* {
-  box-sizing: border-box;
+/* img preview */
+.ant-image-preview-img {
+  margin: 0 auto;
+}
+
+/* table */
+.ant-table-thead {
+  font-size: 16px;
+}
+.ant-table-thead > tr > th {
+  font-weight: bold !important;
 }
 
 /* end ant design */
+
+* {
+  box-sizing: border-box;
+}
 
 :root {
   --brand-color: #f66a05;

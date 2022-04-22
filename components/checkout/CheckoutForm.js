@@ -7,7 +7,7 @@ import { increase } from "../../context/actions/Actions";
 import { removeFromCart } from "../../context/actions/Actions";
 import CheckoutCart from "./CheckoutCart";
 import { API_BASE_URL } from "../../apiconstants";
-import useLocalDB from "../../hooks/useLocalDB";
+
 
 const inputFields = [
   {
