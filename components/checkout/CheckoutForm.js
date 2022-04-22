@@ -1,3 +1,5 @@
+import Link from 'next/link'
+import { Modal, Button } from 'antd'
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -53,6 +55,10 @@ const inputFields = [
 ];
 
 const CheckoutForm = () => {
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const {
     state: { cart, user: { accessToken } },
     dispatch,
@@ -95,10 +101,24 @@ const CheckoutForm = () => {
       })
       .then((res) => {
         console.log(res);
+        setSuccess(true)
+        setIsModalVisible(true)
         reset();
+
       })
-      .catch((err) =>()=> console.log(err));
+      .catch((err) =>{
+         setError(true)
+         setIsModalVisible(true)
+        console.log(err)})
   };
+  const handleOk = () => {
+		setIsModalVisible(false);
+	};
+
+	const handleCancel = () => {
+		setIsModalVisible(false);
+	};
+
 
   return (
     <>
@@ -121,116 +141,52 @@ const CheckoutForm = () => {
               </label>
             ))}
           </div>
-          <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center gap-2 w-full sm:w-1/3">
-            <input type="checkbox" />
-            <label className="min-w-max">Ship to a different address</label>
-          </div>
-
-          <h3 className="font-semibold text-xl mt-12">Shipping method</h3>
-          <p className="text-xs text-gray-500">
-            Please enter your shipping method.
-          </p>
-          <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <input type="radio" />
-              <label>FedEx</label>
-            </div>
-            <div className="flex gap-2">
-              <p className="text-green-500">+32 USD</p>
-              <p>Additional price</p>
-            </div>
-            <div className="font-bold flex">
-              <img src="/images/icons/fedex.png" alt="" />
-            </div>
-          </div>
-          <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <input type="radio" />
-              <label>DHL</label>
-            </div>
-            <div className="flex gap-2">
-              <p className="text-green-500">+17 USD</p>
-              <p>Additional price</p>
-            </div>
-            <img src="/images/icons/dhl.png" alt="dhl logo" />
-          </div>
-
-          {/* <h3 className="font-semibold text-xl mt-12">Payment method</h3>
-              <p className="text-xs text-gray-500">
-                Please enter your payment method.
-              </p>
-              <div className="p-2 border-2 border-gray-200 rounded-lg">
-                <div className="m rounded-lg p-1 flex items-center gap-2">
-                  <div className="w-full flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="radio"
-                        className="border-2 border-green-500 rounded-full"
-                      />
-                      <label>Credit card</label>
-                    </div>
-                    <Image
-										preview={false} src="images/icons/visa.png" alt="" />
-                  </div>
-                </div>
-                <div className="flex flex-col gap-4">
-                  <label className="flex flex-col font-semibold text-sm">
-                    Card number
-                    <input
-                      type="number"
-                      placeholder="Card number"
-                      className="p-1 bg-gray-100 border-2 border-gray-200 rounded-lg"
-                    />
-                  </label>
-                  <div className="grid grid-cols-4 gap-4">
-                    <label className="col-span-2 flex flex-col font-semibold text-sm">
-                      Card holder
-                      <input
-                        type="text"
-                        placeholder="Card holder"
-                        className="p-1 bg-gray-100 border-2 border-gray-200 rounded-lg"
-                      />
-                    </label>
-                    <label className="col-span-1 flex flex-col font-semibold text-sm">
-                      Expiration
-                      <input
-                        type="date"
-                        placeholder=""
-                        className="p-1 bg-gray-100 border-2 border-gray-200 rounded-lg"
-                      />
-                    </label>
-                    <label className="col-span-1 flex flex-col font-semibold text-sm">
-                      CVC
-                      <input
-                        type="number"
-                        placeholder="CVC"
-                        className="p-1 bg-gray-100 border-2 border-gray-200 rounded-lg"
-                      />
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <input type="radio" />
-                  <label>Paypal</label>
-                </div>
-
-                <div className="font-bold flex">
-                  <Image
-										preview={false} src="/images/icons/paypal.png" alt="" />
-                </div>
-              </div>
-              <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center justify-between gap-2">
-                <div className="flex gap-2">
-                  <input type="radio" />
-                  <label>Bitcoin</label>
-                </div>
-
-                <Image
-										preview={false} src="/images/icons/bitcoin.png" alt="dhl logo" />
-              </div> */}
-
+          
+              { success &&
+          <Modal
+          visible={isModalVisible}
+          
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="link" onClick={handleOk}>
+              <Link href='/' passHref>
+              Back to Home
+              </Link>
+            </Button>,
+            <Button
+            type="primary"
+            
+            onClick={handleOk}
+            >
+              <Link href='/customer/dashboard' passHref>
+              Go to Dashboard
+              </Link>
+            </Button>,
+          ]}
+          >
+          <p className='text-green-500 text-lg'>You've successfully placed the order.</p>
+        </Modal>
+        }
+              { error &&
+          <Modal
+          visible={isModalVisible}
+          
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              
+              Return
+              
+            </Button>,
+            
+          ]}
+          >
+          <p className='text-red-500 text-lg'>Something went wrong!</p>
+          <p>Please check your input fields and make sure order is not empty.</p>
+        </Modal>
+        }
           <h3 className="font-semibold text-xl mt-12">Additional info</h3>
           <p className="text-xs text-gray-500">
             Need something else? We will make it for you!
@@ -249,7 +205,7 @@ const CheckoutForm = () => {
             </label>
           </div>
           <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center gap-2 w-full">
-            <input type="checkbox" />
+            <input type="checkbox" required='true' className='cursor-pointer' />
             <label className="min-w-max">
               I agree with the <span>terms and conditions</span> and{" "}
               <span>privacy policy</span>{" "}
@@ -260,6 +216,11 @@ const CheckoutForm = () => {
             className="mt-7 py-5 px-10 bg-orange-600 text-white font-semibold border-2 border-white rounded-lg hover:bg-transparent hover:text-orange-600 hover:border-2 hover:border-orange-600">
             Complete order
           </button>
+          {/* <div>
+            { success || error &&
+            <Modal success={success} error={error} />
+            }
+          </div> */}
           <div className="mt-7 flex flex-col gap-2">
             <img src="images/icons/check.png" width="32px" alt="ok" />
             <h5 className="font-semibold">All your data are safe.</h5>
