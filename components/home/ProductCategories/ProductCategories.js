@@ -7,10 +7,10 @@ import productSm from "../../../public/images/Products/product-sm-1.jpeg";
 const ProductCategories = () => {
   return (
     <div className="container product-categories">
-      <Row className="">
-        <Col className="single-product" xs={24} sm={12} md={8} lg={8}>
+      <Row className="single-category-card">
+        <Col className="" xs={24} sm={12} md={8} lg={8}>
           <Row className="">
-            <div className="border-2 p-4 m-2 flex justify-between items-center">
+            <div className="border w-full my-4 p-4 flex justify-start items-center">
               <Col md={10} className="product-image">
                 <Image src={productSm} alt="" />
               </Col>
@@ -25,9 +25,9 @@ const ProductCategories = () => {
             </div>
           </Row>
         </Col>
-        <Col className="single-product" xs={24} sm={12} md={8} lg={8}>
+        <Col className="" xs={24} sm={12} md={8} lg={8}>
           <Row className="">
-            <div className="border-2 p-4 m-2 flex justify-between items-center">
+            <div className="border w-full p-4  my-4 flex justify-start items-center">
               <Col md={10} className="product-image">
                 <Image src={productSm} alt="" />
               </Col>
@@ -42,9 +42,9 @@ const ProductCategories = () => {
             </div>
           </Row>
         </Col>
-        <Col className="single-product" xs={24} sm={12} md={8} lg={8}>
+        <Col className="" xs={24} sm={12} md={8} lg={8}>
           <Row className="">
-            <div className="border-2 p-4 m-2 flex justify-between items-center">
+            <div className="border w-full p-4  my-4 flex justify-start items-center">
               <Col md={10} className="product-image">
                 <Image src={productSm} alt="" />
               </Col>

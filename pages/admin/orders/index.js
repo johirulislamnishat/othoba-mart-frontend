@@ -12,35 +12,40 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
+import useProvider from "../../../hooks/useProvider";
 
 const { Option } = Select;
 
 const Orders = () => {
 	const [data, setData] = useState(null);
-	const [token, setToken] = useState(null);
+	const {
+		state: {
+			user: { accessToken },
+		},
+	} = useProvider();
 
 	useEffect(() => {
 		axios
-			.get(`${API_BASE_URL}/order`)
-			.then((res) => {
-				const arr = [];
-				for (const value of res.data.result) {
-					arr.push({ ...value, key: value._id });
-				}
-				setData(arr);
-			})
-			.catch((e) => console.log(e));
-
-		if (typeof window !== "undefined") {
-			setToken(localStorage.getItem("token"));
-		}
+            .get(`${API_BASE_URL}/order`, {
+                headers: {
+                    token: `Bearer ${accessToken}`,
+                },
+            })
+            .then((res) => {
+                const arr = [];
+                for (const value of res.data.result) {
+                    arr.push({ ...value, key: value._id });
+                }
+                setData(arr);
+            })
+            .catch((e) => console.log(e));
 	}, []);
 
 	const deleteOrder = (order) => {
 		axios
 			.delete(`${API_BASE_URL}/order/${order._id}`, {
 				headers: {
-					token: `Bearer ${token}`,
+					token: `Bearer ${accessToken}`,
 				},
 			})
 			.then((res) => {
@@ -57,7 +62,7 @@ const Orders = () => {
 				{ status: value },
 				{
 					headers: {
-						token: `Bearer ${token}`,
+						token: `Bearer ${accessToken}`,
 					},
 				}
 			)
@@ -69,21 +74,21 @@ const Orders = () => {
 
 	const columns = [
 		{
-			title: "User id",
-			dataIndex: "user_id",
+			title: "Order id",
+			dataIndex: "_id",
 			key: "2",
 			width: 100,
 			render: (id) => <Tooltip title={id}>#{id.slice(15)}</Tooltip>,
 		},
 		{
-			title: "User Name",
+			title: "Customer Name",
 			dataIndex: "user_name",
 			key: "name",
 			width: 200,
 		},
 
 		{
-			title: "User Email",
+			title: "Customer Email",
 			dataIndex: "email",
 			key: "email",
 			width: 250,
@@ -104,7 +109,9 @@ const Orders = () => {
 			title: "Total Price",
 			dataIndex: "total_price",
 			key: "5",
-			width: 100,
+			width: 120,
+			defaultSortOrder: "descend",
+			sorter: (a, b) => a.total_price - b.total_price,
 		},
 		{
 			title: "Status",
@@ -154,6 +161,33 @@ const Orders = () => {
 					</Option>
 				</Select>
 			),
+			filters: [
+				{
+					text: "Pending",
+					value: "pending",
+				},
+				{
+					text: "Approved",
+					value: "approved",
+				},
+				{
+					text: "Shifted",
+					value: "shifted",
+				},
+				{
+					text: "Completed",
+					value: "completed",
+				},
+				{
+					text: "Cancled",
+					value: "cancled",
+				},
+				{
+					text: "Rejected",
+					value: "rejected",
+				},
+			],
+			onFilter: (value, record) => record.status.indexOf(value) === 0,
 		},
 		{
 			title: "",

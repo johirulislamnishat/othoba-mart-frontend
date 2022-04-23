@@ -1,12 +1,15 @@
-import AuthProvider from "../context/AuthProvider";
+import ContextProvider from '../context/ContextProvider'
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-    return (
-        <AuthProvider>
-            <Component {...pageProps} />
-        </AuthProvider>
-    );
+	return (
+		<ContextProvider>
+			<Component {...pageProps} />
+		</ContextProvider>
+			
+			
+		
+	);
 }
 
 export default MyApp;

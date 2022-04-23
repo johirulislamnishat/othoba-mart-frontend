@@ -8,7 +8,7 @@ import productSm from "../../../public/images/Products/product-sm-1.jpeg";
 const TrendingProductsSidebar = () => {
   return (
     <div className="trending-products">
-      <h3 className="text-2xl mt-4 pb-3 border-b-2">Trending Products</h3>
+      <h3 className="text-2xl mt-4 pb-3 border-b">Trending Products</h3>
       <Row className="">
         <Col className="single-product" lg={24}>
           <Row className="">

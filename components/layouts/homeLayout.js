@@ -21,15 +21,23 @@ import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import { API_BASE_URL } from "../../apiconstants";
+
+import useProvider from "../../hooks/useProvider";
+
 import CartMini from "../cart/CartMini";
+import WishMini from "../wish/WishMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
 
 const { Content } = Layout;
 
 const HomeLayout = ({ children, title }) => {
-  const [active, setActive] = useState(false);
+  const {
+    state: { cart, wish },
+  } = useProvider();
+  const [activeCart, setActiveCart] = useState(false);
+  const [activeWish, setActiveWish] = useState(false);
+
   const [visible, setVisible] = useState(false);
   const [searchText, setSearchText] = useState(null);
   const [searchItem, setSearchItem] = useState("product");
@@ -220,21 +228,32 @@ const HomeLayout = ({ children, title }) => {
                       />
                     </Dropdown>
                   </Col>
-                  <Col>
-                    <HeartOutlined
-                      className="text-3xl"
-                      style={{ color: "#f66a05" }}
+
+                  <Col style={{ position: "relative" }}>
+                    <Badge count={wish.length} size="small">
+                      <HeartOutlined
+                        className="text-3xl"
+                        style={{ color: "#f66a05" }}
+                        onClick={() => setActiveWish(!activeWish)}
+                      />
+                    </Badge>
+                    <WishMini
+                      activeWish={activeWish}
+                      setActiveWish={setActiveWish}
                     />
                   </Col>
                   <Col style={{ position: "relative" }}>
-                    <Badge count={1} size="small">
+                    <Badge count={cart.length} size="small">
                       <ShoppingOutlined
                         className="text-3xl"
                         style={{ color: "#f66a05" }}
-                        onClick={() => setActive(!active)}
+                        onClick={() => setActiveCart(!activeCart)}
                       />
                     </Badge>
-                    <CartMini active={active} setActive={setActive} />
+                    <CartMini
+                      activeCart={activeCart}
+                      setActiveCart={setActiveCart}
+                    />
                   </Col>
                 </Row>
               </Col>
@@ -253,7 +272,7 @@ const HomeLayout = ({ children, title }) => {
       </div>
 
       <Content style={{ minHeight: "90vh", backgroundColor: "white" }}>
-        <div className="container mx-auto px-3 lg:px-0">{children}</div>
+        <div className="container mx-auto px-3">{children}</div>
       </Content>
       <footer className="bg-white px-2">
         <HomeFooter />

@@ -8,12 +8,14 @@ import {
 import { Col, Drawer, Menu, Row } from "antd";
 import Link from "next/link";
 import React from "react";
-import useAuth from "../../../hooks/useAuth";
+import useProvider from "../../../hooks/useProvider";
 
 const { SubMenu } = Menu;
 
 const HomeMenu = ({ visible, setVisible }) => {
-  const { user } = useAuth();
+  const {
+    state: { user },
+  } = useProvider();
 
   return (
     <>

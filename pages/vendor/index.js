@@ -1,5 +1,5 @@
+
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Area } from "@ant-design/plots";
 import {
 	Col,
 	Divider,
@@ -14,47 +14,13 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
-import AdminLayout from "../../components/layouts/adminLayout";
-import useProvider from "../../hooks/useProvider";
+import VendorLayout from '../../components/layouts/vendorLayout';
 
 const { Option } = Select;
 
 const Dashboard = () => {
 	const [data, setData] = useState(null);
-	const {
-		state: {
-			user: { accessToken },
-		},
-	} = useProvider();
-	const [graphData, setGraphData] = useState([
-		{ Date: "1 Jul", Revenew: 10000 },
-		{ Date: "8 Jul", Revenew: 18000 },
-		{ Date: "16 Jul", Revenew: 12000 },
-		{ Date: "24 Jul", Revenew: 24500 },
-		{ Date: "31 Jul", Revenew: 35000 },
-		{ Date: "1 Aug", Revenew: 20000 },
-		{ Date: "8 Aug", Revenew: 25200 },
-		{ Date: "16 Aug", Revenew: 16000 },
-		{ Date: "24 Aug", Revenew: 24500 },
-		{ Date: "30 Aug", Revenew: 35000 },
-	]);
-
-	const config = {
-		data: graphData,
-		xField: "Date",
-		yField: "Revenew",
-		xAxis: {
-			range: [0, 1],
-			tickCount: 5,
-		},
-		areaStyle: () => {
-			return {
-				fill: "l(270) 0:#ffffff 0.5:#7ec2f3 1:#1890ff",
-			};
-		},
-		smooth: true,
-		autoFit: true,
-	};
+	const [token, setToken] = useState(null);
 
 	useEffect(() => {
 		axios
@@ -67,13 +33,17 @@ const Dashboard = () => {
 				setData(arr);
 			})
 			.catch((e) => console.log(e));
+
+		if (typeof window !== "undefined") {
+			setToken(localStorage.getItem("token"));
+		}
 	}, []);
 
 	const deleteOrder = (order) => {
 		axios
 			.delete(`${API_BASE_URL}/order/${order._id}`, {
 				headers: {
-					token: `Bearer ${accessToken}`,
+					token: `Bearer ${token}`,
 				},
 			})
 			.then((res) => {
@@ -90,7 +60,7 @@ const Dashboard = () => {
 				{ status: value },
 				{
 					headers: {
-						token: `Bearer ${accessToken}`,
+						token: `Bearer ${token}`,
 					},
 				}
 			)
@@ -102,20 +72,21 @@ const Dashboard = () => {
 
 	const columns = [
 		{
-			title: "Order id",
-			dataIndex: "_id",
+			title: "User id",
+			dataIndex: "user_id",
 			key: "2",
 			width: 100,
 			render: (id) => <Tooltip title={id}>#{id.slice(15)}</Tooltip>,
 		},
 		{
-			title: "Customer Name",
+			title: "User Name",
 			dataIndex: "user_name",
 			key: "name",
 			width: 200,
 		},
+
 		{
-			title: "Customer Email",
+			title: "User Email",
 			dataIndex: "email",
 			key: "email",
 			width: 250,
@@ -136,9 +107,7 @@ const Dashboard = () => {
 			title: "Total Price",
 			dataIndex: "total_price",
 			key: "5",
-			width: 120,
-			defaultSortOrder: "descend",
-			sorter: (a, b) => a.total_price - b.total_price,
+			width: 100,
 		},
 		{
 			title: "Status",
@@ -188,33 +157,6 @@ const Dashboard = () => {
 					</Option>
 				</Select>
 			),
-			filters: [
-				{
-					text: "Pending",
-					value: "pending",
-				},
-				{
-					text: "Approved",
-					value: "approved",
-				},
-				{
-					text: "Shifted",
-					value: "shifted",
-				},
-				{
-					text: "Completed",
-					value: "completed",
-				},
-				{
-					text: "Cancled",
-					value: "cancled",
-				},
-				{
-					text: "Rejected",
-					value: "rejected",
-				},
-			],
-			onFilter: (value, record) => record.status.indexOf(value) === 0,
 		},
 		{
 			title: "",
@@ -238,38 +180,9 @@ const Dashboard = () => {
 	];
 
 	return (
-		<AdminLayout title="Admin | Dashboard" pageTitle="Dashboard">
-			<Space direction="vertical" size={45} className="w-full">
-				<Row gutter={[32, 32]} justify="space-between" align="middle">
-					<Col xs={24} lg={12}>
-						<div className="bg-white rounded-xl">
-							<div className="w-full flex justify-between py-5 px-8">
-								<p className="text-lg font-bold">
-									Money Revenue
-								</p>
-								<p>Weekly</p>
-							</div>
-							<Area
-								{...config}
-								className="w-full"
-								appendPadding={35}
-							/>
-						</div>
-					</Col>
-					<Col xs={24} lg={12}>
-						<div className="bg-white rounded-xl">
-							<div className="w-full flex justify-between py-5 px-8">
-								<p className="text-lg font-bold">Profit</p>
-								<p>Weekly</p>
-							</div>
-							<Area
-								{...config}
-								className="w-full bg-white rounded-xl"
-								appendPadding={35}
-							/>
-						</div>
-					</Col>
-				</Row>
+		<VendorLayout title='Vendor | Dashboard' pageTitle="Dashboard">
+			<h4>Waiting for Admin approval</h4>
+			{/* <Space direction="vertical" size={45} className="w-full">
 				<Row gutter={[12, 12]} justify="space-around" align="middle">
 					<Col xs={24} md={12} lg={6}>
 						<Row
@@ -331,8 +244,8 @@ const Dashboard = () => {
 					pagination={{ position: ["bottomCenter"] }}
 					size="small"
 				/>
-			</Space>
-		</AdminLayout>
+			</Space> */}
+		</VendorLayout>
 	);
 };
 
