@@ -16,9 +16,10 @@ import {
 	Upload,
 } from "antd";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
+import useProvider from "../../../hooks/useProvider";
 
 const { Option } = Select;
 
@@ -26,7 +27,11 @@ const AddProduct = () => {
 	const [form] = Form.useForm();
 	const [optionName, setOptionName] = useState("");
 	const [loading, setLoading] = useState(false);
-	const [token, setToken] = useState(null);
+	const {
+		state: {
+			user: { accessToken },
+		},
+	} = useProvider();
 	const [categoryChildren, setCategoryChildren] = useState([
 		<Option key={"Smart phone"}>Smart phone</Option>,
 	]);
@@ -42,12 +47,6 @@ const AddProduct = () => {
 	const [previewVisible, setPreviewVisible] = useState(false);
 	const [previewImage, setPreviewImage] = useState("");
 	const [previewTitle, setPreviewTitle] = useState("");
-
-	useEffect(() => {
-		if (typeof window !== "undefined") {
-			setToken(localStorage.getItem("token"));
-		}
-	}, []);
 
 	const handleSubmit = (values) => {
 		setLoading(true);
@@ -91,7 +90,7 @@ const AddProduct = () => {
 			.post(`${API_BASE_URL}/product`, formData, {
 				headers: {
 					"Content-Type": "multipart/form-data",
-					token: `Bearer ${token}`,
+					token: `Bearer ${accessToken}`,
 				},
 			})
 			.then((res) => {

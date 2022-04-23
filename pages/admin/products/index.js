@@ -15,12 +15,17 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
+import useProvider from "../../../hooks/useProvider";
 
 const { Option } = Select;
 
 const Products = () => {
 	const [data, setData] = useState(null);
-	const [token, setToken] = useState(null);
+	const {
+		state: {
+			user: { accessToken },
+		},
+	} = useProvider();
 
 	useEffect(() => {
 		axios
@@ -33,17 +38,13 @@ const Products = () => {
 				setData(arr);
 			})
 			.catch((e) => console.log(e));
-
-		if (typeof window !== "undefined") {
-			setToken(localStorage.getItem("token"));
-		}
 	}, []);
 
 	const deleteProduct = (product) => {
 		axios
 			.delete(`${API_BASE_URL}/product/${product._id}`, {
 				headers: {
-					token: `Bearer ${token}`,
+					token: `Bearer ${accessToken}`,
 				},
 			})
 			.then((res) => {
@@ -60,7 +61,7 @@ const Products = () => {
 				{ status: value },
 				{
 					headers: {
-						token: `Bearer ${token}`,
+						token: `Bearer ${accessToken}`,
 					},
 				}
 			)

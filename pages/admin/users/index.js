@@ -37,7 +37,7 @@ const Users = () => {
 		axios
 			.delete(`${API_BASE_URL}/user/${user._id}`, {
 				headers: {
-					token: `Bearer ${token}`,
+					token: `Bearer ${accessToken}`,
 				},
 			})
 			.then((res) => {
@@ -54,7 +54,7 @@ const Users = () => {
 				{ status: value },
 				{
 					headers: {
-						token: `Bearer ${token}`,
+						token: `Bearer ${accessToken}`,
 					},
 				}
 			)

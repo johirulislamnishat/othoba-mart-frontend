@@ -20,6 +20,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
+import useProvider from "../../../hooks/useProvider";
 
 const { Option } = Select;
 
@@ -27,7 +28,11 @@ export default function EditProduct({ product, id }) {
 	const [form] = Form.useForm();
 	const [optionName, setOptionName] = useState("");
 	const [loading, setLoading] = useState(false);
-	const [token, setToken] = useState(null);
+	const {
+		state: {
+			user: { accessToken },
+		},
+	} = useProvider();
 	const [categoryChildren, setCategoryChildren] = useState([
 		<Option key={"Smart phone"}>Smart phone</Option>,
 	]);
@@ -77,10 +82,6 @@ export default function EditProduct({ product, id }) {
 				))
 			);
 		}
-
-		if (typeof window !== "undefined") {
-			setToken(localStorage.getItem("token"));
-		}
 	}, [product]);
 
 	const handleSubmit = (values) => {
@@ -123,7 +124,7 @@ export default function EditProduct({ product, id }) {
 			.put(`${API_BASE_URL}/product/${id}`, formData, {
 				headers: {
 					"Content-Type": "multipart/form-data",
-					token: `Bearer ${token}`,
+					token: `Bearer ${accessToken}`,
 				},
 			})
 			.then((res) => {
