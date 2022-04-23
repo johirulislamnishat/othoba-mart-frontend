@@ -28,6 +28,7 @@ import CartMini from "../cart/CartMini";
 import WishMini from '../wish/WishMini' 
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
+import { API_BASE_URL } from "../../apiconstants";
 
 const { Content, Footer } = Layout;
 
@@ -206,7 +207,7 @@ const HomeLayout = ({ children, title }) => {
 																		false
 																	}
 																	src={
-																		item.product_img
+																		item.photo
 																	}
 																	alt={
 																		item.product_name
