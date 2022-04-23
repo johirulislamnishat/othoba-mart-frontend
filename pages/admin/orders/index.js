@@ -26,15 +26,19 @@ const Orders = () => {
 
 	useEffect(() => {
 		axios
-			.get(`${API_BASE_URL}/order`)
-			.then((res) => {
-				const arr = [];
-				for (const value of res.data.result) {
-					arr.push({ ...value, key: value._id });
-				}
-				setData(arr);
-			})
-			.catch((e) => console.log(e));
+            .get(`${API_BASE_URL}/order`, {
+                headers: {
+                    token: `Bearer ${accessToken}`,
+                },
+            })
+            .then((res) => {
+                const arr = [];
+                for (const value of res.data.result) {
+                    arr.push({ ...value, key: value._id });
+                }
+                setData(arr);
+            })
+            .catch((e) => console.log(e));
 	}, []);
 
 	const deleteOrder = (order) => {
