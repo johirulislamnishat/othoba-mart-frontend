@@ -107,24 +107,25 @@ const inputFields = [
     const { state: {user: {accessToken}}} = useProvider()
 
    const onSubmit = data => {
-     const vendorData = {
-       vendor_name: `${data.fName} ${data.lName}`,
-       email: data.email,
-       phone:data.phone,
-       shop_name: data.shop_name,
-       shop_address: data.road,
-       shop_city: data.city,
-       shop_country: data.country,
-       shop_email: data.shop_email,
-       shop_phone: data.shop_phone,
-       shop_logo: data.shop_logo[0]
-     }
-     console.log(vendorData)
-     axios.post(API_BASE_URL + '/shop', vendorData, {headers:{
+     const formData = new FormData()
+    
+        formData.append("vendor_name",`${data.fName} ${data.lName}` );
+        formData.append("email", data.email);
+        formData.append("phone", data.phone);
+        formData.append("shop_name", data.shop_name);
+        formData.append('shop_address',data.road );
+        formData.append("shop_city", data.city);
+        formData.append("shop_country", data.country);
+        formData.append("shop_phone", data.shop_phone);
+        formData.append("shop_email", data.shop_email);
+        formData.append("shop_logo", data.shop_logo[0]);
+
+     axios.post(API_BASE_URL + '/shop', formData, {headers:{
+       'Content-Type': 'multipart/form-data',
        token: `Bearer ${accessToken}`}
      })
      .then(res=>{console.log(res)})
-     .then(err=>{console.log(err)})
+     .then(err=>{()=> console.log(err)})
    }
 
     return (
