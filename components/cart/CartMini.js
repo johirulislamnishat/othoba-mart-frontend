@@ -7,13 +7,12 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 import useProvider from "../../hooks/useProvider";
-import { decrease } from "../../context/actions/Actions";
-import { increase } from "../../context/actions/Actions";
-import { removeFromCart } from "../../context/actions/Actions";
+import { decrease, increase, removeFromCart, addToWish } from "../../context/actions/Actions";
 
-const CartMini = ({ active, setActive }) => {
+
+const CartMini = ({ activeCart, setActiveCart }) => {
   const {
-    state: { cart },
+    state: { cart, wish },
     dispatch,
   } = useProvider();
 
@@ -28,19 +27,24 @@ const CartMini = ({ active, setActive }) => {
     );
   }, [cart]);
 
+  const handleWish = (item) => {
+    dispatch(addToWish(wish, item))
+    dispatch(removeFromCart(cart,item._id))
+  }
+
   return (
     <>
-      {active && (
-        <div className="absolute z-10 top-0 w-72 right-0 bg-white shadow-lg shadow-gray-500">
-          <div className="border-gray-200 rounded-lg p-3">
-            <div className="flex items-center justify-between">
+      {activeCart && (
+        <div className="absolute z-10 top-10 w-72 right-0 bg-white shadow-lg shadow-gray-500">
+          <div className="border-gray-200 rounded-lg p-4">
+            <div className="flex items-center justify-between mb-2">
               <h3 className="font-semibold text-xl m-0 text-left">
                 Shopping Cart
               </h3>
               <p className="flex items-center gap-1 font-semibold text-lg  m-0">
-                <CloseOutlined
-                  className="cursor-pointer"
-                  onClick={() => setActive(!active)}
+                <CloseOutlined style={{color:'red'}}
+                  className="cursor-pointer "
+                  onClick={() => setActiveCart(!activeCart)}
                 />
               </p>
             </div>
@@ -51,7 +55,7 @@ const CartMini = ({ active, setActive }) => {
                 </div>
               )}
               {cart.map((p) => (
-                <div className="mt-4 " key={p._id}>
+                <div className="pt-2" key={p._id}>
                   <div className="flex gap-2">
                     <img
                       src={p.item_img}
@@ -60,36 +64,6 @@ const CartMini = ({ active, setActive }) => {
                     />
                     <div className="text-left">
                       <h4 className="font-semibold m-0">{p.item_name}</h4>
-                      <p className="text-xs m-0">
-                        <span className="text-gray-400 w-1/2">
-                          {p?.item_description}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-1 flex items-center justify-between gap-2">
-                    <div className="">
-                      <div className="flex items-center gap-1 cursor-pointer">
-                        <HeartTwoTone twoToneColor="#eb2f96" />
-                        <p className="text-gray-400 text-sm m-0">Wishlist</p>
-                      </div>
-                      <div className="flex items-center gap-1 cursor-pointer">
-                        <img
-                          src="/images/icons/compare.png"
-                          alt=""
-                          width="14px"
-                          height="14px"
-                        />
-                        <p className="text-gray-400 m-0">Compare</p>
-                      </div>
-                      <div
-                        className="flex items-center gap-1 cursor-pointer"
-                        onClick={() => dispatch(removeFromCart(cart, p._id))}>
-                        <CloseOutlined className="text-red-500" />
-                        <p className="text-gray-400 m-0">Remove</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-1">
                       <div className="ratings-mini">
                         <StarFilled />
                         <StarFilled />
@@ -97,14 +71,37 @@ const CartMini = ({ active, setActive }) => {
                         <StarFilled />
                         <StarOutlined />
                       </div>
-                      <div>
-                        <p className="min-w-max text-sky-500 text-md font-semibold m-0">
-                          {p.item_price} USD
-                        </p>
-                        <p className="line-through text-sm m-0">48.56 USD</p>
+                    </div>
+                  </div>
+                  <div className="mt-1 flex items-center justify-between">
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-1 cursor-pointer" onClick={()=>handleWish(p)}>
+                        <HeartTwoTone twoToneColor="#eb2f96" />
+                        <p className="text-gray-400 text-sm m-0"> Wish</p>
+                      </div>
+                      {/* <div className="flex items-center gap-1 cursor-pointer">
+                        <img
+                          src="/images/icons/compare.png"
+                          alt=""
+                          width="14px"
+                          height="14px"
+                        />
+                        <p className="text-gray-400 m-0">Compare</p>
+                      </div> */}
+                      <div
+                        className="flex items-center gap-1 cursor-pointer"
+                        onClick={() => dispatch(removeFromCart(cart, p._id))}>
+                        <CloseOutlined className="text-red-500" />
+                        <p className="text-gray-400 m-0">Remove</p>
                       </div>
                     </div>
-                    <div className="w-max flex items-center mx-auto">
+                    <div className="flex flex-col gap-1 text-left">
+                        <p className="w-max text-orange-500 text-md font-semibold m-0">
+                          {p.item_price * p.item_qty} USD
+                        </p>
+                        <p className="line-through text-sm m-0">12.11 USD</p>
+                    </div>
+                    <div className="self-end flex items-center">
                       <button
                         disabled={p?.item_qty === 1 ? true : false}
                         onClick={() => dispatch(decrease(cart, p._id))}
@@ -112,7 +109,7 @@ const CartMini = ({ active, setActive }) => {
                         -
                       </button>
 
-                      <span className="border-2 border-gray-400 px-2 py-0.5 rounded m-0">
+                      <span className="border-2 border-gray-400 px-2 py-0.5 rounded m-0 font-semibold">
                         {p.item_qty}
                       </span>
                       <button
@@ -131,21 +128,22 @@ const CartMini = ({ active, setActive }) => {
                   <h5 className="text-sky-500 m-0 text-sky-500">{total} USD</h5>
                 </div>
               </div>
-              <div className="py-1 flex items-center justify-between">
+              <div className="pt-3 flex items-center justify-between">
                 <Link href="/categories">
                   <a>
                     <button
-                      className="p-2 bg-transparent font-semibold text-gray-500 rounded-lg hover:text-black"
-                      onClick={() => setActive(!active)}>
-                      Continue shopping
+                      className="p-2 bg-white font-semibold 
+                      text-gray-500 rounded-lg border-2  hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
+                      onClick={() => setActiveCart(!activeCart)}>
+                      shop
                     </button>
                   </a>
                 </Link>
                 <Link href="/cart">
                   <a>
                     <button
-                      className="py-2 px-4 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
-                      onClick={() => setActive(!active)}>
+                      className="py-2 px-3 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
+                      onClick={() => setActiveCart(!activeCart)}>
                       View Full Cart
                     </button>
                   </a>

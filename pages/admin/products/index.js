@@ -15,12 +15,17 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
+import useProvider from "../../../hooks/useProvider";
 
 const { Option } = Select;
 
 const Products = () => {
 	const [data, setData] = useState(null);
-	const [token, setToken] = useState(null);
+	const {
+		state: {
+			user: { accessToken },
+		},
+	} = useProvider();
 
 	useEffect(() => {
 		axios
@@ -33,17 +38,13 @@ const Products = () => {
 				setData(arr);
 			})
 			.catch((e) => console.log(e));
-
-		if (typeof window !== "undefined") {
-			setToken(localStorage.getItem("token"));
-		}
 	}, []);
 
 	const deleteProduct = (product) => {
 		axios
 			.delete(`${API_BASE_URL}/product/${product._id}`, {
 				headers: {
-					token: `Bearer ${token}`,
+					token: `Bearer ${accessToken}`,
 				},
 			})
 			.then((res) => {
@@ -60,7 +61,7 @@ const Products = () => {
 				{ status: value },
 				{
 					headers: {
-						token: `Bearer ${token}`,
+						token: `Bearer ${accessToken}`,
 					},
 				}
 			)
@@ -72,14 +73,14 @@ const Products = () => {
 
 	const columns = [
 		{
-			title: "Preview",
+			title: "Image",
 			key: "img",
 			width: 60,
 			render: (product) => (
 				<Image
-					src={product.product_img}
-					width={30}
-					alt={product.product_name}
+					src={product.photo}
+					width={80}
+					alt={product.photo}
 				/>
 			),
 		},
@@ -93,10 +94,12 @@ const Products = () => {
 			title: "Price",
 			dataIndex: "product_price",
 			key: "price",
-			width: 100,
+			width: 120,
+			defaultSortOrder: "descend",
+			sorter: (a, b) => a.product_price - b.product_price,
 		},
 		{
-			title: "Category",
+			title: "Categories",
 			dataIndex: "product_category",
 			key: "product_category",
 			width: 280,
@@ -215,9 +218,36 @@ const Products = () => {
 					</Option>
 				</Select>
 			),
+			filters: [
+				{
+					text: "Pending",
+					value: "pending",
+				},
+				{
+					text: "Approved",
+					value: "approved",
+				},
+				{
+					text: "Shifted",
+					value: "shifted",
+				},
+				{
+					text: "Completed",
+					value: "completed",
+				},
+				{
+					text: "Cancled",
+					value: "cancled",
+				},
+				{
+					text: "Rejected",
+					value: "rejected",
+				},
+			],
+			onFilter: (value, record) => record.status.indexOf(value) === 0,
 		},
 		{
-			title: "",
+			title: "Actions",
 			key: "actions",
 			width: 80,
 			render: (product) => (
@@ -247,6 +277,7 @@ const Products = () => {
 				scroll={{ x: 1600 }}
 				pagination={{ position: ["bottomCenter"] }}
 				size="small"
+				
 			/>
 		</AdminLayout>
 	);
