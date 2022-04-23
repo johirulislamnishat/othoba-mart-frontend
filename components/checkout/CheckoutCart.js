@@ -47,7 +47,7 @@ const CheckoutCart = ({
             </div>
             <div className="w-full grid grid-cols-3">
               <div className="col-span-1 mt-1 w-full flex flex-col justify-between">
-                <div className="flex items-center gap-1 cursor-pointer">
+                {/* <div className="flex items-center gap-1 cursor-pointer">
                   <HeartTwoTone twoToneColor="#eb2f96" />
                   <p className="text-gray-400 text-sm m-0">Wishlist</p>
                 </div>
@@ -59,7 +59,7 @@ const CheckoutCart = ({
                     height="14px"
                   />
                   <p className="text-gray-400 m-0">Compare</p>
-                </div>
+                </div> */}
                 <div
                   className="flex items-center gap-1 cursor-pointer"
                   onClick={() => dispatch(removeFromCart(cart, p._id))}>

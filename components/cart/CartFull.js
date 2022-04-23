@@ -23,14 +23,13 @@ const CartFull = () => {
     );
   }, [cart]);
 
-  if (cart.length === 0) return <div>Cart is empty</div>;
+  // if (cart.length === 0) return <div>Cart is empty!</div>;
 
   return (
-    <div>
-      <h3 className="text-2xl text-sky-500 font-semibold">SHOPPING CART</h3>
+    <div className='mx-3'>
+      <h3 className="lg:mt-5 text-2xl font-semibold">SHOPPING CART</h3>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="py-4 col-span-1 sm:col-span-2">
-          {cart.length === 0 && <div>Cart is empty </div>}
+        <div className="py-2 col-span-1 sm:col-span-2">
           <table
             className="w-full table-fixed border-2 border-gray-200 text-center"
             style={{ borderSpacing: "20px" }}>
@@ -54,7 +53,7 @@ const CartFull = () => {
                       />
                     </td>
                     <td colSpan="2" className="w-full">
-                      <h5 className="text-left text-sky-500 break-words cursor-pointer">
+                      <h5 className="text-leftbreak-words cursor-pointer">
                         {p.item_name}
                       </h5>
                       {/* <p className="text-left break-words">
