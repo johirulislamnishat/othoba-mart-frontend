@@ -1,14 +1,14 @@
+import Link from "next/link";
+import useProvider from "../../../hooks/useProvider";
+import { addToCart, addToWish } from "../../../context/actions/Actions";
+import { Col, Image, Row } from "antd";
+import { useState } from "react";
 import {
   HeartOutlined,
   ShoppingOutlined,
   StarFilled,
   StarOutlined,
 } from "@ant-design/icons";
-import { Col, Image } from "antd";
-import Link from "next/link";
-import { useState } from "react";
-import { addToCart, addToWish } from "../../../context/actions/Actions";
-import useProvider from "../../../hooks/useProvider";
 
 const Card = ({ item }) => {
   const [cartClicked, setCartClicked] = useState(false);
@@ -29,11 +29,11 @@ const Card = ({ item }) => {
   };
 
   return (
-    <Col xs={24} sm={24} md={6} lg={6}>
+    <Col xs={24} sm={12} md={6} lg={6}>
       <div className="p-5 single-product">
         {/* <Image src={item.product_img} alt="" /> */}
 
-        <Image preview={false} src={item?.product_img} alt="" />
+        <Image preview={false} src={item?.photo} alt="" />
 
         <div className="wishlist flex justify-center items-center">
           <HeartOutlined

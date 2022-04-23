@@ -12,35 +12,40 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
+import useProvider from "../../../hooks/useProvider";
 
 const { Option } = Select;
 
 const Orders = () => {
 	const [data, setData] = useState(null);
-	const [token, setToken] = useState(null);
+	const {
+		state: {
+			user: { accessToken },
+		},
+	} = useProvider();
 
 	useEffect(() => {
 		axios
-			.get(`${API_BASE_URL}/order`)
-			.then((res) => {
-				const arr = [];
-				for (const value of res.data.result) {
-					arr.push({ ...value, key: value._id });
-				}
-				setData(arr);
-			})
-			.catch((e) => console.log(e));
-
-		if (typeof window !== "undefined") {
-			setToken(localStorage.getItem("token"));
-		}
+            .get(`${API_BASE_URL}/order`, {
+                headers: {
+                    token: `Bearer ${accessToken}`,
+                },
+            })
+            .then((res) => {
+                const arr = [];
+                for (const value of res.data.result) {
+                    arr.push({ ...value, key: value._id });
+                }
+                setData(arr);
+            })
+            .catch((e) => console.log(e));
 	}, []);
 
 	const deleteOrder = (order) => {
 		axios
 			.delete(`${API_BASE_URL}/order/${order._id}`, {
 				headers: {
-					token: `Bearer ${token}`,
+					token: `Bearer ${accessToken}`,
 				},
 			})
 			.then((res) => {
@@ -57,7 +62,7 @@ const Orders = () => {
 				{ status: value },
 				{
 					headers: {
-						token: `Bearer ${token}`,
+						token: `Bearer ${accessToken}`,
 					},
 				}
 			)

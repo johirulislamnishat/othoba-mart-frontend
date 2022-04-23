@@ -36,7 +36,7 @@ const NewProducts = () => {
               <div className="p-5 single-product">
                 {/* <Image src={item.product_img} alt="" /> */}
 
-                <Image preview={false} src={item?.product_img} alt="" />
+                <Image preview={false} src={item?.photo} alt="" />
 
                 <div className="wishlist flex justify-center items-center">
                   <HeartOutlined />
