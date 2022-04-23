@@ -7,7 +7,7 @@ import { increase } from "../../context/actions/Actions";
 import { removeFromCart } from "../../context/actions/Actions";
 import CheckoutCart from "./CheckoutCart";
 import { API_BASE_URL } from "../../apiconstants";
-
+import { Image } from "antd";
 
 const inputFields = [
   {
@@ -54,7 +54,10 @@ const inputFields = [
 
 const CheckoutForm = () => {
   const {
-    state: { cart, user: { accessToken } },
+    state: {
+      cart,
+      user: { accessToken },
+    },
     dispatch,
   } = useProvider();
 
@@ -72,7 +75,7 @@ const CheckoutForm = () => {
   const tax = total * 0.17;
   const shipping = total * 0.01;
   const grandTotal = parseFloat(total) + parseFloat(tax) + parseFloat(shipping);
-  
+
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
@@ -85,7 +88,7 @@ const CheckoutForm = () => {
       purchased_items: cart,
       total_price: total,
     };
-    console.log(item)
+    console.log(item);
     axios
       .post(API_BASE_URL + "/order/place", item, {
         headers: {
@@ -97,7 +100,7 @@ const CheckoutForm = () => {
         console.log(res);
         reset();
       })
-      .catch((err) =>()=> console.log(err));
+      .catch((err) => () => console.log(err));
   };
 
   return (
@@ -140,7 +143,7 @@ const CheckoutForm = () => {
               <p>Additional price</p>
             </div>
             <div className="font-bold flex">
-              <img src="/images/icons/fedex.png" alt="" />
+              <Image preview={false} src="/images/icons/fedex.png" alt="" />
             </div>
           </div>
           <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center justify-between gap-2">
@@ -152,7 +155,7 @@ const CheckoutForm = () => {
               <p className="text-green-500">+17 USD</p>
               <p>Additional price</p>
             </div>
-            <img src="/images/icons/dhl.png" alt="dhl logo" />
+            <Image preview={false} src="/images/icons/dhl.png" alt="dhl logo" />
           </div>
 
           {/* <h3 className="font-semibold text-xl mt-12">Payment method</h3>
@@ -257,11 +260,17 @@ const CheckoutForm = () => {
           </div>
           <button
             type="submit"
-            className="mt-7 py-5 px-10 bg-orange-600 text-white font-semibold border-2 border-white rounded-lg hover:bg-transparent hover:text-orange-600 hover:border-2 hover:border-orange-600">
+            className="mt-7 py-5 px-10 bg-orange-600 text-white font-semibold border-2 border-white rounded-lg hover:bg-transparent hover:text-orange-600 hover:border-2 hover:border-orange-600"
+          >
             Complete order
           </button>
           <div className="mt-7 flex flex-col gap-2">
-            <img src="images/icons/check.png" width="32px" alt="ok" />
+            <Image
+              preview={false}
+              src="images/icons/check.png"
+              width="32px"
+              alt="ok"
+            />
             <h5 className="font-semibold">All your data are safe.</h5>
             <p className="w-1/3">
               We are using the most advanced security to provide you the best

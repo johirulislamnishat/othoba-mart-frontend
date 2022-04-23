@@ -48,7 +48,7 @@ const HomeFooter = () => {
           <div className="pr-0 md:pr-3 w-full  md:w-1/3">
             <ul className="list-none footer-links">
               <li className="mb-4">
-                <Link href="/">
+                <Link href="/" passHref>
                   <Image
                     src={Logo}
                     alt="Othoba Mart"
