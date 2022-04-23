@@ -29,12 +29,12 @@ const LatestDeals = () => {
               className="single-product "
               key={index}
               xs={24}
-              sm={12}
+              sm={24}
               md={12}
               lg={12}
             >
               <Row>
-                <div className="border p-4 my-4 flex justify-between items-center">
+                <div className="border w-full p-4 my-4 flex justify-between items-center">
                   <Col md={10} className="product-image">
                     <Image preview={false} src={item?.product_img} alt="" />
                     <div className="discount flex justify-center items-center">

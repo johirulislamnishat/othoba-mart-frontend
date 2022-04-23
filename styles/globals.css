@@ -154,14 +154,15 @@ Home Page Main Area Style
 .single-product img {
   margin-bottom: 30px;
 }
-.single-product a {
+.single-product h3 a {
   font-size: 16px;
   text-align: right !important;
+  line-height: 10px !important;
 }
 @media only screen and (max-width: 668px) {
   .single-product {
     border: 1px solid #ddd;
-    margin: 30px 30px 15px 30px;
+    margin: 15px 0 15px 0;
     border-radius: 10px;
   }
 }
@@ -409,6 +410,13 @@ Home Page Sidebar Style
   position: relative;
   min-height: 480px;
   width: 100%;
+}
+@media only screen and (max-width: 668px) {
+  .super-discount-two-item {
+    position: relative;
+    min-height: 680px;
+    width: 100%;
+  }
 }
 .super-discount-two-item .sidebar-image {
   width: 70%;

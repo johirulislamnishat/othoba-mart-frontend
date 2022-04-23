@@ -4,7 +4,7 @@ import React from "react";
 import iPhone13MaxPro from "../../../assets/Images/iPhone13MaxPro.png";
 const SuperDiscountTwoSidebar = () => {
   return (
-    <div className="super-discount mb-6">
+    <div className="super-discount mb-6  w-full ">
       <Row>
         <div className="bg-gray-100 super-discount-two-item p-6">
           <h4>Super Discount</h4>

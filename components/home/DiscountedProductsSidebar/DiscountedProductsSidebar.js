@@ -5,10 +5,10 @@ import Link from "next/link";
 import React from "react";
 import productSm from "../../../public/images/Products/product-sm-1.jpeg";
 
-const NewProductsSidebar = () => {
+const DiscountedProductsSidebar = () => {
   return (
     <div className="new-products">
-      <h3 className="text-2xl mt-4 pb-3 border-b">New Products</h3>
+      <h3 className="text-2xl mt-4 pb-3 border-b">Discounted Products</h3>
       <Row className="">
         <Col className="single-product" lg={24}>
           <Row className="">
@@ -111,4 +111,4 @@ const NewProductsSidebar = () => {
   );
 };
 
-export default NewProductsSidebar;
+export default DiscountedProductsSidebar;

@@ -30,14 +30,14 @@ const SmartphoneAndAccessories = () => {
         <Link href="/">See All</Link>
       </div>
       <Row>
-        <Col md={9}>
+        <Col xs={24} sm={24} md={9}>
           <SuperDiscountTwoSidebar></SuperDiscountTwoSidebar>
         </Col>
         <Col md={15}>
           <Row>
             {items.map((item, index) => {
               return (
-                <Col xs={24} sm={12} md={8} lg={8} key={index}>
+                <Col xs={24} sm={24} md={8} lg={8} key={index}>
                   <div className="p-5 single-product">
                     {/* <Image src={item.product_img} alt="" /> */}
 

@@ -32,7 +32,7 @@ const NewProducts = () => {
       <Row>
         {items.map((item, index) => {
           return (
-            <Col xs={24} sm={12} md={6} lg={6} key={index}>
+            <Col xs={24} sm={24} md={6} lg={6} key={index}>
               <div className="p-5 single-product">
                 {/* <Image src={item.product_img} alt="" /> */}
 
