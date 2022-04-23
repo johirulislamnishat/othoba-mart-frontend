@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import useProvider from "../../hooks/useProvider";
 import { removeFromWish, addToCart } from "../../context/actions/Actions";
+import { Image } from "antd";
 
 const WishMini = ({ activeWish, setActiveWish }) => {
   const {
@@ -44,7 +45,8 @@ const WishMini = ({ activeWish, setActiveWish }) => {
               {wish.map((p) => (
                 <div className="mt-4" key={p._id}>
                   <div className="flex gap-2">
-                    <img
+                    <Image
+                      preview={false}
                       src={p.item_img}
                       alt=""
                       className="bg-gray-200 w-20 h-16 rounded-lg"
@@ -117,7 +119,8 @@ const WishMini = ({ activeWish, setActiveWish }) => {
                   <a>
                     <button
                       className="py-2 px-4 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
-                      onClick={() => setActiveWish(!activeWish)}>
+                      onClick={() => setActiveWish(!activeWish)}
+                    >
                       View Full Wish List
                     </button>
                   </a>

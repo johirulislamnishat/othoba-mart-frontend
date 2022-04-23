@@ -9,6 +9,10 @@ import { increase } from "../../context/actions/Actions";
 import { removeFromCart } from "../../context/actions/Actions";
 import CheckoutCart from "./CheckoutCart";
 import { API_BASE_URL } from "../../apiconstants";
+<<<<<<< HEAD
+=======
+import { Image } from "antd";
+>>>>>>> origin/nishat
 
 const inputFields = [
     {
@@ -54,9 +58,19 @@ const inputFields = [
 ];
 
 const CheckoutForm = () => {
+<<<<<<< HEAD
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
+=======
+  const {
+    state: {
+      cart,
+      user: { accessToken },
+    },
+    dispatch,
+  } = useProvider();
+>>>>>>> origin/nishat
 
     const {
         state: {

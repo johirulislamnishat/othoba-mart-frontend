@@ -5,6 +5,7 @@ import { decrease } from "../../context/actions/Actions";
 import { increase } from "../../context/actions/Actions";
 import { removeFromCart } from "../../context/actions/Actions";
 import CartTotal from "./CartTotal";
+import { Image } from "antd";
 
 const CartFull = () => {
   const {
@@ -32,7 +33,8 @@ const CartFull = () => {
         <div className="py-2 col-span-1 sm:col-span-2">
           <table
             className="w-full table-fixed border-2 border-gray-200 text-center"
-            style={{ borderSpacing: "20px" }}>
+            style={{ borderSpacing: "20px" }}
+          >
             <thead className="py-3 border-2 border-b-gray-200 w-full">
               <tr className="py-3">
                 <th colSpan="3">Product</th>
@@ -42,11 +44,12 @@ const CartFull = () => {
               </tr>
             </thead>
             <tbody className="">
-              {cart?.map((p,i) => (
+              {cart?.map((p, i) => (
                 <>
                   <tr key={i} className="font-semibold">
                     <td colSpan="1">
-                      <img
+                      <Image
+                        preview={false}
                         src={p.item_img}
                         alt=""
                         className="block w-28 h-24 rounded-lg m-1"
@@ -66,7 +69,8 @@ const CartFull = () => {
                         <button
                           disabled={p.item_qty === 1 ? true : false}
                           onClick={() => dispatch(decrease(cart, p._id))}
-                          className="cursor-pointer text-3xl p-1 pt-0">
+                          className="cursor-pointer text-3xl p-1 pt-0"
+                        >
                           -
                         </button>
 
@@ -75,7 +79,8 @@ const CartFull = () => {
                         </span>
                         <button
                           onClick={() => dispatch(increase(cart, p._id))}
-                          className="cursor-pointer text-2xl p-1 pt-0">
+                          className="cursor-pointer text-2xl p-1 pt-0"
+                        >
                           +
                         </button>
                       </div>

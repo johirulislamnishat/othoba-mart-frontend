@@ -4,6 +4,7 @@ import {
   StarFilled,
   StarOutlined,
 } from "@ant-design/icons";
+import { Image } from "antd";
 
 const CheckoutCart = ({
   cart,
@@ -33,7 +34,12 @@ const CheckoutCart = ({
         {cart.map((p) => (
           <div className="mt-4" key={p._id}>
             <div className="flex justify-between">
-              <img src={p.item_img} alt="" className="w-24 h-20" />
+              <Image
+                preview={false}
+                src={p.item_img}
+                alt=""
+                className="w-24 h-20"
+              />
               <div className="text-left">
                 <h4 className="font-semibold  m-0 cursor-pointer">
                   {p.item_name}
@@ -52,7 +58,8 @@ const CheckoutCart = ({
                   <p className="text-gray-400 text-sm m-0">Wishlist</p>
                 </div>
                 <div className="flex items-center gap-1 cursor-pointer">
-                  <img
+                  <Image
+                    preview={false}
                     src="/images/icons/compare.png"
                     alt=""
                     width="14px"
@@ -62,7 +69,8 @@ const CheckoutCart = ({
                 </div> */}
                 <div
                   className="flex items-center gap-1 cursor-pointer"
-                  onClick={() => dispatch(removeFromCart(cart, p._id))}>
+                  onClick={() => dispatch(removeFromCart(cart, p._id))}
+                >
                   <CloseOutlined className="text-red-500" />
                   <p className="text-gray-400 m-0">Remove</p>
                 </div>
@@ -86,7 +94,8 @@ const CheckoutCart = ({
                 <button
                   disabled={p.item_qty === 1 ? true : false}
                   onClick={() => dispatch(decrease(cart, p._id))}
-                  className="cursor-pointer text-3xl p-1 pt-0">
+                  className="cursor-pointer text-3xl p-1 pt-0"
+                >
                   -
                 </button>
 
@@ -95,7 +104,8 @@ const CheckoutCart = ({
                 </span>
                 <button
                   onClick={() => dispatch(increase(cart, p._id))}
-                  className="cursor-pointer text-2xl p-1 pt-0">
+                  className="cursor-pointer text-2xl p-1 pt-0"
+                >
                   +
                 </button>
               </div>
