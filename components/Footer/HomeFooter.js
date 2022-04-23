@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Logo from "../../assets/Logo/othoba-mart-logo.png";
-import Link from "next/Link";
+import Link from "next/link";
 const footerMenus01 = [
   { id: "0", LinkName: "My Account", href: "#" },
   { id: "1", LinkName: "Track Your Order", href: "#" },
