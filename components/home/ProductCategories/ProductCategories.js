@@ -10,7 +10,7 @@ const ProductCategories = () => {
   return (
     <div className="container product-categories">
       <Row className="single-category-card">
-        <Col className="" xs={24} sm={24} md={8} lg={8}>
+        <Col className="" xs={24} sm={24} md={24} lg={8}>
           <Row className="">
             <div className="border w-full my-4 p-4 flex justify-start items-center">
               <Col md={10} className="product-image mr-6">
@@ -27,7 +27,7 @@ const ProductCategories = () => {
             </div>
           </Row>
         </Col>
-        <Col className="" xs={24} sm={24} md={8} lg={8}>
+        <Col className="" xs={24} sm={24} md={24} lg={8}>
           <Row className="">
             <div className="border w-full p-4  my-4 flex justify-start items-center">
               <Col md={10} className="product-image mr-6">
@@ -44,7 +44,7 @@ const ProductCategories = () => {
             </div>
           </Row>
         </Col>
-        <Col className="" xs={24} sm={24} md={8} lg={8}>
+        <Col className="" xs={24} sm={24} md={24} lg={8}>
           <Row className="">
             <div className="border w-full p-4  my-4 flex justify-start items-center">
               <Col md={10} className="product-image mr-6">

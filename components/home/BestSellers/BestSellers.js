@@ -27,7 +27,7 @@ const BestSellers = () => {
       <Row>
         {items.map((item, index) => {
           return (
-            <Col xs={24} sm={24} md={6} lg={6} key={index}>
+            <Col xs={24} sm={24} md={12} lg={6} key={index}>
               <ProductCardGrid item={item} key={index} />
             </Col>
           );

@@ -24,14 +24,14 @@ const SmartphoneAndAccessories = () => {
         <Link href="/">See All</Link>
       </div>
       <Row>
-        <Col xs={24} sm={24} md={9}>
+        <Col xs={24} sm={24} md={12} lg={9} className="md:pr-4">
           <SuperDiscountTwoSidebar></SuperDiscountTwoSidebar>
         </Col>
-        <Col md={15}>
+        <Col md={12} lg={15} className="md:pl-4">
           <Row>
             {items.map((item, index) => {
               return (
-                <Col xs={24} sm={24} md={12} lg={12} key={index}>
+                <Col xs={24} sm={24} md={24} lg={12} key={index}>
                   <ProductCardGrid item={item} key={index} />
                 </Col>
               );
