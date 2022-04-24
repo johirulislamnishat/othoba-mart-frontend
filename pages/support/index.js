@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import HomeLayout from "../../components/layouts/homeLayout";
 
 const Support = () => {
@@ -18,13 +19,13 @@ const Support = () => {
                 </div>
                 <div className="md:w-2/5 flex mt-10 ml-2 md:ml-0 md:mt-0 md:justify-end">
                   <div>
-                    <a
-                      style={{ backgroundColor: "#f66a05" }}
+                    <Link
                       href="/ticket"
+                      style={{ backgroundColor: "#f66a05" }}
                       className=" px-6 py-2 text-white font-medium text-base  rounded-md"
                     >
                       Rise A Ticket
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
