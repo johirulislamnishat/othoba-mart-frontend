@@ -1,16 +1,16 @@
-import Link from "next/link";
-import useProvider from "../../../hooks/useProvider";
-import { addToCart, addToWish } from "../../../context/actions/Actions";
-import { Col, Image, Row } from "antd";
-import { useState } from "react";
 import {
   HeartOutlined,
   ShoppingOutlined,
   StarFilled,
   StarOutlined,
 } from "@ant-design/icons";
+import { Image } from "antd";
+import Link from "next/link";
+import { useState } from "react";
+import { addToCart, addToWish } from "../../context/actions/Actions";
+import useProvider from "../../hooks/useProvider";
 
-const Card = ({ item }) => {
+const ProductCardGrid = ({ item }) => {
   const [cartClicked, setCartClicked] = useState(false);
   const [wishClicked, setWishClicked] = useState(false);
   const {
@@ -29,10 +29,8 @@ const Card = ({ item }) => {
   };
 
   return (
-    <Col xs={24} sm={12} md={6} lg={6}>
-      <div className="p-5 single-product">
-        {/* <Image src={item.product_img} alt="" /> */}
-
+    <>
+      <div className="single-product">
         <Image preview={false} src={item?.photo} alt="" />
 
         <div className="wishlist flex justify-center items-center">
@@ -41,24 +39,40 @@ const Card = ({ item }) => {
             style={wishClicked ? { color: "red" } : { color: "inherit" }}
           />
         </div>
-        <div className="discount flex justify-center items-center">
-          <small>Super Price</small>
-        </div>
+
+        {item?.discount_percentage && (
+          <div className="discount flex justify-center items-center">
+            <small>{item.discount_percentage}</small>
+          </div>
+        )}
+
         <h3>
           <Link href="/product/[id]" as={`/product/${item._id}`}>
-            <a className="text-1xl"> {item?.product_name}</a>
+            <a className="text-1xl"> {item?.product_name.slice(0, 40)}</a>
           </Link>
         </h3>
         <div className="ratings">
-          <StarFilled />
-          <StarFilled />
-          <StarFilled />
-          <StarFilled />
-          <StarOutlined />
+          {item?.ratings ? (
+            <>
+              <StarFilled />
+              <StarFilled />
+              <StarFilled />
+              <StarFilled />
+              <StarOutlined />
+            </>
+          ) : (
+            <>
+              <StarOutlined />
+              <StarOutlined />
+              <StarOutlined />
+              <StarOutlined />
+              <StarOutlined />
+            </>
+          )}
         </div>
         <div className="flex justify-between items-center mt-4">
           <div className="product-price">
-            <small>$779.99</small>
+            {item?.discount_price ? <span>{item.discount_price}</span> : ""}
             <h3>${item?.product_price}.00</h3>
           </div>
           <div className="shopping flex justify-center items-center">
@@ -68,10 +82,10 @@ const Card = ({ item }) => {
             />
           </div>
         </div>
-        <p className="text-1xl mt-3">2 Day Delivery</p>
+        {/* <p className="text-1xl mt-3">2 Day Delivery</p> */}
       </div>
-    </Col>
+    </>
   );
 };
 
-export default Card;
+export default ProductCardGrid;

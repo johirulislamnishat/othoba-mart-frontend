@@ -36,7 +36,7 @@ const LatestDeals = () => {
               <Row>
                 <div className="border w-full p-4 my-4 flex justify-between items-center">
                   <Col md={10} className="product-image">
-                    <Image preview={false} src={item?.product_img} alt="" />
+                    <Image preview={false} src={item?.photo} alt="" />
                     <div className="discount flex justify-center items-center">
                       <small>24%</small>
                     </div>
@@ -46,11 +46,23 @@ const LatestDeals = () => {
                       <a className="text-1xl"> {item?.product_name}</a>
                     </Link>
                     <div className="ratings">
-                      <StarFilled />
-                      <StarFilled />
-                      <StarFilled />
-                      <StarFilled />
-                      <StarOutlined />
+                      {item?.ratings ? (
+                        <>
+                          <StarFilled />
+                          <StarFilled />
+                          <StarFilled />
+                          <StarFilled />
+                          <StarOutlined />
+                        </>
+                      ) : (
+                        <>
+                          <StarOutlined />
+                          <StarOutlined />
+                          <StarOutlined />
+                          <StarOutlined />
+                          <StarOutlined />
+                        </>
+                      )}
                     </div>
                     <div className="flex justify-between items-center mt-4">
                       <div className="product-price">
@@ -66,10 +78,12 @@ const LatestDeals = () => {
                     </div>
                     <div className="product-data flex justify-between items-center mt-4">
                       <p>
-                        <span>Available:</span> <span> 24</span>
+                        <span>Available:</span>{" "}
+                        <span> {item?.available ? item?.available : 0}</span>
                       </p>
                       <p>
-                        <span>Sold: </span> <span>8</span>
+                        <span>Sold: </span>{" "}
+                        <span>{item?.sold ? item?.sold : 0}</span>
                       </p>
                     </div>
                   </Col>

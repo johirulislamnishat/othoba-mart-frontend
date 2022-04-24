@@ -135,7 +135,9 @@ Home Page Main Area Style
 
 .single-product {
   position: relative;
+  padding: 10px;
 }
+
 .single-product img {
   margin-bottom: 30px;
 }
@@ -156,8 +158,11 @@ Home Page Main Area Style
 }
 .single-product h3 a {
   font-size: 16px;
-  text-align: right !important;
   line-height: 10px !important;
+  min-height: 51px;
+  display: inline-block;
+  text-align: left !important;
+  line-height: 25px !important;
 }
 @media only screen and (max-width: 668px) {
   .single-product {
@@ -441,7 +446,14 @@ Home Page Sidebar Style
 .deals-of-the-weeks {
   margin: 50px 0 50px;
 }
+
 .trending-products .single-product {
+  margin-bottom: 0;
+
+  margin-bottom: 10px !important;
+  padding: 10px;
+}
+.trending-products .single-product img {
   margin-bottom: 0;
 }
 .super-discount span {

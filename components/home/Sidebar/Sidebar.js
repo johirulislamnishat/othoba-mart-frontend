@@ -1,5 +1,5 @@
 import DealsOfTheWeekSidebar from "../DealsOfTheWeekSidebar/DealsOfTheWeekSidebar";
-import DiscountedProductsSidebar from "../DiscountedProductsSidebar/DiscountedProductsSidebar";
+import RecentlyViewedProductSidebar from "../RecentlyViewedProductSidebar/RecentlyViewedProductSidebar";
 import SuperDiscountSidebar from "../SuperDiscountSidebar/SuperDiscountSidebar";
 import SuperDiscountThreeSidebar from "../SuperDiscountThreeSidebar/SuperDiscountThreeSidebar";
 import TrendingProductsSidebar from "../TrendingProductsSidebar/TrendingProductsSidebar";
@@ -11,7 +11,7 @@ const Sidebar = () => {
       <DealsOfTheWeekSidebar></DealsOfTheWeekSidebar>
       <TrendingProductsSidebar></TrendingProductsSidebar>
       <SuperDiscountThreeSidebar></SuperDiscountThreeSidebar>
-      <DiscountedProductsSidebar></DiscountedProductsSidebar>
+      <RecentlyViewedProductSidebar></RecentlyViewedProductSidebar>
     </aside>
   );
 };

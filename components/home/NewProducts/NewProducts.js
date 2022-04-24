@@ -1,15 +1,9 @@
-import {
-  HeartOutlined,
-  ShoppingOutlined,
-  StarFilled,
-  StarOutlined,
-} from "@ant-design/icons";
-import { Col, Image, Row } from "antd";
+import { Col, Row } from "antd";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
-
+import ProductCardGrid from "../../productCardGrid/productCardGrid";
 const NewProducts = () => {
   const [items, setItems] = useState([]);
   console.log(items);
@@ -33,40 +27,7 @@ const NewProducts = () => {
         {items.map((item, index) => {
           return (
             <Col xs={24} sm={24} md={6} lg={6} key={index}>
-              <div className="p-5 single-product">
-                {/* <Image src={item.product_img} alt="" /> */}
-
-                <Image preview={false} src={item?.photo} alt="" />
-
-                <div className="wishlist flex justify-center items-center">
-                  <HeartOutlined />
-                </div>
-                <div className="discount flex justify-center items-center">
-                  <small>Super Price</small>
-                </div>
-                <h3>
-                  <Link href="/product/[id]" as={`/product/${item._id}`}>
-                    <a className="text-1xl"> {item?.product_name}</a>
-                  </Link>
-                </h3>
-                <div className="ratings">
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarFilled />
-                  <StarOutlined />
-                </div>
-                <div className="flex justify-between items-center mt-4">
-                  <div className="product-price">
-                    <small>$779.99</small>
-                    <h3>${item?.product_price}.00</h3>
-                  </div>
-                  <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
-                  </div>
-                </div>
-                <p className="text-1xl mt-3">2 Day Delivery</p>
-              </div>
+              <ProductCardGrid item={item} key={index} />
             </Col>
           );
         })}
