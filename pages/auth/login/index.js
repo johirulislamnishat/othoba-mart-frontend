@@ -1,5 +1,6 @@
 import {useState} from 'react'
-import Image from "next/image";
+import { Image } from 'antd'
+import {CloseCircleTwoTone} from '@ant-design/icons'
 import Link from 'next/link'
 import AuthHandlers from "../../../hooks/useAuthHandlers";
 import useProvider from '../../../hooks/useProvider';
@@ -19,14 +20,14 @@ const Login = () => {
 
   return (
     <div className="w-screen h-screen grid sm:grid-cols-2 items-center">
-      <div className="hidden sm:block">
-        {/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
-        <img src="/images/auth.png" alt="" className="h-screen w-full" />
+      <div className="hidden sm:block h-screen col-span-1 overflow-hidden">
+        <Image src='/images/auth.png' width='50vw' height='100vh' preview={false} alt='' />
       </div>
 
-      <div className='min-w-full rounded-r-lg'>
-        <div className="mx-4 lg:mx-16 p-3 border-2 border-gray-200 rounded-lg flex flex-col items-center">
-          <form onSubmit={handleLogin} className="w-full lg:w-3/4 flex flex-col gap-4 sm:gap-2 lg:gap-4 font-semibold text-sm">
+      <div className='min-w-full rounded-r-lg col-span-1 relative'>
+		<div className='absolute right-5 -top-10'><Link href='/' passHref><CloseCircleTwoTone className='text-2xl' /></Link></div>
+        <div className="mx-4 pt-7 lg:mx-16 p-3 border-2 border-gray-200 rounded-lg flex flex-col items-center">
+          <form onSubmit={handleLogin} className="w-full lg:w-3/4 flex flex-col gap-3 sm:gap-2 lg:gap-3 font-semibold text-sm">
 
             <label>User Name
             <input onChange={(e)=>setUser_name(e.target.value)} type='user_name' required={true}
@@ -57,7 +58,29 @@ const Login = () => {
               </Link>
             </div>
             <button className={loading ? "bg-sky-500 py-2 my-3 text-white font-semibold rounded-lg cursor-wait" : "bg-sky-500 py-2 my-3 text-white font-semibold rounded-lg "} type='submit' >{ loading ? 'Loading...' : 'Login' }</button>
-            <div className=" text-center border-2 border-gray-200 flex items-center pl-8 gap-2 rounded-lg">
+            <div className="flex items-center border-2 border-gray-200  pl-8 gap-2 rounded-lg">
+									<Image
+									    width='20'
+										height='20'
+										src="/images/icons/google.png"
+										alt="google logo"
+									/>
+									<p className="  cursor-pointer py-2 m-0">
+										Log in with Google
+									</p>
+								</div>
+								<div className="flex items-center border-2 border-gray-200  gap-2 pl-8 rounded-lg">
+									<Image
+										width='20'
+										height='20'
+										src="/images/icons/facebook.png"
+										alt="facebook logo"
+									/>
+									<p className=" cursor-pointer py-2 m-0">
+										Log in with Facebook
+									</p>
+								</div>
+            {/* <div className=" text-center border-2 border-gray-200 flex items-center pl-8 gap-2 rounded-lg">
               <img src='/images/icons/google.png' alt='google logo' />
             <p className="  cursor-pointer py-2">
               Log in with Google
@@ -68,7 +91,7 @@ const Login = () => {
             <p className=" cursor-pointer py-2">
               Log in with Facebook
             </p>
-            </div>
+            </div> */}
           </form>
 
 					<div className="flex flex-col  gap-2 mt-5 mb-3">
