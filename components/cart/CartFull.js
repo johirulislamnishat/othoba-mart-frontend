@@ -1,3 +1,4 @@
+import { Image } from "antd";
 import { DeleteTwoTone } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import useProvider from "../../hooks/useProvider";
@@ -27,9 +28,9 @@ const CartFull = () => {
 
   return (
     <div className='mx-3'>
-      <h3 className="lg:mt-5 text-2xl font-semibold">SHOPPING CART</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="py-2 col-span-1 sm:col-span-2">
+      <h3 className="lg:mt-7 text-2xl font-semibold">SHOPPING CART</h3>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="py-3 col-span-1 sm:col-span-2">
           <table
             className="w-full table-fixed border-2 border-gray-200 text-center"
             style={{ borderSpacing: "20px" }}>
@@ -46,14 +47,15 @@ const CartFull = () => {
                 <>
                   <tr key={i} className="font-semibold">
                     <td colSpan="1">
-                      <img
+                      <Image
                         src={p.item_img}
                         alt=""
-                        className="block w-28 h-24 rounded-lg m-1"
+                        width={70}
+                        height={60}
                       />
                     </td>
                     <td colSpan="2" className="w-full">
-                      <h5 className="text-leftbreak-words cursor-pointer">
+                      <h5 className="text-left break-words cursor-pointer">
                         {p.item_name}
                       </h5>
                       {/* <p className="text-left break-words">

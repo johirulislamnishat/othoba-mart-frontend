@@ -21,7 +21,7 @@ const Login = () => {
   return (
     <div className="w-screen h-screen grid sm:grid-cols-2 items-center">
       <div className="hidden sm:block h-screen col-span-1 overflow-hidden">
-        <Image src='/images/auth.png' width='50vw' height='100vh' alt='' />
+        <Image src='/images/auth.png' width='50vw' height='100vh' preview={false} alt='' />
       </div>
 
       <div className='min-w-full rounded-r-lg col-span-1 relative'>

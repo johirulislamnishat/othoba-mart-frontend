@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Modal, Button } from 'antd'
+import { Modal, Button, Image } from 'antd'
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -156,16 +156,16 @@ const CheckoutForm = () => {
             </Button>,
             <Button
             type="primary"
-            
+            key='dashboard'
             onClick={handleOk}
-            >
+            > 
               <Link href='/customer/dashboard' passHref>
               Go to Dashboard
               </Link>
             </Button>,
           ]}
           >
-          <p className='text-green-500 text-lg'>You've successfully placed the order.</p>
+          <p className='text-green-500 text-lg'>You&apos;ve successfully placed the order.</p>
         </Modal>
         }
               { error &&
@@ -205,7 +205,7 @@ const CheckoutForm = () => {
             </label>
           </div>
           <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center gap-2 w-full">
-            <input type="checkbox" required='true' className='cursor-pointer' />
+            <input type="checkbox" required={true} className='cursor-pointer' />
             <label className="min-w-max">
               I agree with the <span>terms and conditions</span> and{" "}
               <span>privacy policy</span>{" "}
@@ -222,7 +222,7 @@ const CheckoutForm = () => {
             }
           </div> */}
           <div className="mt-7 flex flex-col gap-2">
-            <img src="images/icons/check.png" width="32px" alt="ok" />
+            <Image src="images/icons/check.png" width="32px" alt="ok" />
             <h5 className="font-semibold">All your data are safe.</h5>
             <p className="w-1/3">
               We are using the most advanced security to provide you the best

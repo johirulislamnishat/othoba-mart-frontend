@@ -75,7 +75,7 @@ const Register = () => {
 			</div>
 
 			<div className="relative min-w-full rounded-r-lg mt-3">
-			<div className='absolute right-5 top-0'><Link href='/' passHref><CloseCircleTwoTone className='text-2xl' /></Link></div>
+			<div className='absolute right-5 top-5'><Link href='/' passHref><CloseCircleTwoTone className='text-2xl' /></Link></div>
 				{isTerms && (
 					<div
 						className="absolute z-10 bg-white h-full mx-2 lg:mx-16 p-3 border-2 border-gray-200 rounded-lg flex flex-col items-center"

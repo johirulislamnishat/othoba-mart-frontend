@@ -1,3 +1,4 @@
+import { Image } from "antd";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
@@ -24,12 +25,13 @@ const WishMini = ({ activeWish, setActiveWish }) => {
   return (
     <>
       {activeWish && (
-        <div className="absolute z-10 top-0 w-72 right-0 bg-white shadow-lg shadow-gray-500">
+        <div className="absolute z-10 top-10 w-72 right-0 bg-white shadow-lg shadow-gray-500">
           <div className="border-gray-200 rounded-lg p-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-1">
               <h3 className="font-semibold text-xl m-0 text-left">Wish List</h3>
               <p className="flex items-center gap-1 font-semibold text-lg  m-0">
-                <CloseOutlined style={{color:'red'}}
+                <CloseOutlined
+                  style={{ color: "red" }}
                   className="cursor-pointer"
                   onClick={() => setActiveWish(!activeWish)}
                 />
@@ -42,12 +44,14 @@ const WishMini = ({ activeWish, setActiveWish }) => {
                 </div>
               )}
               {wish.map((p) => (
-                <div className="mt-4" key={p._id}>
+                <div className="pt-2" key={p._id}>
                   <div className="flex gap-2">
-                    <img
+                    <Image
                       src={p.item_img}
+                      preview={false}
+                      height={40}
+                      width={50}
                       alt=""
-                      className="bg-gray-200 w-20 h-16 rounded-lg"
                     />
                     <div className="text-left">
                       <h4 className="font-semibold m-0">{p.item_name}</h4>
@@ -59,21 +63,21 @@ const WishMini = ({ activeWish, setActiveWish }) => {
                         <StarFilled />
                         <StarOutlined />
                       </div>
-                      </div>
                     </div>
-                    <div>
-                      <div className="flex justify-around">
-                        <div className="mt-1 flex flex-col gap-2">
-                          <div
-                            className="flex items-center gap-1 cursor-pointer"
-                            onClick={() => handleAddToCart(p)}>
-                            <ShoppingTwoTone
-                              twoToneColor="#ff6347"
-                              className="text-xl"
-                            />
-                            <p className="text-gray-400 text-sm m-0">Add</p>
-                          </div>
-                          {/* <div className="flex items-center gap-1 cursor-pointer">
+                  </div>
+                  <div>
+                    <div className="mt-1 flex justify-between pr-2">
+                      <div className="mt-1 flex flex-col gap-1">
+                        <div
+                          className="flex items-center gap-1 cursor-pointer"
+                          onClick={() => handleAddToCart(p)}>
+                          <ShoppingTwoTone
+                            twoToneColor="#ff6347"
+                            className="text-xl"
+                          />
+                          <p className="text-gray-400 text-sm m-0">Add</p>
+                        </div>
+                        {/* <div className="flex items-center gap-1 cursor-pointer">
                         <img
                           src="/images/icons/compare.png"
                           alt=""
@@ -82,23 +86,21 @@ const WishMini = ({ activeWish, setActiveWish }) => {
                         />
                         <p className="text-gray-400 m-0">Compare</p>
                       </div> */}
-                          <div
-                            className="flex items-center gap-1 cursor-pointer"
-                            onClick={() =>
-                              dispatch(removeFromWish(wish, p._id))
-                            }>
-                            <CloseOutlined className="text-red-500" />
-                            <p className="text-gray-400 m-0">Remove</p>
-                          </div>
-                        </div>
-                        <div className="flex flex-col gap-1 text-left">
-                          <p className="w-max text-orange-500 text-md font-semibold m-0">
-                            {p.item_price * p.item_qty} USD
-                          </p>
-                          <p className="line-through text-sm m-0">12.11 USD</p>
+                        <div
+                          className="flex items-center gap-1 cursor-pointer"
+                          onClick={() => dispatch(removeFromWish(wish, p._id))}>
+                          <CloseOutlined style={{color:'red',fontSize:'large'}} />
+                          <p className="text-gray-400 m-0">Remove</p>
                         </div>
                       </div>
+                      <div className="flex flex-col gap-1">
+                        <p className="w-max text-orange-500 text-md text-right font-semibold m-0">
+                          {p.item_price} USD
+                        </p>
+                        <p className=" w-max mt-0.5 line-through text-sm text-right m-0">12.11 USD</p>
+                      </div>
                     </div>
+                  </div>
                 </div>
               ))}
 

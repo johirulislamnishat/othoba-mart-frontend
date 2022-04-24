@@ -6,7 +6,7 @@ const CartTotal = ({ total }) => {
   const grandTotal = parseFloat(total) + parseFloat(tax) + parseFloat(shipping);
 
   return (
-    <div className="py-4 col-span-1">
+    <div className="py-3 col-span-1">
       <div className="p-4 bg-gray-200 rounded-lg">
         <table className="table-fixed w-full text-right font-semibold ">
           <thead className="">

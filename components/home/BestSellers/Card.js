@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from 'next/router'
 import useProvider from "../../../hooks/useProvider";
 import { addToCart, addToWish } from "../../../context/actions/Actions";
 import { Col, Image, Row } from "antd";
@@ -13,19 +14,33 @@ import {
 const Card = ({ item }) => {
     const [cartClicked, setCartClicked] = useState(false);
     const [wishClicked, setWishClicked] = useState(false);
+
+    const router = useRouter()
     const {
-        state: { cart, wish },
+        state: { user, cart, wish },
         dispatch,
     } = useProvider();
 
     const handleAddToWish = (item) => {
-        setWishClicked(true);
-        dispatch(addToWish(wish, item));
+        if(user?.accessToken) {
+            if(!cartClicked) {
+                setWishClicked(true);
+                dispatch(addToWish(wish, item));
+            }
+        } else {
+            router.push('/auth/login')
+        }
     };
 
     const handleAddToCart = (item) => {
-        setCartClicked(true);
-        dispatch(addToCart(cart, item));
+        if(user?.accessToken) {
+        if(!wishClicked) {
+            setCartClicked(true);
+            dispatch(addToCart(cart, item));
+        }
+     } else {
+        router.push('/auth/login')
+    }
     };
 
     return (
