@@ -46,14 +46,22 @@ const HomeMenu = ({ visible, setVisible }) => {
               </Menu.Item>
 
               <Menu.Item key="3">
-                <Link href="/" passHref>
+                <Link href="/about" passHref>
                   About Us
                 </Link>
               </Menu.Item>
 
               <SubMenu key="SubMenu3" title="Suport">
-                <Menu.Item key="products:1">Contact US</Menu.Item>
-                <Menu.Item key="products:2">Support</Menu.Item>
+                <Menu.Item key="contact">
+                  <Link href="/contact" passHref>
+                    Contact Us
+                  </Link>{" "}
+                </Menu.Item>
+                <Menu.Item key="support">
+                  <Link href="/support" passHref>
+                    Support
+                  </Link>
+                </Menu.Item>
                 <Menu.Item key="products:3">Track Order</Menu.Item>
                 <Menu.Item key="products:4">Privacy Policy</Menu.Item>
                 <Menu.Item key="products:5">Terms & Conditions</Menu.Item>

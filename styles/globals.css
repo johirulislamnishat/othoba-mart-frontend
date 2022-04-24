@@ -803,11 +803,14 @@ single product page style
   font-size: 20px;
 }
 
+/* faq styles start */
+
 /* faqs header  */
 .faq-header {
   font-size: 17px;
 }
 
+/* faq styles end */
 /* homefooter  */
 .left-align-padding {
   padding-left: 20px;

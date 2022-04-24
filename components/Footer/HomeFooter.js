@@ -6,15 +6,15 @@ const footerMenus01 = [
   { id: "1", LinkName: "Track Your Order", href: "#" },
   { id: "2", LinkName: "Payment Methods", href: "#" },
   { id: "3", LinkName: "Shipping Guide", href: "#" },
-  { id: "4", LinkName: "FAQs", href: "#" },
+  { id: "4", LinkName: "FAQs", href: "faq" },
   { id: "5", LinkName: "Product Support", href: "#" },
   { id: "6", LinkName: "Policy", href: "#" },
 ];
 
 const footerMenus02 = [
-  { id: "0", LinkName: "Orders History", href: "#" },
-  { id: "1", LinkName: "Advanced Search", href: "#" },
-  { id: "2", LinkName: "Advanced Search", href: "#" },
+  { id: "0", LinkName: "Orders History", href: "dashboard" },
+  { id: "1", LinkName: "Support Center", href: "support" },
+  { id: "2", LinkName: "About OthobaMart", href: "about" },
   { id: "3", LinkName: "Advanced Search", href: "#" },
   { id: "4", LinkName: "Advanced Search", href: "#" },
   { id: "5", LinkName: "Advanced Search", href: "#" },
@@ -41,7 +41,7 @@ const footerMenus04 = [
 
 const HomeFooter = () => {
   return (
-    <div className="container mx-auto pt-24 px-10">
+    <div className="container mx-auto pt-24 px-4">
       <div>
         <div className="block md:flex py-4">
           {/* company Info  */}
