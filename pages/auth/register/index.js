@@ -1,4 +1,5 @@
 import { Image, Modal } from "antd";
+import {CloseCircleTwoTone} from '@ant-design/icons'
 import Link from "next/link";
 import { useRouter } from 'next/router'
 import { useState } from "react";
@@ -68,18 +69,13 @@ const Register = () => {
 	};
 
 	return (
-		<div className="w-screen min-h-screen grid sm:grid-cols-2 items-center overflow-hidden">
-			<div className="hidden sm:block min-h-full min-w-full">
-				{/* <Image src='/images/login.jpg' width={600} heigth={700} alt='' /> */}
-				<Image
-					preview={false}
-					src="/images/auth.png"
-					alt=""
-					className="h-screen w-full"
-				/>
+		<div className="w-screen h-screen grid sm:grid-cols-2 overflow-hidden">
+			<div className="hidden sm:block h-screen overflow-hidden">
+				<Image src='/images/auth.png' width='100%' height='100%' alt='' layout='responsive' sizes='100vw' />
 			</div>
 
 			<div className="relative min-w-full rounded-r-lg mt-3">
+			<div className='absolute right-5 top-5'><Link href='/' passHref><CloseCircleTwoTone className='text-2xl' /></Link></div>
 				{isTerms && (
 					<div
 						className="absolute z-10 bg-white h-full mx-2 lg:mx-16 p-3 border-2 border-gray-200 rounded-lg flex flex-col items-center"
@@ -337,7 +333,8 @@ const Register = () => {
 							<>
 								<div className="flex items-center border-2 border-gray-200  pl-8 gap-2 rounded-lg">
 									<Image
-										preview={false}
+									    width='20'
+										height='20'
 										src="/images/icons/google.png"
 										alt="google logo"
 									/>
@@ -347,7 +344,8 @@ const Register = () => {
 								</div>
 								<div className="flex items-center border-2 border-gray-200  gap-2 pl-8 rounded-lg">
 									<Image
-										preview={false}
+										width='20'
+										height='20'
 										src="/images/icons/facebook.png"
 										alt="facebook logo"
 									/>
@@ -359,8 +357,8 @@ const Register = () => {
 						)}
 					</form>
 
-					<div className="flex flex-col  gap-2 mt-3 mb-1">
-						<p className="mt-3 text-center">
+					<div className="flex flex-col  gap-2 mt-3">
+						<p className="text-center m-0">
 							Have an account?{" "}
 							<Link href="/auth/login">
 								<a>
@@ -372,7 +370,7 @@ const Register = () => {
 						</p>
 					</div>
 				</div>
-				<div className="mt-5 flex gap-4 items-center justify-center">
+				<div className="mt-4 flex gap-4 items-center justify-center">
 					<Link href="/policy/termsOfService">
 						<a>
 							<span className="underline text-gray-500 cursor-pointer">
