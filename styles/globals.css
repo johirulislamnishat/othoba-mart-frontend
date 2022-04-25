@@ -461,6 +461,9 @@ Home Page Sidebar Style
   margin-bottom: 10px !important;
   padding: 10px;
 }
+.deals-of-the-weeks .single-product {
+  padding: 0;
+}
 .trending-products .single-product img {
   margin-bottom: 0;
 }
