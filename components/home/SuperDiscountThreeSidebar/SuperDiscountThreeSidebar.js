@@ -6,7 +6,7 @@ const SuperDiscountThreeSidebar = () => {
   return (
     <div className="super-discount mb-6">
       <Row>
-        <div className="bg-green-100 super-discount-three-item p-6">
+        <div className="bg-gray-100 super-discount-three-item p-6">
           <h4>Super Discount</h4>
           <h3>NEW MacBook Pro in 16-inch and 14-inch Sizes</h3>
           <p>Do not miss the last opportunity</p>

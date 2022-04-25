@@ -20,14 +20,21 @@ const BestSellers = () => {
 
   return (
     <div className="container best-sellers">
-      <div className="section-title mt-6 flex justify-between items-center border-b-2">
+      <div className="section-title my-6 flex justify-between items-center border-b">
         <h2 className="text-2xl">Best Sellers</h2>
         <Link href="/">See All</Link>
       </div>
-      <Row>
+      <Row className="products-grid">
         {items.map((item, index) => {
           return (
-            <Col xs={24} sm={24} md={12} lg={6} key={index}>
+            <Col
+              className="single-product"
+              xs={24}
+              sm={24}
+              md={12}
+              lg={6}
+              key={index}
+            >
               <ProductCardGrid item={item} key={index} />
             </Col>
           );

@@ -18,7 +18,7 @@ const LatestDeals = () => {
   }, []);
   return (
     <div className="container latest-deals">
-      <div className="section-title mt-8 flex justify-between items-center border-b">
+      <div className="section-title my-6 flex justify-between items-center border-b">
         <h2 className="text-2xl">Latest Deals</h2>
         <Link href="/">See All</Link>
       </div>
@@ -26,7 +26,7 @@ const LatestDeals = () => {
         {items.map((item, index) => {
           return (
             <Col
-              className="single-product "
+              className="single-product"
               key={index}
               xs={24}
               sm={24}
@@ -34,17 +34,24 @@ const LatestDeals = () => {
               lg={12}
             >
               <Row>
-                <div className="border w-full p-4 my-4 flex justify-between items-center">
+                <div className="border w-full p-4 flex justify-between md:mb-4 items-center">
                   <Col md={10} className="product-image">
                     <Image preview={false} src={item?.photo} alt="" />
-                    <div className="discount flex justify-center items-center">
-                      <small>24%</small>
-                    </div>
+                    {item?.discount_percentage && (
+                      <div className="discount flex justify-center items-center">
+                        <small>{item.discount_percentage}</small>
+                      </div>
+                    )}
                   </Col>
                   <Col md={14}>
-                    <Link href="/product/[id]" as={`/product/${item._id}`}>
-                      <a className="text-1xl"> {item?.product_name}</a>
-                    </Link>
+                    <h3>
+                      <Link href="/product/[id]" as={`/product/${item._id}`}>
+                        <a className="text-1xl">
+                          {" "}
+                          {item?.product_name.slice(0, 40)}
+                        </a>
+                      </Link>
+                    </h3>
                     <div className="ratings">
                       {item?.ratings ? (
                         <>
@@ -66,7 +73,11 @@ const LatestDeals = () => {
                     </div>
                     <div className="flex justify-between items-center mt-4">
                       <div className="product-price">
-                        <small>$779.99</small>
+                        {item?.discount_price ? (
+                          <span>{item.discount_price}</span>
+                        ) : (
+                          ""
+                        )}
                         <h3>
                           ${item?.product_price}
                           .00

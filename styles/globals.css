@@ -136,10 +136,11 @@ Home Page Main Area Style
 
 .single-product {
   position: relative;
-  padding: 10px;
   overflow: hidden;
+  padding: 5px;
 }
-
+.products-grid .single-product:last-child {
+}
 .single-product img {
   margin-bottom: 15px;
 }
@@ -162,9 +163,8 @@ Home Page Main Area Style
 }
 @media only screen and (max-width: 668px) {
   .single-product {
-    border: 1px solid #ddd;
     margin: 15px 0 15px 0;
-    border-radius: 10px;
+    padding: 0;
   }
   .single-product img {
     width: 100% !important;
@@ -312,11 +312,12 @@ Home Page Main Area Style
 .latest-deals .product-data p span:first-child {
   color: var(--grey-color);
 }
+
 .latest-deals-items .single-product:first-child {
-  padding-right: 10px;
+  padding: 0 10px 0 0;
 }
 .latest-deals-items .single-product:last-child {
-  padding-left: 10px;
+  padding: 0 0 0 10px;
 }
 
 @media only screen and (max-width: 668px) {
@@ -328,14 +329,13 @@ Home Page Main Area Style
   }
   .latest-deals-items .single-product {
     border: 0;
-    margin: 0;
   }
 }
 /* Smartphone & Accessories */
 
 /* product categories */
 .product-categories {
-  margin: 40px 0 80px;
+  margin: 0 0 80px;
 }
 .product-categories .categories-link a {
   display: block;
@@ -372,10 +372,7 @@ Home Page Main Area Style
   }
 }
 /* related products style*/
-.related-products .single-product {
-  border: 1px solid var(--border-color);
-  margin: 5px;
-}
+
 .related-products .single-product .single-product-image {
   height: 300px;
   margin-bottom: 10px;
@@ -424,13 +421,13 @@ Home Page Sidebar Style
 }
 .super-discount-two-item {
   position: relative;
-  min-height: 480px;
+  min-height: 500px;
   width: 100%;
 }
 @media only screen and (max-width: 668px) {
   .super-discount-two-item {
     position: relative;
-    min-height: 680px;
+    min-height: 550px;
     width: 100%;
   }
 }

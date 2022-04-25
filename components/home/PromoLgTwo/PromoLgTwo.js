@@ -3,8 +3,8 @@ import Image from "next/image";
 import smartwatches from "../../../assets/Images/smartwatches.png";
 const PromoLgTwo = () => {
   return (
-    <div className="container promo-lg-two mt-6">
-      <Row className="promo-lg bg-black p-8 flex justify-between items-center">
+    <div className="container promo-lg-two ">
+      <Row className="promo-lg bg-black p-8 my-6 flex justify-between items-center">
         <Col className="mb-6" md={12}>
           <h4 className="text-white">Weekend Discount</h4>
           <h3 className="text-white">Smartwatch Big Deal</h3>

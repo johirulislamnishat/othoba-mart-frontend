@@ -30,7 +30,7 @@ const ProductCardGrid = ({ item }) => {
 
   return (
     <>
-      <div className="single-product">
+      <div className="border p-4">
         <div className="single-product-image w-full">
           <Image preview={false} src={item?.photo} alt="" />
         </div>
@@ -50,7 +50,7 @@ const ProductCardGrid = ({ item }) => {
 
         <h3>
           <Link href="/product/[id]" as={`/product/${item._id}`}>
-            <a className="text-1xl"> {item?.product_name.slice(0, 40)}</a>
+            <a className="text-1xl"> {item?.product_name.slice(0, 35)}</a>
           </Link>
         </h3>
         <div className="ratings">

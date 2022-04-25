@@ -7,7 +7,7 @@ const PromoSmOne = () => {
     <div className="container promo-sm-one ">
       <Row>
         <Col md={12} sm={24}>
-          <Row className="promo-lg bg-gray-100 p-6 mr-2 mb-3 flex justify-between items-center">
+          <Row className="promo-lg bg-gray-100 p-6 md:mr-2 mb-4 flex justify-between items-center">
             <Col md={12}>
               <h4>Weekend Discount</h4>
               <h3>Headphone</h3>

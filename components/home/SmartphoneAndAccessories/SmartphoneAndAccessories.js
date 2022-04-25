@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import ProductCardGrid from "../../ProductCardGrid/ProductCardGrid";
+import SuperDiscountFourSidebar from "../SuperDiscountFourSidebar/SuperDiscountFourSidebar";
 import SuperDiscountTwoSidebar from "../SuperDiscountTwoSidebar/SuperDiscountTwoSidebar";
 const SmartphoneAndAccessories = () => {
   const [items, setItems] = useState([]);
@@ -19,19 +20,27 @@ const SmartphoneAndAccessories = () => {
   }, []);
   return (
     <div className="container smartphone-and-accessories">
-      <div className="section-title mt-8 mb-4 flex justify-between items-center border-b ">
+      <div className="section-title mt-8 my-6 flex justify-between items-center border-b ">
         <h2 className="text-2xl">Smartphone & Accessories</h2>
         <Link href="/">See All</Link>
       </div>
       <Row>
-        <Col xs={24} sm={24} md={12} lg={9} className="md:pr-4">
+        <Col xs={24} sm={24} md={12} lg={9} className="md:pr-2">
           <SuperDiscountTwoSidebar></SuperDiscountTwoSidebar>
+          <SuperDiscountFourSidebar></SuperDiscountFourSidebar>
         </Col>
-        <Col md={12} lg={15} className="md:pl-4">
+        <Col md={12} lg={15} className="md:pl-2">
           <Row>
             {items.map((item, index) => {
               return (
-                <Col xs={24} sm={24} md={24} lg={12} key={index}>
+                <Col
+                  className="single-product"
+                  xs={24}
+                  sm={24}
+                  md={24}
+                  lg={12}
+                  key={index}
+                >
                   <ProductCardGrid item={item} key={index} />
                 </Col>
               );

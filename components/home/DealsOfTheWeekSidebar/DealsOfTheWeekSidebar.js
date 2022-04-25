@@ -25,8 +25,8 @@ const DealsOfTheWeekSidebar = () => {
     <div className="deals-of-the-weeks">
       <h3 className="text-2xl mt-4 pb-3 border-b">Deals Of The Week</h3>
       <Row>
-        <Col lg={24} className="bg-white-100 border ">
-          <div className="p-5 single-product">
+        <Col lg={24} className="bg-white-100 border p-4">
+          <div className="single-product">
             <Image src={productSm} alt="" />
             <div className="wishlist flex justify-center items-center">
               <HeartOutlined />
