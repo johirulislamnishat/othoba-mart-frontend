@@ -7,7 +7,7 @@ const Support = () => {
     <HomeLayout title="Support | Othoba Mart">
       <div>
         <div className="container mx-auto">
-          <div role="article" className="py-12">
+          <div className="py-12">
             <div className="px-2 xl:px-0 py-10">
               <div className="flex flex-col lg:flex-row flex-wrap">
                 <div className="mt-4 lg:mt-0 lg:w-3/5">
@@ -19,13 +19,14 @@ const Support = () => {
                 </div>
                 <div className="md:w-2/5 flex mt-10 ml-2 md:ml-0 md:mt-0 md:justify-end">
                   <div>
-                    <Link
-                      href="/ticket"
+                    <div
                       style={{ backgroundColor: "#f66a05" }}
-                      className=" px-6 py-2 text-white font-medium text-base  rounded-md"
+                      className=" px-6 py-2 text-white font-medium text-base rounded-md"
                     >
-                      Rise A Ticket
-                    </Link>
+                      <Link href="/ticket">
+                        <a className="ticket-btn">Rise A Ticket</a>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -36,7 +37,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className="bg-white p-5 rounded-md relative h-full w-full">
+                  <div className="bg-white p-5 rounded-md  h-full w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"
@@ -143,7 +144,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className="bg-white p-5 rounded-md relative h-full w-full">
+                  <div className="bg-white p-5 rounded-md  h-full w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"
@@ -274,7 +275,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className="bg-white p-5 rounded-md relative h-full w-full">
+                  <div className="bg-white p-5 rounded-md  h-full w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"
@@ -383,7 +384,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className="bg-white p-5 rounded-md  h-full relative w-full">
+                  <div className="bg-white p-5 rounded-md  h-full  w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"
@@ -492,7 +493,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className="relative bg-white p-5 rounded-md relative h-full w-full">
+                  <div className=" bg-white p-5 rounded-md  h-full w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"
@@ -578,7 +579,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className="relative bg-white p-5 rounded-md relative h-full  w-full">
+                  <div className=" bg-white p-5 rounded-md  h-full  w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"

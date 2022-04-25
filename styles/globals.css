@@ -815,6 +815,13 @@ single product page style
 .left-align-padding {
   padding-left: 20px;
 }
+/* homefooter end */
+
+/* ticket start */
+.ticket-btn {
+  color: white !important;
+}
+/* ticket end */
 .single-product-page .single-product-meta-data .ant-col p {
   font-size: 14px;
   color: #555;

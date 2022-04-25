@@ -1,22 +1,21 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import HomeLayout from "../../components/layouts/homeLayout";
 
 const Contact = () => {
+  const { register, handleSubmit, reset } = useForm();
+  const onSubmit = (data) => console.log(data);
   return (
     <HomeLayout title="Contact Us | Othoba Mart">
       <div className="container px-6 grid gap-8 grid-cols-1 md:grid-cols-2  py-16 mx-auto  text-gray-700">
         <div className="flex flex-col justify-between">
           <div>
-            <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
+            <h2 className="w-full font-bold lg:text-3xl text-2xl lg:leading-10 leading-9">
               Lets talk about everything!
             </h2>
-            <div className="text-gray-700 mt-8">
-              Hate forms? Send us an <span className="underline">email</span>{" "}
-              instead.
-            </div>
           </div>
 
-          {/* contact image */}
+          {/* ticket image */}
           <div className="mt-8 text-center">
             <svg
               className="w-full"
@@ -975,41 +974,51 @@ const Contact = () => {
             </svg>
           </div>
         </div>
-        <div>
-          <div>
-            <span className="uppercase text-sm text-gray-600 font-bold">
-              Full Name
-            </span>
-            <input
-              className="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder=""
-            />
-          </div>
-          <div className="mt-8">
-            <span className="uppercase text-sm text-gray-600 font-bold">
-              Email
-            </span>
-            <input
-              className="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-              type="text"
-            />
-          </div>
-          <div className="mt-8">
-            <span className="uppercase text-sm text-gray-600 font-bold">
-              Message
-            </span>
-            <textarea className="w-full h-32 bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"></textarea>
-          </div>
-          <div className="mt-8">
-            <button
-              type="submit"
-              style={{ backgroundColor: "#f66a05" }}
-              className="uppercase text-sm font-bold tracking-wide  text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline"
-            >
-              Send Message
-            </button>
-          </div>
+        <div className="mt-8">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <span className="uppercase text-sm text-gray-600 font-bold">
+                Full Name
+              </span>
+              <input
+                {...register("fullName", { required: true })}
+                className="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+                type="text"
+                placeholder="Enter Your Full Name"
+              />
+            </div>
+            <div className="mt-8">
+              <span className="uppercase text-sm text-gray-600 font-bold">
+                Email
+              </span>
+              <input
+                {...register("email", { required: true })}
+                className="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+                type="email"
+                placeholder="Enter Your Email"
+              />
+            </div>
+            <div className="mt-8">
+              <span className="uppercase text-sm text-gray-600 font-bold">
+                Message
+              </span>
+              <textarea
+                {...register("message", { required: true })}
+                defaultValue=""
+                placeholder="Enter Your Message"
+                className="w-full h-32 bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              ></textarea>
+            </div>
+            <div className="mt-8">
+              <button
+                type="submit"
+                style={{ backgroundColor: "#f66a05" }}
+                className="uppercase text-sm font-bold tracking-wide  text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline"
+              >
+                Send Message
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </HomeLayout>
