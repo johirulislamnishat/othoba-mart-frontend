@@ -43,7 +43,7 @@ const HomeFooter = () => {
     <div className="pt-24 pb-8">
       {/* subscribe box  */}
       <div style={{ backgroundColor: "#01ABEC" }}>
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 items-center py-6">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 items-center py-6 px-3 md:px-6">
           <div>
             <h3 className="text-white font-medium text-lg">
               Sign Up to Newsletter
