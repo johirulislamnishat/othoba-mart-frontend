@@ -1,4 +1,4 @@
-import { Image } from 'antd'
+import { Image } from "antd";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
@@ -8,8 +8,12 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 import useProvider from "../../hooks/useProvider";
-import { decrease, increase, removeFromCart, addToWish } from "../../context/actions/Actions";
-
+import {
+  decrease,
+  increase,
+  removeFromCart,
+  addToWish,
+} from "../../context/actions/Actions";
 
 const CartMini = ({ activeCart, setActiveCart }) => {
   const {
@@ -29,9 +33,9 @@ const CartMini = ({ activeCart, setActiveCart }) => {
   }, [cart]);
 
   const handleWish = (item) => {
-    dispatch(addToWish(wish, item))
-    dispatch(removeFromCart(cart,item._id))
-  }
+    dispatch(addToWish(wish, item));
+    dispatch(removeFromCart(cart, item._id));
+  };
 
   return (
     <>
@@ -43,7 +47,8 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                 Shopping Cart
               </h3>
               <p className="flex items-center gap-1 font-semibold text-lg  m-0">
-                <CloseOutlined style={{color:'red'}}
+                <CloseOutlined
+                  style={{ color: "red" }}
                   className="cursor-pointer "
                   onClick={() => setActiveCart(!activeCart)}
                 />
@@ -62,7 +67,8 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                       src={p.item_img}
                       preview={false}
                       alt=""
-                      width={50} heigth={40}
+                      width={50}
+                      heigth={40}
                     />
                     <div className="text-left">
                       <h4 className="font-semibold m-0">{p.item_name}</h4>
@@ -77,7 +83,10 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                   </div>
                   <div className="mt-2 flex items-center justify-between">
                     <div className="flex flex-col gap-1">
-                      <div className="flex items-center gap-1 cursor-pointer" onClick={()=>handleWish(p)}>
+                      <div
+                        className="flex items-center gap-1 cursor-pointer"
+                        onClick={() => handleWish(p)}
+                      >
                         <HeartTwoTone twoToneColor="#eb2f96" />
                         <p className="text-gray-400 text-sm m-0"> Wish</p>
                       </div>
@@ -92,22 +101,24 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                       </div> */}
                       <div
                         className="flex items-center gap-1 cursor-pointer"
-                        onClick={() => dispatch(removeFromCart(cart, p._id))}>
+                        onClick={() => dispatch(removeFromCart(cart, p._id))}
+                      >
                         <CloseOutlined className="text-red-500" />
                         <p className="text-gray-400 m-0">Remove</p>
                       </div>
                     </div>
                     <div className="flex flex-col gap-1 text-left">
-                        <p className="w-max text-orange-500 text-md font-semibold m-0">
-                          {p.item_price * p.item_qty} USD
-                        </p>
-                        <p className="line-through text-sm m-0">12.11 USD</p>
+                      <p className="w-max text-orange-500 text-md font-semibold m-0">
+                        {p.item_price * p.item_qty} USD
+                      </p>
+                      <p className="line-through text-sm m-0">12.11 USD</p>
                     </div>
                     <div className="self-end flex items-center">
                       <button
                         disabled={p?.item_qty === 1 ? true : false}
                         onClick={() => dispatch(decrease(cart, p._id))}
-                        className="cursor-pointer text-3xl p-1 pt-0">
+                        className="cursor-pointer text-3xl p-1 pt-0"
+                      >
                         -
                       </button>
 
@@ -116,7 +127,8 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                       </span>
                       <button
                         onClick={() => dispatch(increase(cart, p._id))}
-                        className="cursor-pointer text-2xl p-1 pt-0">
+                        className="cursor-pointer text-2xl p-1 pt-0"
+                      >
                         +
                       </button>
                     </div>
@@ -127,7 +139,7 @@ const CartMini = ({ activeCart, setActiveCart }) => {
               <div className="py-3">
                 <div className="text-left">
                   <h5 className="font-semibold font-xs m-0">Sub Total</h5>
-                  <h5 className="text-sky-500 m-0 text-sky-500">{total} USD</h5>
+                  <h5 className=" m-0 text-sky-500">{total} USD</h5>
                 </div>
               </div>
               <div className="pt-3 flex items-center justify-between">
@@ -136,7 +148,8 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                     <button
                       className="p-2 bg-white font-semibold 
                       text-gray-500 rounded-lg border-2  hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
-                      onClick={() => setActiveCart(!activeCart)}>
+                      onClick={() => setActiveCart(!activeCart)}
+                    >
                       shop
                     </button>
                   </a>
@@ -145,7 +158,8 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                   <a>
                     <button
                       className="py-2 px-3 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
-                      onClick={() => setActiveCart(!activeCart)}>
+                      onClick={() => setActiveCart(!activeCart)}
+                    >
                       View Full Cart
                     </button>
                   </a>

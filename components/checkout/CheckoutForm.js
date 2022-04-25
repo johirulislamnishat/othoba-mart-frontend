@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { Modal, Button, Image } from 'antd'
+import Link from "next/link";
+import { Modal, Button, Image } from "antd";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -9,7 +9,6 @@ import { increase } from "../../context/actions/Actions";
 import { removeFromCart } from "../../context/actions/Actions";
 import CheckoutCart from "./CheckoutCart";
 import { API_BASE_URL } from "../../apiconstants";
-
 
 const inputFields = [
   {
@@ -55,12 +54,15 @@ const inputFields = [
 ];
 
 const CheckoutForm = () => {
-  const [success, setSuccess] = useState(false)
-  const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const {
-    state: { cart, user: { accessToken } },
+    state: {
+      cart,
+      user: { accessToken },
+    },
     dispatch,
   } = useProvider();
 
@@ -78,7 +80,7 @@ const CheckoutForm = () => {
   const tax = total * 0.17;
   const shipping = total * 0.01;
   const grandTotal = parseFloat(total) + parseFloat(tax) + parseFloat(shipping);
-  
+
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
@@ -91,7 +93,7 @@ const CheckoutForm = () => {
       purchased_items: cart,
       total_price: total,
     };
-    console.log(item)
+    console.log(item);
     axios
       .post(API_BASE_URL + "/order/place", item, {
         headers: {
@@ -101,24 +103,23 @@ const CheckoutForm = () => {
       })
       .then((res) => {
         console.log(res);
-        setSuccess(true)
-        setIsModalVisible(true)
+        setSuccess(true);
+        setIsModalVisible(true);
         reset();
-
       })
-      .catch((err) =>{
-         setError(true)
-         setIsModalVisible(true)
-        console.log(err)})
+      .catch((err) => {
+        setError(true);
+        setIsModalVisible(true);
+        console.log(err);
+      });
   };
   const handleOk = () => {
-		setIsModalVisible(false);
-	};
+    setIsModalVisible(false);
+  };
 
-	const handleCancel = () => {
-		setIsModalVisible(false);
-	};
-
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <>
@@ -141,52 +142,47 @@ const CheckoutForm = () => {
               </label>
             ))}
           </div>
-          
-              { success &&
-          <Modal
-          visible={isModalVisible}
-          
-          onOk={handleOk}
-          onCancel={handleCancel}
-          footer={[
-            <Button key="link" onClick={handleOk}>
-              <Link href='/' passHref>
-              Back to Home
-              </Link>
-            </Button>,
-            <Button
-            type="primary"
-            key='dashboard'
-            onClick={handleOk}
-            > 
-              <Link href='/customer/dashboard' passHref>
-              Go to Dashboard
-              </Link>
-            </Button>,
-          ]}
-          >
-          <p className='text-green-500 text-lg'>You&apos;ve successfully placed the order.</p>
-        </Modal>
-        }
-              { error &&
-          <Modal
-          visible={isModalVisible}
-          
-          onOk={handleOk}
-          onCancel={handleCancel}
-          footer={[
-            <Button key="back" onClick={handleCancel}>
-              
-              Return
-              
-            </Button>,
-            
-          ]}
-          >
-          <p className='text-red-500 text-lg'>Something went wrong!</p>
-          <p>Please check your input fields and make sure order is not empty.</p>
-        </Modal>
-        }
+
+          {success && (
+            <Modal
+              visible={isModalVisible}
+              onOk={handleOk}
+              onCancel={handleCancel}
+              footer={[
+                <Button key="link" onClick={handleOk}>
+                  <Link href="/" passHref>
+                    Back to Home
+                  </Link>
+                </Button>,
+                <Button type="primary" key="dashboard" onClick={handleOk}>
+                  <Link href="/customer/dashboard" passHref>
+                    Go to Dashboard
+                  </Link>
+                </Button>,
+              ]}
+            >
+              <p className="text-green-500 text-lg">
+                You&apos;ve successfully placed the order.
+              </p>
+            </Modal>
+          )}
+          {error && (
+            <Modal
+              visible={isModalVisible}
+              onOk={handleOk}
+              onCancel={handleCancel}
+              footer={[
+                <Button key="back" onClick={handleCancel}>
+                  Return
+                </Button>,
+              ]}
+            >
+              <p className="text-red-500 text-lg">Something went wrong!</p>
+              <p>
+                Please check your input fields and make sure order is not empty.
+              </p>
+            </Modal>
+          )}
           <h3 className="font-semibold text-xl mt-12">Additional info</h3>
           <p className="text-xs text-gray-500">
             Need something else? We will make it for you!
@@ -205,7 +201,7 @@ const CheckoutForm = () => {
             </label>
           </div>
           <div className="mt-3 bg-gray-100 border-2 border-gray-200 rounded-lg p-1 flex items-center gap-2 w-full">
-            <input type="checkbox" required={true} className='cursor-pointer' />
+            <input type="checkbox" required={true} className="cursor-pointer" />
             <label className="min-w-max">
               I agree with the <span>terms and conditions</span> and{" "}
               <span>privacy policy</span>{" "}
@@ -213,7 +209,8 @@ const CheckoutForm = () => {
           </div>
           <button
             type="submit"
-            className="mt-7 py-5 px-10 bg-orange-600 text-white font-semibold border-2 border-white rounded-lg hover:bg-transparent hover:text-orange-600 hover:border-2 hover:border-orange-600">
+            className="mt-7 py-5 px-10 bg-orange-600 text-white font-semibold border-2 border-white rounded-lg hover:bg-transparent hover:text-orange-600 hover:border-2 hover:border-orange-600"
+          >
             Complete order
           </button>
           {/* <div>
