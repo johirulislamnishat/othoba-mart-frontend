@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Router from "next/router";
 import { LoadingOutlined } from "@ant-design/icons";
 import useProvider from "../hooks/useProvider";
-import useUser from '../hooks/useUser' 
 import CartFull from "../components/cart/CartFull";
 import HomeLayout from "../components/layouts/homeLayout";
 
@@ -30,15 +29,6 @@ const Cart = () => {
   if (loading) {
     return <LoadingOutlined />;
   }
-
-
-// const { user } = useUser({
-//   redirectTo: '/auth/login'
-// })
-
-// if (!user) {
-//   return <LoadingOutlined />;
-// }
   
   return (
     <HomeLayout title="Othoba Mart | Cart">
