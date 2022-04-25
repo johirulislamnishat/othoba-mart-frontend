@@ -24,7 +24,7 @@ const CartFull = () => {
     );
   }, [cart]);
 
-  // if (cart.length === 0) return <div>Cart is empty!</div>;
+  if (cart.length === 0) return <div>Cart is empty!</div>;
 
   return (
     <div className='mx-3'>

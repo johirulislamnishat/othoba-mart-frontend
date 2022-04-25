@@ -11,7 +11,7 @@ import useProvider from "../../hooks/useProvider";
 import { decrease, increase, removeFromCart, addToWish } from "../../context/actions/Actions";
 
 
-const CartMini = ({ activeCart, setActiveCart }) => {
+const CartMini = ({ activeCart, setActiveCart, handleCart }) => {
   const {
     state: { cart, wish },
     dispatch,
@@ -45,7 +45,7 @@ const CartMini = ({ activeCart, setActiveCart }) => {
               <p className="flex items-center gap-1 font-semibold text-lg  m-0">
                 <CloseOutlined style={{color:'red'}}
                   className="cursor-pointer "
-                  onClick={() => setActiveCart(!activeCart)}
+                  onClick={handleCart}
                 />
               </p>
             </div>

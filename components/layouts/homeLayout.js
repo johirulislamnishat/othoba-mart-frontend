@@ -36,13 +36,28 @@ const HomeLayout = ({ children, title }) => {
 	const {state:{cart, wish}} = useProvider()
 	const [activeCart, setActiveCart] = useState(false);
 	const [activeWish, setActiveWish] = useState(false);
-
+    const [cartClicked, setCartClicked] = useState(false);
+    const [wishClicked, setWishClicked] = useState(false);
 	const [visible, setVisible] = useState(false);
 	const [searchText, setSearchText] = useState(null);
 	const [searchItem, setSearchItem] = useState("product");
 	const [showResult, setShowResult] = useState(false);
 	const [searchData, setSearchData] = useState([]);
 	const [loading, setLoading] = useState(false);
+    
+	const handleWish = () => {
+		if(!cartClicked) {
+			setWishClicked(!wishClicked)
+			setActiveWish(!activeWish)
+		}
+	}
+
+	const handleCart = () => {
+		if (!wishClicked) {
+			setCartClicked(!cartClicked)
+			setActiveCart(!activeCart)
+		}
+	}
 
 	const menu = (
 		<Menu>
@@ -285,10 +300,10 @@ const HomeLayout = ({ children, title }) => {
 										<HeartOutlined
 											className="text-3xl"
 											style={{ color: "#f66a05" }}
-											onClick={()=>setActiveWish(!activeWish)}
+											onClick={handleWish}
 										/>
 										</Badge>
-										<WishMini activeWish={activeWish} setActiveWish={setActiveWish} />
+										<WishMini activeWish={activeWish} setActiveWish={setActiveWish} handleWish={handleWish} />
 
 									</Col>
 									<Col style={{ position: "relative" }}>
@@ -296,18 +311,14 @@ const HomeLayout = ({ children, title }) => {
 											<ShoppingOutlined
 												className="text-3xl"
 												style={{ color: "#f66a05" }}
-												onClick={() =>
-
-													setActiveCart(!activeCart)
-
-												}
+												onClick={handleCart}
 											/>
 										</Badge>
 										<CartMini
 
 											activeCart={activeCart}
 											setActiveCart={setActiveCart}
-
+											handleCart={handleCart}
 										/>
 									</Col>
 								</Row>

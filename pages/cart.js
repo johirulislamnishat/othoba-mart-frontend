@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Router from "next/router";
 import { LoadingOutlined } from "@ant-design/icons";
 import useProvider from "../hooks/useProvider";
+import useUser from '../hooks/useUser' 
 import CartFull from "../components/cart/CartFull";
 import HomeLayout from "../components/layouts/homeLayout";
 
@@ -13,16 +14,31 @@ const Cart = () => {
   } = useProvider();
 
  useEffect(()=>{
-	 if (!user?.user_name) {
-		 Router.push("/auth/login");
-		} else {
-			setLoading(false);
-		} 
+   console.log(user?.user_name)
+    if(user?.user_name ===undefined){
+     setLoading(true)
+    }
+
+    if (!user?.user_name) {
+       Router.push("/auth/login");
+      } else {
+        setLoading(false);
+      } 
+   
 	},[user?.user_name])
 
   if (loading) {
     return <LoadingOutlined />;
   }
+
+
+// const { user } = useUser({
+//   redirectTo: '/auth/login'
+// })
+
+// if (!user) {
+//   return <LoadingOutlined />;
+// }
   
   return (
     <HomeLayout title="Othoba Mart | Cart">
