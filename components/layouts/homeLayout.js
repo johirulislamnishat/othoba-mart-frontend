@@ -33,7 +33,7 @@ const { Content, Footer } = Layout;
 
 const HomeLayout = ({ children, title }) => {
 
-	const {state:{cart, wish}} = useProvider()
+	const {state:{cart, wish, user}, dispatch} = useProvider()
 	const [activeCart, setActiveCart] = useState(false);
 	const [activeWish, setActiveWish] = useState(false);
     const [cartClicked, setCartClicked] = useState(false);
@@ -45,6 +45,13 @@ const HomeLayout = ({ children, title }) => {
 	const [searchData, setSearchData] = useState([]);
 	const [loading, setLoading] = useState(false);
     
+	const handleLogout = () =>{
+		dispatch({
+			type: 'AUTH',
+			payload: []
+		})
+	}
+
 	const handleWish = () => {
 		if(!cartClicked) {
 			setWishClicked(!wishClicked)
@@ -71,11 +78,20 @@ const HomeLayout = ({ children, title }) => {
 					Your Profile
 				</Link>
 			</Menu.Item>
+			{ user?.user_name ? 
+			<Menu.Item key="3" danger onClick={handleLogout}>
+				
+			
+				Logout
+			
+		</Menu.Item> :
 			<Menu.Item key="3" danger>
+				
 				<Link href="/auth/login" passHref>
 					Login
 				</Link>
 			</Menu.Item>
+			}
 		</Menu>
 	);
 
