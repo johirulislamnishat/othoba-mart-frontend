@@ -1,3 +1,4 @@
+import { Image } from "antd";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
@@ -13,7 +14,6 @@ import {
   removeFromCart,
   addToWish,
 } from "../../context/actions/Actions";
-import { Image } from "antd";
 
 const CartMini = ({ activeCart, setActiveCart }) => {
   const {
@@ -64,10 +64,11 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                 <div className="pt-2" key={p._id}>
                   <div className="flex gap-2">
                     <Image
-                      preview={false}
                       src={p.item_img}
+                      preview={false}
                       alt=""
-                      className="bg-gray-200 w-20 h-16 rounded-lg"
+                      width={50}
+                      heigth={40}
                     />
                     <div className="text-left">
                       <h4 className="font-semibold m-0">{p.item_name}</h4>
@@ -80,7 +81,7 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="mt-1 flex items-center justify-between">
+                  <div className="mt-2 flex items-center justify-between">
                     <div className="flex flex-col gap-1">
                       <div
                         className="flex items-center gap-1 cursor-pointer"
