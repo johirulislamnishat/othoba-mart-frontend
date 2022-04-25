@@ -70,7 +70,8 @@ const WishMini = ({ activeWish, setActiveWish, handleWish }) => {
                       <div className="mt-1 flex flex-col gap-1">
                         <div
                           className="flex items-center gap-1 cursor-pointer"
-                          onClick={() => handleAddToCart(p)}>
+                          onClick={() => handleAddToCart(p)}
+                        >
                           <ShoppingTwoTone
                             twoToneColor="#ff6347"
                             className="text-xl"
@@ -88,8 +89,11 @@ const WishMini = ({ activeWish, setActiveWish, handleWish }) => {
                       </div> */}
                         <div
                           className="flex items-center gap-1 cursor-pointer"
-                          onClick={() => dispatch(removeFromWish(wish, p._id))}>
-                          <CloseOutlined style={{color:'red',fontSize:'large'}} />
+                          onClick={() => dispatch(removeFromWish(wish, p._id))}
+                        >
+                          <CloseOutlined
+                            style={{ color: "red", fontSize: "large" }}
+                          />
                           <p className="text-gray-400 m-0">Remove</p>
                         </div>
                       </div>
@@ -97,7 +101,9 @@ const WishMini = ({ activeWish, setActiveWish, handleWish }) => {
                         <p className="w-max text-orange-500 text-md text-right font-semibold m-0">
                           {p.item_price} USD
                         </p>
-                        <p className=" w-max mt-0.5 line-through text-sm text-right m-0">12.11 USD</p>
+                        <p className=" w-max mt-0.5 line-through text-sm text-right m-0">
+                          12.11 USD
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -110,7 +116,8 @@ const WishMini = ({ activeWish, setActiveWish, handleWish }) => {
                     <button
                       className="p-2 bg-white font-semibold 
                       text-gray-500 rounded-lg border-2  hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
-                      onClick={() => setActiveWish(!activeWish)}>
+                      onClick={() => setActiveWish(!activeWish)}
+                    >
                       Shop
                     </button>
                   </a>
@@ -119,7 +126,8 @@ const WishMini = ({ activeWish, setActiveWish, handleWish }) => {
                   <a>
                     <button
                       className="py-2 px-4 rounded-lg bg-orange-500 border-2 text-white hover:bg-white hover:border-2 hover:border-orange-500 hover:text-black"
-                      onClick={() => setActiveWish(!activeWish)}>
+                      onClick={() => setActiveWish(!activeWish)}
+                    >
                       View Full Wish List
                     </button>
                   </a>

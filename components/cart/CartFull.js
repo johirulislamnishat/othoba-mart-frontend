@@ -27,13 +27,14 @@ const CartFull = () => {
   if (cart.length === 0) return <div>Cart is empty!</div>;
 
   return (
-    <div className='mx-3'>
+    <div className="mx-3">
       <h3 className="lg:mt-7 text-2xl font-semibold">SHOPPING CART</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="py-3 col-span-1 sm:col-span-2">
           <table
             className="w-full table-fixed border-2 border-gray-200 text-center"
-            style={{ borderSpacing: "20px" }}>
+            style={{ borderSpacing: "20px" }}
+          >
             <thead className="py-3 border-2 border-b-gray-200 w-full">
               <tr className="py-3">
                 <th colSpan="3">Product</th>
@@ -43,16 +44,11 @@ const CartFull = () => {
               </tr>
             </thead>
             <tbody className="">
-              {cart?.map((p,i) => (
+              {cart?.map((p, i) => (
                 <>
                   <tr key={i} className="font-semibold">
                     <td colSpan="1">
-                      <Image
-                        src={p.item_img}
-                        alt=""
-                        width={70}
-                        height={60}
-                      />
+                      <Image src={p.item_img} alt="" width={70} height={60} />
                     </td>
                     <td colSpan="2" className="w-full">
                       <h5 className="text-left break-words cursor-pointer">
@@ -68,7 +64,8 @@ const CartFull = () => {
                         <button
                           disabled={p.item_qty === 1 ? true : false}
                           onClick={() => dispatch(decrease(cart, p._id))}
-                          className="cursor-pointer text-3xl p-1 pt-0">
+                          className="cursor-pointer text-3xl p-1 pt-0"
+                        >
                           -
                         </button>
 
@@ -77,7 +74,8 @@ const CartFull = () => {
                         </span>
                         <button
                           onClick={() => dispatch(increase(cart, p._id))}
-                          className="cursor-pointer text-2xl p-1 pt-0">
+                          className="cursor-pointer text-2xl p-1 pt-0"
+                        >
                           +
                         </button>
                       </div>

@@ -58,7 +58,8 @@ const CheckoutCart = ({
                 />
                 <div
                   className="flex items-center gap-1 cursor-pointer"
-                  onClick={() => dispatch(removeFromCart(cart, p._id))}>
+                  onClick={() => dispatch(removeFromCart(cart, p._id))}
+                >
                   <CloseOutlined style={{ color: "red" }} />
                   <p className="text-gray-400 m-0">Remove</p>
                 </div>
@@ -86,7 +87,8 @@ const CheckoutCart = ({
                     <button
                       disabled={p.item_qty === 1 ? true : false}
                       onClick={() => dispatch(decrease(cart, p._id))}
-                      className="cursor-pointer text-3xl p-1 pt-0">
+                      className="cursor-pointer text-3xl p-1 pt-0"
+                    >
                       -
                     </button>
 
@@ -95,7 +97,8 @@ const CheckoutCart = ({
                     </span>
                     <button
                       onClick={() => dispatch(increase(cart, p._id))}
-                      className="cursor-pointer text-2xl p-1 pt-0">
+                      className="cursor-pointer text-2xl p-1 pt-0"
+                    >
                       +
                     </button>
                   </div>
@@ -108,7 +111,8 @@ const CheckoutCart = ({
                   <p className="text-gray-400 text-sm m-0">Wishlist</p>
                 </div>
                 <div className="flex items-center gap-1 cursor-pointer">
-                  <img
+                  <Image
+                    preview={false}
                     src="/images/icons/compare.png"
                     alt=""
                     width="14px"
