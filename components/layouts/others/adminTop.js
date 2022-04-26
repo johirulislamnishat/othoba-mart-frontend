@@ -6,12 +6,14 @@ import {
 	QuestionCircleOutlined,
 	SearchOutlined,
 	ShopOutlined,
+	TagOutlined,
 	TeamOutlined,
 } from "@ant-design/icons";
-import { Drawer, Dropdown, Image, Menu, PageHeader } from "antd";
+import { Drawer, Dropdown, Menu, PageHeader } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { DrawerTitle } from "../../shared/footer/drawerTitle";
 
 const { SubMenu } = Menu;
 
@@ -47,17 +49,6 @@ const AdminTop = ({ pageTitle, child }) => {
 		</div>
 	);
 
-	const drawerTitle = (
-		<Link href="/" passHref>
-			<div className="text-center">
-				<Image
-					preview={false}
-					src="/othoba-mart-logo-light.png"
-					alt="Othoba Mart"
-				/>
-			</div>
-		</Link>
-	);
 	return (
 		<>
 			<PageHeader
@@ -85,7 +76,7 @@ const AdminTop = ({ pageTitle, child }) => {
 				]}
 			/>
 			<Drawer
-				title={drawerTitle}
+				title={DrawerTitle}
 				placement="left"
 				onClose={() => setOpen(!open)}
 				visible={open}
@@ -129,6 +120,16 @@ const AdminTop = ({ pageTitle, child }) => {
 					<Menu.Item key="users" icon={<TeamOutlined />}>
 						<Link href="/admin/users" passHref>
 							Users
+						</Link>
+					</Menu.Item>
+					<Menu.Item key="shops" icon={<TeamOutlined />}>
+						<Link href="/admin/shops" passHref>
+							Shops
+						</Link>
+					</Menu.Item>
+					<Menu.Item key="tickets" icon={<TagOutlined />}>
+						<Link href="/admin/tickets" passHref>
+							Manage Ticket
 						</Link>
 					</Menu.Item>
 				</Menu>
