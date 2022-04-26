@@ -16,7 +16,7 @@ import useProvider from "../../../hooks/useProvider";
 
 const { Option } = Select;
 
-const Tickets = () => {
+const AdminTickets = () => {
   const [tickets, setTickets] = useState([]);
   const {
     state: {
@@ -207,4 +207,4 @@ const Tickets = () => {
   );
 };
 
-export default Tickets;
+export default AdminTickets;
