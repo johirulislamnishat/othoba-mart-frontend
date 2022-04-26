@@ -41,13 +41,11 @@ const HomeMenu = ({ visible, setVisible }) => {
 						<div className="ml-3">Sort by Category</div>
 					</div>
 					{showMenu && (
-						<div className="absolute z-10 top-14 w-full">
+						<div className="absolute z-10 top-14 w-full shadow">
 							<Menu
-								defaultSelectedKeys={["1"]}
 								mode="inline"
 								onClick={(e) => setShowMenu(!showMenu)}
 							>
-								<Menu.Item key="1">Home</Menu.Item>
 								<Menu.Item key="2">Fashion</Menu.Item>
 								<Menu.Item key="3">Electronics</Menu.Item>
 								<Menu.Item key="4">Gifts</Menu.Item>
@@ -62,11 +60,7 @@ const HomeMenu = ({ visible, setVisible }) => {
 				</Col>
 				<Col xs={7} md={16} lg={14}>
 					<div className="hidden lg:block">
-						<Menu
-							onClick={(e) => console.log(e)}
-							selectedKeys={["1"]}
-							mode="horizontal"
-						>
+						<Menu selectedKeys={["1"]} mode="horizontal">
 							<Menu.Item key="1">
 								<Link href="/" passHref>
 									Home
