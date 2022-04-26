@@ -20,14 +20,14 @@ const CheckoutCart = ({
 }) => {
   const [coupon, setCoupon] = useState('')
   const [discount, setDiscount] = useState(0)
-  const [discountedPrice, setDiscountedPrice] = useState()
+  const [discountedPrice, setDiscountedPrice] = useState(null)
   
   console.log(discountedPrice, discount)
 
   const handleCoupon = () => {
     if ( coupon === 'othoba') {
       setDiscount(grandTotal * 0.20)
-      setDiscountedPrice((grandTotal - (discount)))
+      setDiscountedPrice(grandTotal - discount)
     }
   }
  
@@ -141,7 +141,7 @@ const CheckoutCart = ({
             <div className="justify-self-end text-right">
               <p>{total} USD</p>
               <p>{tax.toFixed(2)} USD</p>
-              <p>{shipping.toFixed(2)} USD</p>
+              <p>{shipping?.toFixed(2)} USD</p>
             </div>
           </div>
           <div className="mt-8 grid grid-cols-5 items-center bg-gray-100 border-2 border-gray-300 py-1 px-0.5 rounded-lg">
@@ -166,7 +166,7 @@ const CheckoutCart = ({
             </div>
             <div className=" flex flex-col min-w-max text-xl font-semibold text-sky-500">
               <h5 className='font-llg text-sky-500 text-right'>{grandTotal.toFixed(2)} USD  </h5>
-              <h5 className='text-md text-red-500 text-right'>{discount.toFixed(2)} USD </h5>
+              <h5 className='text-sm text-red-500 text-right'>{discount.toFixed(2)} USD </h5>
               <h5 className='font-llg text-green-500 text-right'>{ discountedPrice ? discountedPrice?.toFixed(2) : grandTotal } USD </h5>
             </div>
           </div>

@@ -73,12 +73,6 @@ const VendorMenu = ({ collapsed }) => {
             </Link>
           </Menu.Item>
         </SubMenu>
-
-        <Menu.Item key="coupon" icon={<ShopOutlined />}>
-          <Link href="/vendor/coupon" passHref>
-            Coupon
-          </Link>
-        </Menu.Item>
         <Menu.Item key="profile" icon={<ProfileOutlined />}>
           <Link href="/vendor/profile" passHref>
             Profile

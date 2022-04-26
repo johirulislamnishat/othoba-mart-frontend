@@ -98,6 +98,7 @@ const AddProduct = () => {
             .then((res) => {
                 if (res.status === 200) {
                     message.success(res.data.message);
+                    console.log(res)
                     setLoading(false);
                     form.resetFields();
                 }
@@ -163,7 +164,7 @@ const AddProduct = () => {
     };
 
     return (
-        <VendorLayout title={"Admin || Add Product"} pageTitle="Add Product">
+        <VendorLayout title={"Vendor || Add Product"} pageTitle="Add Product">
             <section className="mt-5 bg-white p-8 pb-3">
                 <Form
                     form={form}

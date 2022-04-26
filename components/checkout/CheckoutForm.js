@@ -79,13 +79,13 @@ const CheckoutForm = () => {
 
   const tax = total * 0.05;
 
-  let shipping;
-  if(total<=5000) {
+  let shipping=0;
+  if(total && total <=5000) {
     shipping = 50
-  } else if (total <=15000) {
+  } else if (total && total <=15000) {
     shipping = 30
   } else {
-    shipping = 20
+    if(total) shipping = 20
   }
 
   const grandTotal = parseFloat(total) + parseFloat(tax) + parseFloat(shipping);
