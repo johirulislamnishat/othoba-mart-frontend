@@ -252,6 +252,7 @@ Home Page Main Area Style
   font-size: 2rem;
   color: var(--black-color);
   margin-bottom: 5px;
+  line-height: 1.8rem;
 }
 
 .promo-lg-two .promo-lg h3 {
@@ -266,6 +267,16 @@ Home Page Main Area Style
 }
 .promo-image {
   max-width: 100px !important;
+}
+.custom-promo-carousel {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
+}
+@media screen and (max-width: 668px) {
+  .custom-promo-carousel {
+    grid-template-columns: 100%;
+  }
 }
 /* latest deals */
 .latest-deals .product-image {
