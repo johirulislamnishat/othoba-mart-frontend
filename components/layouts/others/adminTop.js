@@ -13,10 +13,15 @@ import { Drawer, Dropdown, Image, Menu, PageHeader } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import useProvider from "../../../hooks/useProvider";
 
 const { SubMenu } = Menu;
 
 const AdminTop = ({ pageTitle, child }) => {
+  const {
+    state: { user },
+  } = useProvider();
+  console.log(user);
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const pageName = router.pathname.split("/");
@@ -101,43 +106,149 @@ const AdminTop = ({ pageTitle, child }) => {
               : [pageName[pageName.length - 1].toUpperCase()]
           }
         >
-          <Menu.Item key="admin" icon={<DashboardOutlined />}>
-            <Link href="/admin" passHref>
-              Dashboard
-            </Link>
-          </Menu.Item>
-          <SubMenu key="PRODUCTS" icon={<GoldOutlined />} title="Products">
-            <Menu.Item key="products">
-              <Link href="/admin/products" passHref>
-                Products
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="add">
-              <Link href="/admin/products/add" passHref>
-                Add Product
-              </Link>
-            </Menu.Item>
-          </SubMenu>
-          <Menu.Item key="orders" icon={<ShopOutlined />}>
-            <Link href="/admin/orders" passHref>
-              Orders
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="users" icon={<TeamOutlined />}>
-            <Link href="/admin/users" passHref>
-              Users
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="shops" icon={<TeamOutlined />}>
-            <Link href="/admin/shops" passHref>
-              Shops
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="tickets" icon={<TagOutlined />}>
-            <Link href="/admin/tickets" passHref>
-              Manage Ticket
-            </Link>
-          </Menu.Item>
+          {user?.isSuperAdmin === true && (
+            <>
+              <Menu.Item key="admin" icon={<DashboardOutlined />}>
+                <Link href="/admin" passHref>
+                  Dashboard
+                </Link>
+              </Menu.Item>
+              <SubMenu key="PRODUCTS" icon={<GoldOutlined />} title="Products">
+                <Menu.Item key="products">
+                  <Link href="/admin/products" passHref>
+                    Products
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="add">
+                  <Link href="/admin/products/add" passHref>
+                    Add Product
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
+              <Menu.Item key="orders" icon={<ShopOutlined />}>
+                <Link href="/admin/orders" passHref>
+                  Orders
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="users" icon={<TeamOutlined />}>
+                <Link href="/admin/users" passHref>
+                  Users
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="shops" icon={<TeamOutlined />}>
+                <Link href="/admin/shops" passHref>
+                  Shops
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="tickets" icon={<TagOutlined />}>
+                <Link href="/admin/tickets" passHref>
+                  Manage Ticket
+                </Link>
+              </Menu.Item>
+            </>
+          )}
+          {user?.isAdmin === true && (
+            <>
+              <Menu.Item key="admin" icon={<DashboardOutlined />}>
+                <Link href="/admin" passHref>
+                  Dashboard
+                </Link>
+              </Menu.Item>
+              <SubMenu key="PRODUCTS" icon={<GoldOutlined />} title="Products">
+                <Menu.Item key="products">
+                  <Link href="/admin/products" passHref>
+                    Products
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="add">
+                  <Link href="/admin/products/add" passHref>
+                    Add Product
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
+              <Menu.Item key="orders" icon={<ShopOutlined />}>
+                <Link href="/admin/orders" passHref>
+                  Orders
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="users" icon={<TeamOutlined />}>
+                <Link href="/admin/users" passHref>
+                  Users
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="shops" icon={<TeamOutlined />}>
+                <Link href="/admin/shops" passHref>
+                  Shops
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="tickets" icon={<TagOutlined />}>
+                <Link href="/admin/tickets" passHref>
+                  Manage Ticket
+                </Link>
+              </Menu.Item>
+            </>
+          )}
+          {user?.isVendor === true ? (
+            <>
+              <Menu.Item key="admin" icon={<DashboardOutlined />}>
+                <Link href="/admin" passHref>
+                  Dashboard
+                </Link>
+              </Menu.Item>
+              <SubMenu key="PRODUCTS" icon={<GoldOutlined />} title="Products">
+                <Menu.Item key="products">
+                  <Link href="/admin/products" passHref>
+                    Products
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="add">
+                  <Link href="/admin/products/add" passHref>
+                    Add Product
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
+              <Menu.Item key="orders" icon={<ShopOutlined />}>
+                <Link href="/admin/orders" passHref>
+                  Orders
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="users" icon={<TeamOutlined />}>
+                <Link href="/admin/users" passHref>
+                  Users
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="shops" icon={<TeamOutlined />}>
+                <Link href="/admin/shops" passHref>
+                  Shops
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="tickets" icon={<TagOutlined />}>
+                <Link href="/admin/tickets" passHref>
+                  Manage Ticket
+                </Link>
+              </Menu.Item>
+            </>
+          ) : (
+            <>
+              <Menu.Item key="admin" icon={<DashboardOutlined />}>
+                <Link href="/customer" passHref>
+                  Dashboard
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="orders" icon={<ShopOutlined />}>
+                <Link href="/customer/orders" passHref>
+                  My Orders
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="tickets" icon={<TagOutlined />}>
+                <Link href="/customer/tickets" passHref>
+                  Tickets
+                </Link>
+              </Menu.Item>
+            </>
+          )}
         </Menu>
       </Drawer>
     </>
