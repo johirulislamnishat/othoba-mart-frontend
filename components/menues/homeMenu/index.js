@@ -1,4 +1,4 @@
-import { MenuOutlined } from "@ant-design/icons";
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { Button, Col, Drawer, Form, Input, Menu, Row } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -9,6 +9,8 @@ const { SubMenu } = Menu;
 
 const HomeMenu = ({ visible, setVisible }) => {
 	const [showTrack, setShowTrack] = useState(false);
+	const [loading, setLoading] = useState(false);
+
 	const {
 		state: { user },
 	} = useProvider();
@@ -16,7 +18,10 @@ const HomeMenu = ({ visible, setVisible }) => {
 	const [form] = Form.useForm();
 
 	const handleSubmit = (values) => {
+		setLoading(true);
 		setShowTrack(!showTrack);
+		form.resetFields();
+		setLoading(false);
 	};
 
 	return (
@@ -117,44 +122,61 @@ const HomeMenu = ({ visible, setVisible }) => {
 							</span>
 							{showTrack && (
 								<div className="absolute z-10 top-10 right-0 bg-white px-5 pt-5 shadow w-64">
-									<p className="text-xl font-bold">
-										Track My order
-									</p>
-									<Form
-										form={form}
-										name="Track order"
-										layout="vertical"
-										requiredMark={false}
-										initialValues={{ remember: true }}
-										onFinish={handleSubmit}
-									>
-										<Form.Item
-											label="My tracking number"
-											name="track_number"
-											hasFeedback
-											validateFirst
-											rules={[
-												{
-													required: true,
-													message:
-														"Please enter your tracking number!",
-												},
-											]}
-										>
-											<Input
-												placeholder="eg. 123456789"
-												allowClear
+									<div className="relative">
+										<div className="absolute z-10 -top-3 right-1">
+											<CloseOutlined
+												style={{
+													color: "black",
+													fontSize: "1rem",
+												}}
+												onClick={() =>
+													setShowTrack(false)
+												}
 											/>
-										</Form.Item>
-										<Form.Item>
-											<Button
-												type="primary"
-												htmlType="submit"
+										</div>
+										<p className="text-xl font-bold">
+											Track My order
+										</p>
+										<Form
+											form={form}
+											name="Track order"
+											layout="vertical"
+											requiredMark={false}
+											initialValues={{ remember: true }}
+											onFinish={handleSubmit}
+										>
+											<Form.Item
+												label="My tracking number"
+												name="track_number"
+												hasFeedback
+												validateFirst
+												rules={[
+													{
+														required: true,
+														message:
+															"Please enter your tracking number!",
+													},
+												]}
 											>
-												Track
-											</Button>
-										</Form.Item>
-									</Form>
+												<Input
+													placeholder="eg. 123456789"
+													allowClear
+												/>
+											</Form.Item>
+											<Form.Item>
+												<Button
+													type="primary"
+													htmlType="submit"
+													shape="round"
+													block
+													disabled={loading}
+													loading={loading}
+												>
+													Track
+												</Button>
+											</Form.Item>
+										</Form>
+									</div>
 								</div>
 							)}
 						</Menu.Item>
