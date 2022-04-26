@@ -1,6 +1,7 @@
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { Button, Col, Drawer, Form, Input, Menu, Row } from "antd";
 import Link from "next/link";
+import Router from "next/router";
 import React, { useState } from "react";
 import useProvider from "../../../hooks/useProvider";
 import { DrawerTitle } from "../../shared/footer/drawerTitle";
@@ -20,8 +21,12 @@ const HomeMenu = ({ visible, setVisible }) => {
 	const handleSubmit = (values) => {
 		setLoading(true);
 		setShowTrack(!showTrack);
-		form.resetFields();
-		setLoading(false);
+		Router.push(`/admin/orders/trackOrder/${values.track_number}`).then(
+			() => {
+				form.resetFields();
+				setLoading(false);
+			}
+		);
 	};
 
 	return (
