@@ -38,3 +38,14 @@ const Cart = () => {
 };
 
 export default Cart;
+
+// export async function getStaticProps() {
+//   const { state: {user}} = await useProvider()
+//   console.lopg(user)
+  
+//   return{
+//     props: {
+//       user
+//     }
+//   }
+// }
