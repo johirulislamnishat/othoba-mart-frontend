@@ -6,6 +6,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Carousel, Col, Image, Menu, Row } from "antd";
 import Title from "antd/lib/typography/Title";
+import Router from "next/router";
 import React from "react";
 
 const HomeHeader = () => {
@@ -61,7 +62,12 @@ const HomeHeader = () => {
 										</span>
 									</div>
 
-									<button className="bg-orange-500 text-white py-1 sm:py-2 text-xs sm:text-base rounded-full hover:bg-orange-400">
+									<button
+										onClick={() =>
+											Router.push("/categories")
+										}
+										className="bg-orange-500 text-white py-1 sm:py-2 text-xs sm:text-base rounded-full hover:bg-orange-400"
+									>
 										Shop Now
 									</button>
 								</div>
@@ -96,7 +102,12 @@ const HomeHeader = () => {
 										</span>
 									</div>
 
-									<button className="bg-orange-500 text-white py-1 sm:py-2  text-xs sm:text-base rounded-full hover:bg-orange-400">
+									<button
+										onClick={() =>
+											Router.push("/categories")
+										}
+										className="bg-orange-500 text-white py-1 sm:py-2  text-xs sm:text-base rounded-full hover:bg-orange-400"
+									>
 										Shop Now
 									</button>
 								</div>
