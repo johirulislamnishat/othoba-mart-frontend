@@ -15,9 +15,9 @@ const HomeHeader = () => {
 				{/* left menu */}
 				<Col xs={0} md={0} lg={4}>
 					<Menu defaultSelectedKeys={["1"]} mode="inline">
-						<Menu.Item key="1">Home</Menu.Item>
+						<Menu.Item key="1">Electronics</Menu.Item>
 						<Menu.Item key="2">Fashion</Menu.Item>
-						<Menu.Item key="3">Electronics</Menu.Item>
+						<Menu.Item key="3">Sports</Menu.Item>
 						<Menu.Item key="4">Gifts</Menu.Item>
 						<Menu.Item key="5">Garden</Menu.Item>
 						<Menu.Item key="6">Music</Menu.Item>
@@ -114,9 +114,14 @@ const HomeHeader = () => {
 				</Col>
 			</Row>
 
-			<Row gutter={[16, 16]} align="middle" className="py-3 mt-3">
+			<Row
+				gutter={[16, 16]}
+				align="middle"
+				justify="center"
+				className="py-3 mt-3"
+			>
 				<Col xs={24} md={12} xl={6}>
-					<Row gutter={[16, 16]} align="middle" justify="center">
+					<Row gutter={[16, 16]} align="middle" className="w-full">
 						<Col>
 							<CarOutlined
 								className="text-3xl"
@@ -135,7 +140,7 @@ const HomeHeader = () => {
 				</Col>
 
 				<Col xs={24} md={12} xl={6}>
-					<Row gutter={[16, 16]} align="middle" justify="center">
+					<Row gutter={[16, 16]} align="middle">
 						<Col>
 							<DollarCircleOutlined
 								className="text-3xl"
@@ -152,7 +157,7 @@ const HomeHeader = () => {
 				</Col>
 
 				<Col xs={24} md={12} xl={6}>
-					<Row gutter={[16, 16]} align="middle" justify="center">
+					<Row gutter={[16, 16]} align="middle">
 						<Col>
 							<CheckCircleOutlined
 								className="text-3xl"
@@ -169,7 +174,7 @@ const HomeHeader = () => {
 				</Col>
 
 				<Col xs={24} md={12} xl={6}>
-					<Row gutter={[16, 16]} align="middle" justify="center">
+					<Row gutter={[16, 16]} align="middle">
 						<Col>
 							<CreditCardOutlined
 								className="text-3xl"

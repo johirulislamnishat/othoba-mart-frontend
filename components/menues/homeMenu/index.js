@@ -1,79 +1,118 @@
-import {
-	AppstoreOutlined,
-	GiftOutlined,
-	MailOutlined,
-	MenuOutlined,
-	SettingOutlined,
-} from "@ant-design/icons";
+import { MenuOutlined } from "@ant-design/icons";
 import { Col, Drawer, Menu, Row } from "antd";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import useProvider from "../../../hooks/useProvider";
+import { DrawerTitle } from "../../shared/footer/drawerTitle";
 
 const { SubMenu } = Menu;
 
 const HomeMenu = ({ visible, setVisible }) => {
+	const [isHome, setIsHome] = useState(true);
+	const [showMenu, setShowMenu] = useState(false);
+	const {
+		state: { user },
+	} = useProvider();
+	const router = useRouter();
+
+	useEffect(() => {
+		const routes = router.asPath.split("/");
+		if (routes[1] === "") {
+			setIsHome(true);
+		} else {
+			setIsHome(false);
+		}
+	}, [router]);
+
 	return (
 		<>
 			<Row>
 				<Col xs={0} lg={4}>
-					<div className="bg-black text-white h-full flex justify-center items-center">
+					<div
+						className={`bg-black text-white h-full flex justify-center items-center relative ${
+							isHome ? "cursor-default" : "cursor-pointer"
+						}`}
+						onClick={() =>
+							isHome ? setShowMenu(false) : setShowMenu(!showMenu)
+						}
+					>
 						<MenuOutlined />
 						<div className="ml-3">Sort by Category</div>
 					</div>
+					{showMenu && (
+						<div className="absolute z-10 top-14 w-full shadow">
+							<Menu
+								mode="inline"
+								onClick={(e) => setShowMenu(!showMenu)}
+							>
+								<Menu.Item key="2">Fashion</Menu.Item>
+								<Menu.Item key="3">Electronics</Menu.Item>
+								<Menu.Item key="4">Gifts</Menu.Item>
+								<Menu.Item key="5">Garden</Menu.Item>
+								<Menu.Item key="6">Music</Menu.Item>
+								<Menu.Item key="7">Motors</Menu.Item>
+								<Menu.Item key="8">Furniture</Menu.Item>
+								<Menu.Item key="9">VIEW ALL &gt;</Menu.Item>
+							</Menu>
+						</div>
+					)}
 				</Col>
 				<Col xs={7} md={16} lg={14}>
 					<div className="hidden lg:block">
-						<Menu
-							onClick={(e) => console.log(e)}
-							selectedKeys={["mail"]}
-							mode="horizontal"
-						>
-							<Menu.Item key="mail">Home</Menu.Item>
+						<Menu selectedKeys={["1"]} mode="horizontal">
+							<Menu.Item key="1">
+								<Link href="/" passHref>
+									Home
+								</Link>
+							</Menu.Item>
 
-							<SubMenu key="SubMenu" title="Vendor">
-								<Menu.Item key="vendor:1">Option 1</Menu.Item>
-								<Menu.Item key="vendor:2">Option 2</Menu.Item>
-								<Menu.Item key="vendor:3">Option 3</Menu.Item>
-								<Menu.Item key="vendor:4">Option 4</Menu.Item>
-							</SubMenu>
+							<Menu.Item key="2">
+								<Link href="/categories" passHref>
+									Categories
+								</Link>
+							</Menu.Item>
 
-							<SubMenu key="SubMenu2" title="Categories">
-								<Menu.ItemGroup title="Item 1">
-									<Menu.Item key="setting:1">
-										Option 1
-									</Menu.Item>
-									<Menu.Item key="setting:2">
-										Option 2
-									</Menu.Item>
-								</Menu.ItemGroup>
-								<Menu.ItemGroup title="Item 2">
-									<Menu.Item key="setting:3">
-										Option 3
-									</Menu.Item>
-									<Menu.Item key="setting:4">
-										Option 4
-									</Menu.Item>
-								</Menu.ItemGroup>
-							</SubMenu>
+							<Menu.Item key="3">
+								<Link href="/about" passHref>
+									About Us
+								</Link>
+							</Menu.Item>
 
-							<SubMenu key="SubMenu3" title="Products">
-								<Menu.ItemGroup title="Item 1">
-									<Menu.Item key="products:1">
-										Option 1
-									</Menu.Item>
-									<Menu.Item key="products:2">
-										Option 2
-									</Menu.Item>
-								</Menu.ItemGroup>
-								<Menu.ItemGroup title="Item 2">
-									<Menu.Item key="products:3">
-										Option 3
-									</Menu.Item>
-									<Menu.Item key="products:4">
-										Option 4
-									</Menu.Item>
-								</Menu.ItemGroup>
+							<SubMenu key="SubMenu3" title="Suport">
+								<Menu.Item key="contact">
+									<Link href="/contact" passHref>
+										Contact Us
+									</Link>{" "}
+								</Menu.Item>
+								<Menu.Item key="support">
+									<Link href="/support" passHref>
+										Support
+									</Link>
+								</Menu.Item>
+								<Menu.Item key="products:3">
+									Track Order
+								</Menu.Item>
+								<Menu.Item key="products:4">
+									Privacy Policy
+								</Menu.Item>
+								<Menu.Item key="products:5">
+									Terms & Conditions
+								</Menu.Item>
 							</SubMenu>
+							<Menu.Item key="4">
+								<Link href="/faq" passHref>
+									FAQs
+								</Link>
+							</Menu.Item>
+
+							{user.isVendor && (
+								<Menu.Item key="5">
+									<Link href="/admin" passHref>
+										Admin
+									</Link>
+								</Menu.Item>
+							)}
 						</Menu>
 					</div>
 
@@ -90,23 +129,21 @@ const HomeMenu = ({ visible, setVisible }) => {
 					lg={6}
 					className="pl-5 sm:pl-32 md:pl-0 lg:pl-8 xl:pl-16"
 				>
-					<Menu mode="horizontal" defaultSelectedKeys={["0"]}>
-						<Menu.Item key="1">
-							<Link href="/auth/login">
-								<a>
-									<span className="text-blue font-semibold cursor-pointer">
-										Log In
-									</span>
-								</a>
-							</Link>
-						</Menu.Item>
+					<Menu mode="horizontal" defaultSelectedKeys={["1"]}>
+						{user.isCustomer && (
+							<Menu.Item key="1">
+								<Link href="/auth/register" passHref>
+									Become a Seller
+								</Link>
+							</Menu.Item>
+						)}
 						<Menu.Item key="2">USD</Menu.Item>
 					</Menu>
 				</Col>
 			</Row>
 
 			<Drawer
-				title="Othoba Mart"
+				title={DrawerTitle}
 				placement="right"
 				onClose={() => setVisible(!visible)}
 				visible={visible}
@@ -117,48 +154,54 @@ const HomeMenu = ({ visible, setVisible }) => {
 					defaultSelectedKeys={["1"]}
 					defaultOpenKeys={["sub1"]}
 				>
-					<SubMenu key="sub1" icon={<MailOutlined />} title="Home">
-						<Menu.Item key="1">Option 1</Menu.Item>
-						<Menu.Item key="2">Option 2</Menu.Item>
-						<Menu.Item key="3">Option 3</Menu.Item>
-						<Menu.Item key="4">Option 4</Menu.Item>
-					</SubMenu>
+					<Menu.Item key="1">
+						<Link href="/" passHref>
+							Home
+						</Link>
+					</Menu.Item>
 
-					<SubMenu
-						key="sub2"
-						icon={<AppstoreOutlined />}
-						title="Vendor"
-					>
-						<Menu.Item key="5">Option 5</Menu.Item>
-						<Menu.Item key="6">Option 6</Menu.Item>
-					</SubMenu>
+					<Menu.Item key="2">
+						<Link href="/categories" passHref>
+							Categories
+						</Link>
+					</Menu.Item>
 
-					<SubMenu key="sub3" icon={<GiftOutlined />} title="Gifts">
-						<Menu.Item key="7">Option 7</Menu.Item>
-						<Menu.Item key="8">Option 8</Menu.Item>
-					</SubMenu>
+					<Menu.Item key="3">
+						<Link href="/about" passHref>
+							About Us
+						</Link>
+					</Menu.Item>
 
-					<SubMenu
-						key="sub4"
-						icon={<SettingOutlined />}
-						title="Categories"
-					>
-						<Menu.Item key="9">Option 9</Menu.Item>
-						<Menu.Item key="10">Option 10</Menu.Item>
-						<Menu.Item key="11">Option 11</Menu.Item>
-						<Menu.Item key="12">Option 12</Menu.Item>
+					<SubMenu key="SubMenu3" title="Suport">
+						<Menu.Item key="contact">
+							<Link href="/contact" passHref>
+								Contact Us
+							</Link>{" "}
+						</Menu.Item>
+						<Menu.Item key="support">
+							<Link href="/support" passHref>
+								Support
+							</Link>
+						</Menu.Item>
+						<Menu.Item key="products:3">Track Order</Menu.Item>
+						<Menu.Item key="products:4">Privacy Policy</Menu.Item>
+						<Menu.Item key="products:5">
+							Terms & Conditions
+						</Menu.Item>
 					</SubMenu>
+					<Menu.Item key="4">
+						<Link href="/faq" passHref>
+							FAQs
+						</Link>
+					</Menu.Item>
 
-					<SubMenu
-						key="sub5"
-						icon={<AppstoreOutlined />}
-						title="Products"
-					>
-						<Menu.Item key="13">Option 13</Menu.Item>
-						<Menu.Item key="14">Option 14</Menu.Item>
-						<Menu.Item key="15">Option 15</Menu.Item>
-						<Menu.Item key="16">Option 16</Menu.Item>
-					</SubMenu>
+					{user.isVendor && (
+						<Menu.Item key="5">
+							<Link href="/admin" passHref>
+								Admin
+							</Link>
+						</Menu.Item>
+					)}
 				</Menu>
 			</Drawer>
 		</>

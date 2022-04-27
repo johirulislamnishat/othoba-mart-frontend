@@ -1,186 +1,164 @@
-import {
-	CaretDownOutlined,
-	CloseOutlined,
-	HeartTwoTone,
-	StarFilled,
-	StarOutlined,
-} from "@ant-design/icons";
 import { Image } from "antd";
-import { useState } from "react";
-import UseLocalDB from "../hooks/useLocalDB";
+import {
+  CloseOutlined,
+  HeartTwoTone,
+  StarFilled,
+  StarOutlined,
+} from "@ant-design/icons";
 
-const CheckoutCart = () => {
-	const [activeOption, setActiveOption] = useState(false);
+const CheckoutCart = ({
+  cart,
+  dispatch,
+  decrease,
+  increase,
+  removeFromCart,
+  total,
+  tax,
+  shipping,
+  grandTotal,
+}) => {
+  return (
+    <>
+      <h3 className="font-semibold text-xl mt-4">Order Summary</h3>
+      <p className="text-xs text-gray-500">
+        Price can be changed depending on your shipping method and taxes in your
+        state.{" "}
+      </p>
+      <div className="grid grid-cols-1 gap-2 divide-y-2">
+        {cart.length === 0 && (
+          <div className="text-left text-xl font-semi my-10">
+            {" "}
+            Cart is empty!{" "}
+          </div>
+        )}
+        {cart.map((p) => (
+          <div className="mt-4" key={p._id}>
+            <div className="grid grid-cols-3">
+              <div className="col-span-1">
+                <Image
+                  src={p.item_img}
+                  preview={false}
+                  width={80}
+                  height={70}
+                  alt=""
+                />
+                <div
+                  className="flex items-center gap-1 cursor-pointer"
+                  onClick={() => dispatch(removeFromCart(cart, p._id))}
+                >
+                  <CloseOutlined style={{ color: "red" }} />
+                  <p className="text-gray-400 m-0">Remove</p>
+                </div>
+              </div>
+              <div className="col-span-2">
+                <div className="text-left">
+                  <h4 className="font-semibold  m-0 cursor-pointer">
+                    {p.item_name}
+                  </h4>
+                  <div className="ratings-mini">
+                    <StarFilled />
+                    <StarFilled />
+                    <StarFilled />
+                    <StarFilled />
+                    <StarOutlined />
+                  </div>
 
-	const { cart, totalQuantity, totalPrice, RemoveFromCart } = UseLocalDB();
+                  <div>
+                    <p className="min-w-max text-sky-500 text-md font-semibold m-0">
+                      {p.item_price * p.item_qty} USD
+                    </p>
+                  </div>
 
-	const tax = totalPrice * 0.17;
-	const shipping = totalPrice * 0.01;
-	const grandTotal =
-		parseFloat(totalPrice) + parseFloat(tax) + parseFloat(shipping);
+                  <div className="col-span-1 flex items-center mx-auto">
+                    <button
+                      disabled={p.item_qty === 1 ? true : false}
+                      onClick={() => dispatch(decrease(cart, p._id))}
+                      className="cursor-pointer text-3xl p-1 pt-0"
+                    >
+                      -
+                    </button>
 
-	return (
-		<>
-			<h3 className="font-semibold text-xl mt-4">Order Summary</h3>
-			<p className="text-xs text-gray-500">
-				Price can be changed depending on your shipping method and taxes
-				in your state.{" "}
-			</p>
-			<div className="grid grid-cols-1 gap-6 divide-y-2">
-				{cart?.map((product) => (
-					<>
-						<div className="mt-5 ">
-							<div className="flex gap-4">
-								<Image
-									preview={false}
-									src=""
-									alt=""
-									className="bg-gray-200 w-28 h-20 rounded-lg"
-								/>
-								<div>
-									<h4 className="font-semibold">
-										{product.title}
-									</h4>
-									<p className="">
-										<span className="text-gray-400">
-											Farm:
-										</span>{" "}
-										{product.farm}
-									</p>
-									<p className="">
-										<span className="text-gray-400">
-											Freshness:
-										</span>{" "}
-										1 day old
-									</p>
-								</div>
-							</div>
-							<div className="mt-2 flex items-center justify-between">
-								<div>
-									<div className="flex items-center gap-2">
-										<HeartTwoTone
-											twoToneColor="#eb2f96"
-											className="cursor-pointer"
-										/>
-										<p className="text-gray-400 m-0">
-											Wishlist
-										</p>
-									</div>
-									<div className="flex items-center gap-2">
-										<Image
-											preview={false}
-											src="/images/icons/compare.png"
-											alt=""
-											width="14px"
-											height="14px"
-											className="cursor-pointer"
-										/>
-										<p className="text-gray-400 m-0">
-											Compare
-										</p>
-									</div>
-									<div className="flex items-center gap-2">
-										<CloseOutlined
-											className="text-red-500 cursor-pointer"
-											onClick={() =>
-												RemoveFromCart(product._id)
-											}
-										/>
-										<p className="text-gray-400 m-0">
-											Remove
-										</p>
-									</div>
-								</div>
-								<div className="flex flex-col gap-2">
-									<div className="ratings">
-										<StarFilled />
-										<StarFilled />
-										<StarFilled />
-										<StarFilled />
-										<StarOutlined />
-									</div>
-									<div>
-										<p className="min-w-max text-green-500 text-lg font-semibold m-0">
-											{product.price} USD
-										</p>
-										<p className="line-through text-sm m-0">
-											48.56 USD
-										</p>
-									</div>
-								</div>
-								<div className="">
-									<ul className=" relative bg-gray-100 border-2 border-gray-300 rounded-2xl min-h-max p-2">
-										<span className="text-gray-400">
-											1pc |
-										</span>{" "}
-										Pcs{" "}
-										<CaretDownOutlined
-											className="cursor-pointer"
-											onClick={() =>
-												setActiveOption(!activeOption)
-											}
-										/>
-										{activeOption && (
-											<div className="absolute bg-gray-100 right-0 p-3">
-												<li className="cursor-pointer">
-													1
-												</li>
-												<li className="cursor-pointer">
-													2
-												</li>
-												<li className="cursor-pointer">
-													3
-												</li>
-											</div>
-										)}
-									</ul>
-								</div>
-							</div>
-						</div>
-					</>
-				))}
+                    <span className="border-2 border-gray-400 px-2 py-0.5 rounded m-0">
+                      {p.item_qty}
+                    </span>
+                    <button
+                      onClick={() => dispatch(increase(cart, p._id))}
+                      className="cursor-pointer text-2xl p-1 pt-0"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full grid grid-cols-3">
+                <div className="col-span-1 mt-1 w-full flex flex-col justify-between">
+                  {/* <div className="flex items-center gap-1 cursor-pointer">
+                  <HeartTwoTone twoToneColor="#eb2f96" />
+                  <p className="text-gray-400 text-sm m-0">Wishlist</p>
+                </div>
+                <div className="flex items-center gap-1 cursor-pointer">
+                  <Image
+                    preview={false}
+                    src="/images/icons/compare.png"
+                    alt=""
+                    width="14px"
+                    height="14px"
+                  />
+                  <p className="text-gray-400 m-0">Compare</p>
+                </div> */}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
 
-				<div className="py-5">
-					<div className="grid grid-cols-3 font-semibold">
-						<div>
-							<p>Subtotal</p>
-							<p>Tax</p>
-							<p>Shipping</p>
-						</div>
-						<div className="justify-self-center">
-							<p>Quantity: {totalQuantity}</p>
-							<p>17%</p>
-							<p>FedEx</p>
-						</div>
-						<div className="justify-self-end text-right">
-							<p>{totalPrice} USD</p>
-							<p>{tax.toFixed(2)} USD</p>
-							<p>{shipping.toFixed(2)} USD</p>
-						</div>
-					</div>
-					<div className="mt-16 flex justify-between bg-gray-100 border-2 border-gray-300 py-1 px-2 rounded-lg">
-						<input
-							placeholder="Apply coupon code"
-							className="text-lg border-none bg-gray-100 py-2 rounded-lg outline-none"
-						/>
-						<button className="text-lg font-bold">Apply now</button>
-					</div>
-					<div className="mt-16 flex justify-between">
-						<div className="">
-							<h5 className="font-semibold">Total Order</h5>
-							<p className="text-green-500">
-								Guaranteed delivery day: June 12, 2020
-							</p>
-						</div>
+        <div className="py-5">
+          <div className="grid grid-cols-3 font-semibold">
+            <div>
+              <p>Subtotal</p>
+              <p>Tax</p>
+              <p>Shipping</p>
+            </div>
+            <div className="justify-self-center">
+              <p>{cart.length}</p>
+              <p>17%</p>
+              <p>FedEx</p>
+            </div>
+            <div className="justify-self-end text-right">
+              <p>{total} USD</p>
+              <p>{tax.toFixed(2)} USD</p>
+              <p>{shipping.toFixed(2)} USD</p>
+            </div>
+          </div>
+          <div className="mt-8 grid grid-cols-5 items-center bg-gray-100 border-2 border-gray-300 py-1 px-0.5 rounded-lg">
+            <div className="col-span-3">
+              <input
+                placeholder="Apply coupon code"
+                className="text-md border-none bg-gray-100 lg:py-2 rounded-lg outline-none"
+              />
+            </div>
+            <div className="col-span-2 justify-self-end">
+              <button className="w-max text-right text-md font-bold pr-0.5 cursor-pointer">
+                Apply now
+              </button>
+            </div>
+          </div>
+          <div className="mt-16 flex justify-between">
+            <div className="">
+              <h5 className="text-lg font-semibold">Total Order</h5>
+              {/* <p className="text-green-500">
+                Guaranteed delivery day: June 12, 2020
+              </p> */}
+            </div>
 
-						<h4 className="min-w-max text-xl font-semibold text-green-500">
-							{grandTotal.toFixed(2)} USD
-						</h4>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+            <h4 className="min-w-max text-xl font-semibold text-sky-500">
+              {grandTotal.toFixed(2)} USD
+            </h4>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default CheckoutCart;

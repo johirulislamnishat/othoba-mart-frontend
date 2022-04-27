@@ -1,20 +1,46 @@
-import { Col, Row } from "antd";
-import Image from "next/image";
-import headphone from "../../../public/images/Products/headphone.jpg";
+import { Carousel, Col, Image } from "antd";
+
 const PromoLgOne = () => {
   return (
-    <div className="container promo-lg-one">
-      <Row className="promo-lg bg-gray-100 p-8 flex justify-between items-center">
-        <Col md={12}>
-          <h4>Weekend Discount</h4>
-          <h3>Supper Smartphone Deal</h3>
-          <p>Do not miss the last opportunity</p>
-          <button className="custom-btn">Shop Now</button>
-        </Col>
-        <Col md={12}>
-          <Image src={headphone} className="promo-image" alt="" />
-        </Col>
-      </Row>
+    <div className="container  promo-lg-one  my-6">
+      <Col xs={24} md={24} lg={24}>
+        <Carousel autoplay>
+          <div className="promo-lg bg-gray-100 p-8 custom-promo-carousel">
+            <div className="mt-6">
+              <h4 className="pb-4">Weekend Discount</h4>
+              <h3 className="pb-4">Smartwatch Big Deal</h3>
+              <p className="pb-4">Do not miss the last opportunity</p>
+              <button className="custom-btn">Shop Now</button>
+            </div>
+            <div>
+              <Image
+                className="float-right"
+                width={"100%"}
+                src="https://i.ibb.co/8B313cd/super-smartphone.png"
+                alt="banner"
+                preview={false}
+              />
+            </div>
+          </div>
+          <div className="promo-lg bg-gray-100 p-8 custom-promo-carousel">
+            <div className="mt-6">
+              <h4 className="pb-4">Weekend Discount</h4>
+              <h3 className="pb-4">Powerbank Best Offer</h3>
+              <p className="pb-4">Do not miss the last opportunity</p>
+              <button className="custom-btn">Shop Now</button>
+            </div>
+            <div>
+              <Image
+                className="float-right"
+                width={"100%"}
+                src="https://i.ibb.co/zFsV14x/power-Bank.png"
+                alt="banner"
+                preview={false}
+              />
+            </div>
+          </div>
+        </Carousel>
+      </Col>
     </div>
   );
 };

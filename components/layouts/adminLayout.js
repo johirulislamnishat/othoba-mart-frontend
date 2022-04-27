@@ -2,20 +2,34 @@ import { Layout } from "antd";
 import { Content, Footer } from "antd/lib/layout/layout";
 import Sider from "antd/lib/layout/Sider";
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Foter from "../shared/footer";
 import AdminMenu from "./others/adminMenu";
 import AdminTop from "./others/adminTop";
 
 const AdminLayout = ({ title, children, pageTitle, child = false }) => {
 	const [collapsed, setCollapsed] = useState(false);
+	const [hide, setHide] = useState(false);
+	const { width } = useWindowDimensions();
 
 	const toggle = () => {
 		setCollapsed(!collapsed);
 	};
-	const onSearch = (e) => {
-		console.log(e);
-	};
+
+	useEffect(() => {
+		if (width < 1024) {
+			setHide(true);
+		} else {
+			setHide(false);
+		}
+
+		if (width < 768) {
+			setCollapsed(true);
+		} else {
+			setCollapsed(false);
+		}
+	}, [width]);
 
 	return (
 		<Layout hasSider>
@@ -28,16 +42,20 @@ const AdminLayout = ({ title, children, pageTitle, child = false }) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<Sider
-				collapsible
-				collapsed={collapsed}
-				onCollapse={toggle}
-				style={{ position: "fixed", height: "100vh" }}
-			>
-				<AdminMenu collapsed={collapsed} />
-			</Sider>
+			<div className="hidden lg:block">
+				<Sider
+					collapsible
+					collapsed={collapsed}
+					onCollapse={toggle}
+					style={{ position: "fixed", height: "100vh" }}
+				>
+					<AdminMenu collapsed={collapsed} />
+				</Sider>
+			</div>
 
-			<Layout className={`${collapsed ? "ml-20" : "ml-52"}`}>
+			<Layout
+				className={`${hide ? "ml-0" : collapsed ? "ml-20" : "ml-52"}`}
+			>
 				<AdminTop pageTitle={pageTitle} child={child} />
 				<Content
 					style={{

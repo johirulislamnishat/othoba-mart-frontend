@@ -1,11 +1,14 @@
-import AuthProvider from "../components/context/AuthProvider";
+import ContextProvider from '../context/ContextProvider'
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
 	return (
-		<AuthProvider>
+		<ContextProvider>
 			<Component {...pageProps} />
-		</AuthProvider>
+		</ContextProvider>
+			
+			
+		
 	);
 }
 
