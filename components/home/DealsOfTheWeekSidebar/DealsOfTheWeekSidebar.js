@@ -1,62 +1,32 @@
-import {
-  HeartOutlined,
-  ShoppingOutlined,
-  StarFilled,
-  StarOutlined,
-} from "@ant-design/icons";
 import { Col, Row } from "antd";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import productSm from "../../../public/images/Products/product-sm-1.jpeg";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../../../apiconstants";
+import ProductCardGrid from "../../ProductCardGrid/ProductCardGrid";
 
 const DealsOfTheWeekSidebar = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 2000,
-    autoplaySpeed: 2000,
-    cssEase: "linear",
-  };
+  const [items, setItems] = useState([]);
+  console.log(items);
+
+  useEffect(() => {
+    axios
+      .get(API_BASE_URL + "/product/paginated?page=0&size=1")
+      .then(function (response) {
+        console.log(response?.data?.result);
+        setItems(response?.data?.result);
+      });
+  }, []);
   return (
     <div className="deals-of-the-weeks">
       <h3 className="text-2xl mt-4 pb-3 border-b">Deals Of The Week</h3>
       <Row>
-        <Col lg={24} className="bg-white-100 border ">
-          <div className="p-5 single-product">
-            <Image src={productSm} alt="" />
-            <div className="wishlist flex justify-center items-center">
-              <HeartOutlined />
-            </div>
-            <div className="discount flex justify-center items-center">
-              <small>30%</small>
-            </div>
-
-            <Link href="/" className="text-1xl">
-              Flexible Black Smart Watches For Men & Women
-            </Link>
-            <div className="ratings">
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
-              <StarOutlined />
-            </div>
-            <div className="flex justify-between items-center mt-4">
-              <div className="product-price">
-                <small>$779.99</small>
-                <h3>$699.99</h3>
-              </div>
-              <div className="shopping flex justify-center items-center">
-                <ShoppingOutlined />
-              </div>
-            </div>
-            <p className="text-1xl mt-3">2 Day Delivery</p>
-          </div>
-        </Col>
+        {items.map((item, index) => {
+          return (
+            <Col className="single-product" lg={24} key={index}>
+              <ProductCardGrid item={item} key={index} />
+            </Col>
+          );
+        })}
       </Row>
     </div>
   );
