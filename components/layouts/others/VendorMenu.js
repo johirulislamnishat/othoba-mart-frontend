@@ -46,12 +46,14 @@ const VendorMenu = ({ collapsed }) => {
             ? [pageName[pageName.length - 2].toUpperCase()]
             : [pageName[pageName.length - 1].toUpperCase()]
         }>
-        <Menu.Item key="vendor" icon={<LineChartOutlined />}>
+          { user?.vendor_status === 'pending' ? <>
+          
+        <Menu.Item key="vendor" disabled icon={<LineChartOutlined />}>
           <Link href="/vendor" passHref>
             Dashboard
           </Link>
         </Menu.Item>
-        <SubMenu key="PRODUCTS" icon={<GoldOutlined />} title="Products">
+        <SubMenu key="PRODUCTS" disabled icon={<GoldOutlined />} title="Products">
           <Menu.Item key="products" icon={<HddOutlined />}>
             <Link href="/vendor/products" passHref>
               Products
@@ -62,23 +64,48 @@ const VendorMenu = ({ collapsed }) => {
               Add Product
             </Link>
           </Menu.Item>
-          <Menu.Item key="update" icon={<EditOutlined />}>
+          {/* <Menu.Item key="update" icon={<EditOutlined />}>
             <Link href="/vendor/products/update" passHref>
               Update Product
             </Link>
-          </Menu.Item>
-          <Menu.Item key="remove" icon={<DeleteOutlined />}>
-            <Link href="/vendor/products/remove" passHref>
-              Remove Product
-            </Link>
-          </Menu.Item>
+          </Menu.Item> */}
         </SubMenu>
         <Menu.Item key="profile" icon={<ProfileOutlined />}>
           <Link href="/vendor/profile" passHref>
             Profile
           </Link>
         </Menu.Item>
-      </Menu>
+          </> :  <>
+          
+          <Menu.Item key="vendor" icon={<LineChartOutlined />}>
+            <Link href="/vendor" passHref>
+              Dashboard
+            </Link>
+          </Menu.Item>
+          <SubMenu key="PRODUCTS" icon={<GoldOutlined />} title="Products">
+            <Menu.Item key="products" icon={<HddOutlined />}>
+              <Link href="/vendor/products" passHref>
+                Products
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="add" icon={<PlusOutlined />}>
+              <Link href="/vendor/products/add" passHref>
+                Add Product
+              </Link>
+            </Menu.Item>
+            {/* <Menu.Item key="update" icon={<EditOutlined />}>
+              <Link href="/vendor/products/update" passHref>
+                Update Product
+              </Link>
+            </Menu.Item> */}
+          </SubMenu>
+          <Menu.Item key="profile" icon={<ProfileOutlined />}>
+            <Link href="/vendor/profile" passHref>
+              Profile
+            </Link>
+          </Menu.Item>
+            </>}
+        </Menu>
     </div>
   );
 };

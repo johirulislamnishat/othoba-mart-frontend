@@ -82,15 +82,32 @@ const HomeLayout = ({ children, title }) => {
   const menu = (
     <Menu>
       <Menu.Item key="1">
+        { user?.isAdmin && user?.isVendor && user?.isCustomer &&
         <Link href="/admin" passHref>
           Dashboard
         </Link>
+        }
+        { user?.isAdmin && !user?.isVendor && user?.isCustomer &&
+        <Link href="/admin" passHref>
+          Dashboard
+        </Link>
+        }
+        { !user?.isAdmin && user?.isVendor && user?.isCustomer &&
+        <Link href="/vendor" passHref>
+          Dashboard
+        </Link>
+        }
+        { !user?.isAdmin && !user?.isVendor && user?.isCustomer && 
+        <Link href="/customer" passHref>
+          Dashboard
+        </Link>
+        }
       </Menu.Item>
-      <Menu.Item key="2">
+      {/* <Menu.Item key="2">
         <Link href="/" passHref>
           Your Profile
         </Link>
-      </Menu.Item>
+      </Menu.Item> */}
       {user?.user_name ? (
         <Menu.Item key="3" danger onClick={handleLogout}>
           Logout

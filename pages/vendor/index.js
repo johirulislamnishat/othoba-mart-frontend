@@ -1,30 +1,45 @@
-
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import {
 	Col,
 	Divider,
+	Image,
 	message,
 	Popconfirm,
 	Row,
 	Select,
 	Space,
 	Table,
+	Tag,
 	Tooltip,
 } from "antd";
 import axios from "axios";
+import Link from 'next/link'
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
 import VendorLayout from '../../components/layouts/vendorLayout';
+import useProvider from '../../hooks/useProvider'
 
 const { Option } = Select;
 
 const Dashboard = () => {
+	const { state: { user }} = useProvider()
+
+	if(user?.isVendor === 'pending') {
+		return <div>Admin will review your profile and verify you as soon as possible. <br/>
+		Please be patient.
+		</div>
+	}
+    
 	const [data, setData] = useState(null);
-	const [token, setToken] = useState(null);
+	const {
+		state: {
+			user: { accessToken },
+		},
+	} = useProvider();
 
 	useEffect(() => {
 		axios
-			.get(`${API_BASE_URL}/order`)
+			.get(`${API_BASE_URL}/product`)
 			.then((res) => {
 				const arr = [];
 				for (const value of res.data.result) {
@@ -33,22 +48,18 @@ const Dashboard = () => {
 				setData(arr);
 			})
 			.catch((e) => console.log(e));
-
-		if (typeof window !== "undefined") {
-			setToken(localStorage.getItem("token"));
-		}
 	}, []);
 
-	const deleteOrder = (order) => {
+	const deleteProduct = (product) => {
 		axios
-			.delete(`${API_BASE_URL}/order/${order._id}`, {
+			.delete(`${API_BASE_URL}/product/${product._id}`, {
 				headers: {
-					token: `Bearer ${token}`,
+					token: `Bearer ${accessToken}`,
 				},
 			})
 			.then((res) => {
 				message.success(res.data.message);
-				setData(data.filter((item) => item != order));
+				setData(data.filter((item) => item != product));
 			})
 			.catch((e) => console.log(e));
 	};
@@ -56,11 +67,11 @@ const Dashboard = () => {
 	const handleStatus = (value, field) => {
 		axios
 			.put(
-				`${API_BASE_URL}/order/${field.id}`,
+				`${API_BASE_URL}/product/status/${field.id}`,
 				{ status: value },
 				{
 					headers: {
-						token: `Bearer ${token}`,
+						token: `Bearer ${accessToken}`,
 					},
 				}
 			)
@@ -72,84 +83,144 @@ const Dashboard = () => {
 
 	const columns = [
 		{
-			title: "User id",
-			dataIndex: "user_id",
-			key: "2",
-			width: 100,
-			render: (id) => <Tooltip title={id}>#{id.slice(15)}</Tooltip>,
+			title: "Image",
+			key: "img",
+			width: 60,
+			render: (product) => (
+				<Image
+					src={product.photo}
+					width={80}
+					alt={product.photo}
+				/>
+			),
 		},
 		{
-			title: "User Name",
-			dataIndex: "user_name",
+			title: "Product Name",
+			dataIndex: "product_name",
 			key: "name",
 			width: 200,
 		},
-
 		{
-			title: "User Email",
-			dataIndex: "email",
-			key: "email",
-			width: 250,
+			title: "Price",
+			dataIndex: "product_price",
+			key: "price",
+			width: 120,
+			defaultSortOrder: "descend",
+			sorter: (a, b) => a.product_price - b.product_price,
 		},
 		{
-			title: "Phone",
-			dataIndex: "phone",
-			key: "3",
-			width: 200,
-		},
-		{
-			title: "Address",
-			dataIndex: "address",
-			key: "4",
+			title: "Categories",
+			dataIndex: "product_category",
+			key: "product_category",
 			width: 280,
+			render: (categories) =>
+				categories ? (
+					<>
+						{categories.map((category) => (
+							<Tag
+								color={"rgba(255, 239, 217, 1)"}
+								key={category}
+							>
+								<span className="text-orange-500">
+									{category}
+								</span>
+							</Tag>
+						))}
+					</>
+				) : null,
 		},
 		{
-			title: "Total Price",
-			dataIndex: "total_price",
-			key: "5",
-			width: 100,
+			title: "Colors",
+			dataIndex: "product_colors",
+			key: "product_colors",
+			width: 180,
+			render: (colors) =>
+				colors ? (
+					<div className="flex flex-row">
+						{colors.map((color) => (
+							<Tooltip key={color} title={color}>
+								<div
+									className="m-1 mr-2 w-4 h-4 relative rounded-full"
+									style={{ backgroundColor: color }}
+								/>
+							</Tooltip>
+						))}
+					</div>
+				) : null,
+		},
+		{
+			title: "Tags",
+			dataIndex: "product_tags",
+			key: "product_tags",
+			width: 200,
+			render: (tags) =>
+				tags ? (
+					<>
+						{tags.map((tag) => (
+							<Tag color={"rgba(216, 255, 238, 1)"} key={tag}>
+								<span className="text-green-500">{tag}</span>
+							</Tag>
+						))}
+					</>
+				) : null,
+		},
+		{
+			title: "Sizes",
+			dataIndex: "product_sizes",
+			key: "product_sizes",
+			width: 120,
+			render: (sizes) =>
+				sizes ? (
+					<>
+						{sizes.map((size) => (
+							<Tag color={"rgba(240, 255, 214, 1)"} key={size}>
+								<span className="text-gray-700">{size}</span>
+							</Tag>
+						))}
+					</>
+				) : null,
 		},
 		{
 			title: "Status",
-			key: "6",
+			key: "status",
 			width: 150,
-			render: (order) => (
+			render: (product) => (
 				<Select
+					defaultValue={product.status.toLowerCase()}
 					style={{ width: 150 }}
-					defaultValue={order.status.toLowerCase()}
 					onChange={(value, field) => handleStatus(value, field)}
 				>
-					<Option id={order._id} value="pending">
+					<Option id={product._id} value="pending">
 						<div className="flex items-center">
 							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-yellow-400" />
 							Pending
 						</div>
 					</Option>
-					<Option id={order._id} value="approved">
+					<Option id={product._id} value="approved">
 						<div className="flex items-center">
 							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-lime-300" />
 							Approved
 						</div>
 					</Option>
-					<Option id={order._id} value="shifted">
+					<Option id={product._id} value="shifted">
 						<div className="flex items-center">
 							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-violet-500" />
 							Shifted
 						</div>
 					</Option>
-					<Option id={order._id} value="completed">
+					<Option id={product._id} value="completed">
 						<div className="flex items-center">
 							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-green-500" />
 							Completed
 						</div>
 					</Option>
-					<Option id={order._id} value="cancled">
+					<Option id={product._id} value="cancled">
 						<div className="flex items-center">
 							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-stone-300" />
 							Cancled
 						</div>
 					</Option>
-					<Option id={order._id} value="rejected">
+					<Option id={product._id} value="rejected">
 						<div className="flex items-center">
 							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-red-500" />
 							Rejected
@@ -157,23 +228,52 @@ const Dashboard = () => {
 					</Option>
 				</Select>
 			),
+			filters: [
+				{
+					text: "Pending",
+					value: "pending",
+				},
+				{
+					text: "Approved",
+					value: "approved",
+				},
+				{
+					text: "Shifted",
+					value: "shifted",
+				},
+				{
+					text: "Completed",
+					value: "completed",
+				},
+				{
+					text: "Cancled",
+					value: "cancled",
+				},
+				{
+					text: "Rejected",
+					value: "rejected",
+				},
+			],
+			onFilter: (value, record) => record.status.indexOf(value) === 0,
 		},
 		{
-			title: "",
+			title: "Actions",
 			key: "actions",
 			width: 80,
-			render: (order) => (
+			render: (product) => (
 				<Space split={<Divider type="vertical" />}>
 					<Popconfirm
-						title="Are you sure you want to delete this order?"
-						onConfirm={() => deleteOrder(order)}
+						title="Are you sure you want to delete this product?"
+						onConfirm={() => deleteProduct(product)}
 						okText="Yes"
 						cancelText="No"
 						placement="topRight"
 					>
 						<DeleteOutlined />
 					</Popconfirm>
-					<EditOutlined />
+					<Link href={`/admin/products/${product._id}`} passHref>
+						<EditOutlined />
+					</Link>
 				</Space>
 			),
 		},
@@ -181,70 +281,14 @@ const Dashboard = () => {
 
 	return (
 		<VendorLayout title='Vendor | Dashboard' pageTitle="Dashboard">
-			<h4>Waiting for Admin approval</h4>
-			{/* <Space direction="vertical" size={45} className="w-full">
-				<Row gutter={[12, 12]} justify="space-around" align="middle">
-					<Col xs={24} md={12} lg={6}>
-						<Row
-							justify="space-between"
-							align="middle"
-							className="p-5 rounded-2xl font-semibold"
-							style={{
-								backgroundColor: "rgba(240, 255, 248, 1)",
-							}}
-						>
-							<Col>New Delivery</Col>
-							<Col className="text-xl">2</Col>
-						</Row>
-					</Col>
-					<Col xs={24} md={12} lg={6}>
-						<Row
-							justify="space-between"
-							align="middle"
-							className="p-5 rounded-2xl font-semibold"
-							style={{
-								backgroundColor: "rgba(240, 255, 235, 1)",
-							}}
-						>
-							<Col>Active Orders</Col>
-							<Col className="text-xl">5</Col>
-						</Row>
-					</Col>
-					<Col xs={24} md={12} lg={6}>
-						<Row
-							justify="space-between"
-							align="middle"
-							className="p-5 rounded-2xl font-semibold"
-							style={{
-								backgroundColor: "rgba(255, 251, 235, 1)",
-							}}
-						>
-							<Col>Total Orders</Col>
-							<Col className="text-xl">{data?.length || 0}</Col>
-						</Row>
-					</Col>
-					<Col xs={24} md={12} lg={6}>
-						<Row
-							justify="space-between"
-							align="middle"
-							className="p-5 rounded-2xl font-semibold"
-							style={{
-								backgroundColor: "rgba(240, 255, 214, 1)",
-							}}
-						>
-							<Col>Order in Progress</Col>
-							<Col className="text-xl">4</Col>
-						</Row>
-					</Col>
-				</Row>
-				<Table
-					columns={columns}
-					dataSource={data}
-					scroll={{ x: 1550 }}
-					pagination={{ position: ["bottomCenter"] }}
-					size="small"
-				/>
-			</Space> */}
+			<Table
+				columns={columns}
+				dataSource={data}
+				scroll={{ x: 1600 }}
+				pagination={{ position: ["bottomCenter"] }}
+				size="small"		
+			/>
+			
 		</VendorLayout>
 	);
 };
