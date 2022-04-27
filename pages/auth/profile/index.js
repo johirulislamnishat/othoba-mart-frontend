@@ -1,6 +1,7 @@
 import { Avatar, Card, Col, Divider, PageHeader, Row, Space, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 import useProvider from "../../../hooks/useProvider";
+import { humaneDate } from "../../../styles/utilities/time";
 
 const Profile = () => {
 	const [role, setRole] = useState(null);
@@ -15,8 +16,6 @@ const Profile = () => {
 		else if (user.isVendor) setRole("Vendor");
 		else setRole("Customer");
 	}, [user]);
-
-	console.log(user);
 
 	return (
 		<div className="bg-gray-100">
@@ -39,6 +38,7 @@ const Profile = () => {
 								</p>
 								<p>{user.email}</p>
 								<p>{role}, Othoba Mart</p>
+								<p>Since {humaneDate(user?.createdAt)}</p>
 							</Card>
 						</Col>
 
