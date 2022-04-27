@@ -6,7 +6,7 @@ import OrderTracking from "../../../../components/shared/orderTracking";
 const TrackOrder = () => {
 	const router = useRouter();
 	return (
-		<AdminLayout>
+		<AdminLayout title="Admin | Order Details" pageTitle="Order Details">
 			<OrderTracking id={router.query.id} />
 		</AdminLayout>
 	);
