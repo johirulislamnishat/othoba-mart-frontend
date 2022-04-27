@@ -6,6 +6,7 @@ import {
 } from "@ant-design/icons";
 import { Image } from "antd";
 import Link from "next/link";
+import { useRouter } from 'next/router'
 import { useState } from "react";
 import { addToCart, addToWish } from "../../context/actions/Actions";
 import useProvider from "../../hooks/useProvider";
@@ -13,19 +14,33 @@ import useProvider from "../../hooks/useProvider";
 const ProductCardGrid = ({ item }) => {
   const [cartClicked, setCartClicked] = useState(false);
   const [wishClicked, setWishClicked] = useState(false);
+
+  const router = useRouter();
   const {
-    state: { cart, wish },
+    state: { user, cart, wish },
     dispatch,
   } = useProvider();
 
   const handleAddToWish = (item) => {
-    setWishClicked(true);
-    dispatch(addToWish(wish, item));
+    if (user?.accessToken) {
+      if (!cartClicked) {
+        setWishClicked(true);
+        dispatch(addToWish(wish, item));
+      }
+    } else {
+      router.push("/auth/login");
+    }
   };
 
   const handleAddToCart = (item) => {
-    setCartClicked(true);
-    dispatch(addToCart(cart, item));
+    if (user?.accessToken) {
+      if (!wishClicked) {
+        setCartClicked(true);
+        dispatch(addToCart(cart, item));
+      }
+    } else {
+      router.push("/auth/login");
+    }
   };
 
   return (

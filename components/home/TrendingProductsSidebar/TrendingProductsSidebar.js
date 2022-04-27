@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import useProvider from "../../../hooks/useProvider";
+
 const TrendingProductsSidebar = () => {
   const [cartClicked, setCartClicked] = useState(false);
 
@@ -37,8 +38,7 @@ const TrendingProductsSidebar = () => {
           return (
             <div
               key={index}
-              className="single-product border flex justify-between items-center"
-            >
+              className="single-product border flex justify-between items-center">
               <Col md={10} className="product-image">
                 <Image preview={false} src={item?.photo} alt="" />
               </Col>

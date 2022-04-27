@@ -34,20 +34,34 @@ const Product = () => {
   }
   const [cartClicked, setCartClicked] = useState(false);
   const [wishClicked, setWishClicked] = useState(false);
+
   const {
-    state: { cart, wish },
+    state: { user, cart, wish },
     dispatch,
   } = useProvider();
 
   const handleAddToWish = (item) => {
-    setWishClicked(true);
-    dispatch(addToWish(wish, item));
+    if (user?.accessToken) {
+      if (!cartClicked) {
+        setWishClicked(true);
+        dispatch(addToWish(wish, item));
+      }
+    } else {
+      router.push("/auth/login");
+    }
   };
 
   const handleAddToCart = (item) => {
-    setCartClicked(true);
-    dispatch(addToCart(cart, item));
+    if (user?.accessToken) {
+      if (!wishClicked) {
+        setCartClicked(true);
+        dispatch(addToCart(cart, item));
+      }
+    } else {
+      router.push("/auth/login");
+    }
   };
+  
   return (
     <HomeLayout title={item.product_name}>
       <div className="single-product-page">
@@ -145,14 +159,14 @@ const Product = () => {
                 onClick={() => handleAddToCart(item)}
                 className="custom-btn button-lg"
               >
-                <ShoppingOutlined />
+                <ShoppingOutlined style={cartClicked ? { color: "red" } : { color: "inherit" }} />
                 <span>Add to cart </span>
               </button>
               <button
                 onClick={() => handleAddToWish(item)}
                 className="custom-btn button-lg grey-btn"
               >
-                <HeartOutlined />
+                <HeartOutlined style={wishClicked ? { color: "red" } : { color: "inherit" }} />
                 <span> Add To Wishlist</span>
               </button>
               <button

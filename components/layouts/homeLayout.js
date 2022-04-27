@@ -27,6 +27,7 @@ import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
 import WishMini from "../wish/WishMini";
+import Notify from '../notify/Notify'
 
 const { Content, Footer } = Layout;
 
@@ -354,7 +355,7 @@ const HomeLayout = ({ children, title }) => {
           <HomeMenu visible={visible} setVisible={setVisible} />
         </div>
       </div>
-
+       <Notify />
       <Content style={{ minHeight: "90vh", backgroundColor: "white" }}>
         <div className="container mx-auto px-3">{children}</div>
       </Content>

@@ -7,9 +7,41 @@ import {
 } from "@ant-design/icons";
 import { Col, InputNumber, Row, Tabs } from "antd";
 import Image from "next/image";
+import { useRouter } from 'next/router'
 import productImage from "../../public/images/Products/product-1.jpeg";
 import RelateProducts from "../RelatedProducts/RelateProducts";
 const SingleProductPage = () => {
+  const [cartClicked, setCartClicked] = useState(false);
+  const [wishClicked, setWishClicked] = useState(false);
+
+  const router = useRouter();
+  const {
+    state: { user, cart, wish },
+    dispatch,
+  } = useProvider();
+
+  const handleAddToWish = (item) => {
+    if (user?.accessToken) {
+      if (!cartClicked) {
+        setWishClicked(true);
+        dispatch(addToWish(wish, item));
+      }
+    } else {
+      router.push("/auth/login");
+    }
+  };
+
+  const handleAddToCart = (item) => {
+    if (user?.accessToken) {
+      if (!wishClicked) {
+        setCartClicked(true);
+        dispatch(addToCart(cart, item));
+      }
+    } else {
+      router.push("/auth/login");
+    }
+  };
+  
   function onChange(value) {
     console.log("changed", value);
   }
@@ -80,12 +112,12 @@ const SingleProductPage = () => {
               onChange={onChange}
             />
             <button className="custom-btn">
-              <EyeOutlined />
+              <EyeOutlined style={cartClicked ? { color: "red" } : { color: "inherit" }} />
               <span>Add To Cart</span>
             </button>
 
             <button className="custom-btn grey-btn">
-              <HeartOutlined />
+              <HeartOutlined style={wishClicked ? { color: "red" } : { color: "inherit" }} />
               <span> Add To Wishlist</span>
             </button>
           </div>
