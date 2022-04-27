@@ -77,8 +77,17 @@ const CheckoutForm = () => {
     );
   }, [cart]);
 
-  const tax = total * 0.17;
-  const shipping = total * 0.01;
+  const tax = total * 0.05;
+
+  let shipping=0;
+  if(total && total <=5000) {
+    shipping = 50
+  } else if (total && total <=15000) {
+    shipping = 30
+  } else {
+    if(total) shipping = 20
+  }
+
   const grandTotal = parseFloat(total) + parseFloat(tax) + parseFloat(shipping);
 
   const { register, handleSubmit, reset } = useForm();

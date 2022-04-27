@@ -15,7 +15,7 @@ import {
   addToWish,
 } from "../../context/actions/Actions";
 
-const CartMini = ({ activeCart, setActiveCart }) => {
+const CartMini = ({ activeCart, setActiveCart, handleCart }) => {
   const {
     state: { cart, wish },
     dispatch,
@@ -50,7 +50,7 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                 <CloseOutlined
                   style={{ color: "red" }}
                   className="cursor-pointer "
-                  onClick={() => setActiveCart(!activeCart)}
+                  onClick={handleCart}
                 />
               </p>
             </div>

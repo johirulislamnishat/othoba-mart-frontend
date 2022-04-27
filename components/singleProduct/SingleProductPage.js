@@ -7,9 +7,13 @@ import {
 } from "@ant-design/icons";
 import { Col, InputNumber, Row, Tabs } from "antd";
 import Image from "next/image";
+import { useRouter } from 'next/router'
 import productImage from "../../public/images/Products/product-1.jpeg";
 import RelateProducts from "../RelatedProducts/RelateProducts";
 const SingleProductPage = () => {
+
+  
+  
   function onChange(value) {
     console.log("changed", value);
   }

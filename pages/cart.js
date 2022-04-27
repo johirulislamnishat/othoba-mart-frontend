@@ -6,23 +6,29 @@ import CartFull from "../components/cart/CartFull";
 import HomeLayout from "../components/layouts/homeLayout";
 
 const Cart = () => {
-  const [loading, setLoading] = useState(true);
+//   const [loading, setLoading] = useState(true);
   
-  const {
-    state: { user },
-  } = useProvider();
+//   const {
+//     state: { user },
+//   } = useProvider();
 
- useEffect(()=>{
-	 if (!user?.user_name) {
-		 Router.push("/auth/login");
-		} else {
-			setLoading(false);
-		} 
-	},[user?.user_name])
+//  useEffect(()=>{
+//    console.log(user?.user_name)
+//     if(user?.user_name ===undefined){
+//      setLoading(true)
+//     }
 
-  if (loading) {
-    return <LoadingOutlined />;
-  }
+//     if (!user?.user_name) {
+//        Router.push("/auth/login");
+//       } else {
+//         setLoading(false);
+//       } 
+   
+// 	},[user?.user_name])
+
+//   if (loading) {
+//     return <LoadingOutlined />;
+//   }
   
   return (
     <HomeLayout title="Othoba Mart | Cart">

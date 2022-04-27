@@ -11,7 +11,7 @@ import {
 import useProvider from "../../hooks/useProvider";
 import { removeFromWish, addToCart } from "../../context/actions/Actions";
 
-const WishMini = ({ activeWish, setActiveWish }) => {
+const WishMini = ({ activeWish, setActiveWish, handleWish }) => {
   const {
     state: { cart, wish },
     dispatch,
@@ -33,7 +33,7 @@ const WishMini = ({ activeWish, setActiveWish }) => {
                 <CloseOutlined
                   style={{ color: "red" }}
                   className="cursor-pointer"
-                  onClick={() => setActiveWish(!activeWish)}
+                  onClick={handleWish}
                 />
               </p>
             </div>
