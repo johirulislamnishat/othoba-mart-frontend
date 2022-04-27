@@ -13,33 +13,19 @@ import useProvider from "../../hooks/useProvider";
 const ProductCardList = ({ item }) => {
   const [cartClicked, setCartClicked] = useState(false);
   const [wishClicked, setWishClicked] = useState(false);
-
-  const router = useRouter();
   const {
-    state: { user, cart, wish },
+    state: { cart, wish },
     dispatch,
   } = useProvider();
 
   const handleAddToWish = (item) => {
-    if (user?.accessToken) {
-      if (!cartClicked) {
-        setWishClicked(true);
-        dispatch(addToWish(wish, item));
-      }
-    } else {
-      router.push("/auth/login");
-    }
+    setWishClicked(true);
+    dispatch(addToWish(wish, item));
   };
 
   const handleAddToCart = (item) => {
-    if (user?.accessToken) {
-      if (!wishClicked) {
-        setCartClicked(true);
-        dispatch(addToCart(cart, item));
-      }
-    } else {
-      router.push("/auth/login");
-    }
+    setCartClicked(true);
+    dispatch(addToCart(cart, item));
   };
 
   return (
@@ -107,7 +93,8 @@ const ProductCardList = ({ item }) => {
 
           <button
             onClick={() => handleAddToWish(item)}
-            className="custom-btn grey-btn">
+            className="custom-btn grey-btn"
+          >
             <HeartOutlined />
             <span> Add To Wishlist</span>
           </button>

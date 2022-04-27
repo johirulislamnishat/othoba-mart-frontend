@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Image } from "antd";
 import {
   CloseOutlined,
@@ -18,19 +17,6 @@ const CheckoutCart = ({
   shipping,
   grandTotal,
 }) => {
-  const [coupon, setCoupon] = useState('')
-  const [discount, setDiscount] = useState(0)
-  const [discountedPrice, setDiscountedPrice] = useState(null)
-  
-  console.log(discountedPrice, discount)
-
-  const handleCoupon = () => {
-    if ( coupon === 'othoba') {
-      setDiscount(grandTotal * 0.20)
-      setDiscountedPrice(grandTotal - discount)
-    }
-  }
- 
   return (
     <>
       <h3 className="font-semibold text-xl mt-4">Order Summary</h3>
@@ -135,40 +121,39 @@ const CheckoutCart = ({
             </div>
             <div className="justify-self-center">
               <p>{cart.length}</p>
-              <p>5%</p>
+              <p>17%</p>
               <p>FedEx</p>
             </div>
             <div className="justify-self-end text-right">
               <p>{total} USD</p>
               <p>{tax.toFixed(2)} USD</p>
-              <p>{shipping?.toFixed(2)} USD</p>
+              <p>{shipping.toFixed(2)} USD</p>
             </div>
           </div>
           <div className="mt-8 grid grid-cols-5 items-center bg-gray-100 border-2 border-gray-300 py-1 px-0.5 rounded-lg">
             <div className="col-span-3">
               <input
                 placeholder="Apply coupon code"
-                onChange = {e=>setCoupon(e.target.value)}
                 className="text-md border-none bg-gray-100 lg:py-2 rounded-lg outline-none"
               />
             </div>
             <div className="col-span-2 justify-self-end">
-              <button className="w-max text-right text-md font-bold pr-0.5 cursor-pointer" onClick={handleCoupon}>
+              <button className="w-max text-right text-md font-bold pr-0.5 cursor-pointer">
                 Apply now
               </button>
             </div>
           </div>
           <div className="mt-16 flex justify-between">
-            <div className="flex flex-col">
+            <div className="">
               <h5 className="text-lg font-semibold">Total Order</h5>
-              <h5 className="text-md font-semibold">Discount</h5>
-              <h5 className="text-lg font-semibold">Grand Total</h5>
+              {/* <p className="text-green-500">
+                Guaranteed delivery day: June 12, 2020
+              </p> */}
             </div>
-            <div className=" flex flex-col min-w-max text-xl font-semibold text-sky-500">
-              <h5 className='font-llg text-sky-500 text-right'>{grandTotal.toFixed(2)} USD  </h5>
-              <h5 className='text-sm text-red-500 text-right'>{discount.toFixed(2)} USD </h5>
-              <h5 className='font-llg text-green-500 text-right'>{ discountedPrice ? discountedPrice?.toFixed(2) : grandTotal } USD </h5>
-            </div>
+
+            <h4 className="min-w-max text-xl font-semibold text-sky-500">
+              {grandTotal.toFixed(2)} USD
+            </h4>
           </div>
         </div>
       </div>
