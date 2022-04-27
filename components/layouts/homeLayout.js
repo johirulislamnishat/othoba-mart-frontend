@@ -6,17 +6,7 @@ import {
 	ShoppingOutlined,
 	UserOutlined,
 } from "@ant-design/icons";
-import {
-	Badge,
-	Col,
-	Dropdown,
-	Image,
-	Layout,
-	Menu,
-	message,
-	Row,
-	Tag,
-} from "antd";
+import { Badge, Col, Dropdown, Image, Layout, Menu, message, Row } from "antd";
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
@@ -164,7 +154,7 @@ const HomeLayout = ({ children, title }) => {
 								lg={16}
 								style={{ position: "relative" }}
 							>
-								<div className="flex w-11/12 lg:w-10/12 mx-auto">
+								<div className="flex w-11/12 lg:w-10/12 xl:w-9/12 mx-auto">
 									<input
 										type="search"
 										className="block w-full px-5 py-2 xl:py-3 text-small text-gray-700 border border-solid border-gray-300 rounded-l-3xl focus:text-gray-700 focus:border-orange-500 focus:outline-none"
@@ -176,12 +166,7 @@ const HomeLayout = ({ children, title }) => {
 										}
 									/>
 									<div className="pl-1 pr-1 lg:pr-3 text-small text-gray-700 border border-solid border-gray-300 active:text-gray-700 active:border-orange-500 active:outline-none bg-white m-0 ">
-										<select
-											className="outline-none bg-white h-full py-2 xl:py-3 border-0 px-0 lg:px-3"
-											onChange={(e) =>
-												setSearchItem(e.target.value)
-											}
-										>
+										<select className="outline-none bg-white h-full py-2 xl:py-3 border-0 px-0 lg:px-3">
 											<option value={"product"}>
 												Products
 											</option>
