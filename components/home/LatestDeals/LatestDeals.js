@@ -1,9 +1,9 @@
-import { ShoppingOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
-import { Col, Image, Row } from "antd";
+import { Col, Row } from "antd";
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
+import ProductCardGridTwo from "../../ProductCardGridTwo/ProductCardGridTwo";
 
 const LatestDeals = () => {
   const [items, setItems] = useState([]);
@@ -33,73 +33,7 @@ const LatestDeals = () => {
               md={24}
               lg={12}
             >
-              <Row>
-                <div className="border w-full p-4 flex justify-between md:mb-4 items-center">
-                  <Col md={10} className="product-image">
-                    <Image preview={false} src={item?.photo} alt="" />
-                    {item?.discount_percentage && (
-                      <div className="discount flex justify-center items-center">
-                        <small>{item.discount_percentage}</small>
-                      </div>
-                    )}
-                  </Col>
-                  <Col md={14}>
-                    <h3>
-                      <Link href="/product/[id]" as={`/product/${item._id}`}>
-                        <a className="text-1xl">
-                          {" "}
-                          {item?.product_name.slice(0, 40)}
-                        </a>
-                      </Link>
-                    </h3>
-                    <div className="ratings">
-                      {item?.ratings ? (
-                        <>
-                          <StarFilled />
-                          <StarFilled />
-                          <StarFilled />
-                          <StarFilled />
-                          <StarOutlined />
-                        </>
-                      ) : (
-                        <>
-                          <StarOutlined />
-                          <StarOutlined />
-                          <StarOutlined />
-                          <StarOutlined />
-                          <StarOutlined />
-                        </>
-                      )}
-                    </div>
-                    <div className="flex justify-between items-center mt-4">
-                      <div className="product-price">
-                        {item?.discount_price ? (
-                          <span>{item.discount_price}</span>
-                        ) : (
-                          ""
-                        )}
-                        <h3>
-                          ${item?.product_price}
-                          .00
-                        </h3>
-                      </div>
-                      <div className="shopping flex justify-center items-center">
-                        <ShoppingOutlined />
-                      </div>
-                    </div>
-                    <div className="product-data flex justify-between items-center mt-4">
-                      <p>
-                        <span>Available:</span>{" "}
-                        <span> {item?.available ? item?.available : 0}</span>
-                      </p>
-                      <p>
-                        <span>Sold: </span>{" "}
-                        <span>{item?.sold ? item?.sold : 0}</span>
-                      </p>
-                    </div>
-                  </Col>
-                </div>
-              </Row>
+              <ProductCardGridTwo item={item} key={index} />
             </Col>
           );
         })}
