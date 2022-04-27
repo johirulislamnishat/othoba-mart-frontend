@@ -129,7 +129,7 @@ const inputFields = [
    }
 
     return (
-      <VendorLayout title='Vendor | Profile' pageTitle='Profile'>
+      <VendorLayout>
       <div className="grid grid-cols-1 gap-4 lg:gap-x-8 p-2 lg:p-10 lg:pt-4">
         <form onSubmit={handleSubmit(onSubmit)} className=''>
           <h3 className="font-semibold text-xl">Personal Information</h3>

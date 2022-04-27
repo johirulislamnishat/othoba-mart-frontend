@@ -7,24 +7,24 @@ import CheckoutForm from "./../components/checkout/CheckoutForm";
 import CheckoutCart from "./../components/checkout/CheckoutCart";
 
 const Checkout = () => {
-//   const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   
-//   const {
-//     state: { user },
-//   } = useProvider();
+  const {
+    state: { user },
+  } = useProvider();
 
-//  useEffect(()=>{
+ useEffect(()=>{
 
-// 	 if (!user.user_name) {
-// 		 Router.push("/auth/login");
-// 		} else {
-// 			setLoading(false);
-// 		} 
-// 	},[user.user_name])
+	 if (!user.user_name) {
+		 Router.push("/auth/login");
+		} else {
+			setLoading(false);
+		} 
+	},[user.user_name])
 
-//   if (loading) {
-//     return <LoadingOutlined />;
-//   }
+  if (loading) {
+    return <LoadingOutlined />;
+  }
 
   return (
     <HomeLayout title="Othoba Mart | Checkout">

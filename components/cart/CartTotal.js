@@ -1,16 +1,8 @@
 import Link from "next/link";
 
 const CartTotal = ({ total }) => {
-  const tax = total * 0.05;
-  let shipping;
-  if(total<=5000) {
-    shipping = 50
-  } else if (total <=15000) {
-    shipping = 30
-  } else {
-    shipping = 20
-  }
-
+  const tax = total * 0.17;
+  const shipping = total * 0.01;
   const grandTotal = parseFloat(total) + parseFloat(tax) + parseFloat(shipping);
 
   return (

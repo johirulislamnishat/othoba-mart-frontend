@@ -22,6 +22,7 @@ const AuthHandlers = () => {
 			.then(function (response) {
 				setMessage(response.data.message)
 				setLoading(false)
+				router.push('/')
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -40,10 +41,10 @@ const AuthHandlers = () => {
 			.then(function (response) {
 				console.log(response)
 				setMessage(response.data.message)
-				// dispatch({
-				// 	type: 'AUTH',
-				// 	payload: response.data
-				// })
+				dispatch({
+					type: 'AUTH',
+					payload: response.data
+				})
 				setLoading(false)
 			})
 			.catch(function (error) {
@@ -76,9 +77,9 @@ const AuthHandlers = () => {
 			});
 	};
 
-	// const logout = () => {
-	// 	localStorage.removeItem("token");
-	// };
+	const logout = () => {
+		localStorage.removeItem("token");
+	};
 
 	return {
 		loading,
@@ -87,6 +88,7 @@ const AuthHandlers = () => {
 		signupHandlerCustomer,
 		signupHandlerVendor,
 		signinHandler,
+		logout,
 	};
 };
 

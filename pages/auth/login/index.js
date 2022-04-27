@@ -29,8 +29,12 @@ const Login = () => {
         />
       </div>
 
-      <div className='min-w-full rounded-r-lg col-span-1 relative'>
-		<div className='absolute right-5 -top-5'><Link href='/' passHref><CloseCircleTwoTone className='text-2xl' /></Link></div>
+      <div className="min-w-full rounded-r-lg col-span-1 relative">
+        <div className="absolute right-5 -top-10">
+          <Link href="/" passHref>
+            <CloseCircleTwoTone className="text-2xl" />
+          </Link>
+        </div>
         <div className="mx-4 pt-7 lg:mx-16 p-3 border-2 border-gray-200 rounded-lg flex flex-col items-center">
           <form
             onSubmit={handleLogin}
@@ -64,13 +68,13 @@ const Login = () => {
                 <input type="checkbox" className="cursor-pointer rounded-lg" />
                 <span className=" min-w-max">Remember me</span>
               </div>
-              {/* <Link href='/auth/reset'>
+              <Link href="/auth/reset">
                 <a>
-              <span className="text-sky-500 min-w-max cursor-pointer">
-                Forgot Password?
-              </span>
-              </a>
-              </Link> */}
+                  <span className="text-sky-500 min-w-max cursor-pointer">
+                    Forgot Password?
+                  </span>
+                </a>
+              </Link>
             </div>
             <button
               className={
