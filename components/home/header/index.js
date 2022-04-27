@@ -15,9 +15,9 @@ const HomeHeader = () => {
 				{/* left menu */}
 				<Col xs={0} md={0} lg={4}>
 					<Menu defaultSelectedKeys={["1"]} mode="inline">
-						<Menu.Item key="1">Home</Menu.Item>
+						<Menu.Item key="1">Electronics</Menu.Item>
 						<Menu.Item key="2">Fashion</Menu.Item>
-						<Menu.Item key="3">Electronics</Menu.Item>
+						<Menu.Item key="3">Sports</Menu.Item>
 						<Menu.Item key="4">Gifts</Menu.Item>
 						<Menu.Item key="5">Garden</Menu.Item>
 						<Menu.Item key="6">Music</Menu.Item>

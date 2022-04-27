@@ -1,8 +1,8 @@
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { Button, Col, Drawer, Form, Input, Menu, Row } from "antd";
 import Link from "next/link";
-import Router from "next/router";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import useProvider from "../../../hooks/useProvider";
 import { DrawerTitle } from "../../shared/footer/drawerTitle";
 
@@ -11,40 +11,71 @@ const { SubMenu } = Menu;
 const HomeMenu = ({ visible, setVisible }) => {
 	const [showTrack, setShowTrack] = useState(false);
 	const [loading, setLoading] = useState(false);
-
+	const [isHome, setIsHome] = useState(true);
+	const [showMenu, setShowMenu] = useState(false);
 	const {
 		state: { user },
 	} = useProvider();
+	const router = useRouter();
+
+	useEffect(() => {
+		const routes = router.asPath.split("/");
+		if (routes[1] === "") {
+			setIsHome(true);
+		} else {
+			setIsHome(false);
+		}
+	}, [router]);
 
 	const [form] = Form.useForm();
 
 	const handleSubmit = (values) => {
 		setLoading(true);
 		setShowTrack(!showTrack);
-		Router.push(`/admin/orders/trackOrder/${values.track_number}`).then(
-			() => {
+		router
+			.push(`/admin/orders/trackOrder/${values.track_number}`)
+			.then(() => {
 				form.resetFields();
 				setLoading(false);
-			}
-		);
+			});
 	};
 
 	return (
 		<>
 			<Row>
 				<Col xs={0} lg={4}>
-					<div className="bg-black text-white h-full flex justify-center items-center">
+					<div
+						className={`bg-black text-white h-full flex justify-center items-center relative ${
+							isHome ? "cursor-default" : "cursor-pointer"
+						}`}
+						onClick={() =>
+							isHome ? setShowMenu(false) : setShowMenu(!showMenu)
+						}
+					>
 						<MenuOutlined />
 						<div className="ml-3">Sort by Category</div>
 					</div>
+					{showMenu && (
+						<div className="absolute z-10 top-14 w-full shadow">
+							<Menu
+								mode="inline"
+								onClick={(e) => setShowMenu(!showMenu)}
+							>
+								<Menu.Item key="2">Fashion</Menu.Item>
+								<Menu.Item key="3">Electronics</Menu.Item>
+								<Menu.Item key="4">Gifts</Menu.Item>
+								<Menu.Item key="5">Garden</Menu.Item>
+								<Menu.Item key="6">Music</Menu.Item>
+								<Menu.Item key="7">Motors</Menu.Item>
+								<Menu.Item key="8">Furniture</Menu.Item>
+								<Menu.Item key="9">VIEW ALL &gt;</Menu.Item>
+							</Menu>
+						</div>
+					)}
 				</Col>
 				<Col xs={7} md={16} lg={14}>
 					<div className="hidden lg:block">
-						<Menu
-							onClick={(e) => console.log(e)}
-							selectedKeys={["1"]}
-							mode="horizontal"
-						>
+						<Menu selectedKeys={["1"]} mode="horizontal">
 							<Menu.Item key="1">
 								<Link href="/" passHref>
 									Home

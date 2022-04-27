@@ -5,7 +5,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import useProvider from "../../../hooks/useProvider";
-const TrendingProductsSidebar = () => {
+const RecentlyViewedProductSidebar = () => {
   const [cartClicked, setCartClicked] = useState(false);
 
   const [items, setItems] = useState([]);
@@ -30,14 +30,14 @@ const TrendingProductsSidebar = () => {
   } = useProvider();
   return (
     <div className="trending-products">
-      <h3 className="text-2xl mt-4 pb-3 border-b">Trending Products</h3>
+      <h3 className="text-2xl mt-4 pb-3 border-b">Recently Viewed</h3>
 
       <Row className="">
         {items.map((item, index) => {
           return (
             <div
               key={index}
-              className="single-product border flex justify-between items-center"
+              className="border single-product flex justify-between items-center"
             >
               <Col md={10} className="product-image">
                 <Image preview={false} src={item?.photo} alt="" />
@@ -76,4 +76,4 @@ const TrendingProductsSidebar = () => {
   );
 };
 
-export default TrendingProductsSidebar;
+export default RecentlyViewedProductSidebar;

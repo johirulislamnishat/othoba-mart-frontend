@@ -53,6 +53,7 @@ a {
   --black-color: #333;
   --grey-color: #999;
   --light-grey-color: #f9f9f9;
+  --border-color: #e5e7eb;
 }
 .custom-btn {
   background-color: var(--brand-color);
@@ -135,34 +136,38 @@ Home Page Main Area Style
 
 .single-product {
   position: relative;
+  overflow: hidden;
+  padding: 5px;
+}
+.products-grid .single-product:last-child {
 }
 .single-product img {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
-.single-product a {
+
+.single-product h3 a {
   font-size: 16px;
-  text-align: right !important;
-  color: var(--text-color);
+  line-height: 10px !important;
+  min-height: 51px;
+  display: block;
+  text-align: left !important;
+  line-height: 25px !important;
+  color: #333;
+}
+.single-product h3 a:hover {
+  color: var(--brand-color);
+}
+.single-product .ant-image {
+  position: relative;
+  display: block;
 }
 @media only screen and (max-width: 668px) {
   .single-product {
-    border: 1px solid #ddd;
-    margin: 30px 30px 15px 30px;
-    border-radius: 10px;
+    margin: 15px 0 15px 0;
+    padding: 0;
   }
-}
-.single-product img {
-  margin-bottom: 30px;
-}
-.single-product a {
-  font-size: 16px;
-  text-align: right !important;
-}
-@media only screen and (max-width: 668px) {
-  .single-product {
-    border: 1px solid #ddd;
-    margin: 30px 30px 15px 30px;
-    border-radius: 10px;
+  .single-product img {
+    width: 100% !important;
   }
 }
 .wishlist {
@@ -198,9 +203,9 @@ Home Page Main Area Style
   line-height: 0;
 }
 .product-price h3 {
-  font-size: 1.3rem;
+  font-size: 20px;
   margin: 0;
-  line-height: 1rem;
+  line-height: 20px;
   color: var(--brand-color);
 }
 .single-product > p {
@@ -247,6 +252,13 @@ Home Page Main Area Style
   font-size: 2rem;
   color: var(--black-color);
   margin-bottom: 5px;
+  line-height: 1.8rem;
+}
+
+.promo-lg-two .promo-lg h3 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 5px;
 }
 .promo-lg p {
   font-size: 1rem;
@@ -255,6 +267,16 @@ Home Page Main Area Style
 }
 .promo-image {
   max-width: 100px !important;
+}
+.custom-promo-carousel {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
+}
+@media screen and (max-width: 668px) {
+  .custom-promo-carousel {
+    grid-template-columns: 100%;
+  }
 }
 /* latest deals */
 .latest-deals .product-image {
@@ -301,11 +323,12 @@ Home Page Main Area Style
 .latest-deals .product-data p span:first-child {
   color: var(--grey-color);
 }
+
 .latest-deals-items .single-product:first-child {
-  padding-right: 10px;
+  padding: 0 10px 0 0;
 }
 .latest-deals-items .single-product:last-child {
-  padding-left: 10px;
+  padding: 0 0 0 10px;
 }
 
 @media only screen and (max-width: 668px) {
@@ -317,14 +340,13 @@ Home Page Main Area Style
   }
   .latest-deals-items .single-product {
     border: 0;
-    margin: 0;
   }
 }
 /* Smartphone & Accessories */
 
 /* product categories */
 .product-categories {
-  margin: 40px 0 80px;
+  margin: 0 0 80px;
 }
 .product-categories .categories-link a {
   display: block;
@@ -360,6 +382,15 @@ Home Page Main Area Style
     padding-left: 0;
   }
 }
+/* related products style*/
+
+.related-products .single-product .single-product-image {
+  height: 300px;
+  margin-bottom: 10px;
+}
+.related-products .single-product .single-product-image img {
+  min-height: 280px;
+}
 
 /* --------------------------------------------------
 Home Page Sidebar Style
@@ -390,23 +421,61 @@ Home Page Sidebar Style
 
 .super-discount-item {
   position: relative;
-  min-height: 500px;
+  min-height: 550px;
   width: 100%;
-  border-radius: 10px;
 }
 .super-discount-item .sidebar-image {
-  width: 58%;
+  width: 70%;
   position: absolute;
-  bottom: 10px;
-  right: 15px;
-  border-radius: 10px;
+  bottom: 20px;
+  left: 20px;
 }
+.super-discount-two-item {
+  position: relative;
+  min-height: 500px;
+  width: 100%;
+}
+@media only screen and (max-width: 668px) {
+  .super-discount-two-item {
+    position: relative;
+    min-height: 550px;
+    width: 100%;
+  }
+}
+.super-discount-two-item .sidebar-image {
+  width: 70%;
+  position: absolute;
+  bottom: -6px;
+  left: 20px;
+}
+.super-discount-three-item {
+  position: relative;
+  min-height: 480px;
+  width: 100%;
+}
+.super-discount-three-item .sidebar-image {
+  width: 90%;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
 /* trending products */
 .trending-products,
 .deals-of-the-weeks {
   margin: 50px 0 50px;
 }
+
 .trending-products .single-product {
+  margin-bottom: 0;
+
+  margin-bottom: 10px !important;
+  padding: 10px;
+}
+.deals-of-the-weeks .single-product {
+  padding: 0;
+}
+.trending-products .single-product img {
   margin-bottom: 0;
 }
 .super-discount span {
@@ -414,7 +483,6 @@ Home Page Sidebar Style
   display: inline-block !important;
 }
 .super-discount span img {
-  border-radius: 5px !important;
 }
 /* trending products */
 .trending-products,
