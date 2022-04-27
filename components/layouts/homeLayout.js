@@ -6,7 +6,7 @@ import {
 	ShoppingOutlined,
 	UserOutlined,
 } from "@ant-design/icons";
-import { Badge, Col, Dropdown, Image, Layout, Menu, message, Row } from "antd";
+import { Badge, Col, Dropdown, Image, Layout, Menu, message, Row, Tag } from "antd";
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
