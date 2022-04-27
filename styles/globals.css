@@ -152,7 +152,6 @@ Home Page Main Area Style
 .single-product h3 a:hover {
   color: var(--brand-color);
 }
-
 .single-product .single-product-image {
   margin-bottom: 20px;
   overflow: hidden;
@@ -180,7 +179,6 @@ Home Page Main Area Style
 .latest-deals .single-product .single-product-image {
   height: 157px;
 }
-
 .latest-deals .single-product .single-product-image img {
   min-height: 157px;
 }
@@ -208,7 +206,6 @@ Home Page Main Area Style
 .trending-products .single-product .single-product-image img {
   min-height: 148px;
 }
-
 .deals-of-the-weeks .single-product .single-product-image {
   height: 280px;
 }
@@ -230,6 +227,7 @@ Home Page Main Area Style
   .single-product .single-product-image img {
     min-height: auto !important;
     height: auto !important;
+    max-height: 300px !important;
   }
   .single-product-page .single-product-image img.product-photo {
     min-height: auto !important;
