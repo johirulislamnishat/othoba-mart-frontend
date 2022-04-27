@@ -30,21 +30,77 @@ const HomeHeader = () => {
 				{/* Carousel */}
 				<Col xs={24} md={24} lg={15}>
 					<Carousel autoplay>
-						<div>
+						<div className="relative">
 							<Image
 								width={"100%"}
 								src="https://www.portotheme.com/wordpress/porto/shop22/wp-content/uploads/sites/94/2019/06/shop22_home_slide1.jpg"
 								alt="banner"
 								preview={false}
 							/>
+							<div className="absolute z-10 top-0 right-3 sm:right-12 md:right-12 xl:right-20 h-full">
+								<div className="flex h-full py-5 sm:py-12 md:py-16 lg:py-12 xl:py-24 flex-col justify-between">
+									<div className="text-right">
+										<span className="text-base md:text-3xl lg:text-2xl xl:text-3xl font-black block">
+											ELECTRONIC
+										</span>
+										<span className="text-base md:text-3xl lg:text-2xl xl:text-3xl font-black block">
+											DEALS
+										</span>
+									</div>
+
+									<div>
+										<span className="bg-gray-700 text-white text-xs sm:text-sm md:text-xl lg:text-base xl:text-xl font-bold inline-block mb-1 p-1 md:p-2">
+											Exclusive CUPON
+										</span>
+										<br />
+										<span className="bg-gray-700 text-white text-xs sm:text-sm md:text-xl lg:text-lg xl:text-2xl font-bold inline-block p-1 md:p-2 mr-1">
+											$100
+										</span>
+										<span className="font-bold text-xs sm:text-base">
+											OFF
+										</span>
+									</div>
+
+									<button className="bg-orange-500 text-white py-1 sm:py-2 text-xs sm:text-base rounded-full hover:bg-orange-400">
+										Shop Now
+									</button>
+								</div>
+							</div>
 						</div>
-						<div>
+
+						<div className="relative">
 							<Image
 								width={"100%"}
 								src="https://www.portotheme.com/wordpress/porto/shop22/wp-content/uploads/sites/94/2019/06/shop22_home_slide2.jpg"
 								alt="banner2"
 								preview={false}
 							/>
+							<div className="absolute z-10 top-0 left-3 sm:left-12 md:left-12 xl:left-20 h-full">
+								<div className="flex h-full py-5 sm:py-12 md:py-16 lg:py-12 xl:py-24 flex-col justify-between">
+									<div>
+										<span className="text-base md:text-3xl lg:text-2xl xl:text-3xl font-black block">
+											TOP BRANDS
+										</span>
+										<span className="text-base md:text-3xl lg:text-2xl xl:text-3xl font-black block">
+											SMARTPHONES
+										</span>
+									</div>
+
+									<div>
+										<span className="bg-gray-700 text-white text-xs sm:text-sm md:text-xl lg:text-base xl:text-xl font-bold inline-block mb-1 p-1 md:p-2">
+											STARTING FROM
+										</span>
+										<br />
+										<span className="bg-gray-700 text-white text-xs sm:text-sm md:text-xl lg:text-lg xl:text-2xl font-bold inline-block p-1 md:p-2 mr-1">
+											$100
+										</span>
+									</div>
+
+									<button className="bg-orange-500 text-white py-1 sm:py-2  text-xs sm:text-base rounded-full hover:bg-orange-400">
+										Shop Now
+									</button>
+								</div>
+							</div>
 						</div>
 					</Carousel>
 				</Col>
