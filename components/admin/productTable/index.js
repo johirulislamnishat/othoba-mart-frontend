@@ -15,6 +15,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import useProvider from "../../../hooks/useProvider";
+import { humaneDate } from "../../../utilities/time";
 
 const { Option } = Select;
 
@@ -181,34 +182,34 @@ const ProductTable = () => {
 							Pending
 						</div>
 					</Option>
-					<Option id={product._id} value="approved">
+					<Option id={product._id} value="featured">
 						<div className="flex items-center">
 							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-lime-300" />
-							Approved
+							Featured
 						</div>
 					</Option>
-					<Option id={product._id} value="shifted">
+					<Option id={product._id} value="best_selling">
 						<div className="flex items-center">
 							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-violet-500" />
-							Shifted
+							Best selling
 						</div>
 					</Option>
-					<Option id={product._id} value="completed">
+					<Option id={product._id} value="new_arrival">
 						<div className="flex items-center">
 							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-green-500" />
-							Completed
+							New arrival
 						</div>
 					</Option>
-					<Option id={product._id} value="cancled">
+					<Option id={product._id} value="promoted">
 						<div className="flex items-center">
-							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-stone-300" />
-							Cancled
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-blue-500" />
+							Promoted
 						</div>
 					</Option>
-					<Option id={product._id} value="rejected">
+					<Option id={product._id} value="regular">
 						<div className="flex items-center">
-							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-red-500" />
-							Rejected
+							<div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-orange-500" />
+							Regular
 						</div>
 					</Option>
 				</Select>
@@ -219,27 +220,34 @@ const ProductTable = () => {
 					value: "pending",
 				},
 				{
-					text: "Approved",
-					value: "approved",
+					text: "Featured",
+					value: "featured",
 				},
 				{
-					text: "Shifted",
-					value: "shifted",
+					text: "Best selling",
+					value: "best_selling",
 				},
 				{
-					text: "Completed",
-					value: "completed",
+					text: "New arrival",
+					value: "new_arrival",
 				},
 				{
-					text: "Cancled",
-					value: "cancled",
+					text: "Promoted",
+					value: "promoted",
 				},
 				{
-					text: "Rejected",
-					value: "rejected",
+					text: "Regular",
+					value: "regular",
 				},
 			],
 			onFilter: (value, record) => record.status.indexOf(value) === 0,
+		},
+		{
+			title: "Updated On",
+			dataIndex: "updatedAt",
+			key: "name",
+			width: 200,
+			render: (date) => humaneDate(date),
 		},
 		{
 			title: "Actions",
