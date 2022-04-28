@@ -12,6 +12,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import useProvider from "../../../hooks/useProvider";
+import { humaneDate } from "../../../utilities/time";
 
 const { Option } = Select;
 export let orderData;
@@ -113,13 +114,7 @@ const OrderTable = () => {
 			dataIndex: "createdAt",
 			key: "order",
 			width: 150,
-			render: (date) =>
-				new Date(date).toLocaleDateString("en-Gb", {
-					weekday: "short",
-					year: "numeric",
-					month: "short",
-					day: "numeric",
-				}),
+			render: (date) => humaneDate(date),
 		},
 		{
 			title: "Total Price",
