@@ -56,7 +56,11 @@ const HomeMenu = ({ visible, setVisible }) => {
           {showMenu && (
             <div className="absolute z-10 top-14 w-full shadow">
               <Menu mode="inline" onClick={(e) => setShowMenu(!showMenu)}>
-                <Menu.Item key="2">Fashion</Menu.Item>
+                <Menu.Item key="2">
+                  <Link href="/categories" passHref>
+                    Fashion
+                  </Link>{" "}
+                </Menu.Item>
                 <Menu.Item key="3">Electronics</Menu.Item>
                 <Menu.Item key="4">Gifts</Menu.Item>
                 <Menu.Item key="5">Garden</Menu.Item>
