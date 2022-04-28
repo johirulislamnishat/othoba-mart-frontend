@@ -2,7 +2,7 @@ import { Avatar, Card, Col, Divider, Row, Space, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../../components/layouts/adminLayout";
 import useProvider from "../../../hooks/useProvider";
-import { humaneDate } from "../../../styles/utilities/time";
+import { humaneDate } from "../../../utilities/time";
 
 const Profile = () => {
 	const [role, setRole] = useState(null);
