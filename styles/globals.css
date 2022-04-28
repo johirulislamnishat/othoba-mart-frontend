@@ -132,17 +132,12 @@ a {
 /* --------------------------------------------------
 Home Page Main Area Style
 --------------------------------------------------*/
-/* best seller  */
+/* Product Style  */
 
 .single-product {
   position: relative;
   overflow: hidden;
   padding: 5px;
-}
-.products-grid .single-product:last-child {
-}
-.single-product img {
-  margin-bottom: 15px;
 }
 
 .single-product h3 a {
@@ -157,10 +152,67 @@ Home Page Main Area Style
 .single-product h3 a:hover {
   color: var(--brand-color);
 }
-.single-product .ant-image {
+.single-product .single-product-image {
+  margin-bottom: 20px;
+  overflow: hidden;
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.single-product-page .single-product-image {
+  display: flex;
+  justify-content: center;
+}
+.single-product-page .single-product-image img.product-photo {
+  min-height: 470px;
+  padding: 20px;
+}
+.best-sellers .single-product .single-product-image,
+.new-products .single-product .single-product-image {
+  height: 166px;
+}
+.best-sellers .single-product .single-product-image img,
+.new-products .single-product .single-product-image img {
+  min-height: 166px;
+}
+.latest-deals .single-product .single-product-image {
+  height: 157px;
+}
+.latest-deals .single-product .single-product-image img {
+  min-height: 157px;
+}
+.smartphone-and-accessories .single-product .single-product-image {
+  height: 215px;
+}
+.smartphone-and-accessories .single-product .single-product-image img {
+  min-height: 215px;
+}
+.related-products .single-product .single-product-image {
+  height: 270px;
+}
+.related-products .single-product .single-product-image img {
+  min-height: 270px;
+}
+.category-based-products .single-product .single-product-image {
+  height: 207px;
+}
+.category-based-products .single-product .single-product-image img {
+  min-height: 207px;
+}
+.trending-products .single-product .single-product-image {
+  height: 148px;
+}
+.trending-products .single-product .single-product-image img {
+  min-height: 148px;
+}
+.deals-of-the-weeks .single-product .single-product-image {
+  height: 280px;
+}
+.deals-of-the-weeks .single-product .single-product-image img {
+  min-height: 280px;
+}
+
 @media only screen and (max-width: 668px) {
   .single-product {
     margin: 15px 0 15px 0;
@@ -168,6 +220,17 @@ Home Page Main Area Style
   }
   .single-product img {
     width: 100% !important;
+  }
+  .single-product .single-product-image {
+    height: auto !important;
+  }
+  .single-product .single-product-image img {
+    min-height: auto !important;
+    height: auto !important;
+    max-height: 300px !important;
+  }
+  .single-product-page .single-product-image img.product-photo {
+    min-height: auto !important;
   }
 }
 .wishlist {
@@ -234,6 +297,7 @@ Home Page Main Area Style
   font-size: 1.4rem;
   color: var(--brand-color);
 }
+
 /* promo lg style */
 .promo-lg {
   position: relative;
@@ -278,71 +342,6 @@ Home Page Main Area Style
     grid-template-columns: 100%;
   }
 }
-/* latest deals */
-.latest-deals .product-image {
-  position: relative;
-}
-.latest-deals .product-image .discount {
-  position: absolute;
-  top: 50px;
-  left: 20px;
-  width: 40px;
-  height: 20px;
-  background-color: var(--brand-color);
-  color: #fff;
-  border-radius: 10px;
-}
-
-.latest-deals .product-price small {
-  font-size: 1rem;
-  text-decoration: line-through;
-  color: var(--grey-color);
-  line-height: 0;
-}
-.latest-deals .product-price h3 {
-  font-size: 1.3rem;
-  margin: 0;
-  line-height: 1rem;
-  color: var(--brand-color);
-}
-.latest-deals .shopping {
-  height: 40px;
-  width: 40px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 300ms;
-}
-.latest-deals .shopping:hover {
-  border: 1px solid var(--brand-color);
-}
-.latest-deals .shopping span {
-  font-size: 1.4rem;
-  color: var(--brand-color);
-}
-.latest-deals .product-data p span:first-child {
-  color: var(--grey-color);
-}
-
-.latest-deals-items .single-product:first-child {
-  padding: 0 10px 0 0;
-}
-.latest-deals-items .single-product:last-child {
-  padding: 0 0 0 10px;
-}
-
-@media only screen and (max-width: 668px) {
-  .latest-deals-items .single-product:first-child {
-    padding: 0;
-  }
-  .latest-deals-items .single-product:last-child {
-    padding: 0;
-  }
-  .latest-deals-items .single-product {
-    border: 0;
-  }
-}
-/* Smartphone & Accessories */
 
 /* product categories */
 .product-categories {
@@ -383,14 +382,6 @@ Home Page Main Area Style
   }
 }
 /* related products style*/
-
-.related-products .single-product .single-product-image {
-  height: 300px;
-  margin-bottom: 10px;
-}
-.related-products .single-product .single-product-image img {
-  min-height: 280px;
-}
 
 /* --------------------------------------------------
 Home Page Sidebar Style
@@ -673,10 +664,6 @@ single product page style
 .single-product-page {
   margin-top: 100px;
 }
-.single-product-page .ant-image {
-  width: 100%;
-  height: auto;
-}
 
 .single-product-page h3 {
   font-size: 22px;
@@ -686,6 +673,7 @@ single product page style
   font-size: 30px;
   margin-bottom: 5px;
   font-weight: 600;
+  line-height: 42px;
 }
 .single-product-page p {
   font-size: 16px;
