@@ -1,4 +1,4 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 import {
 	Divider,
 	message,
@@ -220,7 +220,7 @@ const OrderTable = () => {
 					>
 						<DeleteOutlined />
 					</Popconfirm>
-					<EditOutlined />
+					{/* <EditOutlined /> */}
 				</Space>
 			),
 		},
