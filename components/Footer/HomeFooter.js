@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 const footerMenus01 = [
   { id: "0", LinkName: "My Account", href: "#" },
@@ -40,9 +39,9 @@ const footerMenus04 = [
 
 const HomeFooter = () => {
   return (
-    <div className="pt-24 pb-8">
+    <div className="pt-24 pb-8 footer-content">
       {/* subscribe box  */}
-      <div style={{ backgroundColor: "#01ABEC" }}>
+      <div style={{ backgroundColor: "#999" }}>
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 items-center py-6 px-3 md:px-6">
           <div>
             <h3 className="text-white font-medium text-lg">
@@ -94,14 +93,15 @@ const HomeFooter = () => {
                   </Link>
                 </li>
                 <li className="mb-2">
-                  <h1 className="font-medium">Address:</h1>
-                  <p>
-                    House # 7/B, Flat # A-1, Road # 103, Gulshan-2, Dhaka-1212
+                  <h1 className="text-base">Address:</h1>
+                  <p className="text-gray-500">
+                    House # 7/B, Flat # A-1, Road # 103
+                    <br /> Gulshan-2, Dhaka-1212
                   </p>
                 </li>
                 <li className="mb-2">
-                  <h1 className="font-medium">Email:</h1>
-                  <p>othobamart@gmail.com</p>
+                  <h1 className="text-base">Email:</h1>
+                  <p className="text-gray-500">othobamart@gmail.com</p>
                 </li>
               </ul>
             </div>
@@ -113,10 +113,7 @@ const HomeFooter = () => {
                 <ul className="list-none footer-links">
                   {footerMenus01.map((fmenu01) => (
                     <li key={fmenu01.id} className="mb-2">
-                      <a
-                        href={fmenu01.href}
-                        className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                      >
+                      <a href={fmenu01.href} className="">
                         {fmenu01.LinkName}
                       </a>
                     </li>
@@ -130,10 +127,7 @@ const HomeFooter = () => {
                 <ul className="list-none footer-links mt-6">
                   {footerMenus02.map((fmenu02) => (
                     <li key={fmenu02.id} className="mb-2">
-                      <a
-                        href={fmenu02.href}
-                        className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                      >
+                      <a href={fmenu02.href} className="">
                         {fmenu02.LinkName}
                       </a>
                     </li>
@@ -149,10 +143,7 @@ const HomeFooter = () => {
                 <ul className="list-none footer-links">
                   {footerMenus03.map((fmenu03) => (
                     <li key={fmenu03.id} className="mb-2">
-                      <a
-                        href={fmenu03.href}
-                        className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                      >
+                      <a href={fmenu03.href} className="">
                         {fmenu03.LinkName}
                       </a>
                     </li>
@@ -166,10 +157,7 @@ const HomeFooter = () => {
                 <ul className="list-none footer-links">
                   {footerMenus04.map((fmenu04) => (
                     <li key={fmenu04.id} className="mb-2">
-                      <a
-                        href={fmenu04.href}
-                        className="border-b border-solid border-transparent hover:border-purple-800 hover:text-purple-800"
-                      >
+                      <a href={fmenu04.href} className="">
                         {fmenu04.LinkName}
                       </a>
                     </li>
