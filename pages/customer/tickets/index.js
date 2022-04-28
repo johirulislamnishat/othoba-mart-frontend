@@ -1,6 +1,5 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Modal, Button } from "antd";
 import {
+  Button,
   Divider,
   message,
   Popconfirm,
@@ -14,36 +13,19 @@ import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
 import useProvider from "../../../hooks/useProvider";
-import TicketModal from "./ticketModal";
+import TicketModal from "../../admin/tickets/ticketModal";
 
-const { Option } = Select;
-
-const AdminTickets = () => {
+const CustomersTickets = () => {
   const [tickets, setTickets] = useState([]);
-  // console.log("tickets", tickets);
   const {
     state: {
-      user: { accessToken },
+      user: { email, accessToken },
     },
   } = useProvider();
   const [modalVisible, setModalVisible] = useState(false);
   const [chats, setChats] = useState([]);
   const [ticketId, setTicketId] = useState(null);
   // console.log("ticketId", ticketId);
-
-  useEffect(() => {
-    axios
-      .get(`${API_BASE_URL}/support`, {
-        headers: {
-          token: `Bearer ${accessToken}`,
-        },
-      })
-      .then((res) => {
-        setTickets(res.data.result);
-      })
-      .catch((e) => console.log(e));
-  }, [accessToken]);
-
   const handleModal = (id) => {
     // console.log("id", id);
     setTicketId(id);
@@ -60,29 +42,23 @@ const AdminTickets = () => {
       })
       .catch((e) => console.log(e));
   };
-
   const onOk = () => setModalVisible(false);
   const onCancel = () => {
     setModalVisible(false);
     setChats([]);
   };
-
-  const handleStatus = (value, field) => {
+  useEffect(() => {
     axios
-      .put(
-        `${API_BASE_URL}/support/${field.ticketId}`,
-        { status: value },
-        {
-          headers: {
-            token: `Bearer ${accessToken}`,
-          },
-        }
-      )
-      .then((res) => {
-        message.success(res.data.message);
+      .get(`${API_BASE_URL}/support?key=${email}`, {
+        headers: {
+          token: `Bearer ${accessToken}`,
+        },
       })
-      .catch(() => message.error("Failed to change status"));
-  };
+      .then((res) => {
+        setTickets(res.data.result);
+      })
+      .catch((e) => console.log(e));
+  }, [email, accessToken]);
 
   const columns = [
     {
@@ -124,68 +100,15 @@ const AdminTickets = () => {
       width: 120,
       render: (item) => <p>{item[0].message}</p>,
     },
+    // {
+    //   title: "Status",
+    //   dataIndex: "status",
+    //   key: "6",
+    //   width: 150,
+    //   render: (status) => <p>{status}</p>,
+    // },
     {
-      title: "Status",
-      key: "6",
-      width: 150,
-      render: (ticket) => (
-        <Select
-          style={{ width: 150 }}
-          defaultValue={ticket.status.toLowerCase()}
-          onChange={(value, field) => handleStatus(value, field)}
-        >
-          <Option id={ticket._id} value="pending">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-yellow-400" />
-              Pending
-            </div>
-          </Option>
-          <Option id={ticket._id} value="approved">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-lime-300" />
-              Approved
-            </div>
-          </Option>
-
-          <Option id={ticket._id} value="completed">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-green-500" />
-              Completed
-            </div>
-          </Option>
-
-          <Option id={ticket._id} value="rejected">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-red-500" />
-              Rejected
-            </div>
-          </Option>
-        </Select>
-      ),
-      filters: [
-        {
-          text: "Pending",
-          value: "pending",
-        },
-        {
-          text: "Approved",
-          value: "approved",
-        },
-
-        {
-          text: "Completed",
-          value: "completed",
-        },
-
-        {
-          text: "Rejected",
-          value: "rejected",
-        },
-      ],
-      onFilter: (value, record) => record.status.indexOf(value) === 0,
-    },
-    {
-      title: "Reply",
+      title: "View & Reply",
       dataIndex: "_id",
       key: "reply",
       width: 30,
@@ -195,8 +118,26 @@ const AdminTickets = () => {
         </Button>
       ),
     },
+    // {
+    //   title: "Action",
+    //   key: "actions",
+    //   width: 80,
+    //   render: (order) => (
+    //     <Space split={<Divider type="vertical" />}>
+    //       <Popconfirm
+    //         title="Are you sure you want to delete this order?"
+    //         onConfirm={() => deleteTicket(order)}
+    //         okText="Yes"
+    //         cancelText="No"
+    //         placement="topRight"
+    //       >
+    //         <DeleteOutlined />
+    //       </Popconfirm>
+    //       <EditOutlined />
+    //     </Space>
+    //   ),
+    // },
   ];
-
   return (
     <>
       <AdminLayout>
@@ -217,6 +158,7 @@ const AdminTickets = () => {
         onCancel={onCancel}
         tickets={tickets}
         chats={chats}
+        handleModal={handleModal}
         setChats={setChats}
         ticketId={ticketId}
       ></TicketModal>
@@ -224,4 +166,4 @@ const AdminTickets = () => {
   );
 };
 
-export default AdminTickets;
+export default CustomersTickets;
