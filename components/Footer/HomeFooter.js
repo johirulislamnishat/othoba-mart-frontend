@@ -70,7 +70,7 @@ const HomeFooter = () => {
                 className="rounded-r-full absolute h-9 md:h-11 text-sm right-0 px-3 md:px-6 text-white bg-gray-700 "
               >
                 Subscribe
-              </button>{" "}
+              </button>
             </div>
           </div>
         </div>

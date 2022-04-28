@@ -120,7 +120,6 @@ const CheckoutForm = () => {
             .post(API_BASE_URL + "/payment", cart)
             .then((res) => {
                 console.log(res.data.url);
-
                 router.push(res.data.url);
             })
             .catch((err) => {
