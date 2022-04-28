@@ -13,13 +13,9 @@ const footerMenus02 = [
   { id: "0", LinkName: "Orders History", href: "dashboard" },
   { id: "1", LinkName: "Support Center", href: "support" },
   { id: "2", LinkName: "About OthobaMart", href: "about" },
-  { id: "3", LinkName: "Advanced Search", href: "/" },
-  { id: "4", LinkName: "Advanced Search", href: "/" },
-  { id: "5", LinkName: "Advanced Search", href: "/" },
 ];
 
 const footerMenus03 = [
-  { id: "0", LinkName: "Advanced Search", href: "/" },
   { id: "1", LinkName: "Our Guarantees", href: "/" },
   { id: "2", LinkName: "Terms And Conditions", href: "#" },
   { id: "3", LinkName: "Privacy policy", href: "#" },
