@@ -16,8 +16,8 @@ import axios from "axios";
 import Link from 'next/link'
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
-import VendorLayout from '../../components/layouts/vendorLayout';
 import useProvider from '../../hooks/useProvider'
+import VendorLayout from './../../components/layouts/vendorLayout';
 
 const { Option } = Select;
 
