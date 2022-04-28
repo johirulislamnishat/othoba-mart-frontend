@@ -134,16 +134,16 @@ const CheckoutForm = () => {
         setIsModalVisible(false);
     };
 
-    useEffect(() => {
-        axios
-            .post("http://localhost:5000/payment", cart)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, [success]);
+    // useEffect(() => {
+    //     axios
+    //         .post("http://localhost:5000/payment", cart)
+    //         .then((res) => {
+    //             console.log(res);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // }, [success]);
 
     return (
         <>
