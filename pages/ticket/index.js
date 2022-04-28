@@ -9,14 +9,27 @@ import useProvider from "../../hooks/useProvider";
 const Ticket = () => {
   const {
     state: {
-      user: { accessToken },
+      user: { user_name, email, accessToken },
     },
   } = useProvider();
+  // console.log(user);
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    // console.log(data);
+    const ticketData = {
+      user_name: user_name,
+      user_email: email,
+      reason: data.reason,
+      support_title: data.support_title,
+      chat: [
+        {
+          user_name: user_name,
+          message: data.message,
+        },
+      ],
+    };
+
     axios
-      .post(`${API_BASE_URL}/support`, data, {
+      .post(`${API_BASE_URL}/support`, ticketData, {
         headers: {
           token: `Bearer ${accessToken}`,
         },
@@ -25,7 +38,7 @@ const Ticket = () => {
         message.success(res.data.message);
         reset();
       })
-      .catch(() => message.success("Failed to submit"));
+      .catch(() => message.error("Failed to submit"));
   };
   return (
     <HomeLayout title="Support Ticket | Othoba Mart">

@@ -12,7 +12,7 @@ import {
 import { Drawer, Dropdown, Image, Menu, PageHeader } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useProvider from "../../../hooks/useProvider";
 
 const { SubMenu } = Menu;
@@ -21,7 +21,7 @@ const AdminTop = ({ pageTitle, child }) => {
   const {
     state: { user },
   } = useProvider();
-  console.log(user);
+  // console.log(user);
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const pageName = router.pathname.split("/");
@@ -64,6 +64,23 @@ const AdminTop = ({ pageTitle, child }) => {
       </div>
     </Link>
   );
+
+  const [maximumRole, setMaximumRole] = useState("customer");
+
+  useEffect(() => {
+    if (user) {
+      if (user.isSuperAdmin) {
+        setMaximumRole("superAdmin");
+      } else if (user.isAdmin) {
+        setMaximumRole("admin");
+      } else if (user.isVendor) {
+        setMaximumRole("vendor");
+      } else {
+        setMaximumRole("customer");
+      }
+    }
+  }, [user]);
+
   return (
     <>
       <PageHeader
@@ -106,7 +123,7 @@ const AdminTop = ({ pageTitle, child }) => {
               : [pageName[pageName.length - 1].toUpperCase()]
           }
         >
-          {user?.isSuperAdmin === true && (
+          {maximumRole === "superAdmin" && (
             <>
               <Menu.Item key="admin" icon={<DashboardOutlined />}>
                 <Link href="/admin" passHref>
@@ -147,7 +164,7 @@ const AdminTop = ({ pageTitle, child }) => {
               </Menu.Item>
             </>
           )}
-          {user?.isAdmin === true && (
+          {maximumRole === "admin" && (
             <>
               <Menu.Item key="admin" icon={<DashboardOutlined />}>
                 <Link href="/admin" passHref>
@@ -188,7 +205,7 @@ const AdminTop = ({ pageTitle, child }) => {
               </Menu.Item>
             </>
           )}
-          {user?.isVendor === true ? (
+          {maximumRole === "vendor" && (
             <>
               <Menu.Item key="admin" icon={<DashboardOutlined />}>
                 <Link href="/admin" passHref>
@@ -228,7 +245,8 @@ const AdminTop = ({ pageTitle, child }) => {
                 </Link>
               </Menu.Item>
             </>
-          ) : (
+          )}
+          {maximumRole === "customer" && (
             <>
               <Menu.Item key="admin" icon={<DashboardOutlined />}>
                 <Link href="/customer" passHref>

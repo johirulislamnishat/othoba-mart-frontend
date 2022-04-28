@@ -26,6 +26,23 @@ const AdminMenu = ({ collapsed }) => {
   const {
     state: { user },
   } = useProvider();
+
+  const [maximumRole, setMaximumRole] = useState("customer");
+
+  useEffect(() => {
+    if (user) {
+      if (user.isSuperAdmin) {
+        setMaximumRole("superAdmin");
+      } else if (user.isAdmin) {
+        setMaximumRole("admin");
+      } else if (user.isVendor) {
+        setMaximumRole("vendor");
+      } else {
+        setMaximumRole("customer");
+      }
+    }
+  }, [user]);
+
   return (
     <div>
       <Link href="/" passHref>
@@ -48,7 +65,7 @@ const AdminMenu = ({ collapsed }) => {
             : [pageName[pageName.length - 1].toUpperCase()]
         }
       >
-        {user?.isSuperAdmin === true && (
+        {maximumRole === "superAdmin" && (
           <>
             <Menu.Item key="admin" icon={<DashboardOutlined />}>
               <Link href="/admin" passHref>
@@ -89,7 +106,7 @@ const AdminMenu = ({ collapsed }) => {
             </Menu.Item>
           </>
         )}
-        {user?.isAdmin === true && (
+        {maximumRole === "admin" && (
           <>
             <Menu.Item key="admin" icon={<DashboardOutlined />}>
               <Link href="/admin" passHref>
@@ -130,7 +147,7 @@ const AdminMenu = ({ collapsed }) => {
             </Menu.Item>
           </>
         )}
-        {user?.isVendor === true ? (
+        {maximumRole === "vendor" && (
           <>
             <Menu.Item key="vendor" disabled icon={<LineChartOutlined />}>
               <Link href="/vendor" passHref>
@@ -163,7 +180,9 @@ const AdminMenu = ({ collapsed }) => {
               </Link>
             </Menu.Item>
           </>
-        ) : (
+        )}
+
+        {maximumRole === "customer" && (
           <>
             <Menu.Item key="customer" icon={<DashboardOutlined />}>
               <Link href="/customer" passHref>

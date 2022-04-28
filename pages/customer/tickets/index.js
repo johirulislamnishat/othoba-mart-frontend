@@ -1,5 +1,5 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import {
+  Button,
   Divider,
   message,
   Popconfirm,
@@ -13,20 +13,43 @@ import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
 import useProvider from "../../../hooks/useProvider";
-
-const { Option } = Select;
+import TicketModal from "../../admin/tickets/ticketModal";
 
 const CustomersTickets = () => {
   const [tickets, setTickets] = useState([]);
   const {
     state: {
-      user: { accessToken },
+      user: { email, accessToken },
     },
   } = useProvider();
-
+  const [modalVisible, setModalVisible] = useState(false);
+  const [chats, setChats] = useState([]);
+  const [ticketId, setTicketId] = useState(null);
+  // console.log("ticketId", ticketId);
+  const handleModal = (id) => {
+    // console.log("id", id);
+    setTicketId(id);
+    setModalVisible(true);
+    axios
+      .get(`${API_BASE_URL}/support/${ticketId}`, {
+        headers: {
+          token: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        setChats(res.data.result.chat);
+        setRender(false);
+      })
+      .catch((e) => console.log(e));
+  };
+  const onOk = () => setModalVisible(false);
+  const onCancel = () => {
+    setModalVisible(false);
+    setChats([]);
+  };
   useEffect(() => {
     axios
-      .get(`${API_BASE_URL}/support`, {
+      .get(`${API_BASE_URL}/support?key=${email}`, {
         headers: {
           token: `Bearer ${accessToken}`,
         },
@@ -35,38 +58,7 @@ const CustomersTickets = () => {
         setTickets(res.data.result);
       })
       .catch((e) => console.log(e));
-  }, [accessToken]);
-
-  const deleteTicket = (ticket) => {
-    axios
-      .delete(`${API_BASE_URL}/support/${ticket._id}`, {
-        headers: {
-          token: `Bearer ${accessToken}`,
-        },
-      })
-      .then((res) => {
-        message.success(res.data.message);
-        setTickets(tickets.filter((item) => item != ticket));
-      })
-      .catch((e) => console.log(e));
-  };
-
-  const handleStatus = (value, field) => {
-    axios
-      .put(
-        `${API_BASE_URL}/support/${field.id}`,
-        { status: value },
-        {
-          headers: {
-            token: `Bearer ${accessToken}`,
-          },
-        }
-      )
-      .then((res) => {
-        message.success(res.data.message);
-      })
-      .catch(() => message.success("Failed to change status"));
-  };
+  }, [email, accessToken]);
 
   const columns = [
     {
@@ -74,6 +66,7 @@ const CustomersTickets = () => {
       dataIndex: "support_id",
       key: "2",
       width: 100,
+      render: (id) => <p>#{id}</p>,
     },
     {
       title: "Customer Name",
@@ -84,7 +77,7 @@ const CustomersTickets = () => {
 
     {
       title: "Customer Email",
-      dataIndex: "email",
+      dataIndex: "user_email",
       key: "email",
       width: 250,
     },
@@ -102,108 +95,74 @@ const CustomersTickets = () => {
     },
     {
       title: "Message",
-      dataIndex: "message",
+      dataIndex: "chat",
       key: "5",
       width: 120,
-      // defaultSortOrder: "descend",
-      // sorter: (a, b) => a.total_price - b.total_price,
+      render: (item) => <p>{item[0].message}</p>,
     },
+    // {
+    //   title: "Status",
+    //   dataIndex: "status",
+    //   key: "6",
+    //   width: 150,
+    //   render: (status) => <p>{status}</p>,
+    // },
     {
-      title: "Status",
-      key: "6",
-      width: 150,
-      render: (order) => (
-        <Select
-          style={{ width: 150 }}
-          defaultValue={order.status.toLowerCase()}
-          onChange={(value, field) => handleStatus(value, field)}
-        >
-          <Option id={order._id} value="pending">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-yellow-400" />
-              Pending
-            </div>
-          </Option>
-          <Option id={order._id} value="approved">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-lime-300" />
-              Approved
-            </div>
-          </Option>
-
-          <Option id={order._id} value="completed">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-green-500" />
-              Completed
-            </div>
-          </Option>
-
-          <Option id={order._id} value="rejected">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-red-500" />
-              Rejected
-            </div>
-          </Option>
-        </Select>
-      ),
-      filters: [
-        {
-          text: "Pending",
-          value: "pending",
-        },
-        {
-          text: "Approved",
-          value: "approved",
-        },
-
-        {
-          text: "Completed",
-          value: "completed",
-        },
-
-        {
-          text: "Rejected",
-          value: "rejected",
-        },
-      ],
-      onFilter: (value, record) => record.status.indexOf(value) === 0,
-    },
-    {
-      title: "Reply",
-      dataIndex: "reply",
+      title: "View & Reply",
+      dataIndex: "_id",
       key: "reply",
       width: 30,
-    },
-    {
-      title: "Action",
-      key: "actions",
-      width: 80,
-      render: (order) => (
-        <Space split={<Divider type="vertical" />}>
-          <Popconfirm
-            title="Are you sure you want to delete this order?"
-            onConfirm={() => deleteTicket(order)}
-            okText="Yes"
-            cancelText="No"
-            placement="topRight"
-          >
-            <DeleteOutlined />
-          </Popconfirm>
-          <EditOutlined />
-        </Space>
+      render: (id) => (
+        <Button type="primary" onClick={() => handleModal(id)}>
+          Reply
+        </Button>
       ),
     },
+    // {
+    //   title: "Action",
+    //   key: "actions",
+    //   width: 80,
+    //   render: (order) => (
+    //     <Space split={<Divider type="vertical" />}>
+    //       <Popconfirm
+    //         title="Are you sure you want to delete this order?"
+    //         onConfirm={() => deleteTicket(order)}
+    //         okText="Yes"
+    //         cancelText="No"
+    //         placement="topRight"
+    //       >
+    //         <DeleteOutlined />
+    //       </Popconfirm>
+    //       <EditOutlined />
+    //     </Space>
+    //   ),
+    // },
   ];
   return (
-    <AdminLayout>
-      <Table
-        columns={columns}
-        dataSource={tickets}
-        scroll={{ x: 1550 }}
-        pagination={{ position: ["bottomCenter"] }}
-        size="small"
-      />
-    </AdminLayout>
+    <>
+      <AdminLayout>
+        <Table
+          columns={columns}
+          dataSource={tickets}
+          scroll={{ x: 1550 }}
+          pagination={{ position: ["bottomCenter"] }}
+          size="small"
+        />
+      </AdminLayout>
+
+      <TicketModal
+        title="Othoba Mart"
+        style={{ maxWidth: 800, padding: 0 }}
+        visible={modalVisible}
+        onOk={onOk}
+        onCancel={onCancel}
+        tickets={tickets}
+        chats={chats}
+        handleModal={handleModal}
+        setChats={setChats}
+        ticketId={ticketId}
+      ></TicketModal>
+    </>
   );
 };
 
