@@ -66,10 +66,17 @@ const Product = () => {
     <HomeLayout title={item.product_name}>
       <div className="single-product-page">
         <Row>
-          <Col xs={24} md={12} gutter={8} className="border rounded-md mb-10">
-            <Image preview={false} src={item.photo} alt="" />
+          <Col xs={24} md={10} gutter={8} className="border rounded-md mb-10">
+            <div className="single-product-image w-full">
+              <Image
+                className="product-photo"
+                preview={false}
+                src={item?.photo}
+                alt=""
+              />
+            </div>
           </Col>
-          <Col xs={24} md={12} className="md:pl-6">
+          <Col xs={24} md={14} className="md:pl-6">
             <h2>{item.product_name}</h2>
             <div className="ratings mt-4">
               <StarFilled />
