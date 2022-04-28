@@ -9,11 +9,12 @@ import {
   TeamOutlined,
   TagOutlined,
 } from "@ant-design/icons";
-import { Drawer, Dropdown, Image, Menu, PageHeader } from "antd";
+import { Drawer, Dropdown, Menu, PageHeader, Image } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import useProvider from "../../../hooks/useProvider";
+import { DrawerTitle } from "../../shared/footer/drawerTitle";
 
 const { SubMenu } = Menu;
 

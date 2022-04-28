@@ -1,111 +1,40 @@
-import { ShoppingOutlined } from "@ant-design/icons";
-import { Col, Row } from "antd";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import productSm from "../../../public/images/Products/product-sm-1.jpeg";
-
+import { Row } from "antd";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../../../apiconstants";
+import useProvider from "../../../hooks/useProvider";
+import ProductCardListSidebar from "../../ProductCardListSidebar/ProductCardListSidebar";
 const TrendingProductsSidebar = () => {
+  const [cartClicked, setCartClicked] = useState(false);
+
+  const [items, setItems] = useState([]);
+  console.log(items);
+
+  useEffect(() => {
+    axios
+      .get(API_BASE_URL + "/product/paginated?page=0&size=4")
+      .then(function (response) {
+        console.log(response?.data?.result);
+        setItems(response?.data?.result);
+      });
+  }, []);
+
+  const handleAddToCart = (item) => {
+    setCartClicked(true);
+    dispatch(addToCart(cart, item));
+  };
+  const {
+    state: { cart, wish },
+    dispatch,
+  } = useProvider();
   return (
     <div className="trending-products">
       <h3 className="text-2xl mt-4 pb-3 border-b">Trending Products</h3>
-      <Row className="">
-        <Col className="single-product" lg={24}>
-          <Row className="">
-            <div className="flex justify-between items-center">
-              <Col md={10} className="product-image">
-                <Image src={productSm} alt="" />
-              </Col>
-              <Col md={14}>
-                <Link href="/" className="product-title">
-                  Flexible Black Smart Watches For Men & Women
-                </Link>
 
-                <div className="flex justify-between items-center mt-4">
-                  <div className="product-price">
-                    <small>$779.99</small>
-                    <h3>$699.99</h3>
-                  </div>
-                  <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
-                  </div>
-                </div>
-              </Col>
-            </div>
-          </Row>
-        </Col>
-        <Col className="single-product" lg={24}>
-          <Row className="">
-            <div className="flex justify-between items-center">
-              <Col md={10} className="product-image">
-                <Image src={productSm} alt="" />
-              </Col>
-              <Col md={14}>
-                <Link href="/" className="product-title">
-                  Flexible Black Smart Watches For Men & Women
-                </Link>
-
-                <div className="flex justify-between items-center mt-4">
-                  <div className="product-price">
-                    <small>$779.99</small>
-                    <h3>$699.99</h3>
-                  </div>
-                  <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
-                  </div>
-                </div>
-              </Col>
-            </div>
-          </Row>
-        </Col>
-        <Col className="single-product" lg={24}>
-          <Row className="">
-            <div className="flex justify-between items-center">
-              <Col md={10} className="product-image">
-                <Image src={productSm} alt="" />
-              </Col>
-              <Col md={14}>
-                <Link href="/" className="product-title">
-                  Flexible Black Smart Watches For Men & Women
-                </Link>
-
-                <div className="flex justify-between items-center mt-4">
-                  <div className="product-price">
-                    <small>$779.99</small>
-                    <h3>$699.99</h3>
-                  </div>
-                  <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
-                  </div>
-                </div>
-              </Col>
-            </div>
-          </Row>
-        </Col>
-        <Col className="single-product" lg={24}>
-          <Row className="">
-            <div className="flex justify-between items-center">
-              <Col md={10} className="product-image">
-                <Image src={productSm} alt="" />
-              </Col>
-              <Col md={14}>
-                <Link href="/" className="product-title">
-                  Flexible Black Smart Watches For Men & Women
-                </Link>
-
-                <div className="flex justify-between items-center mt-4">
-                  <div className="product-price">
-                    <small>$779.99</small>
-                    <h3>$699.99</h3>
-                  </div>
-                  <div className="shopping flex justify-center items-center">
-                    <ShoppingOutlined />
-                  </div>
-                </div>
-              </Col>
-            </div>
-          </Row>
-        </Col>
+      <Row>
+        {items.map((item, index) => {
+          return <ProductCardListSidebar item={item} key={index} />;
+        })}
       </Row>
     </div>
   );

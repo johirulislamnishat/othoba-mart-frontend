@@ -6,28 +6,17 @@ import {
   ShoppingOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import {
-  Badge,
-  Col,
-  Dropdown,
-  Image,
-  Layout,
-  Menu,
-  message,
-  Row,
-  Tag,
-} from "antd";
+import { Badge, Col, Dropdown, Image, Layout, Menu, message, Row } from "antd";
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-
+import { API_BASE_URL } from "../../apiconstants";
 import useProvider from "../../hooks/useProvider";
-
 import CartMini from "../cart/CartMini";
-import WishMini from "../wish/WishMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
+import WishMini from "../wish/WishMini";
 
 const { Content } = Layout;
 
@@ -37,10 +26,8 @@ const HomeLayout = ({ children, title }) => {
   } = useProvider();
   const [activeCart, setActiveCart] = useState(false);
   const [activeWish, setActiveWish] = useState(false);
-
   const [visible, setVisible] = useState(false);
   const [searchText, setSearchText] = useState(null);
-  const [searchItem, setSearchItem] = useState("product");
   const [showResult, setShowResult] = useState(false);
   const [searchData, setSearchData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -69,7 +56,7 @@ const HomeLayout = ({ children, title }) => {
     if (searchText) {
       setLoading(true);
       axios
-        .get(`${API_BASE_URL}/product?item=${searchItem}&search=${searchText}`)
+        .get(`${API_BASE_URL}/product?key=${searchText}`)
         .then((res) => {
           setSearchData(res.data.result);
           setShowResult(true);
@@ -124,7 +111,7 @@ const HomeLayout = ({ children, title }) => {
                 lg={16}
                 style={{ position: "relative" }}
               >
-                <div className="flex w-11/12 lg:w-10/12 mx-auto">
+                <div className="flex w-11/12 lg:w-10/12 xl:w-9/12 mx-auto">
                   <input
                     type="search"
                     className="block w-full px-5 py-2 xl:py-3 text-small text-gray-700 border border-solid border-gray-300 rounded-l-3xl focus:text-gray-700 focus:border-orange-500 focus:outline-none"
@@ -136,10 +123,7 @@ const HomeLayout = ({ children, title }) => {
                     }
                   />
                   <div className="pl-1 pr-1 lg:pr-3 text-small text-gray-700 border border-solid border-gray-300 active:text-gray-700 active:border-orange-500 active:outline-none bg-white m-0 ">
-                    <select
-                      className="outline-none bg-white h-full py-2 xl:py-3 border-0 px-0 lg:px-3"
-                      onChange={(e) => setSearchItem(e.target.value)}
-                    >
+                    <select className="outline-none bg-white h-full py-2 xl:py-3 border-0 px-0 lg:px-3">
                       <option value={"product"}>Products</option>
                       <option value={"categories"}>Categories</option>
                       <option value={"sub-categories"}>Tags</option>
@@ -160,10 +144,10 @@ const HomeLayout = ({ children, title }) => {
                 {/* searchResult */}
                 {showResult && (
                   <div className="absolute z-10 top-12 w-full pl-8 pr-12">
-                    <div className="w-11/12 lg:w-10/12 mx-auto p-5 bg-white shadow relative">
+                    <div className="w-11/12 lg:w-10/12 xl:w-9/12 mx-auto p-5 bg-white shadow relative">
                       <div className="absolute z-10 top-1 lg:top-3 right-2 lg:right-4">
                         <CloseOutlined
-                          className=" text-lg lg:text-2xl font-bold"
+                          className=" text-lg lg:text-xl font-bold"
                           onClick={() => setShowResult(false)}
                         />
                       </div>
@@ -176,31 +160,18 @@ const HomeLayout = ({ children, title }) => {
                           <Row
                             gutter={16}
                             align="middle"
-                            className="cursor-pointer hover:border hover:border-orange-500 hover:text-orange-500"
+                            className="cursor-pointer border-b hover:text-orange-500"
                           >
-                            <Col xs={6}>
+                            <Col xs={6} xl={4} xxl={3}>
                               <Image
                                 preview={false}
-                                src={item.product_img}
+                                src={item.photo}
                                 alt={item.product_name}
                               />
                             </Col>
-                            <Col xs={18}>
+                            <Col xs={18} xl={20} xxl={21}>
                               <p>{item.product_name}</p>
-                              {item.product_category && (
-                                <div className="hidden lg:block">
-                                  {item.product_category.map((item) => (
-                                    <Tag
-                                      color={"rgba(255, 239, 217, 1)"}
-                                      key={item}
-                                    >
-                                      <span className="text-orange-500">
-                                        {item}
-                                      </span>
-                                    </Tag>
-                                  ))}
-                                </div>
-                              )}
+
                               {item.product_price && (
                                 <p className="mt-0 lg:mt-3">
                                   Price: {item.product_price}

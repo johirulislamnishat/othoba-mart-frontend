@@ -1,38 +1,76 @@
-import {
-  AppstoreOutlined,
-  GiftOutlined,
-  MailOutlined,
-  MenuOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
-import { Col, Drawer, Menu, Row } from "antd";
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
+import { Button, Col, Drawer, Form, Input, Menu, Row } from "antd";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import useProvider from "../../../hooks/useProvider";
+import { DrawerTitle } from "../../shared/footer/drawerTitle";
 
 const { SubMenu } = Menu;
 
 const HomeMenu = ({ visible, setVisible }) => {
+  const [showTrack, setShowTrack] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isHome, setIsHome] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const {
     state: { user },
   } = useProvider();
+  const router = useRouter();
+
+  useEffect(() => {
+    const routes = router.asPath.split("/");
+    if (routes[1] === "") {
+      setIsHome(true);
+    } else {
+      setIsHome(false);
+    }
+  }, [router]);
+
+  const [form] = Form.useForm();
+
+  const handleSubmit = (values) => {
+    setLoading(true);
+    setShowTrack(!showTrack);
+    router.push(`/admin/orders/trackOrder/${values.track_number}`).then(() => {
+      form.resetFields();
+      setLoading(false);
+    });
+  };
 
   return (
     <>
       <Row>
         <Col xs={0} lg={4}>
-          <div className="bg-black text-white h-full flex justify-center items-center">
+          <div
+            className={`bg-black text-white h-full flex justify-center items-center relative ${
+              isHome ? "cursor-default" : "cursor-pointer"
+            }`}
+            onClick={() =>
+              isHome ? setShowMenu(false) : setShowMenu(!showMenu)
+            }
+          >
             <MenuOutlined />
             <div className="ml-3">Sort by Category</div>
           </div>
+          {showMenu && (
+            <div className="absolute z-10 top-14 w-full shadow">
+              <Menu mode="inline" onClick={(e) => setShowMenu(!showMenu)}>
+                <Menu.Item key="2">Fashion</Menu.Item>
+                <Menu.Item key="3">Electronics</Menu.Item>
+                <Menu.Item key="4">Gifts</Menu.Item>
+                <Menu.Item key="5">Garden</Menu.Item>
+                <Menu.Item key="6">Music</Menu.Item>
+                <Menu.Item key="7">Motors</Menu.Item>
+                <Menu.Item key="8">Furniture</Menu.Item>
+                <Menu.Item key="9">VIEW ALL &gt;</Menu.Item>
+              </Menu>
+            </div>
+          )}
         </Col>
         <Col xs={7} md={16} lg={14}>
           <div className="hidden lg:block">
-            <Menu
-              onClick={(e) => console.log(e)}
-              selectedKeys={["1"]}
-              mode="horizontal"
-            >
+            <Menu selectedKeys={["1"]} mode="horizontal">
               <Menu.Item key="1">
                 <Link href="/" passHref>
                   Home
@@ -62,7 +100,6 @@ const HomeMenu = ({ visible, setVisible }) => {
                     Support
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="products:3">Track Order</Menu.Item>
                 <Menu.Item key="products:4">Privacy Policy</Menu.Item>
                 <Menu.Item key="products:5">Terms & Conditions</Menu.Item>
               </SubMenu>
@@ -93,7 +130,7 @@ const HomeMenu = ({ visible, setVisible }) => {
           xs={17}
           md={8}
           lg={6}
-          className="pl-5 sm:pl-32 md:pl-0 lg:pl-8 xl:pl-16"
+          className="pl-5 sm:pl-32 md:pl-0 lg:pl-0 xl:pl-16"
         >
           <Menu mode="horizontal" defaultSelectedKeys={["1"]}>
             {user.isCustomer && (
@@ -103,13 +140,71 @@ const HomeMenu = ({ visible, setVisible }) => {
                 </Link>
               </Menu.Item>
             )}
-            <Menu.Item key="2">USD</Menu.Item>
+            <Menu.Item key="2">
+              <span
+                onClick={() => setShowTrack(!showTrack)}
+                className="relative"
+              >
+                Track Order
+              </span>
+              {showTrack && (
+                <div className="absolute z-10 top-10 right-0 bg-white px-5 pt-5 shadow w-64">
+                  <div className="relative">
+                    <div className="absolute z-10 -top-3 right-1">
+                      <CloseOutlined
+                        style={{
+                          color: "black",
+                          fontSize: "1rem",
+                        }}
+                        onClick={() => setShowTrack(false)}
+                      />
+                    </div>
+                    <p className="text-xl font-bold">Track My order</p>
+                    <Form
+                      form={form}
+                      name="Track order"
+                      layout="vertical"
+                      requiredMark={false}
+                      initialValues={{ remember: true }}
+                      onFinish={handleSubmit}
+                    >
+                      <Form.Item
+                        label="My tracking number"
+                        name="track_number"
+                        hasFeedback
+                        validateFirst
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please enter your tracking number!",
+                          },
+                        ]}
+                      >
+                        <Input placeholder="eg. 123456789" allowClear />
+                      </Form.Item>
+                      <Form.Item>
+                        <Button
+                          type="primary"
+                          htmlType="submit"
+                          shape="round"
+                          block
+                          disabled={loading}
+                          loading={loading}
+                        >
+                          Track
+                        </Button>
+                      </Form.Item>
+                    </Form>
+                  </div>
+                </div>
+              )}
+            </Menu.Item>
           </Menu>
         </Col>
       </Row>
 
       <Drawer
-        title="Othoba Mart"
+        title={DrawerTitle}
         placement="right"
         onClose={() => setVisible(!visible)}
         visible={visible}
@@ -120,36 +215,52 @@ const HomeMenu = ({ visible, setVisible }) => {
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
         >
-          <SubMenu key="sub1" icon={<MailOutlined />} title="Home">
-            <Menu.Item key="1">Option 1</Menu.Item>
-            <Menu.Item key="2">Option 2</Menu.Item>
-            <Menu.Item key="3">Option 3</Menu.Item>
-            <Menu.Item key="4">Option 4</Menu.Item>
-          </SubMenu>
+          <Menu.Item key="1">
+            <Link href="/" passHref>
+              Home
+            </Link>
+          </Menu.Item>
 
-          <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Vendor">
-            <Menu.Item key="5">Option 5</Menu.Item>
-            <Menu.Item key="6">Option 6</Menu.Item>
-          </SubMenu>
+          <Menu.Item key="2">
+            <Link href="/categories" passHref>
+              Categories
+            </Link>
+          </Menu.Item>
 
-          <SubMenu key="sub3" icon={<GiftOutlined />} title="Gifts">
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
+          <Menu.Item key="3">
+            <Link href="/about" passHref>
+              About Us
+            </Link>
+          </Menu.Item>
 
-          <SubMenu key="sub4" icon={<SettingOutlined />} title="Categories">
-            <Menu.Item key="9">Option 9</Menu.Item>
-            <Menu.Item key="10">Option 10</Menu.Item>
-            <Menu.Item key="11">Option 11</Menu.Item>
-            <Menu.Item key="12">Option 12</Menu.Item>
+          <SubMenu key="SubMenu3" title="Suport">
+            <Menu.Item key="contact">
+              <Link href="/contact" passHref>
+                Contact Us
+              </Link>{" "}
+            </Menu.Item>
+            <Menu.Item key="support">
+              <Link href="/support" passHref>
+                Support
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="products:3">Track Order</Menu.Item>
+            <Menu.Item key="products:4">Privacy Policy</Menu.Item>
+            <Menu.Item key="products:5">Terms & Conditions</Menu.Item>
           </SubMenu>
+          <Menu.Item key="4">
+            <Link href="/faq" passHref>
+              FAQs
+            </Link>
+          </Menu.Item>
 
-          <SubMenu key="sub5" icon={<AppstoreOutlined />} title="Products">
-            <Menu.Item key="13">Option 13</Menu.Item>
-            <Menu.Item key="14">Option 14</Menu.Item>
-            <Menu.Item key="15">Option 15</Menu.Item>
-            <Menu.Item key="16">Option 16</Menu.Item>
-          </SubMenu>
+          {user.isVendor && (
+            <Menu.Item key="5">
+              <Link href="/admin" passHref>
+                Admin
+              </Link>
+            </Menu.Item>
+          )}
         </Menu>
       </Drawer>
     </>
