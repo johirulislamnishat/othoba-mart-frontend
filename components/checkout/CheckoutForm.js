@@ -120,7 +120,6 @@ const CheckoutForm = () => {
             .post(API_BASE_URL + "/payment", cart)
             .then((res) => {
                 console.log(res.data.url);
-
                 router.push(res.data.url);
             })
             .catch((err) => {
@@ -135,16 +134,16 @@ const CheckoutForm = () => {
         setIsModalVisible(false);
     };
 
-    useEffect(() => {
-        axios
-            .post("http://localhost:5000/payment", cart)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, [success]);
+    // useEffect(() => {
+    //     axios
+    //         .post("http://localhost:5000/payment", cart)
+    //         .then((res) => {
+    //             console.log(res);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // }, [success]);
 
     return (
         <>
