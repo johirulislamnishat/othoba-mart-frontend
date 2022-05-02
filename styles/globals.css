@@ -345,7 +345,7 @@ Home Page Main Area Style
 
 /* product categories */
 .product-categories {
-  margin: 0 0 80px;
+  margin: 0 0 10px;
 }
 .product-categories .categories-link a {
   display: block;
@@ -989,6 +989,13 @@ Thank you page style
   color: var(--brand-color);
 }
 
+/* footer style */
+.footer-content .footer-links li a {
+  color: var(--black-color) !important;
+}
+.footer-content .footer-links li a:hover {
+  color: var(--brand-color) !important;
+}
 /* ticket style start */
 .ant-modal-body {
   padding: 0px !important;
