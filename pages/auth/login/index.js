@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from 'next/router'
 import { Image } from "antd";
 import { CloseCircleTwoTone } from "@ant-design/icons";
 import Link from "next/link";
@@ -8,13 +9,14 @@ import useProvider from "../../../hooks/useProvider";
 const Login = () => {
   const [user_name, setUser_name] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter()
   const { loading, signinHandler } = AuthHandlers();
-
+  console.log(router.query.from)
   const { dispatch } = useProvider();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    signinHandler(user_name, password, dispatch);
+    signinHandler(user_name, password, dispatch, router);
   };
 
   return (

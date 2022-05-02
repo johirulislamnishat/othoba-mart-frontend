@@ -8,7 +8,7 @@ import { addUser } from './../context/actions/Actions';
 const AuthHandlers = () => {
 	const [loading, setLoading] = useState(false)
 	const [message, setMessage] = useState('')
-	const router = useRouter();
+	// const router = useRouter();
 	
 	// register api handler function
 	const signupHandlerCustomer = (user_name, email, password) => {
@@ -52,7 +52,7 @@ const AuthHandlers = () => {
 	};
 
 	// login api handler function
-	const signinHandler = (user_name, password, dispatch) => {
+	const signinHandler = (user_name, password, dispatch, router) => {
 		setLoading(true)
 		axios
 			.post(API_BASE_URL + "/auth/login", {
@@ -69,7 +69,12 @@ const AuthHandlers = () => {
 					payload: response?.data
 				})
 				setLoading(false)
-				router.push("/");
+				if(router?.query?.from){
+					router.push(router.query.from)
+				} else {
+					router.push('/')
+				}
+				
 			})
 			.catch(function (error) {
 				console.log(error);

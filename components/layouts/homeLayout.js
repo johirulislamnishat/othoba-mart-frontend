@@ -57,6 +57,11 @@ const HomeLayout = ({ children, title }) => {
       setActiveCart(!activeCart);
     }
   };
+ 
+  const handleClick = () => {
+    setActiveWish(false)
+    setActiveCart(false)
+  }
 
   const handleSearch = () => {
     if (searchText) {
@@ -103,11 +108,11 @@ const HomeLayout = ({ children, title }) => {
         </Link>
         }
       </Menu.Item>
-      {/* <Menu.Item key="2">
+      <Menu.Item key="2">
         <Link href="/" passHref>
           Your Profile
         </Link>
-      </Menu.Item> */}
+      </Menu.Item>
       {user?.user_name ? (
         <Menu.Item key="3" danger onClick={handleLogout}>
           Logout

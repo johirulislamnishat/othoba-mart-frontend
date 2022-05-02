@@ -14,10 +14,11 @@ import HomeLayout from "../../../components/layouts/homeLayout";
 import RelateProducts from "../../../components/RelatedProducts/RelateProducts";
 import { addToCart, addToWish } from "../../../context/actions/Actions";
 import useProvider from "../../../hooks/useProvider";
+
+
 const Product = () => {
   const router = useRouter();
   const { id } = router.query;
-
   const [item, setItem] = useState([]);
 
   useEffect(() => {
@@ -46,8 +47,8 @@ const Product = () => {
         setWishClicked(true);
         dispatch(addToWish(wish, item));
       }
-    } else {
-      router.push("/auth/login");
+    } else if (id) {
+      router.push({pathname:"/auth/login", query: {from: `/product/${id}`}});
     }
   };
 
@@ -57,8 +58,8 @@ const Product = () => {
         setCartClicked(true);
         dispatch(addToCart(cart, item));
       }
-    } else {
-      router.push("/auth/login");
+    } else if (id) {
+       router.push({pathname:"/auth/login", query: {from: `/product/${id}`}});
     }
   };
   

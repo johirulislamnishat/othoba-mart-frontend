@@ -1,4 +1,4 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, LoadingOutlined } from "@ant-design/icons";
 import {
 	Col,
 	Divider,
@@ -17,25 +17,17 @@ import Link from 'next/link'
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
 import useProvider from '../../hooks/useProvider'
+import useIsAuthenticated from '../../hooks/useIsAuthenticated'
 import VendorLayout from './../../components/layouts/vendorLayout';
 
 const { Option } = Select;
 
 const Dashboard = () => {
 	const { state: { user }} = useProvider()
-
-	if(user?.isVendor === 'pending') {
-		return <div>Admin will review your profile and verify you as soon as possible. <br/>
-		Please be patient.
-		</div>
-	}
     
 	const [data, setData] = useState(null);
-	const {
-		state: {
-			user: { accessToken },
-		},
-	} = useProvider();
+    
+	const isAuthenticating = useIsAuthenticated({query: { from: '/vendor'}})    
 
 	useEffect(() => {
 		axios
@@ -54,7 +46,7 @@ const Dashboard = () => {
 		axios
 			.delete(`${API_BASE_URL}/product/${product._id}`, {
 				headers: {
-					token: `Bearer ${accessToken}`,
+					token: `Bearer ${user?.accessToken}`,
 				},
 			})
 			.then((res) => {
@@ -71,7 +63,7 @@ const Dashboard = () => {
 				{ status: value },
 				{
 					headers: {
-						token: `Bearer ${accessToken}`,
+						token: `Bearer ${user?.accessToken}`,
 					},
 				}
 			)
@@ -278,18 +270,37 @@ const Dashboard = () => {
 			),
 		},
 	];
+    
+	if(isAuthenticating) {
+        return <LoadingOutlined />
+	}
 
+	if(user?.isVendor === 'pending'){
+		return (
+		<div>Admin will review your profile and verify you as soon as possible. <br/>
+		Please be patient.
+		</div>
+		)
+	}
+
+	if(!user?.isVendor){
+		return(
+			<div>You are not a vendor</div>
+		)
+	}
+	
 	return (
-		<VendorLayout title='Vendor | Dashboard' pageTitle="Dashboard">
+		<>
+			<VendorLayout title='Vendor | Dashboard' pageTitle="Dashboard">
 			<Table
 				columns={columns}
 				dataSource={data}
 				scroll={{ x: 1600 }}
 				pagination={{ position: ["bottomCenter"] }}
 				size="small"		
-			/>
-			
+			/>			
 		</VendorLayout>
+		</>
 	);
 };
 
