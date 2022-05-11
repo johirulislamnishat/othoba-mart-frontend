@@ -10,11 +10,9 @@ const LatestDeals = () => {
   // console.log(items);
 
   useEffect(() => {
-    axios
-      .get(API_BASE_URL + "/product/paginated?page=0&size=2")
-      .then(function (response) {
-        setItems(response?.data?.result);
-      });
+    axios.get(API_BASE_URL + "/product?cat=earphone").then(function (response) {
+      setItems(response?.data?.result);
+    });
   }, []);
   return (
     <div className="container latest-deals">

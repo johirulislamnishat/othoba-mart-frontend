@@ -12,10 +12,10 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
-import useProvider from "../../hooks/useProvider";
 import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
+import HomeHeader from "../shared/homeHeader";
 import WishMini from "../wish/WishMini";
 
 const { Content } = Layout;
