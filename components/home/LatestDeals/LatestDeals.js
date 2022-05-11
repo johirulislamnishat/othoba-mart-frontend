@@ -7,7 +7,7 @@ import ProductCardGridTwo from "../../ProductCardGridTwo/ProductCardGridTwo";
 
 const LatestDeals = () => {
   const [items, setItems] = useState([]);
-  console.log(items);
+  // console.log(items);
 
   useEffect(() => {
     axios.get(API_BASE_URL + "/product?cat=earphone").then(function (response) {

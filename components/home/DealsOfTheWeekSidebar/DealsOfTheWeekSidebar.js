@@ -6,7 +6,7 @@ import ProductCardGrid from "../../ProductCardGrid/ProductCardGrid";
 
 const DealsOfTheWeekSidebar = () => {
   const [items, setItems] = useState([]);
-  console.log(items);
+  // console.log(items);
 
   useEffect(() => {
     axios.get(API_BASE_URL + "/product?cat=fridge").then(function (response) {

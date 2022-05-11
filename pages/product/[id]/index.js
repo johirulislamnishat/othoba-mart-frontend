@@ -26,7 +26,7 @@ const Product = () => {
     });
   }, [id]);
   function onChange(value) {
-    console.log("changed", value);
+    // console.log("changed", value);
   }
   const { TabPane } = Tabs;
   function callback(key) {
