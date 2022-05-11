@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import AdminLayout from "../../../components/layouts/adminLayout";
 import useProvider from "../../../hooks/useProvider";
-import TicketModal from "../../admin/tickets/ticketModal";
+import TicketModal from "../../dashboard/admin/tickets/ticketModal";
 
 const CustomersDashboard = () => {
   const [tickets, setTickets] = useState([]);
