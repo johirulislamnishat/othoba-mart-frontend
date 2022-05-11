@@ -82,42 +82,30 @@ const HomeMenu = ({ visible, setVisible }) => {
               </Menu.Item>
 
               <Menu.Item key="2">
-                <Link href="/categories" passHref>
-                  Categories
-                </Link>
+                <Link href="/categories">Categories</Link>
               </Menu.Item>
 
               <Menu.Item key="3">
-                <Link href="/about" passHref>
-                  About Us
-                </Link>
+                <Link href="/about">About Us</Link>
               </Menu.Item>
 
               <SubMenu key="SubMenu3" title="Suport">
                 <Menu.Item key="contact">
-                  <Link href="/contact" passHref>
-                    Contact Us
-                  </Link>{" "}
+                  <Link href="/contact">Contact Us</Link>{" "}
                 </Menu.Item>
                 <Menu.Item key="support">
-                  <Link href="/support" passHref>
-                    Support
-                  </Link>
+                  <Link href="/support">Support</Link>
                 </Menu.Item>
                 <Menu.Item key="products:4">Privacy Policy</Menu.Item>
                 <Menu.Item key="products:5">Terms & Conditions</Menu.Item>
               </SubMenu>
               <Menu.Item key="4">
-                <Link href="/faq" passHref>
-                  FAQs
-                </Link>
+                <Link href="/faq">FAQs</Link>
               </Menu.Item>
 
               {user.isVendor && (
                 <Menu.Item key="5">
-                  <Link href="/admin" passHref>
-                    Admin
-                  </Link>
+                  <Link href="/dashboard/vendor">Admin</Link>
                 </Menu.Item>
               )}
             </Menu>
@@ -220,49 +208,35 @@ const HomeMenu = ({ visible, setVisible }) => {
           defaultOpenKeys={["sub1"]}
         >
           <Menu.Item key="1">
-            <Link href="/" passHref>
-              Home
-            </Link>
+            <Link href="/">Home</Link>
           </Menu.Item>
 
           <Menu.Item key="2">
-            <Link href="/categories" passHref>
-              Categories
-            </Link>
+            <Link href="/categories">Categories</Link>
           </Menu.Item>
 
           <Menu.Item key="3">
-            <Link href="/about" passHref>
-              About Us
-            </Link>
+            <Link href="/about">About Us</Link>
           </Menu.Item>
 
           <SubMenu key="SubMenu3" title="Suport">
             <Menu.Item key="contact">
-              <Link href="/contact" passHref>
-                Contact Us
-              </Link>{" "}
+              <Link href="/contact">Contact Us</Link>{" "}
             </Menu.Item>
             <Menu.Item key="support">
-              <Link href="/support" passHref>
-                Support
-              </Link>
+              <Link href="/support">Support</Link>
             </Menu.Item>
             <Menu.Item key="products:3">Track Order</Menu.Item>
             <Menu.Item key="products:4">Privacy Policy</Menu.Item>
             <Menu.Item key="products:5">Terms & Conditions</Menu.Item>
           </SubMenu>
           <Menu.Item key="4">
-            <Link href="/faq" passHref>
-              FAQs
-            </Link>
+            <Link href="/faq">FAQs</Link>
           </Menu.Item>
 
           {user.isVendor && (
             <Menu.Item key="5">
-              <Link href="/admin" passHref>
-                Admin
-              </Link>
+              <Link href="/dashboard/vendor">Admin</Link>
             </Menu.Item>
           )}
         </Menu>

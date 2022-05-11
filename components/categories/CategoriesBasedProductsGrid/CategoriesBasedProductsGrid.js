@@ -6,7 +6,7 @@ import ProductCardGrid from "../../ProductCardGrid/ProductCardGrid";
 
 const CategoriesBasedProductsGrid = () => {
   const [items, setItems] = useState([]);
-  console.log(items);
+  // console.log(items);
 
   useEffect(() => {
     axios

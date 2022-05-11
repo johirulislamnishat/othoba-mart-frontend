@@ -10,12 +10,12 @@ import {
 } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from "../../../apiconstants";
-import AdminLayout from "../../../components/layouts/adminLayout";
-import useProvider from "../../../hooks/useProvider";
-import TicketModal from "../../dashboard/admin/tickets/ticketModal";
+import { API_BASE_URL } from "../../../../apiconstants";
+import AdminLayout from "../../../../components/layouts/adminLayout";
+import useProvider from "../../../../hooks/useProvider";
+import TicketModal from "../../admin/tickets/ticketModal";
 
-const CustomersDashboard = () => {
+const CustomersTickets = () => {
   const [tickets, setTickets] = useState([]);
   const {
     state: {
@@ -166,4 +166,4 @@ const CustomersDashboard = () => {
   );
 };
 
-export default CustomersDashboard;
+export default CustomersTickets;

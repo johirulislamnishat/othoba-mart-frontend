@@ -14,10 +14,10 @@ const Sidebar = () => {
     });
   }, []);
   function selectedCheckBox(e) {
-    console.log(`checked = ${e.target.checked}`);
+    // console.log(`checked = ${e.target.checked}`);
   }
   function selectedRating(e) {
-    console.log(`checked = ${e.target.checked}`);
+    // console.log(`checked = ${e.target.checked}`);
   }
 
   return (
