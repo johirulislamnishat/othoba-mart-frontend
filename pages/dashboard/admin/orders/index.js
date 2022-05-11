@@ -1,5 +1,4 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Modal, Button } from "antd";
 import {
   Divider,
   message,
@@ -11,66 +10,55 @@ import {
 } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from "../../../apiconstants";
-import AdminLayout from "../../../components/layouts/adminLayout";
-import useProvider from "../../../hooks/useProvider";
-import TicketModal from "./ticketModal";
+import { API_BASE_URL } from "../../../../apiconstants";
+import AdminLayout from "../../../../components/layouts/adminLayout";
+import useProvider from "../../../../hooks/useProvider";
 
 const { Option } = Select;
 
-const AdminTickets = () => {
-  const [tickets, setTickets] = useState([]);
-  // console.log("tickets", tickets);
+const Orders = () => {
+  const [data, setData] = useState(null);
   const {
     state: {
       user: { accessToken },
     },
   } = useProvider();
-  const [modalVisible, setModalVisible] = useState(false);
-  const [chats, setChats] = useState([]);
-  const [ticketId, setTicketId] = useState(null);
-  // console.log("ticketId", ticketId);
 
   useEffect(() => {
     axios
-      .get(`${API_BASE_URL}/support`, {
+      .get(`${API_BASE_URL}/order`, {
         headers: {
           token: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
-        setTickets(res.data.result);
+        const arr = [];
+        for (const value of res.data.result) {
+          arr.push({ ...value, key: value._id });
+        }
+        setData(arr);
       })
       .catch((e) => console.log(e));
   }, [accessToken]);
 
-  const handleModal = (id) => {
-    // console.log("id", id);
-    setTicketId(id);
-    setModalVisible(true);
+  const deleteOrder = (order) => {
     axios
-      .get(`${API_BASE_URL}/support/${ticketId}`, {
+      .delete(`${API_BASE_URL}/order/${order._id}`, {
         headers: {
           token: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
-        setChats(res.data.result.chat);
-        setRender(false);
+        message.success(res.data.message);
+        setData(data.filter((item) => item != order));
       })
       .catch((e) => console.log(e));
-  };
-
-  const onOk = () => setModalVisible(false);
-  const onCancel = () => {
-    setModalVisible(false);
-    setChats([]);
   };
 
   const handleStatus = (value, field) => {
     axios
       .put(
-        `${API_BASE_URL}/support/${field.ticketId}`,
+        `${API_BASE_URL}/order/${field.id}`,
         { status: value },
         {
           headers: {
@@ -81,16 +69,16 @@ const AdminTickets = () => {
       .then((res) => {
         message.success(res.data.message);
       })
-      .catch(() => message.error("Failed to change status"));
+      .catch(() => message.success("Failed to change status"));
   };
 
   const columns = [
     {
-      title: "Ticket id",
-      dataIndex: "support_id",
+      title: "Order id",
+      dataIndex: "_id",
       key: "2",
       width: 100,
-      render: (id) => <p>#{id}</p>,
+      render: (id) => <Tooltip title={id}>#{id.slice(15)}</Tooltip>,
     },
     {
       title: "Customer Name",
@@ -101,60 +89,71 @@ const AdminTickets = () => {
 
     {
       title: "Customer Email",
-      dataIndex: "user_email",
+      dataIndex: "email",
       key: "email",
       width: 250,
     },
     {
-      title: "Title",
-      dataIndex: "support_title",
+      title: "Phone",
+      dataIndex: "phone",
       key: "3",
       width: 200,
     },
     {
-      title: "Topic",
-      dataIndex: "reason",
+      title: "Address",
+      dataIndex: "address",
       key: "4",
-      width: 100,
+      width: 280,
     },
     {
-      title: "Message",
-      dataIndex: "chat",
+      title: "Total Price",
+      dataIndex: "total_price",
       key: "5",
       width: 120,
-      render: (item) => <p>{item[0].message}</p>,
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.total_price - b.total_price,
     },
     {
       title: "Status",
       key: "6",
       width: 150,
-      render: (ticket) => (
+      render: (order) => (
         <Select
           style={{ width: 150 }}
-          defaultValue={ticket.status.toLowerCase()}
+          defaultValue={order.status.toLowerCase()}
           onChange={(value, field) => handleStatus(value, field)}
         >
-          <Option id={ticket._id} value="pending">
+          <Option id={order._id} value="pending">
             <div className="flex items-center">
               <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-yellow-400" />
               Pending
             </div>
           </Option>
-          <Option id={ticket._id} value="approved">
+          <Option id={order._id} value="approved">
             <div className="flex items-center">
               <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-lime-300" />
               Approved
             </div>
           </Option>
-
-          <Option id={ticket._id} value="completed">
+          <Option id={order._id} value="shifted">
+            <div className="flex items-center">
+              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-violet-500" />
+              Shifted
+            </div>
+          </Option>
+          <Option id={order._id} value="completed">
             <div className="flex items-center">
               <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-green-500" />
               Completed
             </div>
           </Option>
-
-          <Option id={ticket._id} value="rejected">
+          <Option id={order._id} value="cancled">
+            <div className="flex items-center">
+              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-stone-300" />
+              Cancled
+            </div>
+          </Option>
+          <Option id={order._id} value="rejected">
             <div className="flex items-center">
               <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-red-500" />
               Rejected
@@ -171,12 +170,18 @@ const AdminTickets = () => {
           text: "Approved",
           value: "approved",
         },
-
+        {
+          text: "Shifted",
+          value: "shifted",
+        },
         {
           text: "Completed",
           value: "completed",
         },
-
+        {
+          text: "Cancled",
+          value: "cancled",
+        },
         {
           text: "Rejected",
           value: "rejected",
@@ -185,43 +190,37 @@ const AdminTickets = () => {
       onFilter: (value, record) => record.status.indexOf(value) === 0,
     },
     {
-      title: "Reply",
-      dataIndex: "_id",
-      key: "reply",
-      width: 30,
-      render: (id) => (
-        <Button type="primary" onClick={() => handleModal(id)}>
-          Reply
-        </Button>
+      title: "",
+      key: "actions",
+      width: 80,
+      render: (order) => (
+        <Space split={<Divider type="vertical" />}>
+          <Popconfirm
+            title="Are you sure you want to delete this order?"
+            onConfirm={() => deleteOrder(order)}
+            okText="Yes"
+            cancelText="No"
+            placement="topRight"
+          >
+            <DeleteOutlined />
+          </Popconfirm>
+          <EditOutlined />
+        </Space>
       ),
     },
   ];
 
   return (
-    <>
-      <AdminLayout>
-        <Table
-          columns={columns}
-          dataSource={tickets}
-          scroll={{ x: 1550 }}
-          pagination={{ position: ["bottomCenter"] }}
-          size="small"
-        />
-      </AdminLayout>
-
-      <TicketModal
-        title="Othoba Mart"
-        style={{ maxWidth: 800, padding: 0 }}
-        visible={modalVisible}
-        onOk={onOk}
-        onCancel={onCancel}
-        tickets={tickets}
-        chats={chats}
-        setChats={setChats}
-        ticketId={ticketId}
-      ></TicketModal>
-    </>
+    <AdminLayout title="Admin | Orders" pageTitle="Orders">
+      <Table
+        columns={columns}
+        dataSource={data}
+        scroll={{ x: 1550 }}
+        pagination={{ position: ["bottomCenter"] }}
+        size="small"
+      />
+    </AdminLayout>
   );
 };
 
-export default AdminTickets;
+export default Orders;

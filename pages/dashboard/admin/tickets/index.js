@@ -1,4 +1,5 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Modal, Button } from "antd";
 import {
   Divider,
   message,
@@ -10,55 +11,67 @@ import {
 } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from "../../../apiconstants";
-import AdminLayout from "../../../components/layouts/adminLayout";
-import useProvider from "../../../hooks/useProvider";
+import { API_BASE_URL } from "../../../../apiconstants";
+import AdminLayout from "../../../../components/layouts/adminLayout";
+
+import useProvider from "../../../../hooks/useProvider";
+import TicketModal from "./ticketModal";
 
 const { Option } = Select;
 
-const Orders = () => {
-  const [data, setData] = useState(null);
+const AdminTickets = () => {
+  const [tickets, setTickets] = useState([]);
+  // console.log("tickets", tickets);
   const {
     state: {
       user: { accessToken },
     },
   } = useProvider();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [chats, setChats] = useState([]);
+  const [ticketId, setTicketId] = useState(null);
+  // console.log("ticketId", ticketId);
 
   useEffect(() => {
     axios
-      .get(`${API_BASE_URL}/order`, {
+      .get(`${API_BASE_URL}/support`, {
         headers: {
           token: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
-        const arr = [];
-        for (const value of res.data.result) {
-          arr.push({ ...value, key: value._id });
-        }
-        setData(arr);
+        setTickets(res.data.result);
       })
       .catch((e) => console.log(e));
   }, [accessToken]);
 
-  const deleteOrder = (order) => {
+  const handleModal = (id) => {
+    // console.log("id", id);
+    setTicketId(id);
+    setModalVisible(true);
     axios
-      .delete(`${API_BASE_URL}/order/${order._id}`, {
+      .get(`${API_BASE_URL}/support/${ticketId}`, {
         headers: {
           token: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
-        message.success(res.data.message);
-        setData(data.filter((item) => item != order));
+        setChats(res.data.result.chat);
+        setRender(false);
       })
       .catch((e) => console.log(e));
+  };
+
+  const onOk = () => setModalVisible(false);
+  const onCancel = () => {
+    setModalVisible(false);
+    setChats([]);
   };
 
   const handleStatus = (value, field) => {
     axios
       .put(
-        `${API_BASE_URL}/order/${field.id}`,
+        `${API_BASE_URL}/support/${field.ticketId}`,
         { status: value },
         {
           headers: {
@@ -69,16 +82,16 @@ const Orders = () => {
       .then((res) => {
         message.success(res.data.message);
       })
-      .catch(() => message.success("Failed to change status"));
+      .catch(() => message.error("Failed to change status"));
   };
 
   const columns = [
     {
-      title: "Order id",
-      dataIndex: "_id",
+      title: "Ticket id",
+      dataIndex: "support_id",
       key: "2",
       width: 100,
-      render: (id) => <Tooltip title={id}>#{id.slice(15)}</Tooltip>,
+      render: (id) => <p>#{id}</p>,
     },
     {
       title: "Customer Name",
@@ -89,71 +102,60 @@ const Orders = () => {
 
     {
       title: "Customer Email",
-      dataIndex: "email",
+      dataIndex: "user_email",
       key: "email",
       width: 250,
     },
     {
-      title: "Phone",
-      dataIndex: "phone",
+      title: "Title",
+      dataIndex: "support_title",
       key: "3",
       width: 200,
     },
     {
-      title: "Address",
-      dataIndex: "address",
+      title: "Topic",
+      dataIndex: "reason",
       key: "4",
-      width: 280,
+      width: 100,
     },
     {
-      title: "Total Price",
-      dataIndex: "total_price",
+      title: "Message",
+      dataIndex: "chat",
       key: "5",
       width: 120,
-      defaultSortOrder: "descend",
-      sorter: (a, b) => a.total_price - b.total_price,
+      render: (item) => <p>{item[0].message}</p>,
     },
     {
       title: "Status",
       key: "6",
       width: 150,
-      render: (order) => (
+      render: (ticket) => (
         <Select
           style={{ width: 150 }}
-          defaultValue={order.status.toLowerCase()}
+          defaultValue={ticket.status.toLowerCase()}
           onChange={(value, field) => handleStatus(value, field)}
         >
-          <Option id={order._id} value="pending">
+          <Option id={ticket._id} value="pending">
             <div className="flex items-center">
               <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-yellow-400" />
               Pending
             </div>
           </Option>
-          <Option id={order._id} value="approved">
+          <Option id={ticket._id} value="approved">
             <div className="flex items-center">
               <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-lime-300" />
               Approved
             </div>
           </Option>
-          <Option id={order._id} value="shifted">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-violet-500" />
-              Shifted
-            </div>
-          </Option>
-          <Option id={order._id} value="completed">
+
+          <Option id={ticket._id} value="completed">
             <div className="flex items-center">
               <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-green-500" />
               Completed
             </div>
           </Option>
-          <Option id={order._id} value="cancled">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-stone-300" />
-              Cancled
-            </div>
-          </Option>
-          <Option id={order._id} value="rejected">
+
+          <Option id={ticket._id} value="rejected">
             <div className="flex items-center">
               <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-red-500" />
               Rejected
@@ -170,18 +172,12 @@ const Orders = () => {
           text: "Approved",
           value: "approved",
         },
-        {
-          text: "Shifted",
-          value: "shifted",
-        },
+
         {
           text: "Completed",
           value: "completed",
         },
-        {
-          text: "Cancled",
-          value: "cancled",
-        },
+
         {
           text: "Rejected",
           value: "rejected",
@@ -190,37 +186,43 @@ const Orders = () => {
       onFilter: (value, record) => record.status.indexOf(value) === 0,
     },
     {
-      title: "",
-      key: "actions",
-      width: 80,
-      render: (order) => (
-        <Space split={<Divider type="vertical" />}>
-          <Popconfirm
-            title="Are you sure you want to delete this order?"
-            onConfirm={() => deleteOrder(order)}
-            okText="Yes"
-            cancelText="No"
-            placement="topRight"
-          >
-            <DeleteOutlined />
-          </Popconfirm>
-          <EditOutlined />
-        </Space>
+      title: "Reply",
+      dataIndex: "_id",
+      key: "reply",
+      width: 30,
+      render: (id) => (
+        <Button type="primary" onClick={() => handleModal(id)}>
+          Reply
+        </Button>
       ),
     },
   ];
 
   return (
-    <AdminLayout title="Admin | Orders" pageTitle="Orders">
-      <Table
-        columns={columns}
-        dataSource={data}
-        scroll={{ x: 1550 }}
-        pagination={{ position: ["bottomCenter"] }}
-        size="small"
-      />
-    </AdminLayout>
+    <>
+      <AdminLayout>
+        <Table
+          columns={columns}
+          dataSource={tickets}
+          scroll={{ x: 1550 }}
+          pagination={{ position: ["bottomCenter"] }}
+          size="small"
+        />
+      </AdminLayout>
+
+      <TicketModal
+        title="Othoba Mart"
+        style={{ maxWidth: 800, padding: 0 }}
+        visible={modalVisible}
+        onOk={onOk}
+        onCancel={onCancel}
+        tickets={tickets}
+        chats={chats}
+        setChats={setChats}
+        ticketId={ticketId}
+      ></TicketModal>
+    </>
   );
 };
 
-export default Orders;
+export default AdminTickets;

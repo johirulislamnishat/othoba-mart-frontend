@@ -68,39 +68,39 @@ const AdminMenu = ({ collapsed }) => {
         {maximumRole === "superAdmin" && (
           <>
             <Menu.Item key="admin" icon={<DashboardOutlined />}>
-              <Link href="/admin" passHref>
+              <Link href="/dashboard/admin" passHref>
                 Dashboard
               </Link>
             </Menu.Item>
             <SubMenu key="PRODUCTS" icon={<GoldOutlined />} title="Products">
               <Menu.Item key="products">
-                <Link href="/admin/products" passHref>
+                <Link href="/dashboard/admin/products" passHref>
                   Products
                 </Link>
               </Menu.Item>
               <Menu.Item key="add">
-                <Link href="/admin/products/add" passHref>
+                <Link href="/dashboard/admin/products/add" passHref>
                   Add Product
                 </Link>
               </Menu.Item>
             </SubMenu>
             <Menu.Item key="orders" icon={<ShopOutlined />}>
-              <Link href="/admin/orders" passHref>
+              <Link href="/dashboard/admin/orders" passHref>
                 Orders
               </Link>
             </Menu.Item>
             <Menu.Item key="users" icon={<TeamOutlined />}>
-              <Link href="/admin/users" passHref>
+              <Link href="/dashboard/admin/users" passHref>
                 Users
               </Link>
             </Menu.Item>
             <Menu.Item key="shops" icon={<TeamOutlined />}>
-              <Link href="/admin/shops" passHref>
+              <Link href="/dashboard/admin/shops" passHref>
                 Shops
               </Link>
             </Menu.Item>
             <Menu.Item key="tickets" icon={<TagOutlined />}>
-              <Link href="/admin/tickets" passHref>
+              <Link href="/dashboard/admin/tickets" passHref>
                 Manage Ticket
               </Link>
             </Menu.Item>
@@ -109,39 +109,39 @@ const AdminMenu = ({ collapsed }) => {
         {maximumRole === "admin" && (
           <>
             <Menu.Item key="admin" icon={<DashboardOutlined />}>
-              <Link href="/admin" passHref>
+              <Link href="/dashboard/admin" passHref>
                 Dashboard
               </Link>
             </Menu.Item>
             <SubMenu key="PRODUCTS" icon={<GoldOutlined />} title="Products">
               <Menu.Item key="products">
-                <Link href="/admin/products" passHref>
+                <Link href="/dashboard/admin/products" passHref>
                   Products
                 </Link>
               </Menu.Item>
               <Menu.Item key="add">
-                <Link href="/admin/products/add" passHref>
+                <Link href="/dashboard/admin/products/add" passHref>
                   Add Product
                 </Link>
               </Menu.Item>
             </SubMenu>
             <Menu.Item key="orders" icon={<ShopOutlined />}>
-              <Link href="/admin/orders" passHref>
+              <Link href="/dashboard/admin/orders" passHref>
                 Orders
               </Link>
             </Menu.Item>
             <Menu.Item key="users" icon={<TeamOutlined />}>
-              <Link href="/admin/users" passHref>
+              <Link href="/dashboard/admin/users" passHref>
                 Users
               </Link>
             </Menu.Item>
             <Menu.Item key="shops" icon={<TeamOutlined />}>
-              <Link href="/admin/shops" passHref>
+              <Link href="/dashboard/admin/shops" passHref>
                 Shops
               </Link>
             </Menu.Item>
             <Menu.Item key="tickets" icon={<TagOutlined />}>
-              <Link href="/admin/tickets" passHref>
+              <Link href="/dashboard/admin/tickets" passHref>
                 Manage Ticket
               </Link>
             </Menu.Item>
@@ -150,32 +150,32 @@ const AdminMenu = ({ collapsed }) => {
         {maximumRole === "vendor" && (
           <>
             <Menu.Item key="vendor" disabled icon={<LineChartOutlined />}>
-              <Link href="/vendor" passHref>
+              <Link href="/dashboard/vendor" passHref>
                 Dashboard
               </Link>
             </Menu.Item>
             <Menu.Item key="products" disabled icon={<HddOutlined />}>
-              <Link href="/vendor/products" passHref>
+              <Link href="/dashboard/vendor/products" passHref>
                 My Products
               </Link>
             </Menu.Item>
             <Menu.Item key="add" disabled icon={<PlusOutlined />}>
-              <Link href="/vendor/add" passHref>
+              <Link href="/dashboard/vendor/add" passHref>
                 Add Product
               </Link>
             </Menu.Item>
             <Menu.Item key="update" disabled icon={<EditOutlined />}>
-              <Link href="/vendor/update" passHref>
+              <Link href="/dashboard/vendor/update" passHref>
                 Update Product
               </Link>
             </Menu.Item>
             <Menu.Item key="delete" disabled icon={<DeleteOutlined />}>
-              <Link href="/vendor/delete" passHref>
+              <Link href="/dashboard/vendor/delete" passHref>
                 Remove Product
               </Link>
             </Menu.Item>
             <Menu.Item key="profile" icon={<UserOutlined />}>
-              <Link href="/vendor/profile" passHref>
+              <Link href="/dashboard/vendor/profile" passHref>
                 My Profile
               </Link>
             </Menu.Item>
@@ -185,19 +185,19 @@ const AdminMenu = ({ collapsed }) => {
         {maximumRole === "customer" && (
           <>
             <Menu.Item key="customer" icon={<DashboardOutlined />}>
-              <Link href="/customer" passHref>
+              <Link href="/dashboard/customer" passHref>
                 Dashboard
               </Link>
             </Menu.Item>
 
             <Menu.Item key="orders" icon={<ShopOutlined />}>
-              <Link href="/customer/orders" passHref>
+              <Link href="/dashboard/customer/orders" passHref>
                 My Orders
               </Link>
             </Menu.Item>
 
             <Menu.Item key="tickets" icon={<TagOutlined />}>
-              <Link href="/customer/tickets" passHref>
+              <Link href="/dashboard/customer/tickets" passHref>
                 Tickets
               </Link>
             </Menu.Item>

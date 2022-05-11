@@ -10,7 +10,7 @@ import { Badge, Col, Dropdown, Image, Layout, Menu, message, Row } from "antd";
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
 import useProvider from "../../hooks/useProvider";
 import CartMini from "../cart/CartMini";
@@ -22,8 +22,10 @@ const { Content } = Layout;
 
 const HomeLayout = ({ children, title }) => {
   const {
-    state: { cart, wish },
+    state: { user, cart, wish },
   } = useProvider();
+
+  // console.log("User:", user);
   const [activeCart, setActiveCart] = useState(false);
   const [activeWish, setActiveWish] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -32,23 +34,68 @@ const HomeLayout = ({ children, title }) => {
   const [searchData, setSearchData] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const [maximumRole, setMaximumRole] = useState("customer");
+
+  useEffect(() => {
+    if (user) {
+      if (user.isSuperAdmin) {
+        setMaximumRole("superAdmin");
+      } else if (user.isAdmin) {
+        setMaximumRole("admin");
+      } else if (user.isVendor) {
+        setMaximumRole("vendor");
+      } else {
+        setMaximumRole("customer");
+      }
+    }
+  }, [user]);
+
   const menu = (
     <Menu>
-      <Menu.Item key="1">
-        <Link href="/admin" passHref>
-          Dashboard
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="2">
-        <Link href="/" passHref>
-          Your Profile
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="3" danger>
-        <Link href="/auth/login" passHref>
-          Login
-        </Link>
-      </Menu.Item>
+      {user?.email ? (
+        <>
+          <Menu.Item key="1">
+            {maximumRole === "superAdmin" && (
+              <Link href="/dashboard/admin" passHref>
+                Dashboard
+              </Link>
+            )}
+            {maximumRole === "admin" && (
+              <Link href="/dashboard/admin" passHref>
+                Dashboard
+              </Link>
+            )}
+            {maximumRole === "vendor" && (
+              <Link href="/dashboard/vendor" passHref>
+                Dashboard
+              </Link>
+            )}
+            {maximumRole === "customer" && (
+              <Link href="/dashboard/customer" passHref>
+                Dashboard
+              </Link>
+            )}
+          </Menu.Item>
+
+          <Menu.Item key="2">
+            <Link href="/" passHref>
+              Your Profile
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item key="3" danger>
+            <Link href="/auth/login" passHref>
+              Sign Out
+            </Link>
+          </Menu.Item>
+        </>
+      ) : (
+        <Menu.Item key="3" danger>
+          <Link href="/auth/login" passHref>
+            SignIn
+          </Link>
+        </Menu.Item>
+      )}
     </Menu>
   );
 

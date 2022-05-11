@@ -3,9 +3,8 @@ import { Modal, message } from "antd";
 import axios from "axios";
 
 import { useForm } from "react-hook-form";
-import { API_BASE_URL } from "../../../../apiconstants";
-
-import useProvider from "../../../../hooks/useProvider";
+import { API_BASE_URL } from "../../../../../apiconstants";
+import useProvider from "../../../../../hooks/useProvider";
 
 const TicketModal = ({
   chats,

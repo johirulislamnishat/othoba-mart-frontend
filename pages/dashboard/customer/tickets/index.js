@@ -10,9 +10,9 @@ import {
 } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from "../../../apiconstants";
-import AdminLayout from "../../../components/layouts/adminLayout";
-import useProvider from "../../../hooks/useProvider";
+import { API_BASE_URL } from "../../../../apiconstants";
+import AdminLayout from "../../../../components/layouts/adminLayout";
+import useProvider from "../../../../hooks/useProvider";
 import TicketModal from "../../admin/tickets/ticketModal";
 
 const CustomersTickets = () => {
