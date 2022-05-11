@@ -8,6 +8,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../../apiconstants";
 import useProvider from "../../hooks/useProvider";
 import productImage from "../../public/images/Products/product-sm-1.jpeg";
 
@@ -24,12 +25,17 @@ const ThankYouPage = () => {
 
     // console.log("userid", userid);
     // console.log("items", items);
+    // .get(`http://localhost:5000/order/user/${userid}`, {
+    //                 headers: {
+    //                     "Content-Type": "multipart/form-data",
+    //                     token: `Bearer ${accessToken}`,
+    //                 },
+    //             })
 
     useEffect(() => {
         if (userid !== undefined) {
             axios
-                // .get(API_BASE_URL + "/product/paginated?page=0&size=4")
-                .get(`http://localhost:5000/order/user/${userid}`, {
+                .get(API_BASE_URL + `/order/user/${userid}`, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                         token: `Bearer ${accessToken}`,
