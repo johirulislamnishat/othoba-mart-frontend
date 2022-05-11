@@ -20,11 +20,11 @@ const CategoriesPage = () => {
   };
 
   const onChange = (e) => {
-    console.log("radio checked", e.target.value);
+    // console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
   function getChecked(e) {
-    console.log(`checked = ${e.target.checked}`);
+    // console.log(`checked = ${e.target.checked}`);
   }
   const showDefaultDrawer = () => {
     setSize("default");

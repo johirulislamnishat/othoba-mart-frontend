@@ -8,13 +8,13 @@ import SuperDiscountFourSidebar from "../SuperDiscountFourSidebar/SuperDiscountF
 import SuperDiscountTwoSidebar from "../SuperDiscountTwoSidebar/SuperDiscountTwoSidebar";
 const SmartphoneAndAccessories = () => {
   const [items, setItems] = useState([]);
-  console.log(items);
+  // console.log(items);
 
   useEffect(() => {
     axios
       .get(API_BASE_URL + "/product/paginated?page=0&size=4")
       .then(function (response) {
-        console.log(response?.data?.result);
+        // console.log(response?.data?.result);
         setItems(response?.data?.result);
       });
   }, []);

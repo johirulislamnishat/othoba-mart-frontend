@@ -127,7 +127,7 @@ const AdminTop = ({ pageTitle, child }) => {
           {maximumRole === "superAdmin" && (
             <>
               <Menu.Item key="admin" icon={<DashboardOutlined />}>
-                <Link href="/admin" passHref>
+                <Link href="/dashboard/admin" passHref>
                   Dashboard
                 </Link>
               </Menu.Item>
@@ -168,7 +168,7 @@ const AdminTop = ({ pageTitle, child }) => {
           {maximumRole === "admin" && (
             <>
               <Menu.Item key="admin" icon={<DashboardOutlined />}>
-                <Link href="/admin" passHref>
+                <Link href="/dashboard/admin" passHref>
                   Dashboard
                 </Link>
               </Menu.Item>
@@ -209,7 +209,7 @@ const AdminTop = ({ pageTitle, child }) => {
           {maximumRole === "vendor" && (
             <>
               <Menu.Item key="admin" icon={<DashboardOutlined />}>
-                <Link href="/admin" passHref>
+                <Link href="/dashboard/vendor" passHref>
                   Dashboard
                 </Link>
               </Menu.Item>
@@ -250,7 +250,7 @@ const AdminTop = ({ pageTitle, child }) => {
           {maximumRole === "customer" && (
             <>
               <Menu.Item key="admin" icon={<DashboardOutlined />}>
-                <Link href="/customer" passHref>
+                <Link href="/dashboard/customer" passHref>
                   Dashboard
                 </Link>
               </Menu.Item>
