@@ -22,24 +22,24 @@ const ThankYouPage = () => {
     const [items, setItems] = useState([]);
     const [id, setId] = useState("");
 
-    console.log("userid", userid);
-    console.log("items", items);
+    // console.log("userid", userid);
+    // console.log("items", items);
 
     useEffect(() => {
-        if(userid !== undefined){
-          axios
-              // .get(API_BASE_URL + "/product/paginated?page=0&size=4")
-              .get(`http://localhost:5000/order/user/${userid}`, {
-                  headers: {
-                      "Content-Type": "multipart/form-data",
-                      token: `Bearer ${accessToken}`,
-                  },
-              })
-              .then(function (response) {
-                  // console.log(response?.data?.result);
-                  setOrder(response?.data?.result[0]);
-                  setItems(response?.data?.result[0]?.purchased_items);
-              });
+        if (userid !== undefined) {
+            axios
+                // .get(API_BASE_URL + "/product/paginated?page=0&size=4")
+                .get(`http://localhost:5000/order/user/${userid}`, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        token: `Bearer ${accessToken}`,
+                    },
+                })
+                .then(function (response) {
+                    // console.log(response?.data?.result);
+                    setOrder(response?.data?.result[0]);
+                    setItems(response?.data?.result[0]?.purchased_items);
+                });
         }
     }, [userid, accessToken]);
 
@@ -88,10 +88,10 @@ const ThankYouPage = () => {
                         </Link>
 
                         <div>
-                            <button className="custom-btn button-lg">
+                            {/* <button className="custom-btn button-lg">
                                 <SearchOutlined />
                                 <span>Track Order</span>
-                            </button>
+                            </button> */}
                             <Link href="/categories">
                                 <a>
                                     <button className="custom-btn button-lg">
@@ -118,16 +118,16 @@ const ThankYouPage = () => {
                                             {/* <small>2</small> */}
                                         </div>
                                         <div className="nameqty">
-                                            <h4>{item?.item_name}</h4>
+                                            <h6>{item?.item_name}</h6>
                                             <div className="qty">
-                                                <h4>
+                                                <h6>
                                                     Item QTY : {item?.item_qty}
-                                                </h4>
+                                                </h6>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <h4>${item?.item_total_price}</h4>
+                                    <h6>${item?.item_total_price}</h6>
                                 </div>
                             );
                         })}
