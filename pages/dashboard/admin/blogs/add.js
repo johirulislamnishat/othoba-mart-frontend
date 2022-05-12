@@ -185,7 +185,7 @@ const AddProduct = () => {
 							disabled={loading}
 							loading={loading}
 						>
-							Add Product
+							Add Blog
 						</Button>
 					</Form.Item>
 				</Form>
