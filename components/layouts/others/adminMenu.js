@@ -1,16 +1,13 @@
 import {
   DashboardOutlined,
   GoldOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  TagOutlined,
-  LineChartOutlined,
-  ProfileOutlined,
-  UserOutlined,
   HddOutlined,
+  LineChartOutlined,
   PlusOutlined,
-  EditOutlined,
-  DeleteOutlined,
+  ShopOutlined,
+  TagOutlined,
+  TeamOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import { Image, Menu } from "antd";
 import Link from "next/link";
@@ -149,35 +146,20 @@ const AdminMenu = ({ collapsed }) => {
         )}
         {maximumRole === "vendor" && (
           <>
-            <Menu.Item key="vendor" disabled icon={<LineChartOutlined />}>
-              <Link href="/dashboard/vendor" passHref>
-                Dashboard
-              </Link>
+            <Menu.Item key="vendor" icon={<LineChartOutlined />}>
+              <Link href="/dashboard/vendor">Dashboard</Link>
             </Menu.Item>
-            <Menu.Item key="products" disabled icon={<HddOutlined />}>
-              <Link href="/dashboard/vendor/products" passHref>
-                My Products
-              </Link>
+            <Menu.Item key="products" icon={<HddOutlined />}>
+              <Link href="/dashboard/vendor/products">My Products</Link>
             </Menu.Item>
-            <Menu.Item key="add" disabled icon={<PlusOutlined />}>
-              <Link href="/dashboard/vendor/add" passHref>
-                Add Product
-              </Link>
+            <Menu.Item key="add" icon={<PlusOutlined />}>
+              <Link href="/dashboard/vendor/products/add">Add Product</Link>
             </Menu.Item>
-            <Menu.Item key="update" disabled icon={<EditOutlined />}>
-              <Link href="/dashboard/vendor/update" passHref>
-                Update Product
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="delete" disabled icon={<DeleteOutlined />}>
-              <Link href="/dashboard/vendor/delete" passHref>
-                Remove Product
-              </Link>
+            <Menu.Item key="orders" icon={<ShopOutlined />}>
+              <Link href="/dashboard/vendor/orders">Orders</Link>
             </Menu.Item>
             <Menu.Item key="profile" icon={<UserOutlined />}>
-              <Link href="/dashboard/vendor/profile" passHref>
-                My Profile
-              </Link>
+              <Link href="/dashboard/vendor/profile">My Profile</Link>
             </Menu.Item>
           </>
         )}

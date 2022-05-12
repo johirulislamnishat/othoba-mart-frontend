@@ -2,19 +2,22 @@ import {
   BellOutlined,
   DashboardOutlined,
   GoldOutlined,
+  HddOutlined,
+  LineChartOutlined,
   MenuOutlined,
+  PlusOutlined,
   QuestionCircleOutlined,
   SearchOutlined,
   ShopOutlined,
-  TeamOutlined,
   TagOutlined,
+  TeamOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
-import { Drawer, Dropdown, Menu, PageHeader, Image } from "antd";
+import { Drawer, Dropdown, Image, Menu, PageHeader } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useProvider from "../../../hooks/useProvider";
-import { DrawerTitle } from "../../shared/footer/drawerTitle";
 
 const { SubMenu } = Menu;
 
@@ -208,42 +211,20 @@ const AdminTop = ({ pageTitle, child }) => {
           )}
           {maximumRole === "vendor" && (
             <>
-              <Menu.Item key="admin" icon={<DashboardOutlined />}>
-                <Link href="/dashboard/vendor" passHref>
-                  Dashboard
-                </Link>
+              <Menu.Item key="vendor" icon={<LineChartOutlined />}>
+                <Link href="/dashboard/vendor">Dashboard</Link>
               </Menu.Item>
-              <SubMenu key="PRODUCTS" icon={<GoldOutlined />} title="Products">
-                <Menu.Item key="products">
-                  <Link href="/admin/products" passHref>
-                    Products
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="add">
-                  <Link href="/admin/products/add" passHref>
-                    Add Product
-                  </Link>
-                </Menu.Item>
-              </SubMenu>
+              <Menu.Item key="products" icon={<HddOutlined />}>
+                <Link href="/dashboard/vendor/products">My Products</Link>
+              </Menu.Item>
+              <Menu.Item key="add" icon={<PlusOutlined />}>
+                <Link href="/dashboard/vendor/products/add">Add Product</Link>
+              </Menu.Item>
               <Menu.Item key="orders" icon={<ShopOutlined />}>
-                <Link href="/admin/orders" passHref>
-                  Orders
-                </Link>
+                <Link href="/dashboard/vendor/orders">Orders</Link>
               </Menu.Item>
-              <Menu.Item key="users" icon={<TeamOutlined />}>
-                <Link href="/admin/users" passHref>
-                  Users
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="shops" icon={<TeamOutlined />}>
-                <Link href="/admin/shops" passHref>
-                  Shops
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="tickets" icon={<TagOutlined />}>
-                <Link href="/admin/tickets" passHref>
-                  Manage Ticket
-                </Link>
+              <Menu.Item key="profile" icon={<UserOutlined />}>
+                <Link href="/dashboard/vendor/profile">My Profile</Link>
               </Menu.Item>
             </>
           )}
