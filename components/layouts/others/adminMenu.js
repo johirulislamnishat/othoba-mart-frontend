@@ -1,11 +1,6 @@
 import {
   ContainerOutlined,
   DashboardOutlined,
-<<<<<<< HEAD
-=======
-  DeleteOutlined,
-  EditOutlined,
->>>>>>> origin/main
   GoldOutlined,
   HddOutlined,
   LineChartOutlined,
@@ -164,7 +159,6 @@ const AdminMenu = ({ collapsed }) => {
         )}
         {maximumRole === "vendor" && (
           <>
-<<<<<<< HEAD
             <Menu.Item key="vendor" icon={<LineChartOutlined />}>
               <Link href="/dashboard/vendor">Dashboard</Link>
             </Menu.Item>
@@ -179,37 +173,6 @@ const AdminMenu = ({ collapsed }) => {
             </Menu.Item>
             <Menu.Item key="profile" icon={<UserOutlined />}>
               <Link href="/dashboard/vendor/profile">My Profile</Link>
-=======
-            <Menu.Item key="vendor" disabled icon={<LineChartOutlined />}>
-              <Link href="/dashboard/vendor" passHref>
-                Dashboard
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="products" disabled icon={<HddOutlined />}>
-              <Link href="/dashboard/vendor/products" passHref>
-                My Products
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="add" disabled icon={<PlusOutlined />}>
-              <Link href="/dashboard/vendor/add" passHref>
-                Add Product
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="update" disabled icon={<EditOutlined />}>
-              <Link href="/dashboard/vendor/update" passHref>
-                Update Product
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="delete" disabled icon={<DeleteOutlined />}>
-              <Link href="/dashboard/vendor/delete" passHref>
-                Remove Product
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="profile" icon={<UserOutlined />}>
-              <Link href="/dashboard/vendor/profile" passHref>
-                My Profile
-              </Link>
->>>>>>> origin/main
             </Menu.Item>
           </>
         )}
