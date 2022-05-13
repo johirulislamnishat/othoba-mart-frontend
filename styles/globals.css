@@ -1001,12 +1001,12 @@ Thank you page style
   color: var(--brand-color) !important;
 }
 /* ticket style start */
-.ant-modal-body {
+/* .ant-modal-body {
   padding: 0px !important;
 }
 .ant-modal-footer {
   display: none !important;
-}
+} */
 .chat {
   display: flex;
   justify-content: center;
