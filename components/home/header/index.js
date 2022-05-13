@@ -15,7 +15,11 @@ const HomeHeader = () => {
 			<Row gutter={[16, 16]} align="middle">
 				{/* left menu */}
 				<Col xs={0} md={0} lg={4}>
-					<Menu defaultSelectedKeys={["1"]} mode="inline">
+					<Menu
+						defaultSelectedKeys={["1"]}
+						mode="inline"
+						onClick={() => Router.push("/shop")}
+					>
 						<Menu.Item key="1">Electronics</Menu.Item>
 						<Menu.Item key="2">Fashion</Menu.Item>
 						<Menu.Item key="3">Sports</Menu.Item>
@@ -24,7 +28,7 @@ const HomeHeader = () => {
 						<Menu.Item key="6">Music</Menu.Item>
 						<Menu.Item key="7">Motors</Menu.Item>
 						<Menu.Item key="8">Furniture</Menu.Item>
-						<Menu.Item key="9">VIEW ALL &gt;</Menu.Item>
+						{/* <Menu.Item key="9">VIEW ALL &gt;</Menu.Item> */}
 					</Menu>
 				</Col>
 
