@@ -82,7 +82,7 @@ const HomeMenu = ({ visible, setVisible }) => {
               </Menu.Item>
 
               <Menu.Item key="2">
-                <Link href="/categories">Categories</Link>
+                <Link href="/shop">Shop</Link>
               </Menu.Item>
 
               <Menu.Item key="3">
@@ -212,7 +212,7 @@ const HomeMenu = ({ visible, setVisible }) => {
           </Menu.Item>
 
           <Menu.Item key="2">
-            <Link href="/categories">Categories</Link>
+            <Link href="/shop">Shop</Link>
           </Menu.Item>
 
           <Menu.Item key="3">

@@ -1,5 +1,6 @@
 import { Col, Row } from "antd";
 import Image from "next/image";
+import Link from "next/link";
 import headphone from "../../../assets/Images/headphone.png";
 import speaker from "../../../assets/Images/speaker.png";
 const PromoSmOne = () => {
@@ -12,7 +13,11 @@ const PromoSmOne = () => {
               <h4>Weekend Discount</h4>
               <h3>Headphone</h3>
               <p>Do not miss the last opportunity</p>
-              <button className="custom-btn">Shop Now</button>
+              <Link href="shop">
+                <Link href="shop">
+                  <button className="custom-btn">Shop Now</button>
+                </Link>
+              </Link>
             </Col>
             <Col md={12}>
               <Image src={headphone} className="promo-image" alt="" />
@@ -25,7 +30,11 @@ const PromoSmOne = () => {
               <h4>Weekend Discount</h4>
               <h3>Speaker</h3>
               <p>Do not miss the last opportunity</p>
-              <button className="custom-btn">Shop Now</button>
+              <Link href="shop">
+                <Link href="shop">
+                  <button className="custom-btn">Shop Now</button>
+                </Link>
+              </Link>
             </Col>
             <Col md={12}>
               <Image src={speaker} className="promo-image" alt="" />
