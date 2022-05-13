@@ -67,9 +67,7 @@ const HomeHeader = () => {
 									</div>
 
 									<button
-										onClick={() =>
-											Router.push("/categories")
-										}
+										onClick={() => Router.push("/shop")}
 										className="bg-orange-500 text-white py-1 sm:py-2 text-xs sm:text-base rounded-full hover:bg-orange-400"
 									>
 										Shop Now
@@ -107,9 +105,7 @@ const HomeHeader = () => {
 									</div>
 
 									<button
-										onClick={() =>
-											Router.push("/categories")
-										}
+										onClick={() => Router.push("/shop")}
 										className="bg-orange-500 text-white py-1 sm:py-2  text-xs sm:text-base rounded-full hover:bg-orange-400"
 									>
 										Shop Now
