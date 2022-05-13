@@ -1,5 +1,6 @@
 import {
   BellOutlined,
+  ContainerOutlined,
   DashboardOutlined,
   GoldOutlined,
   HddOutlined,
@@ -25,7 +26,7 @@ const AdminTop = ({ pageTitle, child }) => {
   const {
     state: { user },
   } = useProvider();
-  // console.log(user);
+
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const pageName = router.pathname.split("/");
@@ -122,7 +123,7 @@ const AdminTop = ({ pageTitle, child }) => {
           mode="inline"
           defaultSelectedKeys={pageName[pageName.length - 1]}
           defaultOpenKeys={
-            pageName.length > 3
+            pageName.length > 4
               ? [pageName[pageName.length - 2].toUpperCase()]
               : [pageName[pageName.length - 1].toUpperCase()]
           }
@@ -136,33 +137,33 @@ const AdminTop = ({ pageTitle, child }) => {
               </Menu.Item>
               <SubMenu key="PRODUCTS" icon={<GoldOutlined />} title="Products">
                 <Menu.Item key="products">
-                  <Link href="/admin/products" passHref>
+                  <Link href="/dashboard/admin/products" passHref>
                     Products
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="add">
-                  <Link href="/admin/products/add" passHref>
+                  <Link href="/dashboard/admin/products/add" passHref>
                     Add Product
                   </Link>
                 </Menu.Item>
               </SubMenu>
               <Menu.Item key="orders" icon={<ShopOutlined />}>
-                <Link href="/admin/orders" passHref>
+                <Link href="/dashboard/admin/orders" passHref>
                   Orders
                 </Link>
               </Menu.Item>
               <Menu.Item key="users" icon={<TeamOutlined />}>
-                <Link href="/admin/users" passHref>
+                <Link href="/dashboard/admin/users" passHref>
                   Users
                 </Link>
               </Menu.Item>
               <Menu.Item key="shops" icon={<TeamOutlined />}>
-                <Link href="/admin/shops" passHref>
+                <Link href="/dashboard/admin/shops" passHref>
                   Shops
                 </Link>
               </Menu.Item>
               <Menu.Item key="tickets" icon={<TagOutlined />}>
-                <Link href="/admin/tickets" passHref>
+                <Link href="/dashboard/admin/tickets" passHref>
                   Manage Ticket
                 </Link>
               </Menu.Item>
@@ -177,36 +178,48 @@ const AdminTop = ({ pageTitle, child }) => {
               </Menu.Item>
               <SubMenu key="PRODUCTS" icon={<GoldOutlined />} title="Products">
                 <Menu.Item key="products">
-                  <Link href="/admin/products" passHref>
+                  <Link href="/dashboard/admin/products" passHref>
                     Products
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="add">
-                  <Link href="/admin/products/add" passHref>
+                  <Link href="/dashboard/admin/products/add" passHref>
                     Add Product
                   </Link>
                 </Menu.Item>
               </SubMenu>
               <Menu.Item key="orders" icon={<ShopOutlined />}>
-                <Link href="/admin/orders" passHref>
+                <Link href="/dashboard/admin/orders" passHref>
                   Orders
                 </Link>
               </Menu.Item>
               <Menu.Item key="users" icon={<TeamOutlined />}>
-                <Link href="/admin/users" passHref>
+                <Link href="/dashboard/admin/users" passHref>
                   Users
                 </Link>
               </Menu.Item>
               <Menu.Item key="shops" icon={<TeamOutlined />}>
-                <Link href="/admin/shops" passHref>
+                <Link href="/dashboard/admin/shops" passHref>
                   Shops
                 </Link>
               </Menu.Item>
               <Menu.Item key="tickets" icon={<TagOutlined />}>
-                <Link href="/admin/tickets" passHref>
+                <Link href="/dashboard/admin/tickets" passHref>
                   Manage Ticket
                 </Link>
               </Menu.Item>
+              <SubMenu key="BLOGS" icon={<ContainerOutlined />} title="Blogs">
+                <Menu.Item key="blogs">
+                  <Link href="/dashboard/admin/blogs" passHref>
+                    Blogs
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="addBlog">
+                  <Link href="/dashboard/admin/blogs/addBlog" passHref>
+                    Add Blog
+                  </Link>
+                </Menu.Item>
+              </SubMenu>
             </>
           )}
           {maximumRole === "vendor" && (
@@ -230,20 +243,20 @@ const AdminTop = ({ pageTitle, child }) => {
           )}
           {maximumRole === "customer" && (
             <>
-              <Menu.Item key="admin" icon={<DashboardOutlined />}>
+              <Menu.Item key="customer" icon={<DashboardOutlined />}>
                 <Link href="/dashboard/customer" passHref>
                   Dashboard
                 </Link>
               </Menu.Item>
 
               <Menu.Item key="orders" icon={<ShopOutlined />}>
-                <Link href="/customer/orders" passHref>
+                <Link href="/dashboard/customer/orders" passHref>
                   My Orders
                 </Link>
               </Menu.Item>
 
               <Menu.Item key="tickets" icon={<TagOutlined />}>
-                <Link href="/customer/tickets" passHref>
+                <Link href="/dashboard/customer/tickets" passHref>
                   Tickets
                 </Link>
               </Menu.Item>

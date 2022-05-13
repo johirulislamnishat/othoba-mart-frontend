@@ -1,4 +1,5 @@
 import {
+  ContainerOutlined,
   DashboardOutlined,
   GoldOutlined,
   HddOutlined,
@@ -57,7 +58,7 @@ const AdminMenu = ({ collapsed }) => {
         mode="inline"
         defaultSelectedKeys={pageName[pageName.length - 1]}
         defaultOpenKeys={
-          pageName.length > 3
+          pageName.length > 4
             ? [pageName[pageName.length - 2].toUpperCase()]
             : [pageName[pageName.length - 1].toUpperCase()]
         }
@@ -142,6 +143,18 @@ const AdminMenu = ({ collapsed }) => {
                 Manage Ticket
               </Link>
             </Menu.Item>
+            <SubMenu key="BLOGS" icon={<ContainerOutlined />} title="Blogs">
+              <Menu.Item key="blogs">
+                <Link href="/dashboard/admin/blogs" passHref>
+                  Blogs
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="addBlog">
+                <Link href="/dashboard/admin/blogs/addBlog" passHref>
+                  Add Blog
+                </Link>
+              </Menu.Item>
+            </SubMenu>
           </>
         )}
         {maximumRole === "vendor" && (

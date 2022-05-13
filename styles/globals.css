@@ -42,6 +42,10 @@ a {
   font-weight: bold !important;
 }
 
+.loader h1{
+  text-align: center;
+}
+
 /* end ant design */
 
 * {
