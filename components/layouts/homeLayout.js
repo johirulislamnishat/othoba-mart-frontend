@@ -281,7 +281,10 @@ const HomeLayout = ({ children, title }) => {
           <br />
           <hr />
         </div>
-        <script src="//code.tidio.co/tjulnrkjq0cb7j9tpmteqtrukabkn1jm.js" async></script>
+        <script
+          src="//code.tidio.co/tjulnrkjq0cb7j9tpmteqtrukabkn1jm.js"
+          async
+        ></script>
       </header>
 
       {/* Top menu */}
