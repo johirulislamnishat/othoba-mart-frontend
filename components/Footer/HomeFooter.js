@@ -1,27 +1,20 @@
 import Link from "next/link";
 const footerMenus01 = [
-  { id: "0", LinkName: "My Account", href: "#" },
-  { id: "1", LinkName: "Track Your Order", href: "#" },
+  { id: "1", LinkName: "Ticket", href: "/ticket" },
   { id: "2", LinkName: "Payment Methods", href: "#" },
   { id: "3", LinkName: "Shipping Guide", href: "#" },
   { id: "4", LinkName: "FAQs", href: "/faq" },
-  { id: "5", LinkName: "Product Support", href: "#" },
-  { id: "6", LinkName: "Policy", href: "#" },
-];
-
-const footerMenus02 = [
-  { id: "0", LinkName: "Orders History", href: "dashboard" },
-  { id: "1", LinkName: "Support Center", href: "support" },
-  { id: "2", LinkName: "About OthobaMart", href: "about" },
+  { id: "5", LinkName: "Support", href: "/support" },
+  { id: "6", LinkName: "Policy", href: "/policy" },
 ];
 
 const footerMenus03 = [
-  { id: "1", LinkName: "Our Guarantees", href: "/" },
-  { id: "2", LinkName: "Terms And Conditions", href: "#" },
-  { id: "3", LinkName: "Privacy policy", href: "#" },
-  { id: "4", LinkName: "Return Policy", href: "#" },
-  { id: "5", LinkName: "Intellectual Property Claims", href: "#" },
-  { id: "6", LinkName: "Site Map", href: "/ticket" },
+  { id: "1", LinkName: "About", href: "/about" },
+  { id: "2", LinkName: "Terms And Conditions", href: "/terms" },
+  { id: "3", LinkName: "Privacy policy", href: "/policy" },
+  { id: "4", LinkName: "Return Policy", href: "/policy" },
+  { id: "5", LinkName: "Categories", href: "/categories" },
+  { id: "6", LinkName: "Shop", href: "/categories" },
 ];
 const footerMenus04 = [
   { id: "0", LinkName: "Daraz Bangladesh", href: "https://www.daraz.com.bd/" },
@@ -79,7 +72,7 @@ const HomeFooter = () => {
             {/* company Info  */}
             <div className="pr-0 md:pr-3 w-full  md:w-1/3">
               <ul className="list-none footer-links">
-                <li className="mb-4">
+                <li className="mb-8">
                   <Link href="/" passHref>
                     <img
                       src="othoba-mart-logo-light.png"
@@ -88,16 +81,14 @@ const HomeFooter = () => {
                     />
                   </Link>
                 </li>
-                <li className="mb-2">
-                  <h1 className="text-base">Address:</h1>
-                  <p className="text-gray-500">
-                    House # 7/B, Flat # A-1, Road # 103
-                    <br /> Gulshan-2, Dhaka-1212
+                <li>
+                  <p className="pr-3 text-justify">
+                    Othoba Mart is best online shopping store in Bangladesh that
+                    features 10+ million products at affordable prices. As
+                    bangaldesh{"'"}s online shopping landscape is expanding
+                    every year, online shopping in dhaka, chittagong, khulna,
+                    sylhet and other big cities are also gaining momentum.
                   </p>
-                </li>
-                <li className="mb-2">
-                  <h1 className="text-base">Email:</h1>
-                  <p className="text-gray-500">othobamart@gmail.com</p>
                 </li>
               </ul>
             </div>
@@ -105,26 +96,35 @@ const HomeFooter = () => {
             <div className="pt-4 md:pt-0 px-0 md:px-3 flex w-full  md:w-1/3">
               {/* 1st footer menu  */}
               <div className="w-1/2 md:w-full">
+                <h5 className="text-xl font-bold mb-6">Contact</h5>
+                <ul className="list-none footer-links">
+                  <li className="mb-1">
+                    <h1 className="text-base">Email:</h1>
+                    <p className="text-gray-500">othobamart@gmail.com</p>
+                  </li>
+                  <li className="mb-1">
+                    <h1 className="text-base">Contact:</h1>
+                    <p className="text-gray-500">+88010000000</p>
+                  </li>
+                  <li className="mb-1">
+                    <h1 className="text-base">Address:</h1>
+                    <p className="text-gray-500">
+                      House # 7/B, Flat # A-1, <br />
+                      Road # 103 Gulshan-2, <br />
+                      Dhaka-1212
+                    </p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 2nd footer menu  */}
+              <div className="pl-5 md:pl-0 w-1/2 md:w-full left-align-padding">
                 <h5 className="text-xl font-bold mb-6">Account</h5>
                 <ul className="list-none footer-links">
                   {footerMenus01.map((fmenu01) => (
                     <li key={fmenu01.id} className="mb-2">
                       <a href={fmenu01.href} className="">
                         {fmenu01.LinkName}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* 2nd footer menu  */}
-              <div className="pl-5 md:pl-0 w-1/2 md:w-full left-align-padding">
-                <h5 className="text-xl font-bold">{""}</h5>
-                <ul className="list-none footer-links mt-6">
-                  {footerMenus02.map((fmenu02) => (
-                    <li key={fmenu02.id} className="mb-2">
-                      <a href={fmenu02.href} className="">
-                        {fmenu02.LinkName}
                       </a>
                     </li>
                   ))}
@@ -165,9 +165,11 @@ const HomeFooter = () => {
         </div>
         <hr className="py-3 h-1" />
         <div className="grid grid-cols-1 md:grid-cols-2 items-center">
-          <p>Othoba Mart ©2022 || Design And Developed By End Game Battalion</p>
+          <p className="text-center md:text-left">
+            Othoba Mart ©2022 || Design And Developed By End Game Battalion
+          </p>
           <div>
-            <div className="flex gap-4 md:justify-end">
+            <div className="flex gap-4 justify-center md:justify-end">
               <img src="visa.svg" alt="Othoba Mart" className="w-14" />
               <img src="mastercard-4.svg" alt="Othoba Mart" className="w-14" />
               <img src="mobilepay.svg" alt="Othoba Mart" className="w-14" />

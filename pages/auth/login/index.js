@@ -86,7 +86,7 @@ const Login = () => {
             >
               {loading ? "Loading..." : "Login"}
             </button>
-            <div className="flex items-center border-2 border-gray-200  pl-8 gap-2 rounded-lg">
+            {/* <div className="flex items-center border-2 border-gray-200  pl-8 gap-2 rounded-lg">
               <Image
                 width="20"
                 height="20"
@@ -103,7 +103,7 @@ const Login = () => {
                 alt="facebook logo"
               />
               <p className=" cursor-pointer py-2 m-0">Log in with Facebook</p>
-            </div>
+            </div> */}
             {/* <div className=" text-center border-2 border-gray-200 flex items-center pl-8 gap-2 rounded-lg">
               <img src='/images/icons/google.png' alt='google logo' />
             <p className="  cursor-pointer py-2">
@@ -133,21 +133,21 @@ const Login = () => {
         </div>
 
         <div className="mt-10 flex gap-4 items-center justify-center">
-          <Link href="/policy/termsOfService">
+          <Link href="/terms">
             <a>
               <span className="underline text-gray-500 cursor-pointer">
                 Terms of Service
               </span>
             </a>
           </Link>
-          <Link href="/policy/privacyPolicy">
+          <Link href="/policy">
             <a>
               <span className="underline text-gray-500 cursor-pointer">
                 Privacy Policy
               </span>
             </a>
           </Link>
-          <Link href="/policy/support">
+          <Link href="/support">
             <a>
               <span className="underline text-gray-500 cursor-pointer">
                 Support
