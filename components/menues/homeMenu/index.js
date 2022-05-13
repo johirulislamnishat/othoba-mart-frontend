@@ -57,7 +57,7 @@ const HomeMenu = ({ visible, setVisible }) => {
             <div className="absolute z-10 top-14 w-full shadow">
               <Menu mode="inline" onClick={(e) => setShowMenu(!showMenu)}>
                 <Menu.Item key="2">
-                  <Link href="/categories" passHref>
+                  <Link href="/shop" passHref>
                     Fashion
                   </Link>{" "}
                 </Menu.Item>
@@ -82,7 +82,7 @@ const HomeMenu = ({ visible, setVisible }) => {
               </Menu.Item>
 
               <Menu.Item key="2">
-                <Link href="/categories">Categories</Link>
+                <Link href="/shop">Shop</Link>
               </Menu.Item>
 
               <Menu.Item key="3">
@@ -212,7 +212,7 @@ const HomeMenu = ({ visible, setVisible }) => {
           </Menu.Item>
 
           <Menu.Item key="2">
-            <Link href="/categories">Categories</Link>
+            <Link href="/shop">Shop</Link>
           </Menu.Item>
 
           <Menu.Item key="3">

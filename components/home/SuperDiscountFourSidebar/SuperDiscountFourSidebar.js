@@ -1,4 +1,5 @@
 import { Row } from "antd";
+import Link from "next/link";
 import React from "react";
 const SuperDiscountFourSidebar = () => {
   return (
@@ -8,7 +9,11 @@ const SuperDiscountFourSidebar = () => {
           <h3>60% OFF ON HEADPHONE</h3>
           <h4>PROMO CODE: 60%OFFHP</h4>
           <p>Do not miss the last opportunity</p>
-          <button className="custom-btn">Shop Now</button>
+          <Link href="shop">
+            <Link href="shop">
+              <button className="custom-btn">Shop Now</button>
+            </Link>
+          </Link>
         </div>
       </Row>
     </div>
