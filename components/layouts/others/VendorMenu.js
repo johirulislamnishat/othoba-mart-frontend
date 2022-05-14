@@ -1,12 +1,10 @@
 import {
-  LineChartOutlined,
-  ProfileOutlined,
-  UserOutlined,
-  HddOutlined,
-  PlusOutlined,
-  EditOutlined,
   DeleteOutlined,
-  GoldOutlined,
+  EditOutlined,
+  HddOutlined,
+  LineChartOutlined,
+  PlusOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import { Image, Menu } from "antd";
 import Link from "next/link";

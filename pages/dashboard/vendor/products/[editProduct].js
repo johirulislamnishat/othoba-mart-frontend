@@ -16,14 +16,15 @@ import {
   Upload,
 } from "antd";
 import axios from "axios";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../../apiconstants";
 import AdminLayout from "../../../../components/layouts/adminLayout";
 import useProvider from "../../../../hooks/useProvider";
 
 const { Option } = Select;
 
-const AddProduct = () => {
+export default function EditProduct({ product, id }) {
   const [form] = Form.useForm();
   const [optionName, setOptionName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,20 +48,46 @@ const AddProduct = () => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (product.product_category) {
+      setCategoryChildren(
+        product.product_category.map((item) => (
+          <Option key={item}>{item}</Option>
+        ))
+      );
+    }
+
+    if (product.product_colors) {
+      setColorChildren(
+        product.product_colors.map((item) => <Option key={item}>{item}</Option>)
+      );
+    }
+
+    if (product.product_tags) {
+      setTagChildren(
+        product.product_tags.map((item) => <Option key={item}>{item}</Option>)
+      );
+    }
+
+    if (product.product_sizes) {
+      setSizeChildren(
+        product.product_sizes.map((item) => <Option key={item}>{item}</Option>)
+      );
+    }
+  }, [product]);
 
   const handleSubmit = (values) => {
-    // console.log("value", values);
     setLoading(true);
     const formData = new FormData();
     formData.append("product_name", values.product_name);
     formData.append("product_description", values.product_description);
     formData.append("product_price", values.product_price);
-    formData.append("photo", values.photo[0].originFileObj);
+    formData.append("photo", values.photo[0]);
 
-    if (values.gallery) {
-      for (const item of values.gallery) {
-        formData.append("gallery", item.originFileObj);
-      }
+    for (const item of values.gallery) {
+      formData.append("gallery", item);
     }
 
     if (values.product_category) {
@@ -88,7 +115,7 @@ const AddProduct = () => {
     }
 
     axios
-      .post(`${API_BASE_URL}/product`, formData, {
+      .put(`${API_BASE_URL}/product/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           token: `Bearer ${accessToken}`,
@@ -99,10 +126,11 @@ const AddProduct = () => {
           message.success(res.data.message);
           setLoading(false);
           form.resetFields();
+          router.push("/admin/products");
         }
       })
       .catch(() => {
-        message.error("Failed to add product");
+        message.error("Failed to update product");
         setLoading(false);
       });
   };
@@ -122,28 +150,34 @@ const AddProduct = () => {
 
   const mainPhoto = {
     beforeUpload: (file) => {
-      const perfectSize = file.size < 300000;
-
-      if (!perfectSize) {
+      if (file.size > 3000) {
         message.error(`${file.name}'s size is over 300kb`);
         setImg(null);
         return Upload.LIST_IGNORE;
       }
-      return perfectSize || Upload.LIST_IGNORE;
     },
+    defaultFileList: [
+      {
+        uid: 1,
+        name: "Product Preview",
+        url: product.product_img,
+      },
+    ],
   };
 
   const props = {
     beforeUpload: (file) => {
-      const perfectSize = file.size < 300000;
-
-      if (!perfectSize) {
+      if (file.size > 3000) {
         message.error(`${file.name}'s size is over 300kb`);
         setImg(null);
         return Upload.LIST_IGNORE;
       }
-      return perfectSize || Upload.LIST_IGNORE;
     },
+    defaultFileList: product.gallery
+      ? product.gallery.map((item, index) => {
+          return { uid: index, url: item.gallery };
+        })
+      : null,
   };
 
   function getBase64(file) {
@@ -168,16 +202,30 @@ const AddProduct = () => {
   };
 
   return (
-    <AdminLayout title={"Admin || Add Product"} pageTitle="Add Product">
+    <AdminLayout
+      title={"Admin | Update Product"}
+      pageTitle="Update Product"
+      child={true}
+    >
       <section className="mt-5 bg-white p-8 pb-3">
         <Form
           form={form}
-          name="Add Product"
+          name="Update Product"
           layout="vertical"
           size="large"
           requiredMark={false}
-          initialValues={{ remember: true }}
           onFinish={handleSubmit}
+          initialValues={{
+            product_name: product.photo,
+            product_price: product.product_price,
+            product_description: product.product_description,
+            product_category: product.product_category,
+            product_colors: product.product_colors,
+            product_tags: product.product_tags,
+            product_sizes: product.product_sizes,
+            product_photo: product.product_img,
+            product_gelery: product.product_gelery,
+          }}
         >
           <Row gutter={[32]}>
             <Col xs={24} md={12}>
@@ -413,6 +461,7 @@ const AddProduct = () => {
                     },
                   ]}
                   noStyle
+                  initialValue={product.product_img}
                   getValueFromEvent={normFile}
                 >
                   <Upload.Dragger
@@ -446,6 +495,7 @@ const AddProduct = () => {
                     },
                   ]}
                   noStyle
+                  initialValue={product.gallery}
                   getValueFromEvent={normFile}
                 >
                   <Upload.Dragger
@@ -476,7 +526,7 @@ const AddProduct = () => {
             >
               <Image
                 preview={false}
-                alt="example"
+                alt="preview"
                 style={{ width: "100%" }}
                 src={previewImage}
               />
@@ -490,13 +540,22 @@ const AddProduct = () => {
               disabled={loading}
               loading={loading}
             >
-              Add Product
+              Update Product
             </Button>
           </Form.Item>
         </Form>
       </section>
     </AdminLayout>
   );
-};
+}
 
-export default AddProduct;
+EditProduct.getInitialProps = async (ctx) => {
+  const { editProduct } = ctx.query;
+  const res = await fetch(
+    `https://othobamart-api.herokuapp.com/product/${editProduct}`
+  );
+  if (res.ok) {
+    const product = await res.json();
+    return { product: product.result, id: editProduct };
+  }
+};

@@ -122,27 +122,21 @@ const AddProduct = () => {
 
   const mainPhoto = {
     beforeUpload: (file) => {
-      const perfectSize = file.size < 300000;
-
-      if (!perfectSize) {
+      if (file.size > 3000) {
         message.error(`${file.name}'s size is over 300kb`);
         setImg(null);
         return Upload.LIST_IGNORE;
       }
-      return perfectSize || Upload.LIST_IGNORE;
     },
   };
 
   const props = {
     beforeUpload: (file) => {
-      const perfectSize = file.size < 300000;
-
-      if (!perfectSize) {
+      if (file.size > 3000) {
         message.error(`${file.name}'s size is over 300kb`);
         setImg(null);
         return Upload.LIST_IGNORE;
       }
-      return perfectSize || Upload.LIST_IGNORE;
     },
   };
 

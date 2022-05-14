@@ -4,7 +4,7 @@ import HomeLayout from "../components/layouts/homeLayout";
 
 const categories = () => {
   return (
-    <HomeLayout title="Category">
+    <HomeLayout title="Shop">
       <CategoriesPage />
     </HomeLayout>
   );

@@ -1,4 +1,5 @@
 import { Carousel, Col, Image } from "antd";
+import Link from "next/link";
 
 const PromoLgOne = () => {
   return (
@@ -10,7 +11,9 @@ const PromoLgOne = () => {
               <h4 className="pb-4">Weekend Discount</h4>
               <h3 className="pb-4">Smartwatch Big Deal</h3>
               <p className="pb-4">Do not miss the last opportunity</p>
-              <button className="custom-btn">Shop Now</button>
+              <Link href="shop">
+                <button className="custom-btn">Shop Now</button>
+              </Link>
             </div>
             <div>
               <Image
@@ -27,7 +30,9 @@ const PromoLgOne = () => {
               <h4 className="pb-4">Weekend Discount</h4>
               <h3 className="pb-4">Powerbank Best Offer</h3>
               <p className="pb-4">Do not miss the last opportunity</p>
-              <button className="custom-btn">Shop Now</button>
+              <Link href="shop">
+                <button className="custom-btn">Shop Now</button>
+              </Link>
             </div>
             <div>
               <Image
