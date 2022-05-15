@@ -44,8 +44,7 @@ const Store = () => {
                 <div className="info-store">
                     <img className="storelogo" src={store?.shop_logo} alt="" />
                     <h2 className="store-title">{store?.shop_name}</h2>
-                    {/* </div>
-                <div className="chat-area-store"> */}
+                    
                     <p className="store-chat-text">What to chat with us?</p>
                     <button className="store-chat-btn" onClick={handleChat}>
                         Chat Now
