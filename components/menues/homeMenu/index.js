@@ -55,7 +55,13 @@ const HomeMenu = ({ visible, setVisible }) => {
           </div>
           {showMenu && (
             <div className="absolute z-10 top-14 w-full shadow">
-              <Menu mode="inline" onClick={(e) => setShowMenu(!showMenu)}>
+              <Menu
+                mode="inline"
+                onClick={(e) => {
+                  setShowMenu(!showMenu);
+                  router.push("/shop");
+                }}
+              >
                 <Menu.Item key="2">
                   <Link href="/shop" passHref>
                     Fashion
@@ -67,7 +73,7 @@ const HomeMenu = ({ visible, setVisible }) => {
                 <Menu.Item key="6">Music</Menu.Item>
                 <Menu.Item key="7">Motors</Menu.Item>
                 <Menu.Item key="8">Furniture</Menu.Item>
-                <Menu.Item key="9">VIEW ALL &gt;</Menu.Item>
+                {/* <Menu.Item key="9">VIEW ALL &gt;</Menu.Item> */}
               </Menu>
             </div>
           )}
@@ -91,16 +97,23 @@ const HomeMenu = ({ visible, setVisible }) => {
 
               <SubMenu key="SubMenu3" title="Suport">
                 <Menu.Item key="contact">
-                  <Link href="/contact">Contact Us</Link>{" "}
+                  <Link href="/contact">Contact Us</Link>
                 </Menu.Item>
                 <Menu.Item key="support">
                   <Link href="/support">Support</Link>
                 </Menu.Item>
-                <Menu.Item key="products:4">Privacy Policy</Menu.Item>
-                <Menu.Item key="products:5">Terms & Conditions</Menu.Item>
+                <Menu.Item key="products:4">
+                  <Link href="/policy">Privacy Policy</Link>
+                </Menu.Item>
+                <Menu.Item key="products:5">
+                  <Link href="/terms">Terms & Conditions</Link>
+                </Menu.Item>
               </SubMenu>
               <Menu.Item key="4">
                 <Link href="/faq">FAQs</Link>
+              </Menu.Item>
+              <Menu.Item key="blogs">
+                <Link href="/blogs">Blogs</Link>
               </Menu.Item>
 
               {user.isVendor && (
@@ -208,7 +221,9 @@ const HomeMenu = ({ visible, setVisible }) => {
           defaultOpenKeys={["sub1"]}
         >
           <Menu.Item key="1">
-            <Link href="/">Home</Link>
+            <Link href="/" passHref>
+              Home
+            </Link>
           </Menu.Item>
 
           <Menu.Item key="2">
@@ -221,17 +236,23 @@ const HomeMenu = ({ visible, setVisible }) => {
 
           <SubMenu key="SubMenu3" title="Suport">
             <Menu.Item key="contact">
-              <Link href="/contact">Contact Us</Link>{" "}
+              <Link href="/contact">Contact Us</Link>
             </Menu.Item>
             <Menu.Item key="support">
               <Link href="/support">Support</Link>
             </Menu.Item>
-            <Menu.Item key="products:3">Track Order</Menu.Item>
-            <Menu.Item key="products:4">Privacy Policy</Menu.Item>
-            <Menu.Item key="products:5">Terms & Conditions</Menu.Item>
+            <Menu.Item key="products:4">
+              <Link href="/policy">Privacy Policy</Link>
+            </Menu.Item>
+            <Menu.Item key="products:5">
+              <Link href="/terms">Terms & Conditions</Link>
+            </Menu.Item>
           </SubMenu>
           <Menu.Item key="4">
             <Link href="/faq">FAQs</Link>
+          </Menu.Item>
+          <Menu.Item key="blogs">
+            <Link href="/blogs">Blogs</Link>
           </Menu.Item>
 
           {user.isVendor && (
