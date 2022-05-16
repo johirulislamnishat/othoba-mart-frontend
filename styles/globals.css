@@ -60,6 +60,16 @@ a {
 	background-position: center;
 	background-size: cover;
 }
+
+.top-close {
+	color: rgba(255, 255, 255, 0.9);
+	z-index: 1;
+	font-size: large;
+	position: absolute;
+	top: 16px;
+	right: 10px;
+}
+
 .top-header .content {
 	position: absolute;
 	width: 100%;

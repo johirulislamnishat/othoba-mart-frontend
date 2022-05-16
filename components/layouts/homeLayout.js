@@ -43,6 +43,7 @@ const HomeLayout = ({ children, title }) => {
 	const [showResult, setShowResult] = useState(false);
 	const [searchData, setSearchData] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const [showTop, setShowTop] = useState(true);
 
 	const [maximumRole, setMaximumRole] = useState("customer");
 
@@ -136,32 +137,42 @@ const HomeLayout = ({ children, title }) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className="top-header">
-				<div className="bg"></div>
-				<div className="content">
-					<div className="container mx-auto px-3 py-2 ">
-						<div className="flex justify-between items-center">
-							<div className="hidden sm:block">
-								<span>20% Discount</span>
-								<br />
-								<span>For Books of May</span>
-							</div>
-							<div className="">
-								<span>Enter Promotion</span>
-								<br />
-								<span>Sale2022</span>
-							</div>
-							<div className="">
-								<Link href="/shop" passHref>
-									<Button type="primary" shape="round">
-										Shop Now
-									</Button>
-								</Link>
+			{showTop && (
+				<div className="top-header">
+					<div className="bg"></div>
+
+					<div
+						className="top-close hover:text-white hover:font-bold"
+						onClick={() => setShowTop(false)}
+					>
+						X
+					</div>
+
+					<div className="content">
+						<div className="container mx-auto px-3 py-2 ">
+							<div className="flex justify-between items-center">
+								<div className="hidden sm:block">
+									<span>20% Discount</span>
+									<br />
+									<span>For Books of May</span>
+								</div>
+								<div className="">
+									<span>Enter Promotion</span>
+									<br />
+									<span>Sale2022</span>
+								</div>
+								<div className="mr-4 xl:mr-0">
+									<Link href="/shop" passHref>
+										<Button type="primary" shape="round">
+											Shop Now
+										</Button>
+									</Link>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			)}
 
 			<header className="bg-white">
 				<div className="py-5 px-3 lg:px-0">
