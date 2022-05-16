@@ -32,12 +32,10 @@ const HomeMenu = ({ visible, setVisible }) => {
 	const handleSubmit = (values) => {
 		setLoading(true);
 		setShowTrack(!showTrack);
-		router
-			.push(`/admin/orders/trackOrder/${values.track_number}`)
-			.then(() => {
-				form.resetFields();
-				setLoading(false);
-			});
+		router.push(`/admin/orders/trackOrder/${values.track_number}`).then(() => {
+			form.resetFields();
+			setLoading(false);
+		});
 	};
 
 	return (
@@ -108,9 +106,7 @@ const HomeMenu = ({ visible, setVisible }) => {
 									<Link href="/policy">Privacy Policy</Link>
 								</Menu.Item>
 								<Menu.Item key="products:5">
-									<Link href="/terms">
-										Terms & Conditions
-									</Link>
+									<Link href="/terms">Terms & Conditions</Link>
 								</Menu.Item>
 							</SubMenu>
 							<Menu.Item key="4">
@@ -122,7 +118,12 @@ const HomeMenu = ({ visible, setVisible }) => {
 
 							{user.isVendor && (
 								<Menu.Item key="5">
-									<Link href="/dashboard/vendor">Admin</Link>
+									<Link href="/dashboard/vendor">Vendor</Link>
+								</Menu.Item>
+							)}
+							{user.isAdmin && (
+								<Menu.Item key="5">
+									<Link href="/dashboard/admin">Admin</Link>
 								</Menu.Item>
 							)}
 						</Menu>
@@ -142,80 +143,74 @@ const HomeMenu = ({ visible, setVisible }) => {
 					className="pl-5 sm:pl-32 md:pl-0 lg:pl-0 xl:pl-16"
 				>
 					<Menu mode="horizontal" defaultSelectedKeys={["1"]}>
-						{user.isCustomer && (
+						{!user.isVendor && (
 							<Menu.Item key="1">
 								<Link href="/auth/register" passHref>
 									Become a Seller
 								</Link>
 							</Menu.Item>
 						)}
-						<Menu.Item key="2">
-							<span
-								onClick={() => setShowTrack(!showTrack)}
-								className="relative"
-							>
-								Track Order
-							</span>
-							{showTrack && (
-								<div className="absolute z-10 top-10 right-0 bg-white px-5 pt-5 shadow w-64">
-									<div className="relative">
-										<div className="absolute z-10 -top-3 right-1">
-											<CloseOutlined
-												style={{
-													color: "black",
-													fontSize: "1rem",
-												}}
-												onClick={() =>
-													setShowTrack(false)
-												}
-											/>
-										</div>
-										<p className="text-xl font-bold">
-											Track My order
-										</p>
-										<Form
-											form={form}
-											name="Track order"
-											layout="vertical"
-											requiredMark={false}
-											initialValues={{ remember: true }}
-											onFinish={handleSubmit}
-										>
-											<Form.Item
-												label="My tracking number"
-												name="track_number"
-												hasFeedback
-												validateFirst
-												rules={[
-													{
-														required: true,
-														message:
-															"Please enter your tracking number!",
-													},
-												]}
-											>
-												<Input
-													placeholder="eg. 123456789"
-													allowClear
+						{user.email && (
+							<Menu.Item key="2">
+								<span
+									onClick={() => setShowTrack(!showTrack)}
+									className="relative"
+								>
+									Track Order
+								</span>
+								{showTrack && (
+									<div className="absolute z-10 top-10 right-0 bg-white px-5 pt-5 shadow w-64">
+										<div className="relative">
+											<div className="absolute z-10 -top-3 right-1">
+												<CloseOutlined
+													style={{
+														color: "black",
+														fontSize: "1rem",
+													}}
+													onClick={() => setShowTrack(false)}
 												/>
-											</Form.Item>
-											<Form.Item>
-												<Button
-													type="primary"
-													htmlType="submit"
-													shape="round"
-													block
-													disabled={loading}
-													loading={loading}
+											</div>
+											<p className="text-xl font-bold">Track My order</p>
+											<Form
+												form={form}
+												name="Track order"
+												layout="vertical"
+												requiredMark={false}
+												initialValues={{ remember: true }}
+												onFinish={handleSubmit}
+											>
+												<Form.Item
+													label="My tracking number"
+													name="track_number"
+													hasFeedback
+													validateFirst
+													rules={[
+														{
+															required: true,
+															message: "Please enter your tracking number!",
+														},
+													]}
 												>
-													Track
-												</Button>
-											</Form.Item>
-										</Form>
+													<Input placeholder="eg. 123456789" allowClear />
+												</Form.Item>
+												<Form.Item>
+													<Button
+														type="primary"
+														htmlType="submit"
+														shape="round"
+														block
+														disabled={loading}
+														loading={loading}
+													>
+														Track
+													</Button>
+												</Form.Item>
+											</Form>
+										</div>
 									</div>
-								</div>
-							)}
-						</Menu.Item>
+								)}
+							</Menu.Item>
+						)}
 					</Menu>
 				</Col>
 			</Row>
@@ -269,7 +264,12 @@ const HomeMenu = ({ visible, setVisible }) => {
 
 					{user.isVendor && (
 						<Menu.Item key="5">
-							<Link href="/dashboard/vendor">Admin</Link>
+							<Link href="/dashboard/vendor">Vendor</Link>
+						</Menu.Item>
+					)}
+					{user.isAdmin && (
+						<Menu.Item key="5">
+							<Link href="/dashboard/admin">Admin</Link>
 						</Menu.Item>
 					)}
 				</Menu>
