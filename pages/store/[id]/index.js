@@ -29,7 +29,9 @@ const Store = () => {
             receiverId: current_user,
         };
         axios
-            .post(`http://localhost:5000/conversation/`, { newConversation })
+            .post(API_BASE_URL + `/conversation/`, {
+                newConversation,
+            })
             .then(function (response) {
                 console.log(response);
             })
@@ -44,7 +46,7 @@ const Store = () => {
                 <div className="info-store">
                     <img className="storelogo" src={store?.shop_logo} alt="" />
                     <h2 className="store-title">{store?.shop_name}</h2>
-                    
+
                     <p className="store-chat-text">What to chat with us?</p>
                     <button className="store-chat-btn" onClick={handleChat}>
                         Chat Now

@@ -6,6 +6,7 @@ import useProvider from "../../hooks/useProvider";
 import axios from "axios";
 import { io } from "socket.io-client";
 import HomeLayout from "../../components/layouts/homeLayout";
+import { API_BASE_URL } from "../../apiconstants";
 
 export default function Messenger() {
     const [conversations, setConversations] = useState([]);
@@ -23,7 +24,7 @@ export default function Messenger() {
     const scrollRef = useRef();
 
     useEffect(() => {
-        socket.current = io("ws://localhost:8900");
+        socket.current = io("https://othobamart-chat-api.herokuapp.com/");
         socket.current.on("getMessage", (data) => {
             setArrivalMessage({
                 sender: data.senderId,
@@ -53,7 +54,7 @@ export default function Messenger() {
         const getConversations = async () => {
             try {
                 const res = await axios.get(
-                    "http://localhost:5000/conversation/" + user._id
+                    API_BASE_URL + "/conversation/" + user._id
                 );
                 setConversations(res?.data);
             } catch (err) {
@@ -68,7 +69,7 @@ export default function Messenger() {
         const getMessages = async () => {
             try {
                 const res = await axios.get(
-                    "http://localhost:5000/message/" + currentChat?._id
+                    API_BASE_URL + "/message/" + currentChat?._id
                 );
                 // console.log(res);
                 setMessages(res?.data?.data);
@@ -99,10 +100,7 @@ export default function Messenger() {
         });
 
         try {
-            const res = await axios.post(
-                "http://localhost:5000/message",
-                message
-            );
+            const res = await axios.post(API_BASE_URL + "/message", message);
             setMessages([...messages, res.data]);
             setNewMessage("");
         } catch (err) {
