@@ -49,6 +49,27 @@ a {
 
 /* end ant design */
 
+/* top header */
+.top-header {
+	position: relative;
+}
+.top-header .bg {
+	height: 60px;
+	background-image: url("../public/e-shopping.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+.top-header .content {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	background-color: #0f0c29bb;
+	color: white;
+}
+
+/* end top header */
+
 * {
 	box-sizing: border-box;
 }
