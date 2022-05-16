@@ -115,17 +115,6 @@ const HomeMenu = ({ visible, setVisible }) => {
 							<Menu.Item key="blogs">
 								<Link href="/blogs">Blogs</Link>
 							</Menu.Item>
-
-							{user.isVendor && (
-								<Menu.Item key="5">
-									<Link href="/dashboard/vendor">Vendor</Link>
-								</Menu.Item>
-							)}
-							{user.isAdmin && (
-								<Menu.Item key="5">
-									<Link href="/dashboard/admin">Admin</Link>
-								</Menu.Item>
-							)}
 						</Menu>
 					</div>
 
@@ -261,17 +250,6 @@ const HomeMenu = ({ visible, setVisible }) => {
 					<Menu.Item key="blogs">
 						<Link href="/blogs">Blogs</Link>
 					</Menu.Item>
-
-					{user.isVendor && (
-						<Menu.Item key="5">
-							<Link href="/dashboard/vendor">Vendor</Link>
-						</Menu.Item>
-					)}
-					{user.isAdmin && (
-						<Menu.Item key="5">
-							<Link href="/dashboard/admin">Admin</Link>
-						</Menu.Item>
-					)}
 				</Menu>
 			</Drawer>
 		</>
