@@ -1,10 +1,8 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import {
-  Col,
   Divider,
   message,
   Popconfirm,
-  Row,
   Select,
   Space,
   Table,
@@ -12,18 +10,27 @@ import {
 } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from "../../../apiconstants";
-import AdminLayout from "../../../components/layouts/adminLayout";
+import { API_BASE_URL } from "../../../../apiconstants";
+import AdminLayout from "../../../../components/layouts/adminLayout";
+import useProvider from "../../../../hooks/useProvider";
 
 const { Option } = Select;
 
-const VendorDashboard = () => {
+const Orders = () => {
   const [data, setData] = useState(null);
-  const [token, setToken] = useState(null);
+  const {
+    state: {
+      user: { accessToken },
+    },
+  } = useProvider();
 
   useEffect(() => {
     axios
-      .get(`${API_BASE_URL}/order`)
+      .get(`${API_BASE_URL}/order`, {
+        headers: {
+          token: `Bearer ${accessToken}`,
+        },
+      })
       .then((res) => {
         const arr = [];
         for (const value of res.data.result) {
@@ -32,17 +39,13 @@ const VendorDashboard = () => {
         setData(arr);
       })
       .catch((e) => console.log(e));
-
-    if (typeof window !== "undefined") {
-      setToken(localStorage.getItem("token"));
-    }
-  }, []);
+  }, [accessToken]);
 
   const deleteOrder = (order) => {
     axios
       .delete(`${API_BASE_URL}/order/${order._id}`, {
         headers: {
-          token: `Bearer ${token}`,
+          token: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
@@ -59,7 +62,7 @@ const VendorDashboard = () => {
         { status: value },
         {
           headers: {
-            token: `Bearer ${token}`,
+            token: `Bearer ${accessToken}`,
           },
         }
       )
@@ -71,21 +74,21 @@ const VendorDashboard = () => {
 
   const columns = [
     {
-      title: "User id",
-      dataIndex: "user_id",
+      title: "Order id",
+      dataIndex: "_id",
       key: "2",
       width: 100,
       render: (id) => <Tooltip title={id}>#{id.slice(15)}</Tooltip>,
     },
     {
-      title: "User Name",
+      title: "Customer Name",
       dataIndex: "user_name",
       key: "name",
       width: 200,
     },
 
     {
-      title: "User Email",
+      title: "Customer Email",
       dataIndex: "email",
       key: "email",
       width: 250,
@@ -106,7 +109,9 @@ const VendorDashboard = () => {
       title: "Total Price",
       dataIndex: "total_price",
       key: "5",
-      width: 100,
+      width: 120,
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.total_price - b.total_price,
     },
     {
       title: "Status",
@@ -156,6 +161,33 @@ const VendorDashboard = () => {
           </Option>
         </Select>
       ),
+      filters: [
+        {
+          text: "Pending",
+          value: "pending",
+        },
+        {
+          text: "Approved",
+          value: "approved",
+        },
+        {
+          text: "Shifted",
+          value: "shifted",
+        },
+        {
+          text: "Completed",
+          value: "completed",
+        },
+        {
+          text: "Cancled",
+          value: "cancled",
+        },
+        {
+          text: "Rejected",
+          value: "rejected",
+        },
+      ],
+      onFilter: (value, record) => record.status.indexOf(value) === 0,
     },
     {
       title: "",
@@ -179,73 +211,16 @@ const VendorDashboard = () => {
   ];
 
   return (
-    <AdminLayout title="Vendor | Dashboard" pageTitle="Dashboard">
-      <h4>Waiting for Admin approval</h4>
-      <Space direction="vertical" size={45} className="w-full">
-        <Row gutter={[12, 12]} justify="space-around" align="middle">
-          <Col xs={24} md={12} lg={6}>
-            <Row
-              justify="space-between"
-              align="middle"
-              className="p-5 rounded-2xl font-semibold"
-              style={{
-                backgroundColor: "rgba(240, 255, 248, 1)",
-              }}
-            >
-              <Col>New Delivery</Col>
-              <Col className="text-xl">2</Col>
-            </Row>
-          </Col>
-          <Col xs={24} md={12} lg={6}>
-            <Row
-              justify="space-between"
-              align="middle"
-              className="p-5 rounded-2xl font-semibold"
-              style={{
-                backgroundColor: "rgba(240, 255, 235, 1)",
-              }}
-            >
-              <Col>Active Orders</Col>
-              <Col className="text-xl">5</Col>
-            </Row>
-          </Col>
-          <Col xs={24} md={12} lg={6}>
-            <Row
-              justify="space-between"
-              align="middle"
-              className="p-5 rounded-2xl font-semibold"
-              style={{
-                backgroundColor: "rgba(255, 251, 235, 1)",
-              }}
-            >
-              <Col>Total Orders</Col>
-              <Col className="text-xl">{data?.length || 0}</Col>
-            </Row>
-          </Col>
-          <Col xs={24} md={12} lg={6}>
-            <Row
-              justify="space-between"
-              align="middle"
-              className="p-5 rounded-2xl font-semibold"
-              style={{
-                backgroundColor: "rgba(240, 255, 214, 1)",
-              }}
-            >
-              <Col>Order in Progress</Col>
-              <Col className="text-xl">4</Col>
-            </Row>
-          </Col>
-        </Row>
-        <Table
-          columns={columns}
-          dataSource={data}
-          scroll={{ x: 1550 }}
-          pagination={{ position: ["bottomCenter"] }}
-          size="small"
-        />
-      </Space>
+    <AdminLayout title="Admin | Orders" pageTitle="Orders">
+      <Table
+        columns={columns}
+        dataSource={data}
+        scroll={{ x: 1550 }}
+        pagination={{ position: ["bottomCenter"] }}
+        size="small"
+      />
     </AdminLayout>
   );
 };
 
-export default VendorDashboard;
+export default Orders;

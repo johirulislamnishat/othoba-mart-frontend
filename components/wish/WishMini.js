@@ -1,15 +1,13 @@
-import { Image } from "antd";
-import { useState, useEffect } from "react";
-import Link from "next/link";
 import {
-  StarOutlined,
-  StarFilled,
-  HeartTwoTone,
   CloseOutlined,
   ShoppingTwoTone,
+  StarFilled,
+  StarOutlined,
 } from "@ant-design/icons";
+import { Image } from "antd";
+import Link from "next/link";
+import { addToCart, removeFromWish } from "../../context/actions/Actions";
 import useProvider from "../../hooks/useProvider";
-import { removeFromWish, addToCart } from "../../context/actions/Actions";
 
 const WishMini = ({ activeWish, setActiveWish }) => {
   const {
@@ -111,7 +109,7 @@ const WishMini = ({ activeWish, setActiveWish }) => {
               ))}
 
               <div className="pt-3 flex items-center justify-between">
-                <Link href="/categories">
+                <Link href="/shop">
                   <a>
                     <button
                       className="p-2 bg-white font-semibold 

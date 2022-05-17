@@ -12,7 +12,9 @@ const HomeContent = () => {
 				<MainArea />
 			</div>
 			<ProductCategories />
-			<Blogs location={"home"} />
+			<div className="hidden lg:block">
+				<Blogs location={"home"} />
+			</div>
 		</>
 	);
 };

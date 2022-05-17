@@ -1,5 +1,6 @@
 import { Row } from "antd";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import macbookPro from "../../../assets/Images/macbookPro.png";
 const SuperDiscountThreeSidebar = () => {
@@ -10,7 +11,11 @@ const SuperDiscountThreeSidebar = () => {
           <h4>Super Discount</h4>
           <h3>NEW MacBook Pro in 16-inch and 14-inch Sizes</h3>
           <p>Do not miss the last opportunity</p>
-          <button className="custom-btn">Shop Now</button>
+          <Link href="shop">
+            <Link href="shop">
+              <button className="custom-btn">Shop Now</button>
+            </Link>
+          </Link>
           <div className="sidebar-image">
             <Image preview={false} src={macbookPro} alt="" />
           </div>

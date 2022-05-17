@@ -1,19 +1,19 @@
-import { Image } from "antd";
-import { useState, useEffect } from "react";
-import Link from "next/link";
 import {
-  StarOutlined,
-  StarFilled,
-  HeartTwoTone,
   CloseOutlined,
+  HeartTwoTone,
+  StarFilled,
+  StarOutlined,
 } from "@ant-design/icons";
-import useProvider from "../../hooks/useProvider";
+import { Image } from "antd";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
+  addToWish,
   decrease,
   increase,
   removeFromCart,
-  addToWish,
 } from "../../context/actions/Actions";
+import useProvider from "../../hooks/useProvider";
 
 const CartMini = ({ activeCart, setActiveCart }) => {
   const {
@@ -143,7 +143,7 @@ const CartMini = ({ activeCart, setActiveCart }) => {
                 </div>
               </div>
               <div className="pt-3 flex items-center justify-between">
-                <Link href="/categories">
+                <Link href="/shop">
                   <a>
                     <button
                       className="p-2 bg-white font-semibold 

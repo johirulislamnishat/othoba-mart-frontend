@@ -28,13 +28,13 @@ const HomeLayout = ({ children, title }) => {
     state: { user, cart, wish },
   } = useProvider();
   const router = useRouter();
+
   const logout = (e) => {
     e.preventDefault();
     // console.log("Logout");
     localStorage.removeItem("user");
-
-    location.reload(true);
     // router.push("/");
+    location.reload(true);
   };
 
   // console.log("User:", user);
@@ -89,14 +89,16 @@ const HomeLayout = ({ children, title }) => {
             )}
           </Menu.Item>
 
-          <Menu.Item key="2">
-            <Link href="/" passHref>
-              Your Profile
-            </Link>
-          </Menu.Item>
+          {/* <Menu.Item key="2">
+                        <Link href="/" passHref>
+                            Your Profile
+                        </Link>
+                    </Menu.Item> */}
 
           <Menu.Item key="3" danger>
-            <button onClick={logout}> Sign Out</button>
+            <Menu.Item key={2}>
+              <button onClick={logout}> Sign Out</button>
+            </Menu.Item>
           </Menu.Item>
         </>
       ) : (
