@@ -1034,12 +1034,12 @@ Thank you page style
 	color: var(--brand-color) !important;
 }
 /* ticket style start */
-.ant-modal-body {
-	padding: 0px !important;
+/* .ant-modal-body {
+  padding: 0px !important;
 }
 .ant-modal-footer {
-	display: none !important;
-}
+  display: none !important;
+} */
 .chat {
 	display: flex;
 	justify-content: center;
@@ -1146,6 +1146,44 @@ Thank you page style
 }
 .messanger-send-btn:hover {
 	background: rgb(0, 180, 50);
+}
+
+.store-page {
+	padding: 50px 0;
+}
+.info-store {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 30px;
+}
+.store-title {
+	font-size: 45px;
+	text-align: center;
+}
+.storelogo {
+	width: 100px;
+	height: 100px;
+	padding: 15px;
+	border-radius: 50%;
+	border: 2px solid #f66a05;
+}
+.store-chat-btn {
+	background-color: #f66a05;
+	color: white;
+	padding: 10px 30px;
+	border-radius: 5px;
+}
+.store-chat-btn:hover {
+	background-color: #c95400;
+}
+.store-products-title {
+	text-align: center;
+	font-size: 35px;
+	font-weight: 800;
+	text-transform: capitalize;
+	border-bottom: 5px solid #f66a05;
 }
 
 .messanger-chat {
