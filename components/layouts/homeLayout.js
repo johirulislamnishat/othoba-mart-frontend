@@ -20,6 +20,7 @@ import {
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
 import useProvider from "../../hooks/useProvider";
@@ -34,6 +35,15 @@ const HomeLayout = ({ children, title }) => {
 	const {
 		state: { user, cart, wish },
 	} = useProvider();
+	const router = useRouter();
+
+	const logout = (e) => {
+		e.preventDefault();
+		// console.log("Logout");
+		localStorage.removeItem("user");
+		// router.push("/");
+		location.reload(true);
+	};
 
 	// console.log("User:", user);
 	const [activeCart, setActiveCart] = useState(false);
@@ -88,16 +98,14 @@ const HomeLayout = ({ children, title }) => {
 						)}
 					</Menu.Item>
 
-					<Menu.Item key="2">
-						<Link href="/" passHref>
-							Your Profile
-						</Link>
-					</Menu.Item>
+					{/* <Menu.Item key="2">
+                        <Link href="/" passHref>
+                            Your Profile
+                        </Link>
+                    </Menu.Item> */}
 
 					<Menu.Item key="3" danger>
-						<Link href="/auth/login" passHref>
-							Sign Out
-						</Link>
+						<span onClick={logout}>Sign Out</span>
 					</Menu.Item>
 				</>
 			) : (
