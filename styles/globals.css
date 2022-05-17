@@ -94,17 +94,22 @@ a {
   --border-color: #e5e7eb;
 }
 body,
-.container {
+.container,
+main,
+aside,
+header {
   background-color: var(--color-background) !important;
   color: var(--color-primary) !important;
 }
 /* swtich theme button */
 
 .switch {
-  position: relative;
+  position: absolute;
   display: inline-block;
   width: 60px;
   height: 34px;
+  right: 10px;
+  top: 10px;
 }
 
 .switch input {
