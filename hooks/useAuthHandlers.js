@@ -82,10 +82,6 @@ const AuthHandlers = () => {
       });
   };
 
-  const logout = () => {
-    localStorage.removeItem("token");
-  };
-
   return {
     loading,
     message,
@@ -93,7 +89,6 @@ const AuthHandlers = () => {
     signupHandlerCustomer,
     signupHandlerVendor,
     signinHandler,
-    logout,
   };
 };
 
