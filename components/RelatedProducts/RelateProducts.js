@@ -22,7 +22,7 @@ const RelateProducts = () => {
     <div className="container related-products">
       <div className="section-title mt-8 flex my-6 justify-between items-center border-b">
         <h2 className="text-2xl pb-4">Related Products</h2>
-        <Link href="/">See All</Link>
+        <Link href="/shop">See All</Link>
       </div>
       <Row>
         {items.map((item, index) => {

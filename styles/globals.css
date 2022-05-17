@@ -52,13 +52,6 @@ a {
   box-sizing: border-box;
 }
 
-:root {
-  --brand-color: #f66a05;
-  --color-primary: #333;
-  --grey-color: #999;
-  --light-grey-color: #f9f9f9;
-  --border-color: #e5e7eb;
-}
 /* declaring the css variables colors */
 :root {
   --color-primary-accent: #2614c7;
@@ -66,13 +59,13 @@ a {
   --color-button: #3d486c;
   --color-paragraph: #797979;
   --color-button-text: rgb(255, 255, 255);
-  --color-background: #fff;
   --color-anchor: #000aff;
 
   --color-background: #fff;
   --brand-color: #f66a05;
   --color-primary: #333;
   --grey-color: #999;
+  --color-sidebar-title: #333;
   --light-grey-color: #f9f9f9;
   --border-color: #e5e7eb;
 }
@@ -83,13 +76,13 @@ a {
   --color-button: #00ff4c;
   --color-paragraph: #8a8a8a;
   --color-button-text: rgb(0, 0, 0);
-  --color-background: #22212b;
   --color-anchor: #00ff4c;
 
   --color-background: #22212b;
   --brand-color: #f66a05;
   --color-primary: #fff;
   --grey-color: #999;
+  --color-sidebar-title: #333;
   --light-grey-color: #f9f9f9;
   --border-color: #e5e7eb;
 }
@@ -97,17 +90,21 @@ body,
 .container,
 main,
 aside,
-header {
+header,
+.footer-content {
   background-color: var(--color-background) !important;
   color: var(--color-primary) !important;
+}
+aside h3 {
+  color: var(--color-primary);
 }
 /* swtich theme button */
 
 .switch {
   position: absolute;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 45px;
+  height: 23px;
   right: 10px;
   top: 10px;
 }
@@ -133,8 +130,8 @@ header {
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 16px;
+  width: 16px;
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -151,9 +148,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
 }
 
 .slider {
@@ -208,6 +205,7 @@ input:checked + .slider:before {
   font-size: 1.5rem !important;
   font-weight: 600;
   margin-bottom: 15px;
+  color: var(--color-primary);
 }
 /* home main container  */
 .main-container {
@@ -353,6 +351,7 @@ Home Page Main Area Style
   border-radius: 50%;
   transition: all 300ms;
   cursor: pointer;
+  color: var(--grey-color);
 }
 .wishlist span {
   font-size: 1rem;
@@ -424,14 +423,14 @@ Home Page Main Area Style
 }
 .promo-lg h3 {
   font-size: 2rem;
-  color: var(--color-primary);
+  color: var(--color-sidebar-title);
   margin-bottom: 5px;
   line-height: 1.8rem;
 }
 
 .promo-lg-two .promo-lg h3 {
   font-size: 2rem;
-  color: var(--color-primary);
+  color: #fff;
   margin-bottom: 5px;
 }
 .promo-lg p {
@@ -463,6 +462,7 @@ Home Page Main Area Style
 }
 .product-categories .categories-link h3 {
   font-size: 20px;
+  color: var(--color-primary);
 }
 .product-categories .categories-link a:last-of-type {
   color: var(--brand-color);
@@ -505,7 +505,7 @@ Home Page Sidebar Style
 }
 .super-discount h3 {
   font-size: 2rem;
-  color: var(--color-primary);
+  color: var(--color-sidebar-title);
   margin-bottom: 5px;
   line-height: 2.4rem;
   margin-bottom: 20px;
@@ -784,6 +784,7 @@ single product page style
   margin-bottom: 5px;
   font-weight: 600;
   line-height: 42px;
+  color: var(--color-primary);
 }
 .single-product-page p {
   font-size: 16px;
@@ -811,6 +812,7 @@ categories page style
 .categories-page-top h2 {
   font-size: 30px;
   font-weight: 600;
+  color: var(--color-primary);
 }
 @media screen and (max-width: 668px) {
   .categories-page-top .grid-or-list-view {
@@ -902,6 +904,7 @@ categories page style
 .category-page-drawer-filter .single-filter h4 {
   font-size: 20px;
   margin-bottom: 15px;
+  color: var(--color-primary);
 }
 .categories-page-container .single-filter button,
 .category-page-drawer-filter .single-filter button {
@@ -915,6 +918,7 @@ categories page style
   align-items: center;
   border-radius: 0;
   transition: all 0.3s ease-in-out;
+  background-color: transparent;
 }
 .categories-page-container .single-filter button:hover span:first-child,
 .category-page-drawer-filter .single-filter button:hover span:first-child {
@@ -1265,3 +1269,20 @@ Thank you page style
 }
 
 /* ticket style end */
+
+/* footer  */
+.news-letter-subscription .container {
+  background-color: #999 !important;
+}
+.footer-content h5,
+.footer-content h1 {
+  color: var(--color-primary);
+}
+
+/* miscellaneous */
+h5.ant-typography {
+  color: var(--color-primary);
+}
+label.ant-checkbox-wrapper > span {
+  color: var(--color-primary);
+}
