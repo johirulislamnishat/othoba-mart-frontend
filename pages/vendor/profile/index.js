@@ -126,7 +126,7 @@ const VendorProfile = () => {
 
         axios
             // .post(API_BASE_URL + "/shop", formData, {
-            .post("http://localhost:5000/shop", formData, {
+            .post(API_BASE_URL + "/shop", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     token: `Bearer ${accessToken}`,
