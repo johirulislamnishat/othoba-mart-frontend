@@ -20,6 +20,7 @@ import { Drawer, Dropdown, Image, Menu, PageHeader } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import AuthHandlers from "../../../hooks/useAuthHandlers";
 import useProvider from "../../../hooks/useProvider";
 
 const { SubMenu } = Menu;
@@ -33,6 +34,13 @@ const AdminTop = ({ pageTitle, child }) => {
   const router = useRouter();
   const pageName = router.pathname.split("/");
 
+  const logout = (e) => {
+    e.preventDefault();
+    // console.log("Logout");
+    localStorage.removeItem("user");
+    // router.push("/");
+    location.reload(true);
+  };
   const menu = (
     <Menu>
       <Menu.Item key={1}>
@@ -41,9 +49,7 @@ const AdminTop = ({ pageTitle, child }) => {
         </Link>
       </Menu.Item>
       <Menu.Item key={2}>
-        <Link href="/auth/login" passHref>
-          Logout
-        </Link>
+        <button onClick={logout}> Sign Out</button>
       </Menu.Item>
     </Menu>
   );

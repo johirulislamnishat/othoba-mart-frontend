@@ -1,4 +1,10 @@
 import Link from "next/link";
+import useProvider from "../../hooks/useProvider";
+import { useForm } from "react-hook-form";
+import { message, Tooltip } from "antd";
+import axios from "axios";
+import { API_BASE_URL } from "../../apiconstants";
+
 const footerMenus01 = [
   { id: "1", LinkName: "Ticket", href: "/ticket" },
   { id: "2", LinkName: "Payment Methods", href: "#" },
@@ -27,6 +33,27 @@ const footerMenus04 = [
 ];
 
 const HomeFooter = () => {
+  const {
+    state: {
+      user: { accessToken },
+    },
+  } = useProvider();
+
+  const { register, handleSubmit, reset } = useForm();
+  const onSubmit = (data) => {
+    axios
+      .post(`${API_BASE_URL}/subscriber`, data, {
+        headers: {
+          token: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        message.success(res.data.message);
+        reset();
+      })
+      .catch(() => message.error("Failed to submit"));
+  };
+
   return (
     <div className="pt-24 pb-8 footer-content">
       {/* subscribe box  */}
@@ -47,18 +74,20 @@ const HomeFooter = () => {
           </div>
           <div className="w-full py-2 rounded-full pl-0 md:pl-3">
             <div className="relative">
-              {" "}
-              <input
-                type="email"
-                className="bg-white h-9 md:h-11 w-full px-4 pr-20 rounded-full focus:outline-none hover:cursor-pointer"
-                placeholder="Enter your email....."
-              />{" "}
-              <button
-                type="submit"
-                className="rounded-r-full absolute h-9 md:h-11 text-sm right-0 px-3 md:px-6 text-white bg-gray-700 "
-              >
-                Subscribe
-              </button>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  type="email"
+                  {...register("email", { required: true })}
+                  className="bg-white h-9 md:h-11 w-full px-4 pr-20 rounded-full focus:outline-none hover:cursor-pointer"
+                  placeholder="Enter your email....."
+                />
+                <button
+                  type="submit"
+                  className="rounded-r-full absolute h-9 md:h-11 text-sm right-0 px-3 md:px-6 text-white bg-gray-700 "
+                >
+                  Subscribe
+                </button>
+              </form>
             </div>
           </div>
         </div>

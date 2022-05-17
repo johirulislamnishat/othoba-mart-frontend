@@ -12,12 +12,14 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
+import AuthHandlers from "../../hooks/useAuthHandlers";
 import useProvider from "../../hooks/useProvider";
 import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
 import HomeHeader from "../shared/homeHeader";
 import WishMini from "../wish/WishMini";
+import { useRouter } from "next/router";
 
 const { Content } = Layout;
 
@@ -25,6 +27,15 @@ const HomeLayout = ({ children, title }) => {
   const {
     state: { user, cart, wish },
   } = useProvider();
+  const router = useRouter();
+  const logout = (e) => {
+    e.preventDefault();
+    // console.log("Logout");
+    localStorage.removeItem("user");
+
+    location.reload(true);
+    // router.push("/");
+  };
 
   // console.log("User:", user);
   const [activeCart, setActiveCart] = useState(false);
@@ -85,9 +96,7 @@ const HomeLayout = ({ children, title }) => {
           </Menu.Item>
 
           <Menu.Item key="3" danger>
-            <Link href="/auth/login" passHref>
-              Sign Out
-            </Link>
+            <button onClick={logout}> Sign Out</button>
           </Menu.Item>
         </>
       ) : (
