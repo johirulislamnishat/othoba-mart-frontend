@@ -22,7 +22,7 @@ const BestSellers = () => {
     <div className="container best-sellers">
       <div className="section-title my-6 flex justify-between items-center border-b">
         <h2 className="text-2xl">Best Sellers</h2>
-        <Link href="/">See All</Link>
+        <Link href="/shop">See All</Link>
       </div>
       <Row className="products-grid">
         {items.map((item, index) => {

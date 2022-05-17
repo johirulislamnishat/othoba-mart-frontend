@@ -18,7 +18,7 @@ const LatestDeals = () => {
     <div className="container latest-deals">
       <div className="section-title my-6 flex justify-between items-center border-b">
         <h2 className="text-2xl">Latest Deals</h2>
-        <Link href="/">See All</Link>
+        <Link href="/shop">See All</Link>
       </div>
       <Row className="latest-deals-items">
         {items.map((item, index) => {

@@ -22,7 +22,7 @@ const SmartphoneAndAccessories = () => {
     <div className="container smartphone-and-accessories">
       <div className="section-title mt-8 my-6 flex justify-between items-center border-b ">
         <h2 className="text-2xl">Smartphone & Accessories</h2>
-        <Link href="/">See All</Link>
+        <Link href="/shop">See All</Link>
       </div>
       <Row>
         <Col xs={24} sm={24} md={12} lg={9} className="md:pr-2">
