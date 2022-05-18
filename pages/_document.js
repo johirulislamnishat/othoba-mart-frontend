@@ -39,11 +39,7 @@ function setInitialColorMode() {
     const hasMediaQueryPreference = typeof preference.matches === "boolean";
 
     if (hasMediaQueryPreference) {
-<<<<<<< HEAD
       return preference.matches ? "light" : "dark";
-=======
-      return preference.matches ? "dark" : "light";
->>>>>>> origin/main
     }
 
     return "light";

@@ -177,7 +177,11 @@ const Product = () => {
               </button>
             </div>
 
-            <Tabs className="mt-6" defaultActiveKey="1" onChange={callback}>
+            <Tabs
+              className="mt-6 product-data-tab"
+              defaultActiveKey="1"
+              onChange={callback}
+            >
               <TabPane tab="Descriptions" key="1">
                 <p>{item.product_description}</p>
               </TabPane>
