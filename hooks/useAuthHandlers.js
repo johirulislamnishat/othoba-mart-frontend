@@ -45,10 +45,10 @@ const AuthHandlers = () => {
       })
       .then(function (response) {
         // console.log(response)
-        setMessage(response.data.message);
+        setMessage(response?.data?.message);
         dispatch({
           type: "AUTH",
-          payload: response.data,
+          payload: response?.data,
         });
         setLoading(false);
       })
@@ -83,7 +83,7 @@ const AuthHandlers = () => {
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("user");
   };
 
   return {
