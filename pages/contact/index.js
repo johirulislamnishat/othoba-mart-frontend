@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import HomeLayout from "../../components/layouts/homeLayout";
 import emailjs from "@emailjs/browser";
 import { message } from "antd";
+import React, { useRef } from "react";
+import HomeLayout from "../../components/layouts/homeLayout";
 
 const Contact = () => {
   const form = useRef();
@@ -28,7 +28,7 @@ const Contact = () => {
   };
   return (
     <HomeLayout title="Contact Us | Othoba Mart">
-      <div className="container px-6 grid gap-8 grid-cols-1 md:grid-cols-2  py-16 mx-auto  text-gray-700">
+      <div className="container contact-us-page px-6 grid gap-8 grid-cols-1 md:grid-cols-2  py-16 mx-auto  text-gray-700">
         <div className="flex flex-col justify-between">
           <div>
             <h2 className="w-full font-bold lg:text-3xl text-2xl lg:leading-10 leading-9">

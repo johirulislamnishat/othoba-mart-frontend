@@ -3,18 +3,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import ProductCardList from "../../ProductCardList/ProductCardList";
-const CategoriesBasedProductsList = () => {
+const CategoriesBasedProductsList = ({ selectedCategory }) => {
   const [items, setItems] = useState([]);
   // console.log(items);
 
   useEffect(() => {
     axios
-      .get(API_BASE_URL + "/product/paginated?page=0&size=6")
+      .get(API_BASE_URL + `/product?cat=${selectedCategory}`)
       .then(function (response) {
-        // console.log(response?.data?.result);
         setItems(response?.data?.result);
       });
-  }, []);
+  }, [selectedCategory]);
 
   return (
     <div className="container new-products">

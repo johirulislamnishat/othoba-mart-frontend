@@ -10,16 +10,14 @@ import { Badge, Col, Dropdown, Image, Layout, Menu, message, Row } from "antd";
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
-import AuthHandlers from "../../hooks/useAuthHandlers";
 import useProvider from "../../hooks/useProvider";
 import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
 import HomeMenu from "../menues/homeMenu";
-import HomeHeader from "../shared/homeHeader";
 import WishMini from "../wish/WishMini";
-import { useRouter } from "next/router";
 
 const { Content } = Layout;
 
@@ -300,7 +298,7 @@ const HomeLayout = ({ children, title }) => {
       </header>
 
       {/* Top menu */}
-      <div className="bg-white">
+      <div className="nav-menu-home">
         <div className="container mx-auto hidden lg:block">
           <HomeMenu visible={visible} setVisible={setVisible} />
         </div>
