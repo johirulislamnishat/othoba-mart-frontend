@@ -107,15 +107,20 @@ aside h3 {
 /* swtich theme button */
 
 .switch {
-  position: fixed;
+  position: absolute;
   display: inline-block;
-  width: 60px;
-  height: 35px;
-  right: -10px;
-  top: calc(100vh - 52%);
-  transform: rotate(90deg);
+  width: 50px;
+  height: 25px;
+  right: 240px;
+  top: 42px;
+  z-index: 1;
 }
-
+@media only screen and (max-width: 668px) {
+  .switch {
+    right: 145px;
+    top: 34px;
+  }
+}
 .switch input {
   opacity: 0;
   width: 0;
@@ -137,8 +142,8 @@ aside h3 {
 .slider:before {
   position: absolute;
   content: "";
-  height: 27px;
-  width: 27px;
+  height: 18px;
+  width: 18px;
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -155,9 +160,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(20px);
-  -ms-transform: translateX(20px);
-  transform: translateX(23px);
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
 }
 
 .slider {
