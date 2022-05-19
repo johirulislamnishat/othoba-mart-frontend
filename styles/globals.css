@@ -1309,3 +1309,8 @@ label.ant-checkbox-wrapper > span {
 .faqs-page summary {
   color: #333;
 }
+
+.contact-us-page h1,
+.contact-us-page span {
+  color: var(--color-primary);
+}
