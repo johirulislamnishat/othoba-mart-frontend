@@ -43,9 +43,11 @@ const Register = () => {
 
     const handleOk = () => {
         setIsModalVisible(false);
-        if (message == "Vendor added successfully!") {
+        console.log(message);
+        if (message === "Vendor added successfully!") {
+            signinHandler(user_name, password, dispatch, true);
             setMessage("");
-            router.push("/vendor/profile");
+            router.push("/dashboard/vendor/profile");
         } else {
             setMessage("");
             router.push("/");
@@ -75,7 +77,7 @@ const Register = () => {
                 shop_name,
                 dispatch
             );
-            signinHandler(user_name, password, dispatch);
+            // signinHandler(user_name, password, dispatch);
         } else {
             setIsModalVisible(true);
         }

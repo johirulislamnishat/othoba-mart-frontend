@@ -171,9 +171,9 @@ const AdminMenu = ({ collapsed }) => {
             <Menu.Item key="orders" icon={<ShopOutlined />}>
               <Link href="/dashboard/vendor/orders">Orders</Link>
             </Menu.Item>
-            <Menu.Item key="profile" icon={<UserOutlined />}>
+            {/* <Menu.Item key="profile" icon={<UserOutlined />}>
               <Link href="/dashboard/vendor/profile">My Profile</Link>
-            </Menu.Item>
+            </Menu.Item> */}
           </>
         )}
 

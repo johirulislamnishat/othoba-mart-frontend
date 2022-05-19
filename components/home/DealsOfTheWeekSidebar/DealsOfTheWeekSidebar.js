@@ -9,10 +9,12 @@ const DealsOfTheWeekSidebar = () => {
   // console.log(items);
 
   useEffect(() => {
-    axios.get(API_BASE_URL + "/product?cat=fridge").then(function (response) {
-      console.log(response?.data?.result);
-      setItems(response?.data?.result);
-    });
+    axios
+      .get(API_BASE_URL + "/product/paginated?page=0&size=1")
+      .then(function (response) {
+        console.log(response?.data?.result);
+        setItems(response?.data?.result);
+      });
   }, []);
   return (
     <div className="deals-of-the-weeks">

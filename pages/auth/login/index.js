@@ -14,7 +14,7 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        signinHandler(user_name, password, dispatch);
+        signinHandler(user_name, password, dispatch, false);
     };
 
     return (
