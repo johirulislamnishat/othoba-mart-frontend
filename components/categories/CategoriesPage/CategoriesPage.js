@@ -92,8 +92,8 @@ const CategoriesPage = () => {
           </div>
         </div>
       </div>
-      <div className="categories-page-container">
-        <Sidebar></Sidebar>
+      <div>
+        {/* <Sidebar></Sidebar> */}
         <MainArea view={view}></MainArea>
       </div>
     </>
