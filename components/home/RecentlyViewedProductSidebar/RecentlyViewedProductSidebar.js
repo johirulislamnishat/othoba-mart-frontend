@@ -12,7 +12,7 @@ const RecentlyViewedProductSidebar = () => {
 
   useEffect(() => {
     axios
-      .get(API_BASE_URL + "/product/paginated?page=0&size=4")
+      .get(API_BASE_URL + "/product/paginated?page=0&size=3")
       .then(function (response) {
         // console.log(response?.data?.result);
         setItems(response?.data?.result);

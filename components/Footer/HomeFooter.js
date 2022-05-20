@@ -1,9 +1,9 @@
-import Link from "next/link";
-import useProvider from "../../hooks/useProvider";
-import { useForm } from "react-hook-form";
-import { message, Tooltip } from "antd";
+import { message } from "antd";
 import axios from "axios";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
 import { API_BASE_URL } from "../../apiconstants";
+import useProvider from "../../hooks/useProvider";
 
 const footerMenus01 = [
   { id: "1", LinkName: "Ticket", href: "/ticket" },
@@ -57,7 +57,10 @@ const HomeFooter = () => {
   return (
     <div className="pt-24 pb-8 footer-content">
       {/* subscribe box  */}
-      <div style={{ backgroundColor: "#999" }}>
+      <div
+        className="news-letter-subscription"
+        style={{ backgroundColor: "#999" }}
+      >
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 items-center py-6 px-3 md:px-6">
           <div>
             <h3 className="text-white font-medium text-lg">
@@ -78,7 +81,7 @@ const HomeFooter = () => {
                 <input
                   type="email"
                   {...register("email", { required: true })}
-                  className="bg-white h-9 md:h-11 w-full px-4 pr-20 rounded-full focus:outline-none hover:cursor-pointer"
+                  className="bg-white h-9 md:h-11 w-full px-4 pr-20 rounded-full focus:outline-none"
                   placeholder="Enter your email....."
                 />
                 <button

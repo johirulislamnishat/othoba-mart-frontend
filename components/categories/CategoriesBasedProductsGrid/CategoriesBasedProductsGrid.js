@@ -4,17 +4,16 @@ import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
 import ProductCardGrid from "../../ProductCardGrid/ProductCardGrid";
 
-const CategoriesBasedProductsGrid = () => {
+const CategoriesBasedProductsGrid = ({ selectedCategory }) => {
   const [items, setItems] = useState([]);
-  // console.log(items);
 
   useEffect(() => {
     axios
-      .get(API_BASE_URL + "/product/paginated?page=0&size=8")
+      .get(API_BASE_URL + `/product?cat=${selectedCategory}`)
       .then(function (response) {
         setItems(response?.data?.result);
       });
-  }, []);
+  }, [selectedCategory]);
 
   return (
     <div className="container category-based-products">

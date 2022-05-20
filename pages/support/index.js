@@ -1,12 +1,12 @@
-import React from "react";
 import Link from "next/link";
+import React from "react";
 import HomeLayout from "../../components/layouts/homeLayout";
 
 const Support = () => {
   return (
     <HomeLayout title="Support | Othoba Mart">
       <div>
-        <div className="container mx-auto">
+        <div className="container mx-auto support-page">
           <div className="py-12">
             <div className="px-2 xl:px-0 py-10">
               <div className="flex flex-col lg:flex-row flex-wrap">
@@ -37,7 +37,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className="bg-white p-5 rounded-md  h-full w-full">
+                  <div className="support-page__single bg-white p-5 rounded-md  h-full w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"
@@ -144,7 +144,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className="bg-white p-5 rounded-md  h-full w-full">
+                  <div className="support-page__single bg-white p-5 rounded-md  h-full w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"
@@ -275,7 +275,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className="bg-white p-5 rounded-md  h-full w-full">
+                  <div className="support-page__single bg-white p-5 rounded-md  h-full w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"
@@ -384,7 +384,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className="bg-white p-5 rounded-md  h-full  w-full">
+                  <div className="support-page__single bg-white p-5 rounded-md  h-full  w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"
@@ -493,7 +493,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className=" bg-white p-5 rounded-md  h-full w-full">
+                  <div className="support-page__single bg-white p-5 rounded-md  h-full w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"
@@ -579,7 +579,7 @@ const Support = () => {
                   role="cell"
                   className="bg-gray-100 border border-gray-100 shadow rounded-md"
                 >
-                  <div className=" bg-white p-5 rounded-md  h-full  w-full">
+                  <div className="support-page__single bg-white p-5 rounded-md  h-full  w-full">
                     <span>
                       <img
                         className="bg-gray-200 p-2 mb-5 rounded-full"

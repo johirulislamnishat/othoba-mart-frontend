@@ -42,7 +42,7 @@ a {
   font-weight: bold !important;
 }
 
-.loader h1{
+.loader h1 {
   text-align: center;
 }
 
@@ -52,13 +52,127 @@ a {
   box-sizing: border-box;
 }
 
+/* declaring the css variables colors */
 :root {
+  --color-primary-accent: #2614c7;
+  --color-primary: #000;
+  --color-button: #3d486c;
+  --color-paragraph: #797979;
+  --color-button-text: rgb(255, 255, 255);
+  --color-anchor: #000aff;
+
+  --color-background: #fff;
   --brand-color: #f66a05;
-  --black-color: #333;
+  --color-primary: #333;
   --grey-color: #999;
+  --color-sidebar-title: #333;
   --light-grey-color: #f9f9f9;
   --border-color: #e5e7eb;
 }
+
+[data-theme="dark"] {
+  --color-primary-accent: #00ff4c;
+  --color-primary: #fff;
+  --color-button: #00ff4c;
+  --color-paragraph: #8a8a8a;
+  --color-button-text: rgb(0, 0, 0);
+  --color-anchor: #00ff4c;
+
+  --color-background: #22212b;
+  --brand-color: #f66a05;
+  --color-primary: #fff;
+  --grey-color: #999;
+  --color-sidebar-title: #333;
+  --light-grey-color: #f9f9f9;
+  --border-color: #e5e7eb;
+}
+body,
+.container,
+main,
+aside,
+header,
+.footer-content,
+.nav-menu-home,
+.ant-menu-horizontal,
+.ant-menu-horizontal li a,
+.category-menu-home ul,
+.category-menu-home li,
+.support-page__single {
+  background-color: var(--color-background) !important;
+  color: var(--color-primary) !important;
+}
+aside h3 {
+  color: var(--color-primary);
+}
+/* swtich theme button */
+
+.switch {
+  position: absolute;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  right: 240px;
+  top: 42px;
+  z-index: 1;
+}
+@media only screen and (max-width: 668px) {
+  .switch {
+    right: 145px;
+    top: 34px;
+  }
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #282828;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--brand-color);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #33f321;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+}
+
+.slider {
+  border-radius: 34px;
+}
+
+.slider:before {
+  border-radius: 50%;
+}
+/* button */
 .custom-btn {
   background-color: var(--brand-color);
   border: 1px solid var(--brand-color);
@@ -81,7 +195,7 @@ a {
 .custom-btn.grey-btn {
   background-color: var(--light-grey-color);
   border: 1px solid var(--grey-color);
-  color: var(--black-color);
+  color: var(--color-primary);
 }
 .custom-btn:hover {
   background-color: transparent;
@@ -103,6 +217,7 @@ a {
   font-size: 1.5rem !important;
   font-weight: 600;
   margin-bottom: 15px;
+  color: var(--color-primary);
 }
 /* home main container  */
 .main-container {
@@ -152,7 +267,7 @@ Home Page Main Area Style
   display: block;
   text-align: left !important;
   line-height: 25px !important;
-  color: #333;
+  color: var(--color-primary);
 }
 .single-product h3 a:hover {
   color: var(--brand-color);
@@ -248,6 +363,7 @@ Home Page Main Area Style
   border-radius: 50%;
   transition: all 300ms;
   cursor: pointer;
+  color: var(--grey-color);
 }
 .wishlist span {
   font-size: 1rem;
@@ -261,7 +377,7 @@ Home Page Main Area Style
   padding: 5px 10px;
   background-color: #d8feee;
   border-radius: 10px;
-  color: var(--black-color);
+  color: var(--color-primary);
 }
 
 .product-price small {
@@ -319,7 +435,7 @@ Home Page Main Area Style
 }
 .promo-lg h3 {
   font-size: 2rem;
-  color: var(--black-color);
+  color: var(--color-sidebar-title);
   margin-bottom: 5px;
   line-height: 1.8rem;
 }
@@ -358,6 +474,7 @@ Home Page Main Area Style
 }
 .product-categories .categories-link h3 {
   font-size: 20px;
+  color: var(--color-primary);
 }
 .product-categories .categories-link a:last-of-type {
   color: var(--brand-color);
@@ -400,7 +517,7 @@ Home Page Sidebar Style
 }
 .super-discount h3 {
   font-size: 2rem;
-  color: var(--black-color);
+  color: var(--color-sidebar-title);
   margin-bottom: 5px;
   line-height: 2.4rem;
   margin-bottom: 20px;
@@ -535,7 +652,7 @@ categories page style
   font-weight: 600;
 }
 .categories-page-top .filter-icon span {
-  color: var(--black-color);
+  color: var(--color-primary);
   font-size: 0.8rem;
   cursor: pointer;
 }
@@ -631,7 +748,7 @@ categories page style
   justify-content: space-between;
   border: 0;
   margin-bottom: 10px;
-  color: var(--black-color);
+  color: var(--color-primary);
   align-items: center;
   border-radius: 0;
   transition: all 0.3s ease-in-out;
@@ -679,6 +796,7 @@ single product page style
   margin-bottom: 5px;
   font-weight: 600;
   line-height: 42px;
+  color: var(--color-primary);
 }
 .single-product-page p {
   font-size: 16px;
@@ -706,6 +824,7 @@ categories page style
 .categories-page-top h2 {
   font-size: 30px;
   font-weight: 600;
+  color: var(--color-primary);
 }
 @media screen and (max-width: 668px) {
   .categories-page-top .grid-or-list-view {
@@ -720,7 +839,7 @@ categories page style
 }
 
 .categories-page-top .filter-icon span {
-  color: var(--black-color);
+  color: var(--color-primary);
   font-size: 0.8rem;
   cursor: pointer;
 }
@@ -797,6 +916,7 @@ categories page style
 .category-page-drawer-filter .single-filter h4 {
   font-size: 20px;
   margin-bottom: 15px;
+  color: var(--color-primary);
 }
 .categories-page-container .single-filter button,
 .category-page-drawer-filter .single-filter button {
@@ -806,10 +926,11 @@ categories page style
   justify-content: space-between;
   border: 0;
   margin-bottom: 10px;
-  color: var(--black-color);
+  color: var(--color-primary);
   align-items: center;
   border-radius: 0;
   transition: all 0.3s ease-in-out;
+  background-color: transparent;
 }
 .categories-page-container .single-filter button:hover span:first-child,
 .category-page-drawer-filter .single-filter button:hover span:first-child {
@@ -844,7 +965,7 @@ single product page style
 .single-product-page {
   margin-top: 100px;
   padding-bottom: 100px !important;
-  color: var(--black-color);
+  color: var(--color-primary);
 }
 
 .single-product-page h3 {
@@ -885,7 +1006,10 @@ single product page style
 /* ticket end */
 .single-product-page .single-product-meta-data .ant-col p {
   font-size: 14px;
-  color: #555;
+  color: var(--color-primary);
+}
+.single-product-page .product-data-tab {
+  color: var(--color-primary);
 }
 .single-product-page .single-product-meta-data .ant-col p:first-child {
   width: 100px;
@@ -996,7 +1120,7 @@ Thank you page style
 
 /* footer style */
 .footer-content .footer-links li a {
-  color: var(--black-color) !important;
+  color: var(--color-primary) !important;
 }
 .footer-content .footer-links li a:hover {
   color: var(--brand-color) !important;
@@ -1116,43 +1240,42 @@ Thank you page style
   background: rgb(0, 180, 50);
 }
 
-.store-page{
+.store-page {
   padding: 50px 0;
 }
-.info-store{
+.info-store {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-bottom: 30px;
 }
-.store-title{
+.store-title {
   font-size: 45px;
   text-align: center;
 }
-.storelogo{
+.storelogo {
   width: 100px;
   height: 100px;
   padding: 15px;
   border-radius: 50%;
   border: 2px solid #f66a05;
 }
-.store-chat-btn{
+.store-chat-btn {
   background-color: #f66a05;
   color: white;
   padding: 10px 30px;
   border-radius: 5px;
 }
-.store-chat-btn:hover{
+.store-chat-btn:hover {
   background-color: #c95400;
 }
-.store-products-title{
+.store-products-title {
   text-align: center;
   font-size: 35px;
   font-weight: 800;
   text-transform: capitalize;
   border-bottom: 5px solid #f66a05;
-
 }
 
 .messanger-chat {
@@ -1161,3 +1284,38 @@ Thank you page style
 }
 
 /* ticket style end */
+
+/* footer  */
+.news-letter-subscription .container {
+  background-color: #999 !important;
+}
+.footer-content h5,
+.footer-content h1 {
+  color: var(--color-primary);
+}
+
+/* miscellaneous */
+h5.ant-typography {
+  color: var(--color-primary);
+}
+label.ant-checkbox-wrapper > span {
+  color: var(--color-primary);
+}
+
+.about-us-page p,
+.about-us-page h2,
+.faqs-page h1,
+.faqs-page p,
+.support-page h1,
+.support-page h4 {
+  color: var(--color-primary);
+}
+
+.faqs-page summary {
+  color: #333;
+}
+
+.contact-us-page h1,
+.contact-us-page span {
+  color: var(--color-primary);
+}
