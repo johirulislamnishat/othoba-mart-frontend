@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../apiconstants";
+import AuthHandlers from "../../hooks/useAuthHandlers";
 import useProvider from "../../hooks/useProvider";
 import CartMini from "../cart/CartMini";
 import HomeFooter from "../Footer/HomeFooter";
@@ -94,10 +95,11 @@ const HomeLayout = ({ children, title }) => {
                         </Link>
                     </Menu.Item> */}
 
-          <Menu.Item key="3" danger>
-            <Menu.Item key={2}>
-              <button onClick={logout}> Sign Out</button>
-            </Menu.Item>
+          <Menu.Item key={2}>
+            <button className="bg-transparent" onClick={logout}>
+              {" "}
+              Sign Out
+            </button>
           </Menu.Item>
         </>
       ) : (

@@ -18,15 +18,16 @@ const { Option } = Select;
 
 const Orders = () => {
   const [data, setData] = useState(null);
+  // console.log("data", data);
   const {
     state: {
-      user: { accessToken },
+      user: { _id, accessToken },
     },
   } = useProvider();
 
   useEffect(() => {
     axios
-      .get(`${API_BASE_URL}/order`, {
+      .get(`${API_BASE_URL}/order/user/${_id}`, {
         headers: {
           token: `Bearer ${accessToken}`,
         },
@@ -39,21 +40,21 @@ const Orders = () => {
         setData(arr);
       })
       .catch((e) => console.log(e));
-  }, [accessToken]);
+  }, [_id, accessToken]);
 
-  const deleteOrder = (order) => {
-    axios
-      .delete(`${API_BASE_URL}/order/${order._id}`, {
-        headers: {
-          token: `Bearer ${accessToken}`,
-        },
-      })
-      .then((res) => {
-        message.success(res.data.message);
-        setData(data.filter((item) => item != order));
-      })
-      .catch((e) => console.log(e));
-  };
+  // const deleteOrder = (order) => {
+  //   axios
+  //     .delete(`${API_BASE_URL}/order/${order._id}`, {
+  //       headers: {
+  //         token: `Bearer ${accessToken}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       message.success(res.data.message);
+  //       setData(data.filter((item) => item != order));
+  //     })
+  //     .catch((e) => console.log(e));
+  // };
 
   const handleStatus = (value, field) => {
     axios
@@ -119,6 +120,7 @@ const Orders = () => {
       width: 150,
       render: (order) => (
         <Select
+          disabled
           style={{ width: 150 }}
           defaultValue={order.status.toLowerCase()}
           onChange={(value, field) => handleStatus(value, field)}
@@ -189,25 +191,25 @@ const Orders = () => {
       ],
       onFilter: (value, record) => record.status.indexOf(value) === 0,
     },
-    {
-      title: "",
-      key: "actions",
-      width: 80,
-      render: (order) => (
-        <Space split={<Divider type="vertical" />}>
-          <Popconfirm
-            title="Are you sure you want to delete this order?"
-            onConfirm={() => deleteOrder(order)}
-            okText="Yes"
-            cancelText="No"
-            placement="topRight"
-          >
-            <DeleteOutlined />
-          </Popconfirm>
-          <EditOutlined />
-        </Space>
-      ),
-    },
+    // {
+    //   title: "",
+    //   key: "actions",
+    //   width: 80,
+    //   render: (order) => (
+    //     <Space split={<Divider type="vertical" />}>
+    //       <Popconfirm
+    //         title="Are you sure you want to delete this order?"
+    //         onConfirm={() => deleteOrder(order)}
+    //         okText="Yes"
+    //         cancelText="No"
+    //         placement="topRight"
+    //       >
+    //         <DeleteOutlined />
+    //       </Popconfirm>
+    //       <EditOutlined />
+    //     </Space>
+    //   ),
+    // },
   ];
 
   return (
