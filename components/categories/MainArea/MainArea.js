@@ -53,7 +53,7 @@ const MainArea = ({ view }) => {
             })}
           </div>
         </div>
-        <div className="single-filter">
+        {/* <div className="single-filter">
           <h4>Brands</h4>
           <div>
             <Checkbox onChange={selectedCheckBox}>XIAOMI Phones</Checkbox>
@@ -112,7 +112,7 @@ const MainArea = ({ view }) => {
               </div>
             </Checkbox>
           </div>
-        </div>
+        </div> */}
       </aside>
       <main>
         {view == "list-view" ? (
