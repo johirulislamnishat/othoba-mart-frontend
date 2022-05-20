@@ -23,6 +23,7 @@ import WishMini from "../wish/WishMini";
 const { Content } = Layout;
 
 const HomeLayout = ({ children, title }) => {
+  
   const {
     state: { user, cart, wish },
   } = useProvider();
