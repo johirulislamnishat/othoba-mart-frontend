@@ -3,7 +3,7 @@ import {
   BorderInnerOutlined,
   FilterOutlined,
 } from "@ant-design/icons";
-import { Button, Drawer, Radio, Space } from "antd";
+import { Button, Drawer, Space } from "antd";
 import React, { useState } from "react";
 import MainArea from "../MainArea/MainArea";
 import Sidebar from "../Sidebar/Sidebar";
@@ -84,12 +84,12 @@ const CategoriesPage = () => {
             </div>
           </Drawer>
 
-          <div>
+          {/* <div>
             <Radio.Group onChange={onChange} value={value}>
               <Radio value={"filter-text"}>Low to High</Radio>
               <Radio value={"filter-text2"}>High to Low</Radio>
             </Radio.Group>
-          </div>
+          </div> */}
         </div>
       </div>
       <div>
