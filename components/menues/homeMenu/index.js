@@ -32,10 +32,12 @@ const HomeMenu = ({ visible, setVisible }) => {
 	const handleSubmit = (values) => {
 		setLoading(true);
 		setShowTrack(!showTrack);
-		router.push(`/admin/orders/trackOrder/${values.track_number}`).then(() => {
-			form.resetFields();
-			setLoading(false);
-		});
+		router
+			.push(`/dashboard/admin/orders/trackOrder/${values.track_number}`)
+			.then(() => {
+				form.resetFields();
+				setLoading(false);
+			});
 	};
 
 	return (
@@ -132,7 +134,7 @@ const HomeMenu = ({ visible, setVisible }) => {
 					className="pl-5 sm:pl-32 md:pl-0 lg:pl-0 xl:pl-16"
 				>
 					<Menu mode="horizontal" defaultSelectedKeys={["1"]}>
-						{!user.isVendor && (
+						{user.isCustomer && (
 							<Menu.Item key="1">
 								<Link href="/auth/register" passHref>
 									Become a Seller

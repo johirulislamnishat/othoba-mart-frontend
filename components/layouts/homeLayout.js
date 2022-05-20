@@ -104,8 +104,11 @@ const HomeLayout = ({ children, title }) => {
                         </Link>
                     </Menu.Item> */}
 
-					<Menu.Item key="3" danger>
-						<span onClick={logout}>Sign Out</span>
+					<Menu.Item key={2}>
+						<button className="bg-transparent" onClick={logout}>
+							{" "}
+							Sign Out
+						</button>
 					</Menu.Item>
 				</>
 			) : (

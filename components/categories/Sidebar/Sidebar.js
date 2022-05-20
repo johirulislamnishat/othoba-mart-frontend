@@ -6,8 +6,8 @@ import { API_BASE_URL } from "../../../apiconstants";
 
 const Sidebar = () => {
   const [items, setItems] = useState([]);
-  console.log(items);
-
+  const [selectedCategory, setSelectedCategory] = useState("");
+  // console.log(selectedCategory);
   useEffect(() => {
     axios.get(API_BASE_URL + "/category").then(function (response) {
       setItems(response?.data?.result);
@@ -19,6 +19,9 @@ const Sidebar = () => {
   function selectedRating(e) {
     // console.log(`checked = ${e.target.checked}`);
   }
+  const selectedCategoryName = (e) => {
+    setSelectedCategory(e.target.innerText);
+  };
 
   return (
     <aside>
@@ -28,14 +31,14 @@ const Sidebar = () => {
           {items.map((item, index) => {
             return (
               <Button key={index}>
-                <span>{item.category_name}</span>
+                <span onClick={selectedCategoryName}>{item.category_name}</span>
                 <span></span>
               </Button>
             );
           })}
         </div>
       </div>
-      <div className="single-filter">
+      {/* <div className="single-filter">
         <h4>Brands</h4>
         <div>
           <Checkbox onChange={selectedCheckBox}>XIAOMI Phones</Checkbox>
@@ -94,7 +97,7 @@ const Sidebar = () => {
             </div>
           </Checkbox>
         </div>
-      </div>
+      </div> */}
       <div className="single-filter">
         <h4>Price</h4>
         <div>

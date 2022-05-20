@@ -4,7 +4,7 @@ import HomeLayout from "../../components/layouts/homeLayout";
 const About = () => {
   return (
     <HomeLayout title="About Us | Othoba Mart">
-      <div className="container mx-auto lg:py-12  md:py-10  py-8 px-4">
+      <div className="container about-us-page mx-auto lg:py-12  md:py-10  py-8 px-4">
         <div className="flex md:flex-row flex-col md:gap-6 sm:gap-10 gap-12">
           <div className="w-full md:w-6/12 flex flex-col justify-center">
             <h2 className="w-full font-bold lg:text-3xl text-2xl lg:leading-10 leading-9">
