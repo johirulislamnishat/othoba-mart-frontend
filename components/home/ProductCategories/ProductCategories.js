@@ -18,11 +18,11 @@ const ProductCategories = () => {
               </Col>
               <Col className="categories-link" md={14}>
                 <h3>Cell Phones</h3>
-                <Link href="/">iPhones</Link>
-                <Link href="/">Phone Accessories</Link>
-                <Link href="/">Phone Cases</Link>
-                <Link href="/">Postpaid Phones</Link>
-                <Link href="/">All Cell Phones </Link>
+                <Link href="/shop">iPhones</Link>
+                <Link href="/shop">Phone Accessories</Link>
+                <Link href="/shop">Phone Cases</Link>
+                <Link href="/shop">Postpaid Phones</Link>
+                <Link href="/shop">All Cell Phones </Link>
               </Col>
             </div>
           </Row>
@@ -35,11 +35,11 @@ const ProductCategories = () => {
               </Col>
               <Col className="categories-link" md={14}>
                 <h3>Headphones</h3>
-                <Link href="/">Noise Canceling</Link>
-                <Link href="/">Over-EAR</Link>
-                <Link href="/">Premium Headphones</Link>
-                <Link href="/">Sports & Fitness</Link>
-                <Link href="/">All Headphones</Link>
+                <Link href="/shop">Noise Canceling</Link>
+                <Link href="/shop">Over-EAR</Link>
+                <Link href="/shop">Premium Headphones</Link>
+                <Link href="/shop">Sports & Fitness</Link>
+                <Link href="/shop">All Headphones</Link>
               </Col>
             </div>
           </Row>
@@ -52,11 +52,11 @@ const ProductCategories = () => {
               </Col>
               <Col className="categories-link" md={14}>
                 <h3>Smartwatches</h3>
-                <Link href="/">Sport Watches</Link>
-                <Link href="/">Times Watches</Link>
-                <Link href="/">Watch Brands</Link>
-                <Link href="/">Women Watches</Link>
-                <Link href="/">All Smartwatches</Link>
+                <Link href="/shop">Sport Watches</Link>
+                <Link href="/shop">Times Watches</Link>
+                <Link href="/shop">Watch Brands</Link>
+                <Link href="/shop">Women Watches</Link>
+                <Link href="/shop">All Smartwatches</Link>
               </Col>
             </div>
           </Row>

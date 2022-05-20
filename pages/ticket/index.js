@@ -1,10 +1,45 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import HomeLayout from "../../components/layouts/homeLayout";
+import { message, Tooltip } from "antd";
+import axios from "axios";
+import { API_BASE_URL } from "../../apiconstants";
+import useProvider from "../../hooks/useProvider";
 
 const Ticket = () => {
+  const {
+    state: {
+      user: { user_name, email, accessToken },
+    },
+  } = useProvider();
+  // console.log(user);
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const ticketData = {
+      user_name: user_name,
+      user_email: email,
+      reason: data.reason,
+      support_title: data.support_title,
+      chat: [
+        {
+          user_name: user_name,
+          message: data.message,
+        },
+      ],
+    };
+
+    axios
+      .post(`${API_BASE_URL}/support`, ticketData, {
+        headers: {
+          token: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        message.success(res.data.message);
+        reset();
+      })
+      .catch(() => message.error("Failed to submit"));
+  };
   return (
     <HomeLayout title="Support Ticket | Othoba Mart">
       <div className="container px-6 grid gap-8 grid-cols-1 md:grid-cols-2  py-16 mx-auto  text-gray-700">
@@ -28,16 +63,16 @@ const Ticket = () => {
         </div>
         <div className="mt-10">
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* full name */}
-            <div>
+            {/* title  */}
+            <div className="mt-8">
               <span className="uppercase text-sm text-gray-600 font-bold">
-                Full Name
+                Title
               </span>
               <input
-                {...register("fullName", { required: true })}
+                {...register("support_title", { required: true })}
                 className="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 type="text"
-                placeholder="Enter Your Full Name"
+                placeholder="Enter Your Query Title"
               />
             </div>
 
@@ -48,7 +83,7 @@ const Ticket = () => {
               </span>
               <div>
                 <select
-                  {...register("topic")}
+                  {...register("reason")}
                   className="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 >
                   <option value="product">Product</option>
@@ -58,19 +93,6 @@ const Ticket = () => {
                   <option value="service">Service</option>
                 </select>
               </div>
-            </div>
-
-            {/* title  */}
-            <div className="mt-8">
-              <span className="uppercase text-sm text-gray-600 font-bold">
-                Title
-              </span>
-              <input
-                {...register("title", { required: true })}
-                className="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-                type="text"
-                placeholder="Enter Your Query Title"
-              />
             </div>
 
             {/* message  */}

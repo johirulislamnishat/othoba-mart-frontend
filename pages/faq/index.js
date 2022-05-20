@@ -1,13 +1,12 @@
 // import Image from "antd";
+import { Col, Image, Row } from "antd";
 import React from "react";
 import HomeLayout from "../../components/layouts/homeLayout";
-import faq from "../../assets/Images/faqs.png";
-import { Col, Image, Row } from "antd";
 
 const FAQs = () => {
   return (
     <HomeLayout title="FAQs | Othoba Mart">
-      <div className="text-gray-700">
+      <div className="text-gray-700 faqs-page">
         <div className="container pt-4 md:pt-10 py-10 mx-auto">
           <div className="text-center mb-20">
             <h1 className="text-2xl font-medium text-center title-font text-gray-700 mb-8 md:mb-16">

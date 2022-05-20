@@ -1,105 +1,67 @@
-import {
-  HeartOutlined,
-  ShoppingOutlined,
-  StarFilled,
-  StarOutlined,
-} from "@ant-design/icons";
-import { Image } from "antd";
+import { ShoppingOutlined } from "@ant-design/icons";
+import { Col, Image } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 import { addToCart, addToWish } from "../../context/actions/Actions";
 import useProvider from "../../hooks/useProvider";
 
 const ProductCardListSidebar = ({ item }) => {
-  const [cartClicked, setCartClicked] = useState(false);
-  const [wishClicked, setWishClicked] = useState(false);
-  const {
-    state: { cart, wish },
-    dispatch,
-  } = useProvider();
+    const [cartClicked, setCartClicked] = useState(false);
+    const [wishClicked, setWishClicked] = useState(false);
+    const {
+        state: { cart, wish },
+        dispatch,
+    } = useProvider();
 
-  const handleAddToWish = (item) => {
-    setWishClicked(true);
-    dispatch(addToWish(wish, item));
-  };
+    const handleAddToWish = (item) => {
+        setWishClicked(true);
+        dispatch(addToWish(wish, item));
+    };
 
-  const handleAddToCart = (item) => {
-    setCartClicked(true);
-    dispatch(addToCart(cart, item));
-  };
+    const handleAddToCart = (item) => {
+        setCartClicked(true);
+        dispatch(addToCart(cart, item));
+    };
 
-  return (
-    <>
-      <div className="product-list-view p-5 flex justify-between items-center border-2 mb-5 rounded-lg">
-        {/* <Image src={item.product_img} alt="" /> */}
+    return (
+        <>
+            <div className="single-product border flex justify-between items-center">
+                <Col sm={6} md={10} lg={10} className="product-image">
+                    <div className="single-product-image w-full">
+                        <Image preview={false} src={item?.photo} alt="" />
+                    </div>
+                </Col>
+                <Col sm={18} md={14} lg={14} className="md:pl-4">
+                    <h3>
+                        <Link href="/product/[id]" as={`/product/${item._id}`}>
+                            <a className="text-1xl"> {item?.product_name}</a>
+                        </Link>
+                    </h3>
 
-        <Image preview={false} src={item?.photo} alt="" />
-
-        <div>
-          <h3>
-            <Link href="/" className="text-1xl">
-              {item?.product_name.slice(0, 40)}
-            </Link>
-          </h3>
-          <p>Space for a small product description</p>
-          <div className="ratings mb-4">
-            {item?.ratings ? (
-              <>
-                <StarFilled />
-                <StarFilled />
-                <StarFilled />
-                <StarFilled />
-                <StarOutlined />
-              </>
-            ) : (
-              <>
-                <StarOutlined />
-                <StarOutlined />
-                <StarOutlined />
-                <StarOutlined />
-                <StarOutlined />
-              </>
-            )}
-          </div>
-          <div className="meta-data">
-            <p>
-              <span>Brand:</span>
-              <span>OPPO</span>
-            </p>
-            <p>
-              <span>Delivery:</span>
-              <span>Europe</span>
-            </p>
-            <p>
-              <span>Stoke:</span>
-              <span>320 pcs</span>
-            </p>
-          </div>
-        </div>
-        <div className="product-data">
-          <div className="product-price">
-            <h3>${item?.product_price}.00</h3>
-            <small>$779.99</small>
-          </div>
-          <h6 className="text-1xl mt-3">Free Shipping</h6>
-          <p className="text-1xl mt-3">Delivery in 1 day</p>
-
-          <button onClick={() => handleAddToCart(item)} className="custom-btn">
-            <ShoppingOutlined />
-            <span>Add to cart </span>
-          </button>
-
-          <button
-            onClick={() => handleAddToWish(item)}
-            className="custom-btn grey-btn"
-          >
-            <HeartOutlined />
-            <span> Add To Wishlist</span>
-          </button>
-        </div>
-      </div>
-    </>
-  );
+                    <div className="flex justify-between items-center mt-4">
+                        <div className="product-price">
+                            {item?.discount_price ? (
+                                <span>{item.discount_price}</span>
+                            ) : (
+                                ""
+                            )}
+                            <h3>${item?.product_price}.00</h3>
+                        </div>
+                        <div className="shopping flex justify-center items-center">
+                            <ShoppingOutlined
+                                onClick={() => handleAddToCart(item)}
+                                style={
+                                    cartClicked
+                                        ? { color: "red" }
+                                        : { color: "inherit" }
+                                }
+                            />
+                        </div>
+                    </div>
+                </Col>
+            </div>
+        </>
+    );
 };
 
 export default ProductCardListSidebar;

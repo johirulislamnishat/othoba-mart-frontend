@@ -9,6 +9,7 @@ import { increase } from "../../context/actions/Actions";
 import { removeFromCart } from "../../context/actions/Actions";
 import CheckoutCart from "./CheckoutCart";
 import { API_BASE_URL } from "../../apiconstants";
+import { useRouter } from "next/router";
 
 const inputFields = [
   {
@@ -54,14 +55,14 @@ const inputFields = [
 ];
 
 const CheckoutForm = () => {
+  const router = useRouter();
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const {
     state: {
       cart,
-      user: { accessToken },
+      user: { accessToken, _id },
     },
     dispatch,
   } = useProvider();
@@ -82,18 +83,19 @@ const CheckoutForm = () => {
   const grandTotal = parseFloat(total) + parseFloat(tax) + parseFloat(shipping);
 
   const { register, handleSubmit, reset } = useForm();
+  const { payURL, setPayURL } = useState("");
 
   const onSubmit = (data) => {
     const item = {
       user_name: `${data.fName} ${data.lName}`,
       email: data.email,
-      user_id: "11",
+      user_id: _id,
       phone: data.phone,
       address: `${data.address}, ${data.city}- ${data.zip_code}, ${data.country}.`,
       purchased_items: cart,
       total_price: total,
     };
-    console.log(item);
+    // console.log("order details : ", item);
     axios
       .post(API_BASE_URL + "/order/place", item, {
         headers: {
@@ -102,7 +104,7 @@ const CheckoutForm = () => {
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setSuccess(true);
         setIsModalVisible(true);
         reset();
@@ -110,6 +112,16 @@ const CheckoutForm = () => {
       .catch((err) => {
         setError(true);
         setIsModalVisible(true);
+        console.log(err);
+      });
+
+    axios
+      .post(API_BASE_URL + "/payment", cart)
+      .then((res) => {
+        // console.log(res.data.url);
+        router.push(res.data.url);
+      })
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -120,6 +132,17 @@ const CheckoutForm = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
+  // useEffect(() => {
+  //     axios
+  //         .post("http://localhost:5000/payment", cart)
+  //         .then((res) => {
+  //             console.log(res);
+  //         })
+  //         .catch((err) => {
+  //             console.log(err);
+  //         });
+  // }, [success]);
 
   return (
     <>
@@ -143,46 +166,53 @@ const CheckoutForm = () => {
             ))}
           </div>
 
-          {success && (
-            <Modal
-              visible={isModalVisible}
-              onOk={handleOk}
-              onCancel={handleCancel}
-              footer={[
-                <Button key="link" onClick={handleOk}>
-                  <Link href="/" passHref>
-                    Back to Home
-                  </Link>
-                </Button>,
-                <Button type="primary" key="dashboard" onClick={handleOk}>
-                  <Link href="/customer/dashboard" passHref>
-                    Go to Dashboard
-                  </Link>
-                </Button>,
-              ]}
-            >
-              <p className="text-green-500 text-lg">
-                You&apos;ve successfully placed the order.
-              </p>
-            </Modal>
-          )}
-          {error && (
-            <Modal
-              visible={isModalVisible}
-              onOk={handleOk}
-              onCancel={handleCancel}
-              footer={[
-                <Button key="back" onClick={handleCancel}>
-                  Return
-                </Button>,
-              ]}
-            >
-              <p className="text-red-500 text-lg">Something went wrong!</p>
-              <p>
-                Please check your input fields and make sure order is not empty.
-              </p>
-            </Modal>
-          )}
+          {/* {success && (
+                        <Modal
+                            visible={isModalVisible}
+                            onOk={handleOk}
+                            onCancel={handleCancel}
+                            footer={[
+                                <Button key="link" onClick={handleOk}>
+                                    <Link href="/" passHref>
+                                        Back to Home
+                                    </Link>
+                                </Button>,
+                                <Button
+                                    type="primary"
+                                    key="dashboard"
+                                    onClick={handleOk}
+                                >
+                                    <Link href="/customer/dashboard" passHref>
+                                        Go to Dashboard
+                                    </Link>
+                                </Button>,
+                            ]}
+                        >
+                            <p className="text-green-500 text-lg">
+                                You&apos;ve successfully placed the order.
+                            </p>
+                        </Modal>
+                    )}
+                    {error && (
+                        <Modal
+                            visible={isModalVisible}
+                            onOk={handleOk}
+                            onCancel={handleCancel}
+                            footer={[
+                                <Button key="back" onClick={handleCancel}>
+                                    Return
+                                </Button>,
+                            ]}
+                        >
+                            <p className="text-red-500 text-lg">
+                                Something went wrong!
+                            </p>
+                            <p>
+                                Please check your input fields and make sure
+                                order is not empty.
+                            </p>
+                        </Modal>
+                    )} */}
           <h3 className="font-semibold text-xl mt-12">Additional info</h3>
           <p className="text-xs text-gray-500">
             Need something else? We will make it for you!

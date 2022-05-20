@@ -1,13 +1,34 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import emailjs from "@emailjs/browser";
+import { message } from "antd";
+import React, { useRef } from "react";
 import HomeLayout from "../../components/layouts/homeLayout";
 
 const Contact = () => {
-  const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_contact",
+        "template_ltscu1v",
+        form.current,
+        "NBFT4b5XVRXiuHBpX"
+      )
+      .then(
+        (result) => {
+          // console.log(result.text);
+          result.text && message.success("Submitted");
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
   return (
     <HomeLayout title="Contact Us | Othoba Mart">
-      <div className="container px-6 grid gap-8 grid-cols-1 md:grid-cols-2  py-16 mx-auto  text-gray-700">
+      <div className="container contact-us-page px-6 grid gap-8 grid-cols-1 md:grid-cols-2  py-16 mx-auto  text-gray-700">
         <div className="flex flex-col justify-between">
           <div>
             <h2 className="w-full font-bold lg:text-3xl text-2xl lg:leading-10 leading-9">
@@ -975,13 +996,14 @@ const Contact = () => {
           </div>
         </div>
         <div className="mt-8">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form ref={form} onSubmit={sendEmail}>
             <div>
               <span className="uppercase text-sm text-gray-600 font-bold">
                 Full Name
               </span>
               <input
-                {...register("fullName", { required: true })}
+                name="user_name"
+                required="true"
                 className="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="Enter Your Full Name"
@@ -992,7 +1014,8 @@ const Contact = () => {
                 Email
               </span>
               <input
-                {...register("email", { required: true })}
+                name="user_email"
+                required="true"
                 className="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 type="email"
                 placeholder="Enter Your Email"
@@ -1003,7 +1026,8 @@ const Contact = () => {
                 Message
               </span>
               <textarea
-                {...register("message", { required: true })}
+                name="message"
+                required="true"
                 defaultValue=""
                 placeholder="Enter Your Message"
                 className="w-full h-32 bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
@@ -1012,10 +1036,11 @@ const Contact = () => {
             <div className="mt-8">
               <button
                 type="submit"
+                value="Send"
                 style={{ backgroundColor: "#f66a05" }}
                 className="uppercase text-sm font-bold tracking-wide  text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline"
               >
-                Send Message
+                Contact
               </button>
             </div>
           </form>

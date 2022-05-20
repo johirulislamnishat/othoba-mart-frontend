@@ -3,7 +3,7 @@ import {
   BorderInnerOutlined,
   FilterOutlined,
 } from "@ant-design/icons";
-import { Button, Checkbox, Drawer, Radio, Space } from "antd";
+import { Button, Drawer, Radio, Space } from "antd";
 import React, { useState } from "react";
 import MainArea from "../MainArea/MainArea";
 import Sidebar from "../Sidebar/Sidebar";
@@ -20,11 +20,11 @@ const CategoriesPage = () => {
   };
 
   const onChange = (e) => {
-    console.log("radio checked", e.target.value);
+    // console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
   function getChecked(e) {
-    console.log(`checked = ${e.target.checked}`);
+    // console.log(`checked = ${e.target.checked}`);
   }
   const showDefaultDrawer = () => {
     setSize("default");
@@ -38,7 +38,7 @@ const CategoriesPage = () => {
     <>
       <div className="categories-page-top">
         <div className="flex justify-between items-center">
-          <h2>Smartphone & Accessories</h2>
+          <h2>Shop</h2>
           <div className="grid-or-list-view flex justify-between items-center">
             <div
               onClick={() => handleView("gide-view")}
@@ -90,16 +90,10 @@ const CategoriesPage = () => {
               <Radio value={"filter-text2"}>High to Low</Radio>
             </Radio.Group>
           </div>
-          <div>
-            <Checkbox onChange={getChecked}>New</Checkbox>
-          </div>
-          <div>
-            <Checkbox onChange={getChecked}>Top</Checkbox>
-          </div>
         </div>
       </div>
-      <div className="categories-page-container">
-        <Sidebar></Sidebar>
+      <div>
+        {/* <Sidebar></Sidebar> */}
         <MainArea view={view}></MainArea>
       </div>
     </>
