@@ -38,7 +38,7 @@ const Sidebar = () => {
           })}
         </div>
       </div>
-      <div className="single-filter">
+      {/* <div className="single-filter">
         <h4>Brands</h4>
         <div>
           <Checkbox onChange={selectedCheckBox}>XIAOMI Phones</Checkbox>
@@ -97,7 +97,7 @@ const Sidebar = () => {
             </div>
           </Checkbox>
         </div>
-      </div>
+      </div> */}
       <div className="single-filter">
         <h4>Price</h4>
         <div>
