@@ -7,7 +7,7 @@ import { API_BASE_URL } from "../../../apiconstants";
 const Sidebar = () => {
   const [items, setItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  console.log(selectedCategory);
+  // console.log(selectedCategory);
   useEffect(() => {
     axios.get(API_BASE_URL + "/category").then(function (response) {
       setItems(response?.data?.result);
@@ -38,7 +38,7 @@ const Sidebar = () => {
           })}
         </div>
       </div>
-      <div className="single-filter">
+      {/* <div className="single-filter">
         <h4>Brands</h4>
         <div>
           <Checkbox onChange={selectedCheckBox}>XIAOMI Phones</Checkbox>
@@ -97,7 +97,7 @@ const Sidebar = () => {
             </div>
           </Checkbox>
         </div>
-      </div>
+      </div> */}
       <div className="single-filter">
         <h4>Price</h4>
         <div>

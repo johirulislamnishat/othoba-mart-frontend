@@ -47,7 +47,10 @@ const AdminTop = ({ pageTitle, child }) => {
         </Link>
       </Menu.Item>
       <Menu.Item key={2}>
-        <button onClick={logout}> Sign Out</button>
+        <button className="bg-transparent" onClick={logout}>
+          {" "}
+          Sign Out
+        </button>
       </Menu.Item>
     </Menu>
   );
