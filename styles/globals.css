@@ -1536,3 +1536,45 @@ label.ant-checkbox-wrapper>span {
 .contact-us-page span {
   color: var(--color-primary);
 }
+
+/* review  */
+
+.review-area {
+  width: 300px;
+  margin: 20px 0;
+}
+
+.review-area h1 {
+  font-weight: 500;
+  font-size: 17px;
+}
+.pro-name {
+  font-weight: 500;
+  font-size: 20px;
+}
+.rateinput, .rating{
+  border: .5px solid #8a8a8a63;
+  margin: 10px 0;
+  padding: 10px;
+
+}
+
+.review form {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-btn {
+  background-color: #f66a05;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 8px;
+  border-radius: 8px;
+  width: 40%;
+}
+
+.product-container{
+  padding: 25px;
+  border-bottom: .5px solid #8a8a8a63 ;
+}
