@@ -37,10 +37,6 @@ const CategoriesBasedProductsGrid = ({ selectedCategory }) => {
       });
   }, [selectedCategory]);
 
-  useEffect(() => {
-    console.log(items);
-  }, []);
-
   return (
     <div className="container category-based-products">
       <Radio.Group
