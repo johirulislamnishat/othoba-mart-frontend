@@ -1,20 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../../apiconstants";
 import ConversationCss from "../../styles/Conversation.module.css";
 
 export default function Conversation({ conversation, currentUser }) {
     const [user, setUser] = useState(null);
-    // const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    // console.log("user", user);
 
     useEffect(() => {
         const friendId = conversation?.members.find(
             (m) => m !== currentUser._id
         );
-
         const getUser = async () => {
             try {
                 const res = await axios(
-                    "http://localhost:5000/users?userId=" + friendId
+                    API_BASE_URL + `/user?userId=` + friendId
                 );
                 setUser(res.data);
             } catch (err) {
@@ -32,7 +32,7 @@ export default function Conversation({ conversation, currentUser }) {
                 alt=""
             />
             <span className={ConversationCss.conversationName}>
-                {user?.username}
+                {user?.user_name}
             </span>
         </div>
     );
