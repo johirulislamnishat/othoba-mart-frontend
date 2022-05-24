@@ -137,10 +137,10 @@ const Orders = () => {
                             Approved
                         </div>
                     </Option>
-                    <Option id={order._id} value="shifted">
+                    <Option id={order._id} value="delevered">
                         <div className="flex items-center">
                             <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-violet-500" />
-                            Shifted
+                            Delevered
                         </div>
                     </Option>
                     <Option id={order._id} value="completed">
@@ -173,8 +173,8 @@ const Orders = () => {
                     value: "approved",
                 },
                 {
-                    text: "Shifted",
-                    value: "shifted",
+                    text: "delevered",
+                    value: "delevered",
                 },
                 {
                     text: "Completed",
@@ -197,7 +197,10 @@ const Orders = () => {
             width: 80,
             render: (order) => (
                 <Space split={<Divider type="vertical" />}>
-                    <Link href={`/dashboard/customer/orders/${order?._id}`} passHref>
+                    <Link
+                        href={`/dashboard/customer/orders/${order?._id}`}
+                        passHref
+                    >
                         <FileTextOutlined />
                     </Link>
 
