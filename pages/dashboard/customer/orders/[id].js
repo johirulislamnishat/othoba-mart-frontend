@@ -64,7 +64,7 @@ const OrderDetails = () => {
                         <p>
                             <b>Total Price:</b> ${product?.item_total_price}
                         </p>
-                        {orderData?.status === "delivered" ? (
+                        {orderData?.status === "delevered" ? (
                             <Review id={product?._id} />
                         ) : (
                             ""
