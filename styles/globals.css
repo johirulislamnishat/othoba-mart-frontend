@@ -64,6 +64,10 @@ a {
   --color-anchor: #000aff;
 
   --color-background: #fff;
+  --color-gray-bg: #f3f4f6;
+  --color-orange-bg: #ffedd6;
+  --color-orange-bg: #ffedd6;
+  --color-orange-border: #ffedd6;
   --brand-color: #f66a05;
   --color-primary: #333;
   --grey-color: #999;
@@ -81,6 +85,10 @@ a {
   --color-anchor: #00ff4c;
 
   --color-background: #22212b;
+  --color-gray-bg: #22212b;
+  --color-orange-bg: #22212b;
+  --color-orange-border: #fff;
+  --color-white-border: #fff;
   --brand-color: #f66a05;
   --color-primary: #fff;
   --grey-color: #999;
@@ -104,7 +112,14 @@ header,
   background-color: var(--color-background) !important;
   color: var(--color-primary) !important;
 }
-
+.bg-gray-100 {
+  background-color: var(--color-gray-bg);
+  border: 1px solid var(--color-white-border);
+}
+.bg-orange-100 {
+  background-color: var(--color-orange-bg);
+  border: 1px solid var(--color-orange-border);
+}
 aside h3 {
   color: var(--color-primary);
 }
@@ -1541,5 +1556,9 @@ label.ant-checkbox-wrapper > span {
 
 .contact-us-page h1,
 .contact-us-page span {
+  color: var(--color-primary);
+}
+.bg-gray-100 h3,
+.bg-orange-100 h3 {
   color: var(--color-primary);
 }
