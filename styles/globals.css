@@ -1577,3 +1577,6 @@ label.ant-checkbox-wrapper > span {
 .single-product-page h3 {
   color: var(--color-primary);
 }
+.ant-layout.ant-layout-has-sider .ant-layout-sider-children {
+  background-color: #001529;
+}
