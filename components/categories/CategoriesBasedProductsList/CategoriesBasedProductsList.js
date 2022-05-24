@@ -43,6 +43,7 @@ const CategoriesBasedProductsList = ({ selectedCategory }) => {
         style={{ marginBottom: 30 }}
         onChange={onChange}
         value={value}
+        className="high-low-radio-btn"
       >
         <Radio defaultChecked={false} value={"1"}>
           High to Low

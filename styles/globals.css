@@ -1562,3 +1562,6 @@ label.ant-checkbox-wrapper > span {
 .bg-orange-100 h3 {
   color: var(--color-primary);
 }
+.high-low-radio-btn span {
+  color: var(--color-primary) !important;
+}
