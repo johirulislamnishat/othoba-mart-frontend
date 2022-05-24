@@ -32,29 +32,41 @@ const AdminTop = ({ pageTitle, child }) => {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
 	const pageName = router.pathname.split("/");
-
-	const menu = (
+	const [menu, setMenu] = useState(
 		<Menu>
-			<Menu.Item key={1}>
-				<Link href="" passHref>
-					Profile
+			<Menu.Item key="3" danger>
+				<Link href="/auth/login" passHref>
+					SignIn
 				</Link>
 			</Menu.Item>
-			{isLogin ? (
-				<Menu.Item key={2}>
-					<button className="bg-transparent" onClick={logout}>
-						Sign Out
-					</button>
-				</Menu.Item>
-			) : (
-				<Menu.Item key="3" danger>
-					<Link href="/auth/login" passHref>
-						SignIn
-					</Link>
-				</Menu.Item>
-			)}
 		</Menu>
 	);
+
+	useEffect(() => {
+		setMenu(
+			<Menu>
+				<Menu.Item key={1}>
+					<Link href="" passHref>
+						Profile
+					</Link>
+				</Menu.Item>
+				{isLogin ? (
+					<Menu.Item key={2}>
+						<button className="bg-transparent" onClick={logout}>
+							Sign Out
+						</button>
+					</Menu.Item>
+				) : (
+					<Menu.Item key="3" danger>
+						<Link href="/auth/login" passHref>
+							SignIn
+						</Link>
+					</Menu.Item>
+				)}
+			</Menu>
+		);
+	}, [isLogin, logout]);
+
 	const customTitle = (
 		<div className="flex items-center w-full">
 			<div className="block lg:hidden flex items-center h-full">
