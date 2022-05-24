@@ -180,7 +180,7 @@ const VendorDashboard = () => {
 
   return (
     <AdminLayout title="Vendor | Dashboard" pageTitle="Dashboard">
-      <h4>Waiting for Admin approval</h4>
+      {/* <h4>Waiting for Admin approval</h4> */}
       <Space direction="vertical" size={45} className="w-full">
         <Row gutter={[12, 12]} justify="space-around" align="middle">
           <Col xs={24} md={12} lg={6}>

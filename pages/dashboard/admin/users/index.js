@@ -71,7 +71,7 @@ const Users = () => {
             title: "Name",
             dataIndex: "user_name",
             key: "1",
-            width: 250,
+            width: 120,
             defaultSortOrder: "descend",
             sorter: (a, b) =>
                 a.user_name.charCodeAt(0) - b.user_name.charCodeAt(0),
@@ -80,12 +80,12 @@ const Users = () => {
             title: "email",
             dataIndex: "email",
             key: "2",
-            width: 300,
+            width: 200,
         },
         {
             title: "Role",
             key: "3",
-            width: 300,
+            width: 180,
             render: (user) => (
                 <div>
                     {user.isSuperAdmin && (
@@ -115,10 +115,10 @@ const Users = () => {
             title: "Shop Name",
             dataIndex: "shop_name",
             key: "4",
-            width: 160,
+            width: 130,
         },
         {
-            title: "Status",
+            title: "Vendor Status",
             key: "5",
             width: 150,
             render: (user) => (
@@ -165,7 +165,7 @@ const Users = () => {
                 record.vendor_status.indexOf(value) === 0,
         },
         {
-            title: "",
+            title: "Actions",
             key: "actions",
             width: 40,
             render: (user) => (

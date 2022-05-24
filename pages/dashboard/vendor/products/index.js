@@ -98,17 +98,17 @@ const Products = () => {
       title: "Categories",
       dataIndex: "product_category",
       key: "product_category",
-      width: 280,
-      render: (categories) =>
-        categories ? (
-          <>
-            {categories.map((category) => (
-              <Tag color={"rgba(255, 239, 217, 1)"} key={category}>
-                <span className="text-orange-500">{category}</span>
-              </Tag>
-            ))}
-          </>
-        ) : null,
+      width: 200,
+      // render: (categories) =>
+      //   categories ? (
+      //     <>
+      //       {categories.map((category) => (
+      //         <Tag color={"rgba(255, 239, 217, 1)"} key={category}>
+      //           <span className="text-orange-500">{category}</span>
+      //         </Tag>
+      //       ))}
+      //     </>
+      //   ) : null,
     },
     {
       title: "Colors",
@@ -164,78 +164,79 @@ const Products = () => {
     {
       title: "Status",
       key: "status",
+      dataIndex: "status",
       width: 150,
-      render: (product) => (
-        <Select
-          defaultValue={product.status.toLowerCase()}
-          style={{ width: 150 }}
-          onChange={(value, field) => handleStatus(value, field)}
-        >
-          <Option id={product._id} value="pending">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-yellow-400" />
-              Pending
-            </div>
-          </Option>
-          <Option id={product._id} value="approved">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-lime-300" />
-              Approved
-            </div>
-          </Option>
-          <Option id={product._id} value="shifted">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-violet-500" />
-              Shifted
-            </div>
-          </Option>
-          <Option id={product._id} value="completed">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-green-500" />
-              Completed
-            </div>
-          </Option>
-          <Option id={product._id} value="cancled">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-stone-300" />
-              Cancled
-            </div>
-          </Option>
-          <Option id={product._id} value="rejected">
-            <div className="flex items-center">
-              <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-red-500" />
-              Rejected
-            </div>
-          </Option>
-        </Select>
-      ),
-      filters: [
-        {
-          text: "Pending",
-          value: "pending",
-        },
-        {
-          text: "Approved",
-          value: "approved",
-        },
-        {
-          text: "Shifted",
-          value: "shifted",
-        },
-        {
-          text: "Completed",
-          value: "completed",
-        },
-        {
-          text: "Cancled",
-          value: "cancled",
-        },
-        {
-          text: "Rejected",
-          value: "rejected",
-        },
-      ],
-      onFilter: (value, record) => record.status.indexOf(value) === 0,
+      // render: (product) => (
+      //   <Select
+      //     defaultValue={product.status.toLowerCase()}
+      //     style={{ width: 150 }}
+      //     onChange={(value, field) => handleStatus(value, field)}
+      //   >
+      //     <Option id={product._id} value="pending">
+      //       <div className="flex items-center">
+      //         <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-yellow-400" />
+      //         Pending
+      //       </div>
+      //     </Option>
+      //     <Option id={product._id} value="approved">
+      //       <div className="flex items-center">
+      //         <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-lime-300" />
+      //         Approved
+      //       </div>
+      //     </Option>
+      //     <Option id={product._id} value="shifted">
+      //       <div className="flex items-center">
+      //         <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-violet-500" />
+      //         Shifted
+      //       </div>
+      //     </Option>
+      //     <Option id={product._id} value="completed">
+      //       <div className="flex items-center">
+      //         <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-green-500" />
+      //         Completed
+      //       </div>
+      //     </Option>
+      //     <Option id={product._id} value="cancled">
+      //       <div className="flex items-center">
+      //         <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-stone-300" />
+      //         Cancled
+      //       </div>
+      //     </Option>
+      //     <Option id={product._id} value="rejected">
+      //       <div className="flex items-center">
+      //         <div className="m-1 mr-2 w-2 h-2 relative rounded-full bg-red-500" />
+      //         Rejected
+      //       </div>
+      //     </Option>
+      //   </Select>
+      // ),
+      // filters: [
+      //   {
+      //     text: "Pending",
+      //     value: "pending",
+      //   },
+      //   {
+      //     text: "Approved",
+      //     value: "approved",
+      //   },
+      //   {
+      //     text: "Shifted",
+      //     value: "shifted",
+      //   },
+      //   {
+      //     text: "Completed",
+      //     value: "completed",
+      //   },
+      //   {
+      //     text: "Cancled",
+      //     value: "cancled",
+      //   },
+      //   {
+      //     text: "Rejected",
+      //     value: "rejected",
+      //   },
+      // ],
+      // onFilter: (value, record) => record.status.indexOf(value) === 0,
     },
     {
       title: "Actions",
