@@ -71,7 +71,11 @@ const Users = () => {
             title: "Name",
             dataIndex: "user_name",
             key: "1",
+<<<<<<< HEAD
             width: 120,
+=======
+            width: 250,
+>>>>>>> origin
             defaultSortOrder: "descend",
             sorter: (a, b) =>
                 a.user_name.charCodeAt(0) - b.user_name.charCodeAt(0),
@@ -80,12 +84,20 @@ const Users = () => {
             title: "email",
             dataIndex: "email",
             key: "2",
+<<<<<<< HEAD
             width: 200,
+=======
+            width: 300,
+>>>>>>> origin
         },
         {
             title: "Role",
             key: "3",
+<<<<<<< HEAD
             width: 180,
+=======
+            width: 300,
+>>>>>>> origin
             render: (user) => (
                 <div>
                     {user.isSuperAdmin && (
@@ -115,10 +127,17 @@ const Users = () => {
             title: "Shop Name",
             dataIndex: "shop_name",
             key: "4",
+<<<<<<< HEAD
             width: 130,
         },
         {
             title: "Vendor Status",
+=======
+            width: 160,
+        },
+        {
+            title: "Status",
+>>>>>>> origin
             key: "5",
             width: 150,
             render: (user) => (
