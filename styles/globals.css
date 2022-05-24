@@ -64,6 +64,10 @@ a {
   --color-anchor: #000aff;
 
   --color-background: #fff;
+  --color-gray-bg: #f3f4f6;
+  --color-orange-bg: #ffedd6;
+  --color-orange-bg: #ffedd6;
+  --color-orange-border: #ffedd6;
   --brand-color: #f66a05;
   --color-primary: #333;
   --grey-color: #999;
@@ -81,6 +85,10 @@ a {
   --color-anchor: #00ff4c;
 
   --color-background: #22212b;
+  --color-gray-bg: #22212b;
+  --color-orange-bg: #22212b;
+  --color-orange-border: #fff;
+  --color-white-border: #fff;
   --brand-color: #f66a05;
   --color-primary: #fff;
   --grey-color: #999;
@@ -100,11 +108,19 @@ header,
 .ant-menu-horizontal li a,
 .category-menu-home ul,
 .category-menu-home li,
-.support-page__single {
+.support-page__single,
+.single-blog {
   background-color: var(--color-background) !important;
   color: var(--color-primary) !important;
 }
-
+.container .bg-gray-100 {
+  background-color: var(--color-gray-bg);
+  border: 1px solid var(--color-white-border);
+}
+.container .bg-orange-100 {
+  background-color: var(--color-orange-bg);
+  border: 1px solid var(--color-orange-border);
+}
 aside h3 {
   color: var(--color-primary);
 }
@@ -120,14 +136,12 @@ aside h3 {
   top: 42px;
   z-index: 1;
 }
-
 @media only screen and (max-width: 668px) {
   .switch {
     right: 145px;
     top: 34px;
   }
 }
-
 .switch input {
   opacity: 0;
   width: 0;
@@ -1154,7 +1168,6 @@ single product page style
   font-size: 14px;
   color: var(--color-primary);
 }
-
 .single-product-page .product-data-tab {
   color: var(--color-primary);
 }
@@ -1538,11 +1551,41 @@ label.ant-checkbox-wrapper > span {
   color: var(--color-primary);
 }
 
+.about-us-page p,
+.about-us-page h2,
+.faqs-page h1,
+.faqs-page p,
+.support-page h1,
+.support-page h4 {
+  color: var(--color-primary);
+}
+
 .faqs-page summary {
   color: #333;
 }
 
-.contact-us-page h1,
+.contact-us-page h2,
 .contact-us-page span {
   color: var(--color-primary);
+}
+.container .bg-gray-100 h3,
+.container .bg-orange-100 h3 {
+  color: var(--color-primary);
+}
+.high-low-radio-btn span {
+  color: var(--color-primary) !important;
+}
+
+.single-blog .ant-card-meta-title {
+  color: var(--color-primary);
+}
+.single-blog .ant-card-meta-description {
+  color: var(--color-primary);
+}
+
+.single-product-page h3 {
+  color: var(--color-primary);
+}
+.ant-layout.ant-layout-has-sider .ant-layout-sider-children {
+  background-color: #001529;
 }

@@ -1,5 +1,4 @@
-import { StarFilled, StarOutlined } from "@ant-design/icons";
-import { Button, Checkbox } from "antd";
+import { Button } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
@@ -62,8 +61,8 @@ const MainArea = ({ view }) => {
             <Checkbox onChange={selectedCheckBox}>LG Electronic</Checkbox>
             <Checkbox onChange={selectedCheckBox}>NOKIA Phone</Checkbox>
           </div>
-        </div>
-        <div className="single-filter">
+        </div> */}
+        {/* <div className="single-filter">
           <h4>Ratings</h4>
           <div>
             <Checkbox onChange={selectedRating}>

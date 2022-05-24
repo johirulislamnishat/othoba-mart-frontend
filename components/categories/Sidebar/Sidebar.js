@@ -1,5 +1,4 @@
-import { StarFilled, StarOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Slider } from "antd";
+import { Button, Slider } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
@@ -7,7 +6,7 @@ import { API_BASE_URL } from "../../../apiconstants";
 const Sidebar = () => {
   const [items, setItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  // console.log(selectedCategory);
+  console.log(selectedCategory);
   useEffect(() => {
     axios.get(API_BASE_URL + "/category").then(function (response) {
       setItems(response?.data?.result);
