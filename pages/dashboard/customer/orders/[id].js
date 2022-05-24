@@ -40,6 +40,7 @@ const OrderDetails = () => {
 
     return (
         <AdminLayout title={"Customer | Order Details"}>
+            <h1 className="heading-order">Shipping details: </h1>
             <div className="order-details">
                 <h1>Name: {orderData?.user_name}</h1>
                 <h1>Email: {orderData?.email}</h1>
@@ -63,7 +64,7 @@ const OrderDetails = () => {
                         <p>
                             <b>Total Price:</b> ${product?.item_total_price}
                         </p>
-                        {orderData?.status === "placed" ? (
+                        {orderData?.status === "delivered" ? (
                             <Review id={product?._id} />
                         ) : (
                             ""
