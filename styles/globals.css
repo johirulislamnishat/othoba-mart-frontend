@@ -108,15 +108,16 @@ header,
 .ant-menu-horizontal li a,
 .category-menu-home ul,
 .category-menu-home li,
-.support-page__single {
+.support-page__single,
+.single-blog {
   background-color: var(--color-background) !important;
   color: var(--color-primary) !important;
 }
-.bg-gray-100 {
+.container .bg-gray-100 {
   background-color: var(--color-gray-bg);
   border: 1px solid var(--color-white-border);
 }
-.bg-orange-100 {
+.container .bg-orange-100 {
   background-color: var(--color-orange-bg);
   border: 1px solid var(--color-orange-border);
 }
@@ -1554,14 +1555,25 @@ label.ant-checkbox-wrapper > span {
   color: #333;
 }
 
-.contact-us-page h1,
+.contact-us-page h2,
 .contact-us-page span {
   color: var(--color-primary);
 }
-.bg-gray-100 h3,
-.bg-orange-100 h3 {
+.container .bg-gray-100 h3,
+.container .bg-orange-100 h3 {
   color: var(--color-primary);
 }
 .high-low-radio-btn span {
   color: var(--color-primary) !important;
+}
+
+.single-blog .ant-card-meta-title {
+  color: var(--color-primary);
+}
+.single-blog .ant-card-meta-description {
+  color: var(--color-primary);
+}
+
+.single-product-page h3 {
+  color: var(--color-primary);
 }
