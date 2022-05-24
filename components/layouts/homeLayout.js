@@ -366,7 +366,7 @@ const HomeLayout = ({ children, title }) => {
 			<Content style={{ minHeight: "90vh", backgroundColor: "white" }}>
 				<div className="container mx-auto px-3">{children}</div>
 			</Content>
-			<footer className="bg-white px-2">
+			<footer className="bg-white">
 				<HomeFooter />
 			</footer>
 		</Layout>
