@@ -13,10 +13,8 @@ const PromoSmOne = () => {
               <h4>Weekend Discount</h4>
               <h3>Headphone</h3>
               <p>Do not miss the last opportunity</p>
-              <Link href="shop">
-                <Link href="shop">
-                  <button className="custom-btn">Shop Now</button>
-                </Link>
+              <Link href="/shop" passHref>
+                <button className="custom-btn">Shop Now</button>
               </Link>
             </Col>
             <Col md={12}>
@@ -30,10 +28,8 @@ const PromoSmOne = () => {
               <h4>Weekend Discount</h4>
               <h3>Speaker</h3>
               <p>Do not miss the last opportunity</p>
-              <Link href="shop">
-                <Link href="shop">
-                  <button className="custom-btn">Shop Now</button>
-                </Link>
+              <Link href="/shop" passHref>
+                <button className="custom-btn">Shop Now</button>
               </Link>
             </Col>
             <Col md={12}>

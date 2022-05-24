@@ -32,10 +32,12 @@ const HomeMenu = ({ visible, setVisible }) => {
   const handleSubmit = (values) => {
     setLoading(true);
     setShowTrack(!showTrack);
-    router.push(`/admin/orders/trackOrder/${values.track_number}`).then(() => {
-      form.resetFields();
-      setLoading(false);
-    });
+    router
+      .push(`/dashboard/admin/orders/trackOrder/${values.track_number}`)
+      .then(() => {
+        form.resetFields();
+        setLoading(false);
+      });
   };
 
   return (
@@ -116,11 +118,11 @@ const HomeMenu = ({ visible, setVisible }) => {
                 <Link href="/blogs">Blogs</Link>
               </Menu.Item>
 
-              {user.isVendor && (
+              {/* {user.isVendor && (
                 <Menu.Item key="5">
                   <Link href="/dashboard/vendor">Admin</Link>
                 </Menu.Item>
-              )}
+              )} */}
             </Menu>
           </div>
 
@@ -255,11 +257,11 @@ const HomeMenu = ({ visible, setVisible }) => {
             <Link href="/blogs">Blogs</Link>
           </Menu.Item>
 
-          {user.isVendor && (
+          {/* {user.isVendor && (
             <Menu.Item key="5">
               <Link href="/dashboard/vendor">Admin</Link>
             </Menu.Item>
-          )}
+          )} */}
         </Menu>
       </Drawer>
     </>

@@ -1,5 +1,4 @@
-import { StarFilled, StarOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Slider } from "antd";
+import { Button, Slider } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../../../apiconstants";
@@ -38,7 +37,7 @@ const Sidebar = () => {
           })}
         </div>
       </div>
-      <div className="single-filter">
+      {/* <div className="single-filter">
         <h4>Brands</h4>
         <div>
           <Checkbox onChange={selectedCheckBox}>XIAOMI Phones</Checkbox>
@@ -97,7 +96,7 @@ const Sidebar = () => {
             </div>
           </Checkbox>
         </div>
-      </div>
+      </div> */}
       <div className="single-filter">
         <h4>Price</h4>
         <div>

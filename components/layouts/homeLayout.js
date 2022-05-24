@@ -22,6 +22,7 @@ import WishMini from "../wish/WishMini";
 const { Content } = Layout;
 
 const HomeLayout = ({ children, title }) => {
+  
   const {
     state: { user, cart, wish },
   } = useProvider();
@@ -93,10 +94,11 @@ const HomeLayout = ({ children, title }) => {
                         </Link>
                     </Menu.Item> */}
 
-          <Menu.Item key="3" danger>
-            <Menu.Item key={2}>
-              <button onClick={logout}> Sign Out</button>
-            </Menu.Item>
+          <Menu.Item key={2}>
+            <button className="bg-transparent" onClick={logout}>
+              {" "}
+              Sign Out
+            </button>
           </Menu.Item>
         </>
       ) : (
