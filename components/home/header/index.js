@@ -8,6 +8,7 @@ import { Button, Carousel, Col, Image, Menu, Row } from "antd";
 import Title from "antd/lib/typography/Title";
 import Router from "next/router";
 import React from "react";
+import Link from "next/link";
 
 const HomeHeader = () => {
   return (
@@ -122,15 +123,18 @@ const HomeHeader = () => {
             </span>
             <p>Get payment terms and much more</p>
 
-            <button className="bg-amber-500 text-black w-full p-1 rounded-full">
-              Upgrade
-            </button>
+            <Link href="/coming-soon" passHref>
+              <button className="bg-amber-500 text-black w-full p-1 rounded-full">
+                Upgrade
+              </button>
+            </Link>
           </div>
-          <Button type="primary" className="mt-3" block>
-            Selected Machinery
-          </Button>
-
-          <Row align="middle" className="mt-3">
+          <Link href="/coming-soon" passHref>
+            <Button type="primary" className="mt-3 " block>
+              Selected Machinery
+            </Button>
+          </Link>
+          <Row align="middle" className="mt-3 ">
             <Col xs={20}>
               <Title level={5}>Woodworking Machinery</Title>
             </Col>
