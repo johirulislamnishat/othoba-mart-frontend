@@ -217,11 +217,11 @@ const AdminMenu = ({ collapsed }) => {
 
                 {maximumRole === "customer" && (
                     <>
-                        <Menu.Item key="customer" icon={<DashboardOutlined />}>
+                        {/* <Menu.Item key="customer" icon={<DashboardOutlined />}>
                             <Link href="/dashboard/customer" passHref>
                                 Dashboard
                             </Link>
-                        </Menu.Item>
+                        </Menu.Item> */}
                         <Menu.Item key="orders" icon={<ShopOutlined />}>
                             <Link href="/dashboard/customer/orders" passHref>
                                 My Orders
