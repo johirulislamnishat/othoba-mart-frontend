@@ -12,7 +12,7 @@ const Review = (props) => {
         reset,
         formState: { errors },
     } = useForm();
-    // const { user } = useAuth();
+
     const {
         state: {
             user: { accessToken, user_name, _id },
@@ -20,7 +20,6 @@ const Review = (props) => {
     } = useProvider();
 
     const onSubmit = (data) => {
-        // console.log(data);
         const formData = {
             ...data,
             reviewer_id: _id,
@@ -28,7 +27,6 @@ const Review = (props) => {
         console.log(formData);
         axios
             .post(`${API_BASE_URL}/review`, formData, {
-            // .post(`http://localhost:5000/review`, formData, {
                 headers: {
                     token: `Bearer ${accessToken}`,
                     product_id: props.id,

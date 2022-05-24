@@ -5,7 +5,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import useProvider from "../../hooks/useProvider";
 import axios from "axios";
 import { io } from "socket.io-client";
-import HomeLayout from "../../components/layouts/homeLayout";
+import AdminLayout from "../../components/layouts/adminLayout";
 import { API_BASE_URL } from "../../apiconstants";
 
 export default function Messenger() {
@@ -115,7 +115,7 @@ export default function Messenger() {
 
     return (
         <>
-            <HomeLayout>
+            <AdminLayout title="Dashboard" pageTitle="Chatbox">
                 <div className={ChatStyle.messenger}>
                     <div className={ChatStyle.chatMenu}>
                         <div className={ChatStyle.chatMenuWrapper}>
@@ -176,7 +176,7 @@ export default function Messenger() {
                         </div>
                     </div>
                 </div>
-            </HomeLayout>
+            </AdminLayout>
         </>
     );
 }

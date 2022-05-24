@@ -1578,3 +1578,18 @@ label.ant-checkbox-wrapper>span {
   padding: 25px;
   border-bottom: .5px solid #8a8a8a63 ;
 }
+
+.order-details{
+  padding-top: 50px;
+  padding-left: 20px;
+}
+
+.order-details h1{
+  font-size: 18px;
+}
+.heading-order{
+  font-size: 20px;
+  font-weight: 900;
+  padding: 25px;
+  border-bottom: 1px solid
+}

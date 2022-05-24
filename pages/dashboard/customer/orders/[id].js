@@ -5,6 +5,7 @@ import { API_BASE_URL } from "../../../../apiconstants";
 import AdminLayout from "../../../../components/layouts/adminLayout";
 import Review from "../../../../components/review";
 import useProvider from "../../../../hooks/useProvider";
+import Link from "next/link";
 
 const OrderDetails = () => {
     const router = useRouter();
@@ -39,7 +40,14 @@ const OrderDetails = () => {
 
     return (
         <AdminLayout title={"Customer | Order Details"}>
-            <p>OrderDetails</p>
+            <div className="order-details">
+                <h1>Name: {orderData?.user_name}</h1>
+                <h1>Email: {orderData?.email}</h1>
+                <h1>Phone: {orderData?.phone}</h1>
+                <h1>Tracking Id: {orderData?.tracking_id}</h1>
+                <h1>Shipping Address: {orderData?.address}</h1>
+            </div>
+            <h1 className="heading-order">All ordered products: </h1>
             {items.map((product, index) => {
                 return (
                     <div key={index} className="product-container">
@@ -50,11 +58,9 @@ const OrderDetails = () => {
                             <b>Shop Name:</b> {product?.shop_name}
                         </p>
                         <p>
-                           
                             <b>Total QTY:</b> {product?.item_qty}
                         </p>
                         <p>
-                            
                             <b>Total Price:</b> ${product?.item_total_price}
                         </p>
                         {orderData?.status === "placed" ? (
