@@ -54,6 +54,40 @@ a {
   box-sizing: border-box;
 }
 
+/* top header */
+.top-header {
+  position: relative;
+}
+.top-header .bg {
+  height: 76px;
+  background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20210115/pngtree-background-e-commerce-promotion-banner-image_518676.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.top-close {
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 1;
+  font-size: large;
+  position: absolute;
+  top: 16px;
+  right: 10px;
+}
+
+.top-header .content {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  background-color: #0f0c29bb;
+  color: white;
+}
+.top-header .content .container {
+  background-color: transparent !important;
+  color: #fff !important;
+}
+/* end top header */
+
 /* declaring the css variables colors */
 :root {
   --color-primary-accent: #2614c7;
@@ -1560,6 +1594,15 @@ label.ant-checkbox-wrapper > span {
   color: var(--color-primary);
 }
 
+.about-us-page p,
+.about-us-page h2,
+.faqs-page h1,
+.faqs-page p,
+.support-page h1,
+.support-page h4 {
+  color: var(--color-primary);
+}
+
 .faqs-page summary {
   color: #333;
 }
@@ -1567,6 +1610,84 @@ label.ant-checkbox-wrapper > span {
 .contact-us-page h2,
 .contact-us-page span {
   color: var(--color-primary);
+}
+
+/* review  */
+
+.review-area {
+  width: 300px;
+  margin: 20px 0;
+}
+
+.review-area h1 {
+  font-weight: 500;
+  font-size: 17px;
+}
+.pro-name {
+  font-weight: 500;
+  font-size: 20px;
+}
+.rateinput,
+.rating {
+  border: 0.5px solid #8a8a8a63;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.review form {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-btn {
+  background-color: #f66a05;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 8px;
+  border-radius: 8px;
+  width: 40%;
+}
+
+.product-container {
+  padding: 25px;
+  border-bottom: 0.5px solid #8a8a8a63;
+}
+
+.order-details {
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.order-details h1 {
+  font-size: 18px;
+}
+.heading-order {
+  font-size: 20px;
+  font-weight: 900;
+  padding: 25px;
+  border-bottom: 1px solid;
+}
+.container .bg-gray-100 h3,
+.container .bg-orange-100 h3 {
+  color: var(--color-primary);
+}
+.high-low-radio-btn span {
+  color: var(--color-primary) !important;
+}
+
+.single-blog .ant-card-meta-title {
+  color: var(--color-primary);
+}
+.single-blog .ant-card-meta-description {
+  color: var(--color-primary);
+}
+
+.single-product-page h3 {
+  color: var(--color-primary);
+}
+.ant-layout.ant-layout-has-sider .ant-layout-sider-children {
+  background-color: #001529;
 }
 .container .bg-gray-100 h3,
 .container .bg-orange-100 h3 {
