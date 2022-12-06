@@ -5,18 +5,18 @@ import ProductCategories from "../ProductCategories/ProductCategories";
 import Sidebar from "../Sidebar/Sidebar";
 
 const HomeContent = () => {
-	return (
-		<>
-			<div className="main-container">
-				<Sidebar />
-				<MainArea />
-			</div>
-			<ProductCategories />
-			<div className="hidden lg:block">
-				<Blogs location={"home"} />
-			</div>
-		</>
-	);
+  return (
+    <>
+      <div className="main-container">
+        <Sidebar />
+        <MainArea />
+      </div>
+      <ProductCategories />
+      <div className="hidden lg:block">
+        <Blogs location={"home"} />
+      </div>
+    </>
+  );
 };
 
 export default HomeContent;
